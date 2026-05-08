@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>MEON · Intelligence · Innovation · Inspiration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --bg-deep: #050816;
+      --bg-primary: #05060f;
+      --bg-surface: rgba(10, 14, 28, 0.8);
+      --bg-card: rgba(14, 18, 32, 0.7);
+      --bg-card-hover: rgba(18, 22, 40, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --glass-border-strong: rgba(255, 255, 255, 0.12);
+      --text-primary: #edeff5;
+      --text-secondary: #9da3c4;
+      --text-muted: #63688a;
+      --accent-blue: #4a8eff;
+      --accent-cyan: #5ec8f2;
+      --accent-purple: #7b5ef0;
+      --accent-glow: rgba(74, 142, 255, 0.3);
+      --accent-glow-strong: rgba(74, 142, 255, 0.55);
+      --accent-purple-glow: rgba(123, 94, 240, 0.25);
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-xl: 36px;
+      --transition-smooth: 0.45s cubic-bezier(0.22, 0.1, 0.18, 1);
+      --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --transition-spring: 0.5s cubic-bezier(0.22, 0.68, 0, 1.2);
+      --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+      --shadow-elevated: 0 16px 50px rgba(0, 0, 0, 0.65), 0 2px 0 rgba(255, 255, 255, 0.04) inset;
+      --shadow-glow: 0 0 80px rgba(74, 142, 255, 0.2);
+      --font-stack: 'Inter', system-ui, -apple-system, sans-serif;
+      --bottom-nav-height: 72px;
+    }
+    [data-theme="light"] {
+      --bg-deep: #f2f4f9;
+      --bg-primary: #f5f7fc;
+      --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.75);
+      --bg-card-hover: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(0, 0, 0, 0.05);
+      --glass-border-strong: rgba(0, 0, 0, 0.1);
+      --text-primary: #10122a;
+      --text-secondary: #4a4e6d;
+      --text-muted: #7a7e9e;
+      --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.06), 0 1px 0 rgba(0, 0, 0, 0.02) inset;
+      --shadow-elevated: 0 16px 50px rgba(0, 0, 0, 0.1), 0 2px 0 rgba(0, 0, 0, 0.03) inset;
+      --shadow-glow: 0 0 60px rgba(74, 142, 255, 0.12);
+    }
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg-deep);
+    }
+    body {
+      font-family: var(--font-stack);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background 0.6s, color 0.6s;
+      padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
+    }
+    /* ── 3D Canvas ── */
+    #three-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* ── Cinematic Fog Overlays ── */
+    .fog-layer {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 50%;
+      filter: blur(140px);
+      opacity: 0.35;
+      animation: fogDrift 20s ease-in-out infinite;
+    }
+    .fog-layer.fog-1 {
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(40, 60, 140, 0.4) 0%, transparent 70%);
+      top: -20%;
+      left: -15%;
+      animation-delay: 0s;
+    }
+    .fog-layer.fog-2 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(90, 50, 160, 0.3) 0%, transparent 70%);
+      bottom: -25%;
+      right: -12%;
+      animation-delay: -10s;
+      animation-duration: 24s;
+    }
+    .fog-layer.fog-3 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(30, 80, 180, 0.3) 0%, transparent 70%);
+      top: 50%;
+      left: 40%;
+      animation-delay: -6s;
+      animation-duration: 18s;
+    }
+    @keyframes fogDrift {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(60px, -40px) scale(1.1);
+      }
+      50% {
+        transform: translate(-30px, 35px) scale(0.92);
+      }
+      75% {
+        transform: translate(-50px, -20px) scale(1.06);
+      }
+    }
+    /* ── Ambient Particles ── */
+    .ambient-particles {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+    }
+    .particle-dot {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: rgba(140, 180, 240, 0.5);
+      animation: particleFloat 8s ease-in-out infinite;
+    }
+    @keyframes particleFloat {
+      0%,
+      100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.3;
+      }
+      25% {
+        transform: translateY(-30px) translateX(15px);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translateY(-10px) translateX(-10px);
+        opacity: 0.4;
+      }
+      75% {
+        transform: translateY(-40px) translateX(20px);
+        opacity: 0.6;
+      }
+    }
+    .app-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 32px;
+      width: 100%;
+    }
+    /* ── Top Navigation Dock ── */
+    .nav-dock {
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      margin: 16px auto 0;
+      max-width: 100%;
+      background: var(--bg-surface);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      transition: all 0.4s;
+    }
+    .nav-dock.scrolled {
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(74, 142, 255, 0.08);
+    }
+    .nav-logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3b7af0, #5ec8f2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+      transition: all 0.3s;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: rgba(74, 142, 255, 0.08);
+    }
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: var(--bg-surface);
+      backdrop-filter: blur(12px);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+      font-size: 1.1rem;
+    }
+    .btn-icon:hover {
+      border-color: var(--glass-border-strong);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 8px;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+    }
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 0 60px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/M4QHbPb/file-00000000b52471f79bd1dc0846e5f2e2.png') no-repeat center center / cover;
+      opacity: 0.65;
+      filter: drop-shadow(0 0 60px rgba(74, 142, 255, 0.6));
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-glass {
+      position: relative;
+      z-index: 2;
+      background: rgba(10, 15, 30, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-xl);
+      padding: 56px 48px;
+      max-width: 700px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 50px rgba(74, 142, 255, 0.2);
+      transition: all 0.4s;
+    }
+    .hero-glass:hover {
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 70px rgba(74, 142, 255, 0.35);
+    }
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      background: linear-gradient(to right, #e0ecff, #ffffff, #c8dcff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 35px rgba(100, 160, 255, 0.7));
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero-tagline {
+      font-size: 1.1rem;
+      letter-spacing: 0.25em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary,
+    .btn-secondary {
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #3b7af0, #5ea0f8);
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(60, 120, 240, 0.45);
+      border: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(60, 130, 250, 0.6);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      color: var(--text-primary);
+      backdrop-filter: blur(8px);
+    }
+    .btn-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    /* ── Sections ── */
+    .section {
+      padding: 60px 0;
+      position: relative;
+    }
+    /* ── Cinematic Section Header ── */
+    .cinematic-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .cinematic-header .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(74, 142, 255, 0.1);
+      border: 1px solid rgba(74, 142, 255, 0.25);
+      color: var(--accent-blue);
+      white-space: nowrap;
+    }
+    .section-badge .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      box-shadow: 0 0 10px var(--accent-glow-strong);
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+    @keyframes dotPulse {
+      0%,
+      100% {
+        box-shadow: 0 0 8px var(--accent-glow-strong);
+      }
+      50% {
+        box-shadow: 0 0 22px var(--accent-blue), 0 0 40px var(--accent-glow);
+      }
+    }
+    .cinematic-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--text-primary);
+      text-shadow: 0 0 40px rgba(140, 180, 240, 0.3);
+    }
+    .cinematic-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+    /* ── Glass Search Bar ── */
+    .search-bar-cinematic {
+      position: relative;
+      max-width: 360px;
+      width: 100%;
+    }
+    .search-bar-cinematic input {
+      width: 100%;
+      padding: 13px 18px 13px 44px;
+      border-radius: 100px;
+      background: var(--bg-card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      font-family: var(--font-stack);
+      letter-spacing: 0.02em;
+      outline: none;
+      transition: all 0.35s;
+    }
+    .search-bar-cinematic input:focus {
+      border-color: rgba(74, 142, 255, 0.5);
+      box-shadow: 0 0 30px rgba(74, 142, 255, 0.15);
+    }
+    .search-bar-cinematic input::placeholder {
+      color: var(--text-muted);
+    }
+    .search-bar-cinematic .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 1rem;
+    }
+    /* ── Category Chips Horizontal Scroll ── */
+    .category-chips-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 8px 0 24px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      flex-wrap: nowrap;
+    }
+    .category-chips-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .chip {
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.35s var(--transition-bounce);
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      color: var(--text-secondary);
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .chip.active {
+      background: rgba(74, 142, 255, 0.15);
+      border-color: rgba(74, 142, 255, 0.5);
+      color: var(--accent-blue);
+      box-shadow: 0 0 24px rgba(74, 142, 255, 0.2);
+      font-weight: 600;
+    }
+    .chip:hover {
+      border-color: var(--glass-border-strong);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+    /* ── Cinematic AI Card Grid ── */
+    .cinematic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    /* ── The AI Card ── */
+    .ai-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 20px 22px;
+      border-radius: 26px;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      cursor: pointer;
+      transition: all 0.45s var(--transition-smooth);
+      overflow: hidden;
+      isolation: isolate;
+      box-shadow: var(--shadow-card);
+    }
+    .ai-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(ellipse at top left, rgba(74, 142, 255, 0.06) 0%, transparent 60%);
+      z-index: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+      opacity: 0.5;
+    }
+    .ai-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: 0;
+      pointer-events: none;
+      transition: all 0.4s;
+    }
+    .ai-card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: var(--shadow-elevated), 0 0 60px rgba(74, 142, 255, 0.15);
+    }
+    .ai-card:hover::after {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.08));
+    }
+    /* Ambient glow ring on hover */
+    .ai-card .card-glow-ring {
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      box-shadow: 0 0 30px rgba(74, 142, 255, 0.3), 0 0 60px rgba(74, 142, 255, 0.1);
+    }
+    .ai-card:hover .card-glow-ring {
+      opacity: 1;
+    }
+    /* Icon container */
+    .ai-card .icon-container {
+      position: relative;
+      z-index: 1;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.4s var(--transition-smooth);
+      box-shadow: 0 0 20px rgba(74, 142, 255, 0.1);
+    }
+    .ai-card:hover .icon-container {
+      box-shadow: 0 0 35px rgba(74, 142, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.04);
+    }
+    .ai-card .icon-container .icon-pulse {
+      position: absolute;
+      inset: -4px;
+      border-radius: 22px;
+      border: 2px solid rgba(74, 142, 255, 0.2);
+      animation: iconPulse 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes iconPulse {
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.9;
+        transform: scale(1.06);
+      }
+    }
+    /* Card info */
+    .ai-card .card-info {
+      flex: 1;
+      min-width: 0;
+      z-index: 1;
+    }
+    .ai-card .app-name {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .ai-card .app-category {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+      margin-bottom: 4px;
+    }
+    .ai-card .app-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .ai-card .star-rating {
+      color: #ffb84d;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .ai-card .install-count {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+    /* AI Tag Badge */
+    .ai-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .ai-tag.trending {
+      background: rgba(255, 140, 60, 0.12);
+      color: #ff8c3c;
+      border: 1px solid rgba(255, 140, 60, 0.25);
+    }
+    .ai-tag.popular {
+      background: rgba(100, 200, 120, 0.12);
+      color: #64c878;
+      border: 1px solid rgba(100, 200, 120, 0.25);
+    }
+    .ai-tag.new {
+      background: rgba(120, 140, 240, 0.12);
+      color: #788cf0;
+      border: 1px solid rgba(120, 140, 240, 0.25);
+    }
+    /* Futuristic Install Button */
+    .install-btn-cinematic {
+      position: relative;
+      z-index: 1;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.35s var(--transition-bounce);
+      overflow: hidden;
+    }
+    .install-btn-cinematic::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(74, 142, 255, 0.5), transparent, rgba(94, 200, 242, 0.3));
+      z-index: -1;
+      opacity: 0.6;
+      transition: opacity 0.35s;
+    }
+    .install-btn-cinematic:hover {
+      transform: scale(1.12);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 30px rgba(74, 142, 255, 0.5), 0 0 60px rgba(74, 142, 255, 0.2);
+      background: rgba(74, 142, 255, 0.2);
+    }
+    .install-btn-cinematic:hover::before {
+      opacity: 1;
+    }
+    .install-btn-cinematic .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(0);
+      animation: ripple 0.7s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      to {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+    .install-btn-cinematic.installed {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: rgba(34, 197, 94, 0.5);
+      box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
+    }
+    /* ── Trust Badges ── */
+    .trust-badges {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 40px;
+      padding: 0 8px;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 100px;
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .trust-badge:hover {
+      border-color: var(--glass-border-strong);
+      color: var(--text-primary);
+      box-shadow: 0 0 20px rgba(74, 142, 255, 0.1);
+    }
+    .trust-badge .badge-icon {
+      font-size: 1.2rem;
+    }
+    /* ── Featured Carousel ── */
+    .featured-carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 10px 4px 20px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+      user-select: none;
+    }
+    .featured-carousel::-webkit-scrollbar {
+      display: none;
+    }
+    .featured-card {
+      min-width: 280px;
+      max-width: 400px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      aspect-ratio: 16/10;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      position: relative;
+      overflow: hidden;
+      transition: 0.4s;
+      cursor: pointer;
+    }
+    .featured-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--glass-border-strong);
+    }
+    .fc-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      opacity: 0.25;
+    }
+    .fc-content {
+      position: absolute;
+      bottom: 0;
+      padding: 24px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    }
+    /* ── Categories Grid ── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .category-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: 20px 16px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .category-card:hover {
+      border-color: var(--glass-border-strong);
+      background: rgba(74, 142, 255, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .category-icon {
+      font-size: 1.8rem;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 18px;
+    }
+    .category-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+    }
+    /* ── Editor's Choice ── */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      transition: all 0.4s;
+      cursor: pointer;
+    }
+    .glass-card:hover {
+      border-color: var(--glass-border-strong);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-elevated), 0 0 30px var(--accent-glow);
+    }
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    /* ── Bottom Navigation ── */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: var(--bottom-nav-height);
+      background: var(--bg-surface);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border-top: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 16px;
+      z-index: 120;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 500;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    .bottom-nav-item.active {
+      color: var(--accent-blue);
+      text-shadow: 0 0 10px var(--accent-glow);
+    }
+    .bottom-nav-item span {
+      font-size: 1.4rem;
+    }
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(15px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: var(--bg-surface);
+      backdrop-filter: blur(30px);
+      border: 1px solid var(--glass-border-strong);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    /* ── Dashboard ── */
+    .dashboard-toggle {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      z-index: 150;
+      background: var(--bg-surface);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+      box-shadow: var(--shadow-card);
+    }
+    .dashboard-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 400px;
+      max-width: 100vw;
+      height: 100vh;
+      background: var(--bg-surface);
+      backdrop-filter: blur(30px);
+      border-left: 1px solid var(--glass-border);
+      z-index: 180;
+      transform: translateX(100%);
+      transition: 0.4s;
+      padding: 28px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .dashboard-panel.open {
+      transform: translateX(0);
+    }
+    canvas#analyticsChart {
+      width: 100% !important;
+      height: auto !important;
+      max-height: 250px;
+    }
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .app-wrapper {
+        padding: 0 16px;
+      }
+      .nav-dock {
+        padding: 10px 18px;
+        border-radius: 28px;
+      }
+      .nav-links {
+        position: fixed;
+        top: 90px;
+        left: 16px;
+        right: 16px;
+        flex-direction: column;
+        background: var(--bg-surface);
+        backdrop-filter: blur(35px);
+        border: 1px solid var(--glass-border-strong);
+        border-radius: 24px;
+        padding: 20px;
+        gap: 8px;
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 99;
+        transition: all 0.35s ease;
+      }
+      .nav-links.mobile-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-links a {
+        display: block;
+        text-align: center;
+        padding: 14px;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-actions .btn-icon:not(.theme-toggle) {
+        display: none;
+      }
+      .hero-glass {
+        padding: 40px 28px;
+      }
+      .cinematic-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .featured-card {
+        min-width: 240px;
+      }
+      .app-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+      }
+      .categories-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+      .bottom-nav {
+        height: 68px;
+      }
+      .cinematic-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .search-bar-cinematic {
+        max-width: 100%;
+      }
+      .ai-card {
+        padding: 16px 18px;
+        gap: 14px;
+      }
+      .ai-card .icon-container {
+        width: 48px;
+        height: 48px;
+        border-radius: 15px;
+        font-size: 1.3rem;
+      }
+      .install-btn-cinematic {
+        width: 38px;
+        height: 38px;
+      }
+    }
+    @media (max-width: 480px) {
+      .nav-logo {
+        font-size: 1.3rem;
+      }
+      .logo-mark {
+        width: 32px;
+        height: 32px;
+      }
+      .hero-glass {
+        padding: 32px 20px;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .ai-card {
+        padding: 14px 16px;
+        gap: 12px;
+        border-radius: 22px;
+      }
+      .ai-card .icon-container {
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        font-size: 1.1rem;
+      }
+      .ai-card .app-name {
+        font-size: 0.9rem;
+      }
+      .install-btn-cinematic {
+        width: 34px;
+        height: 34px;
+        font-size: 0.9rem;
+      }
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .trust-badges {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Ambient Fog Layers -->
+  <div class="fog-layer fog-1"></div>
+  <div class="fog-layer fog-2"></div>
+  <div class="fog-layer fog-3"></div>
+  <!-- Ambient Particles -->
+  <div class="ambient-particles" id="ambientParticles"></div>
+  <!-- 3D Canvas -->
+  <div id="three-canvas"></div>
+
+  <div class="app-wrapper">
+    <!-- Top Navigation -->
+    <nav class="nav-dock" id="nav">
+      <a href="#" class="nav-logo"><span class="logo-mark">M</span>MEON</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#featured" class="active">Featured</a></li>
+        <li><a href="#trending">Trending</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#editors">Editor's</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn-icon theme-toggle" id="themeToggle" aria-label="Switch theme">🌓</button>
+        <button class="btn-icon" id="searchBtn" aria-label="Search">🔍</button>
+        <button class="btn-icon" id="profileBtn" aria-label="Profile">👤</button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-glass">
+        <h1 class="hero-title">MEON</h1>
+        <p class="hero-tagline">INTELLIGENCE · INNOVATION · INSPIRATION</p>
+        <p class="hero-subtitle">Empowering tomorrow with technology, creativity, and purpose.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="document.getElementById('featured').scrollIntoView()">Explore Marketplace</button>
+          <button class="btn-secondary" id="devPortalBtn">Developer Portal</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Carousel -->
+    <section class="section" id="featured">
+      <div class="cinematic-header">
+        <div class="header-left">
+          <span class="section-badge"><span class="badge-dot"></span> Featured</span>
+          <div>
+            <h2 class="cinematic-title">Featured Apps</h2>
+          </div>
+        </div>
+      </div>
+      <div class="featured-carousel" id="featuredCarousel"></div>
+    </section>
+
+    <!-- ★ CINEMATIC AI RECOMMENDATIONS SECTION ★ -->
+    <section class="section" id="trending">
+      <div class="cinematic-header">
+        <div class="header-left">
+          <span class="section-badge"><span class="badge-dot"></span> AI Marketplace</span>
+          <div>
+            <h2 class="cinematic-title">AI Recommendations</h2>
+            <p class="cinematic-subtitle">Curated intelligent tools for creators</p>
+          </div>
+        </div>
+        <div class="search-bar-cinematic">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search AI tools..." id="aiSearchInput">
+        </div>
+      </div>
+      <!-- Category Chips -->
+      <div class="category-chips-scroll" id="categoryChips">
+        <span class="chip active" data-cat="All">All</span>
+        <span class="chip" data-cat="Productivity">Productivity</span>
+        <span class="chip" data-cat="Creativity">Creativity</span>
+        <span class="chip" data-cat="Security">Security</span>
+        <span class="chip" data-cat="Analytics">Analytics</span>
+        <span class="chip" data-cat="Music">Music</span>
+      </div>
+      <!-- Cinematic Card Grid -->
+      <div class="cinematic-grid" id="cinematicGrid"></div>
+      <!-- Trust Badges -->
+      <div class="trust-badges">
+        <div class="trust-badge"><span class="badge-icon">🛡️</span> Trusted & Secure</div>
+        <div class="trust-badge"><span class="badge-icon">🤖</span> AI Curated</div>
+        <div class="trust-badge"><span class="badge-icon">⚡</span> Instant Access</div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section" id="categories">
+      <div class="cinematic-header">
+        <div class="header-left">
+          <span class="section-badge"><span class="badge-dot"></span> Browse</span>
+          <div><h2 class="cinematic-title">Categories</h2></div>
+        </div>
+      </div>
+      <div class="categories-grid" id="categoriesGrid"></div>
+    </section>
+
+    <!-- Editor's Choice -->
+    <section class="section" id="editors">
+      <div class="cinematic-header">
+        <div class="header-left">
+          <span class="section-badge"><span class="badge-dot"></span> Curated</span>
+          <div><h2 class="cinematic-title">Editor's Choice</h2></div>
+        </div>
+      </div>
+      <div class="app-grid" id="editorsGrid"></div>
+    </section>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a class="bottom-nav-item active" href="#"><span>🎮</span> Games</a>
+    <a class="bottom-nav-item" href="#categories"><span>📱</span> Apps</a>
+    <a class="bottom-nav-item" href="#trending"><span>🔍</span> Search</a>
+    <a class="bottom-nav-item" href="#" id="userTab"><span>👤</span> You</a>
+  </nav>
+
+  <!-- Dashboard Toggle -->
+  <div class="dashboard-toggle" id="dashboardToggle" aria-label="Developer Dashboard">📊</div>
+  <!-- Dashboard Panel -->
+  <div class="dashboard-panel" id="dashboardPanel">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3>Developer Dashboard</h3>
+      <button class="btn-icon" id="closeDashboard" style="font-size:1.2rem;">✕</button>
+    </div>
+    <canvas id="analyticsChart"></canvas>
+    <p style="margin-top:20px;color:var(--text-secondary);">Live installs: <strong>12.4k</strong></p>
+    <p style="color:var(--text-muted);">Active subscriptions: 8.2k</p>
+    <p style="color:var(--text-muted);">Revenue: $24,800</p>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="appModal">
+    <div class="modal-content" id="modalBody"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="importmap">
+    {"imports":{"three":"https://unpkg.com/three@0.128.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.128.0/examples/jsm/"}}
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script type="module">
+    import * as THREE from 'three';
+    const isMobile = window.innerWidth < 768;
+    const canvas = document.getElementById('three-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !isMobile });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0.5, isMobile ? 10 : 8);
+    scene.background = null;
+    const ambient = new THREE.AmbientLight(0x2a3f6e);
+    scene.add(ambient);
+    const pointLight = new THREE.PointLight(0x4a8eff, 0.8, 15);
+    pointLight.position.set(2, 2, 3);
+    scene.add(pointLight);
+    const handGroup = new THREE.Group();
+    const mat = new THREE.MeshStandardMaterial({ color: 0x8ab4f8, emissive: new THREE.Color(0x112244), roughness: 0.3, metalness: 0.7 });
+    const jointMat = new THREE.MeshStandardMaterial({ color: 0xc0d8ff, emissive: new THREE.Color(0x001122), roughness: 0.2 });
+    function addSeg(p, s, r) { const g = new THREE.CylinderGeometry(0.15, 0.18, 1, 8); const m = new THREE.Mesh(g, mat); m.position.set(p.x, p.y, p.z); m.scale.set(s.x, s.y, s.z); m.rotation.set(r.x, r.y, r.z); handGroup.add(m); const j = new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 16), jointMat); j.position.copy(m.position); handGroup.add(j); }
+    addSeg({ x: 0, y: -0.5, z: 0 }, { x: 0.9, y: 0.7, z: 0.9 }, { x: 0, y: 0, z: 0 });
+    addSeg({ x: 0.2, y: 0.8, z: 0.2 }, { x: 0.6, y: 0.6, z: 0.6 }, { x: 0.3, y: 0, z: 0.4 });
+    addSeg({ x: -0.2, y: 0.8, z: -0.2 }, { x: 0.6, y: 0.6, z: 0.6 }, { x: -0.3, y: 0, z: -0.4 });
+    scene.add(handGroup);
+    const butterflyGroup = new THREE.Group();
+    const wingMat = new THREE.MeshStandardMaterial({ color: 0x9fc8ff, emissive: new THREE.Color(0x001122), transparent: true, opacity: 0.7, side: THREE.DoubleSide });
+    const wingGeo = new THREE.CircleGeometry(0.5, 8);
+    const lw = new THREE.Mesh(wingGeo, wingMat);
+    lw.position.set(-0.25, 0, 0);
+    const rw = new THREE.Mesh(wingGeo, wingMat);
+    rw.position.set(0.25, 0, 0);
+    butterflyGroup.add(lw, rw);
+    butterflyGroup.position.set(0.4, 1.7, 0.3);
+    scene.add(butterflyGroup);
+    const pc = isMobile ? 150 : 400;
+    const pgeo = new THREE.BufferGeometry();
+    const pos = new Float32Array(pc * 3);
+    for (let i = 0; i < pc * 3; i += 3) { pos[i] = (Math.random() - 0.5) * 8; pos[i + 1] = (Math.random() - 0.5) * 6; pos[i + 2] = (Math.random() - 0.5) * 5 - 2; }
+    pgeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const pts = new THREE.Points(pgeo, new THREE.PointsMaterial({ size: 0.04, color: 0x7aaaff, blending: THREE.AdditiveBlending }));
+    scene.add(pts);
+    function anim() { requestAnimationFrame(anim); handGroup.rotation.y += 0.002; butterflyGroup.rotation.y += 0.005; butterflyGroup.position.y = 1.7 + Math.sin(Date.now() * 0.003) * 0.15; pts.rotation.y += 0.0002; renderer.render(scene, camera); }
+    anim();
+    window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+  </script>
+
+  <script>
+    // ── Ambient Particles ──
+    (function() {
+      const container = document.getElementById('ambientParticles');
+      for (let i = 0; i < 35; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('particle-dot');
+        dot.style.left = Math.random() * 100 + '%';
+        dot.style.top = Math.random() * 100 + '%';
+        dot.style.animationDelay = Math.random() * 8 + 's';
+        dot.style.animationDuration = (6 + Math.random() * 10) + 's';
+        dot.style.width = (1 + Math.random() * 2) + 'px';
+        dot.style.height = dot.style.width;
+        container.appendChild(dot);
+      }
+    })();
+
+    // ── App Data ──
+    const apps = [
+      { name: 'NeuralMind AI', cat: 'Productivity', rating: 4.9, icon: '🧠', desc: 'Cognitive assistant with real-time learning.', installs: '1.2M', tag: 'TRENDING' },
+      { name: 'Luminar Studio', cat: 'Creativity', rating: 4.8, icon: '🎨', desc: 'AI creative suite for next-gen design.', installs: '982K', tag: 'POPULAR' },
+      { name: 'Quantum Vault', cat: 'Security', rating: 4.9, icon: '🔐', desc: 'Encrypted cloud storage with zero-knowledge.', installs: '756K', tag: 'TRENDING' },
+      { name: 'Synth OS', cat: 'Utilities', rating: 4.7, icon: '⚡', desc: 'Productivity reimagined through AI automation.', installs: '623K', tag: 'NEW' },
+      { name: 'DataVision', cat: 'Analytics', rating: 4.8, icon: '📊', desc: 'Live data dashboards powered by ML.', installs: '541K', tag: 'POPULAR' },
+      { name: 'SonicLens', cat: 'Music', rating: 4.6, icon: '🎵', desc: 'AI music composition and spatial audio.', installs: '412K', tag: 'NEW' }
+    ];
+
+    const categoryList = ["Communication", "Dating", "Education", "Entertainment", "Events", "Finance", "Food & Drink", "Games", "Health & Fitness", "House & Home", "Libraries & Demo", "Lifestyle"];
+    const categoryIcons = { Communication: '💬', Dating: '❤️', Education: '📚', Entertainment: '🎬', Events: '📅', Finance: '💰', "Food & Drink": '🍔', Games: '🎮', "Health & Fitness": '💪', "House & Home": '🏠', "Libraries & Demo": '📦', Lifestyle: '🌟' };
+
+    // ── Render Featured Carousel ──
+    function renderFeatured() {
+      document.getElementById('featuredCarousel').innerHTML = apps.slice(0, 4).map(a => `
+        <div class="featured-card" onclick="openAppDetail('${a.name}')">
+          <div class="fc-bg" style="background:linear-gradient(135deg,#1a1a3e,#0d1b3e)"></div>
+          <div class="fc-content"><div class="category-icon" style="margin-bottom:8px">${a.icon}</div><h3>${a.name}</h3><p style="font-size:0.8rem;color:rgba(255,255,255,0.7)">${a.cat} · ★${a.rating}</p></div>
+        </div>`).join('');
+    }
+
+    // ── Render Cinematic AI Cards ──
+    function renderCinematicGrid(filter = 'All') {
+      const grid = document.getElementById('cinematicGrid');
+      const filtered = filter === 'All' ? apps : apps.filter(a => a.cat === filter);
+      grid.innerHTML = filtered.map(a => {
+        const tagClass = a.tag?.toLowerCase() || '';
+        return `
+          <div class="ai-card" onclick="openAppDetail('${a.name}')" data-cat="${a.cat}">
+            <div class="card-glow-ring"></div>
+            <div class="icon-container">
+              ${a.icon}
+              <div class="icon-pulse"></div>
+            </div>
+            <div class="card-info">
+              <div class="app-name">${a.name}</div>
+              <div class="app-category">${a.cat}</div>
+              <div class="app-meta">
+                <span class="star-rating">★ ${a.rating}</span>
+                ${a.tag ? `<span class="ai-tag ${tagClass}">${a.tag}</span>` : ''}
+                <span class="install-count">${a.installs} installs</span>
+              </div>
+            </div>
+            <button class="install-btn-cinematic" onclick="event.stopPropagation();installCinematic(this)" aria-label="Install ${a.name}">
+              ↓
+            </button>
+          </div>`;
+      }).join('');
+    }
+
+    // ── Render Categories ──
+    function renderCategories() {
+      document.getElementById('categoriesGrid').innerHTML = categoryList.map(cat => {
+        const icon = categoryIcons[cat] || '📁';
+        return `<div class="category-card" onclick="alert('Browse ${cat} apps')"><div class="category-icon">${icon}</div><div class="category-name">${cat}</div></div>`;
+      }).join('');
+    }
+
+    // ── Render Editor's Choice ──
+    function renderEditors() {
+      document.getElementById('editorsGrid').innerHTML = apps.slice(0, 3).map(a => `
+        <div class="glass-card" onclick="openAppDetail('${a.name}')">
+          <div style="display:flex;align-items:center;gap:14px"><div class="category-icon">${a.icon}</div><div><strong>${a.name}</strong><p style="font-size:0.8rem;color:var(--text-muted)">${a.desc}</p></div></div>
+        </div>`).join('');
+    }
+
+    renderFeatured();
+    renderCinematicGrid();
+    renderCategories();
+    renderEditors();
+
+    // ── Category Chip Filtering ──
+    document.getElementById('categoryChips').addEventListener('click', (e) => {
+      if (e.target.classList.contains('chip')) {
+        document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.remove('active'));
+        e.target.classList.add('active');
+        renderCinematicGrid(e.target.dataset.cat);
+      }
+    });
+
+    // ── Search Filter ──
+    document.getElementById('aiSearchInput').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const grid = document.getElementById('cinematicGrid');
+      const cards = grid.querySelectorAll('.ai-card');
+      cards.forEach(card => {
+        const name = card.querySelector('.app-name').textContent.toLowerCase();
+        const cat = card.querySelector('.app-category').textContent.toLowerCase();
+        card.style.display = (name.includes(query) || cat.includes(query)) ? '' : 'none';
+      });
+    });
+
+    // ── Cinematic Install Button ──
+    window.installCinematic = function(btn) {
+      if (btn.classList.contains('installed')) return;
+      btn.classList.add('installed');
+      btn.textContent = '✓';
+      // Ripple effect
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      ripple.style.width = ripple.style.height = btn.offsetWidth + 'px';
+      ripple.style.left = '0px';
+      ripple.style.top = '0px';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
+      setTimeout(() => {
+        btn.classList.remove('installed');
+        btn.textContent = '↓';
+      }, 2000);
+    };
+
+    // ── App Detail Modal ──
+    window.openAppDetail = (name) => {
+      const app = apps.find(a => a.name === name) || apps[0];
+      document.getElementById('modalBody').innerHTML = `
+        <h2 style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><span class="category-icon">${app.icon}</span>${app.name}</h2>
+        <p style="margin-bottom:16px">${app.desc}</p>
+        <p style="margin-bottom:20px"><strong>Rating:</strong> ★${app.rating} · ${app.cat} · ${app.installs} installs</p>
+        <div style="display:flex;gap:10px"><button class="btn-primary inst-modal">Install Now</button><button class="btn-secondary" onclick="document.getElementById('appModal').classList.remove('active')">Close</button></div>`;
+      document.getElementById('appModal').classList.add('active');
+      document.querySelector('.inst-modal')?.addEventListener('click', function(e) { e.target.textContent = '✓ Installed';
+        e.target.style.background = '#22c55e'; });
+    };
+    document.getElementById('appModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.classList
+        .remove('active'); });
+
+    // ── Dashboard ──
+    const dp = document.getElementById('dashboardPanel');
+    document.getElementById('dashboardToggle').addEventListener('click', () => dp.classList.toggle('open'));
+    document.getElementById('devPortalBtn').addEventListener('click', () => dp.classList.add('open'));
+    document.getElementById('closeDashboard').addEventListener('click', () => dp.classList.remove('open'));
+
+    // ── Chart ──
+    new Chart(document.getElementById('analyticsChart'), { type: 'line', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{ label: 'Installs', data: [8000, 12000, 10500, 15000, 12400], borderColor: '#4a8eff',
+          backgroundColor: 'rgba(74,142,255,0.1)', tension: 0.4, fill: true }] }, options: { responsive: true,
+        maintainAspectRatio: true, plugins: { legend: { display: false } } } });
+
+    // ── Mobile Nav ──
+    document.getElementById('hamburgerBtn').addEventListener('click', () => document.getElementById('navLinks').classList.toggle(
+      'mobile-open'));
+    document.querySelectorAll('#navLinks a').forEach(l => l.addEventListener('click', () => document.getElementById('navLinks')
+      .classList.remove('mobile-open')));
+
+    // ── Bottom Nav Active ──
+    document.querySelectorAll('.bottom-nav-item').forEach(item => {
+      item.addEventListener('click', function() { document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove(
+          'active'));
+        this.classList.add('active'); });
+    });
+
+    // ── Theme Toggle ──
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ?
+        'light' : 'dark');
+    });
+
+    // ── Scroll Nav Effect ──
+    window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50));
+
+    // ── Carousel Drag ──
+    const carousel = document.getElementById('featuredCarousel');
+    let isDown = false,
+      startX, scrollLeft;
+    carousel.addEventListener('mousedown', (e) => { isDown = true;
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft; });
+    carousel.addEventListener('mouseleave', () => isDown = false);
+    carousel.addEventListener('mouseup', () => isDown = false);
+    carousel.addEventListener('mousemove', (e) => { if (!isDown) return;
+      e.preventDefault();
+      carousel.scrollLeft = scrollLeft - (e.pageX - carousel.offsetLeft - startX) * 1.5; });
+    carousel.addEventListener('touchstart', (e) => { startX = e.touches[0].pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft; });
+    carousel.addEventListener('touchmove', (e) => { carousel.scrollLeft = scrollLeft - (e.touches[0].pageX - carousel.offsetLeft -
+        startX) * 1.5; });
+
+    // ── Magnetic Install Button Effect ──
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.install-btn-cinematic:not(.installed)').forEach(btn => {
+        const rect = btn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          const pull = Math.max(0, 1 - dist / 120) * 6;
+          btn.style.transform = `translate(${(dx / dist) * pull}px, ${(dy / dist) * pull}px) scale(1.08)`;
+        } else {
+          btn.style.transform = '';
+        }
+      });
+    });
+
+    // ── Intersection Observer for Staggered Entrance ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, i * 60);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.ai-card').forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.22,0.68,0,1.2)';
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
