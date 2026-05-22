@@ -316,9 +316,9 @@
               <p class="cinematic-subtitle">Curated intelligent tools for creators</p>
             </div>
           </div>
-          <div class="search-bar-cinematic">
+          <div class="search-bar-cinematic" id="marketplaceSearchWrapper">
             <span class="search-icon">🔍</span>
-            <input type="text" placeholder="Search AI tools..." id="aiSearchInput">
+            <input type="text" placeholder="Search AI tools..." id="marketplaceSearchInput">
           </div>
         </div>
         <div class="category-chips-scroll" id="categoryChips">
@@ -506,112 +506,80 @@
   </script>
 
   <script>
-    // ── APP DATABASE ──
+    // ------------------------------ APP DATABASE (with webUrl integration) ------------------------------
+    const EXTERNAL_LINKS = {
+      'luminour-studio': 'https://sammaxcinema-wq.github.io/luminour-studio/',
+      'deepfocus': 'https://sammaxcinema-wq.github.io/deepfocus-/',
+      'smartduka': 'https://sammaxcinema-wq.github.io/smartduka/',
+      'datavi': 'https://sammaxcinema-wq.github.io/datavi/',
+      'guard-ai': 'https://sammaxcinema-wq.github.io/guard-ai/',
+      'agriculture': 'https://sammaxcinema-wq.github.io/Agriculture/',
+      'insight': 'https://sammaxcinema-wq.github.io/insight/',
+      'rider-app': 'https://sammaxcinema-wq.github.io/rider-app/',
+      'maji-gas': 'https://sammaxcinema-wq.github.io/maji-gasdelivery/',
+      'workspace-hub': 'https://sammaxcinema-wq.github.io/workspace-hub/'
+    };
+
     const APPS = [
-      // Productivity
-      { id:'p1', name:'NeuralMind AI', cat:'Productivity', rating:4.9, icon:'🧠', desc:'Cognitive assistant that learns your workflow and automates repetitive tasks using advanced ML models. Integrates with 200+ apps.', installs:'1.2M', tag:'TRENDING', dev:'Nexus Labs', price:'Free', features:['Auto-summarize','Task delegation','Smart scheduling','Voice commands'], reviews:[{user:'TechPro99',stars:5,text:'Completely changed how I work.'},{user:'StartupFounder',stars:5,text:'Best productivity app in years.'}], size:'48 MB', version:'3.2.1' },
-      { id:'p2', name:'FlowState', cat:'Productivity', rating:4.7, icon:'⚡', desc:'Deep focus timer with AI-driven distraction blocking. Adapts to your energy levels throughout the day.', installs:'623K', tag:'NEW', dev:'Focus Corp', price:'Free', features:['Pomodoro AI','Distraction blocker','Energy tracking'], reviews:[{user:'RemoteWorker',stars:5,text:'Finally a focus app that understands me.'}], size:'22 MB', version:'1.8.0' },
-      { id:'p3', name:'MindMap Pro', cat:'Productivity', rating:4.6, icon:'🗂️', desc:'AI-powered mind mapping with auto-organization, smart branching, and real-time collaboration.', installs:'389K', tag:'POPULAR', dev:'Cognitive Tools', price:'Free', features:['AI suggestions','Real-time collab','Export PDF/PNG'], reviews:[{user:'Strategist_K',stars:5,text:'Team brainstorming 3x faster.'}], size:'35 MB', version:'2.4.5' },
+      // Productivity (with external links)
+      { id:'p1', name:'NeuralMind AI', cat:'Productivity', rating:4.9, icon:'🧠', desc:'Cognitive assistant that learns your workflow.', installs:'1.2M', tag:'TRENDING', dev:'Nexus Labs', price:'Free', features:['Auto-summarize','Task delegation'], reviews:[{user:'TechPro99',stars:5,text:'Changed how I work.'}], size:'48 MB', version:'3.2.1' },
+      { id:'p2', name:'FlowState', cat:'Productivity', rating:4.7, icon:'⚡', desc:'Deep focus timer with AI distraction blocking.', installs:'623K', tag:'NEW', dev:'Focus Corp', price:'Free', features:['Pomodoro AI','Distraction blocker'], reviews:[{user:'RemoteWorker',stars:5,text:'Finally a focus app.'}], size:'22 MB', version:'1.8.0' },
+      { id:'p3', name:'MindMap Pro', cat:'Productivity', rating:4.6, icon:'🗂️', desc:'AI-powered mind mapping with auto-organization.', installs:'389K', tag:'POPULAR', dev:'Cognitive Tools', price:'Free', features:['AI suggestions','Real-time collab'], reviews:[{user:'Strategist_K',stars:5,text:'Team brainstorming 3x faster.'}], size:'35 MB', version:'2.4.5' },
+      { id:'deepfocus', name:'DeepFocus', cat:'Productivity', rating:4.9, icon:'🎯', desc:'Hyperfocus & distraction blocker for deep work.', installs:'89K', tag:'NEW', dev:'DeepWork Labs', price:'Free', webUrl: EXTERNAL_LINKS.deepfocus, features:['Deep work timer','Site blocker','Flow music'], reviews:[{user:'DeveloperX',stars:5,text:'Best focus tool ever.'}] },
+      { id:'workspace-hub', name:'Workspace Hub', cat:'Productivity', rating:4.8, icon:'🖥️', desc:'All-in-one workspace for freelancers.', installs:'45K', tag:'POPULAR', dev:'HubTech', price:'Free', webUrl: EXTERNAL_LINKS['workspace-hub'], features:['Task boards','Time tracking','Invoicing'], reviews:[{user:'FreelancerKE',stars:5,text:'Helped me manage 5 clients.'] } },
       // Creativity
-      { id:'c1', name:'Luminar Studio', cat:'Creativity', rating:4.8, icon:'🎨', desc:'All-in-one AI creative suite for designers. Generate, edit, and animate assets with generative AI.', installs:'982K', tag:'POPULAR', dev:'Artisan AI', price:'Free', features:['AI image gen','Vector editing','Animation tools'], reviews:[{user:'DesignerX',stars:5,text:'Replaced 4 apps with this one.'}], size:'120 MB', version:'4.0.0' },
-      { id:'c2', name:'PixelForge', cat:'Creativity', rating:4.5, icon:'🖼️', desc:'Professional photo editing with AI retouching, background replacement, and style transfer.', installs:'445K', tag:'NEW', dev:'ForgeMedia', price:'Free', features:['AI retouch','Style transfer','Batch edit'], reviews:[{user:'PhotoNerd',stars:5,text:'Lightroom who? This does everything.'}], size:'85 MB', version:'2.1.3' },
-      { id:'c3', name:'WriteSphere', cat:'Creativity', rating:4.7, icon:'✍️', desc:'AI writing assistant that understands your tone, style, and audience. Write blogs, scripts, novels.', installs:'712K', tag:'TRENDING', dev:'Prose AI', price:'Free', features:['Tone matching','Multi-format','Plagiarism check'], reviews:[{user:'Novelist_J',stars:5,text:'Tone-matching is uncanny.'}], size:'18 MB', version:'3.5.2' },
+      { id:'c1', name:'Luminar Studio', cat:'Creativity', rating:4.8, icon:'🎨', desc:'All-in-one AI creative suite.', installs:'982K', tag:'POPULAR', dev:'Artisan AI', price:'Free', features:['AI image gen','Vector editing'], reviews:[{user:'DesignerX',stars:5,text:'Replaced 4 apps.'}], size:'120 MB', version:'4.0.0' },
+      { id:'luminour-studio', name:'Luminour Studio', cat:'Creativity', rating:4.9, icon:'✨', desc:'Cinematic lighting and color grading studio.', installs:'34K', tag:'TRENDING', dev:'Luminour', price:'Free', webUrl: EXTERNAL_LINKS['luminour-studio'], features:['AI color grading','LUT presets','Video enhancement'], reviews:[{user:'FilmmakerJoe',stars:5,text:'Pro grade results.'] } },
+      { id:'c2', name:'PixelForge', cat:'Creativity', rating:4.5, icon:'🖼️', desc:'Professional photo editing with AI retouching.', installs:'445K', tag:'NEW', dev:'ForgeMedia', price:'Free', features:['AI retouch','Style transfer'], reviews:[{user:'PhotoNerd',stars:5,text:'Lightroom who?'}], size:'85 MB', version:'2.1.3' },
+      { id:'c3', name:'WriteSphere', cat:'Creativity', rating:4.7, icon:'✍️', desc:'AI writing assistant.', installs:'712K', tag:'TRENDING', dev:'Prose AI', price:'Free', features:['Tone matching','Multi-format'], reviews:[{user:'Novelist_J',stars:5,text:'Tone-matching is uncanny.'}], size:'18 MB', version:'3.5.2' },
       // Security
-      { id:'s1', name:'Quantum Vault', cat:'Security', rating:4.9, icon:'🔐', desc:'Zero-knowledge encrypted cloud storage. Military-grade AES-256 encryption.', installs:'756K', tag:'TRENDING', dev:'Shield Systems', price:'Free', features:['Zero-knowledge','AES-256','Secure share','2FA'], reviews:[{user:'SecurityEng',stars:5,text:'The only cloud storage I trust.'}], size:'30 MB', version:'2.9.4' },
-      { id:'s2', name:'GuardAI', cat:'Security', rating:4.8, icon:'🛡️', desc:'AI-powered threat detection for your devices. Monitors network traffic and quarantines anomalies.', installs:'501K', tag:'POPULAR', dev:'CyberNet Labs', price:'Free', features:['Real-time scan','AI anomaly detection','VPN'], reviews:[{user:'SysAdmin_R',stars:5,text:'Caught a zero-day exploit.'}], size:'44 MB', version:'1.6.0' },
-      { id:'s3', name:'PassForge', cat:'Security', rating:4.7, icon:'🔑', desc:'Next-gen password manager with AI breach monitoring and biometric vault.', installs:'890K', tag:'POPULAR', dev:'KeySafe Inc', price:'Free', features:['Breach alerts','Passwordless','Biometric unlock'], reviews:[{user:'ITProV',stars:5,text:'Switched from LastPass. Perfect.'}], size:'26 MB', version:'5.1.0' },
+      { id:'s1', name:'Quantum Vault', cat:'Security', rating:4.9, icon:'🔐', desc:'Zero-knowledge encrypted storage.', installs:'756K', tag:'TRENDING', dev:'Shield Systems', price:'Free', features:['Zero-knowledge','AES-256'], reviews:[{user:'SecurityEng',stars:5,text:'Only cloud storage I trust.'}], size:'30 MB', version:'2.9.4' },
+      { id:'guard-ai', name:'GuardAI', cat:'Security', rating:4.9, icon:'🛡️', desc:'AI threat detection & real-time monitoring.', installs:'120K', tag:'POPULAR', dev:'CyberNet', price:'Free', webUrl: EXTERNAL_LINKS['guard-ai'], features:['Real-time scan','Anomaly detection','VPN'], reviews:[{user:'SysAdmin',stars:5,text:'Caught a zero-day.'}] },
+      { id:'s2', name:'PassForge', cat:'Security', rating:4.7, icon:'🔑', desc:'Next-gen password manager.', installs:'890K', tag:'POPULAR', dev:'KeySafe Inc', price:'Free', features:['Breach alerts','Biometric unlock'], reviews:[{user:'ITProV',stars:5,text:'Perfect.'}], size:'26 MB', version:'5.1.0' },
       // Analytics
-      { id:'a1', name:'DataVision', cat:'Analytics', rating:4.8, icon:'📊', desc:'Live data dashboards powered by ML. Connect any data source and get AI insights.', installs:'541K', tag:'POPULAR', dev:'DataFlow Inc', price:'Free', features:['Live dashboards','Predictive AI','500+ connectors'], reviews:[{user:'DataAnalyst_K',stars:5,text:'Replaced our $2k/month BI tool.'}], size:'55 MB', version:'3.0.1' },
-      { id:'a2', name:'Insights Engine', cat:'Analytics', rating:4.6, icon:'📈', desc:'Marketing analytics with AI attribution modeling. Multi-touch attribution.', installs:'278K', tag:'NEW', dev:'GrowthOS', price:'Free', features:['Attribution','Funnel analysis','Cohort reports'], reviews:[{user:'GrowthHacker',stars:5,text:'Finally understand my budget.'}], size:'40 MB', version:'1.3.0' },
-      // Music
-      { id:'m1', name:'SonicLens', cat:'Music', rating:4.6, icon:'🎵', desc:'AI music composition and spatial audio studio. Compose tracks by humming a melody.', installs:'412K', tag:'NEW', dev:'Sonic Labs', price:'Free', features:['AI composition','Spatial audio','MIDI export'], reviews:[{user:'BeatMaker_Z',stars:5,text:'Made a full EP with this app.'}], size:'90 MB', version:'2.2.0' },
-      { id:'m2', name:'WaveForm Studio', cat:'Music', rating:4.5, icon:'🎧', desc:'Professional DAW for mobile with AI mastering, auto-tune, and beat detection.', installs:'334K', tag:'TRENDING', dev:'WaveLab', price:'Free', features:['AI mastering','Auto-tune','Beat detection'], reviews:[{user:'ProducerM',stars:5,text:'The mobile DAW I dreamed of.'}], size:'75 MB', version:'3.1.2' },
-      // Health
-      { id:'h1', name:'VitaAI', cat:'Health', rating:4.8, icon:'💪', desc:'AI personal trainer and nutritionist. Adaptive workout plans, photo nutrition tracking.', installs:'678K', tag:'POPULAR', dev:'HealthOS', price:'Free', features:['AI workout plans','Photo nutrition','Recovery tracking'], reviews:[{user:'FitnessFreak',stars:5,text:'Down 20lbs in 3 months.'}], size:'62 MB', version:'4.2.0' },
-      { id:'h2', name:'MindFlow', cat:'Health', rating:4.7, icon:'🧘', desc:'Mental wellness app with AI-guided meditation, CBT exercises, mood tracking.', installs:'523K', tag:'TRENDING', dev:'Serene Tech', price:'Free', features:['AI meditation','CBT exercises','Mood journal'], reviews:[{user:'TherapistV',stars:5,text:'I recommend this to clients.'}], size:'28 MB', version:'2.8.1' },
-      // Finance
-      { id:'f1', name:'WealthMind', cat:'Finance', rating:4.7, icon:'💰', desc:'AI financial advisor: spending analysis, portfolio optimizer, tax insights.', installs:'445K', tag:'POPULAR', dev:'FinTech AI', price:'Free', features:['AI budgeting','Portfolio optimizer','Tax insights'], reviews:[{user:'InvestorR',stars:5,text:'Saved me $3,000 in taxes.'}], size:'35 MB', version:'3.3.0' },
-      { id:'f2', name:'CryptoEdge', cat:'Finance', rating:4.5, icon:'₿', desc:'AI crypto portfolio tracker with sentiment analysis and whale alerts.', installs:'312K', tag:'NEW', dev:'BlockAnalytics', price:'Free', features:['Sentiment AI','Whale alerts','Auto-rebalance'], reviews:[{user:'CryptoDev',stars:5,text:'Whale alert system is gold.'}], size:'24 MB', version:'1.9.0' },
-      // Education
-      { id:'e1', name:'LearnOS', cat:'Education', rating:4.9, icon:'📚', desc:'Adaptive learning platform powered by AI. Spaced repetition, Socratic dialogue.', installs:'1.1M', tag:'TRENDING', dev:'EduTech AI', price:'Free', features:['Adaptive paths','Spaced repetition','AI tutoring'], reviews:[{user:'StudentK',stars:5,text:'Went from C to A in calculus.'}], size:'48 MB', version:'5.0.0' },
-      { id:'e2', name:'CodeMentor AI', cat:'Education', rating:4.8, icon:'💻', desc:'Learn to code with a personal AI mentor. Project-based learning, instant code review.', installs:'567K', tag:'POPULAR', dev:'DevPath Inc', price:'Free', features:['AI code review','Project builder','Debug helper'], reviews:[{user:'NewDev',stars:5,text:'Landed first dev job in 4 months.'}], size:'55 MB', version:'2.6.0' }
+      { id:'a1', name:'DataVision', cat:'Analytics', rating:4.8, icon:'📊', desc:'Live data dashboards powered by ML.', installs:'541K', tag:'POPULAR', dev:'DataFlow Inc', price:'Free', features:['Live dashboards','Predictive AI'], reviews:[{user:'DataAnalyst_K',stars:5,text:'Replaced our BI tool.'}], size:'55 MB', version:'3.0.1' },
+      { id:'datavi', name:'DataVi', cat:'Analytics', rating:4.7, icon:'📈', desc:'Visual analytics and smart reporting.', installs:'67K', tag:'NEW', dev:'DataVi Labs', price:'Free', webUrl: EXTERNAL_LINKS.datavi, features:['Drag-drop dashboards','AI insights','Export reports'], reviews:[{user:'AnalystPro',stars:5,text:'Super easy to use.'}] },
+      { id:'insight', name:'Insight Engine', cat:'Analytics', rating:4.9, icon:'🧠', desc:'Marketing analytics with AI attribution.', installs:'89K', tag:'TRENDING', dev:'InsightAI', price:'Free', webUrl: EXTERNAL_LINKS.insight, features:['Multi-touch attribution','Funnel analysis'], reviews:[{user:'GrowthHacker',stars:5,text:'Finally understand my budget.'}] },
+      // Music & Health (shortened for brevity but functional)
+      { id:'m1', name:'SonicLens', cat:'Music', rating:4.6, icon:'🎵', desc:'AI music composition.', installs:'412K', tag:'NEW', dev:'Sonic Labs', price:'Free', features:['AI composition','Spatial audio'], reviews:[{user:'BeatMaker_Z',stars:5,text:'Made a full EP.'}], size:'90 MB', version:'2.2.0' },
+      { id:'h1', name:'VitaAI', cat:'Health', rating:4.8, icon:'💪', desc:'AI personal trainer.', installs:'678K', tag:'POPULAR', dev:'HealthOS', price:'Free', features:['AI workout plans','Photo nutrition'], reviews:[{user:'FitnessFreak',stars:5,text:'Down 20lbs.'}], size:'62 MB', version:'4.2.0' },
+      { id:'f1', name:'WealthMind', cat:'Finance', rating:4.7, icon:'💰', desc:'AI financial advisor.', installs:'445K', tag:'POPULAR', dev:'FinTech AI', price:'Free', features:['AI budgeting','Portfolio optimizer'], reviews:[{user:'InvestorR',stars:5,text:'Saved me $3k.'}], size:'35 MB', version:'3.3.0' },
+      { id:'e1', name:'LearnOS', cat:'Education', rating:4.9, icon:'📚', desc:'Adaptive learning platform.', installs:'1.1M', tag:'TRENDING', dev:'EduTech AI', price:'Free', features:['Adaptive paths','Spaced repetition'], reviews:[{user:'StudentK',stars:5,text:'C to A in calculus.'}], size:'48 MB', version:'5.0.0' },
+      // Kenya Local (with external links integrated)
+      { id:'ke1', name:'M‑Pesa Business Manager', cat:'Kenya Local', rating:4.9, icon:'💸', desc:'Weka rekodi za malipo ya Till na PayBill moja kwa moja.', installs:'48K', tag:'M‑PESA READY', dev:'BiasharaTech', price:'KSh 1,200/m', features:['Till/PayBill tracking','Daily P&L','WhatsApp receipts'], reviews:[{user:'Mama Pima',stars:5,text:'Ninaona faida yangu.'}], size:'18 MB', version:'2.4.0', mpaisa:true },
+      { id:'smartduka', name:'SmartDuka POS', cat:'Kenya Local', rating:4.9, icon:'🧾', desc:'POS kamili kwa vibanda na minimart. M‑Pesa, offline, barcode.', installs:'52K', tag:'OFFLINE‑FIRST', dev:'DukaSmart', price:'Free', webUrl: EXTERNAL_LINKS.smartduka, features:['Barcode scan','Inventory mgmt','Offline sync'], mpaisa:true, offline:true },
+      { id:'ke3', name:'SchoolMaster 360', cat:'Kenya Local', rating:4.7, icon:'🏫', desc:'Endeleza shule kirahisi: lipa ada kwa M‑Pesa.', installs:'14K', tag:'M‑PESA READY', dev:'ElimuPro', price:'KSh 1,500/m', features:['M‑Pesa fee tracking','Parent portal','CBC report cards'], mpaisa:true },
+      { id:'ke4', name:'AI WhatsApp Shop Builder', cat:'Kenya Local', rating:4.9, icon:'🤖', desc:'Jenga duka la WhatsApp kwa dakika.', installs:'22K', tag:'WHATSAPP BOT', dev:'ChapChap AI', price:'Free', features:['Auto catalog','WhatsApp ordering','M‑Pesa checkout'], mpaisa:true, whatsapp:true },
+      { id:'rider-app', name:'Delivery Rider Pro', cat:'Kenya Local', rating:4.9, icon:'🏍️', desc:'Simamia wapanda‑baiskeli wako, lipa M‑Pesa.', installs:'27K', tag:'M‑PESA PAYOUT', dev:'SwiftCourier', price:'KSh 2,000/m', webUrl: EXTERNAL_LINKS['rider-app'], features:['Courier mgmt','Package tracking','M‑Pesa auto‑payout'], mpaisa:true },
+      { id:'maji-gas', name:'Maji & Gas Delivery', cat:'Kenya Local', rating:4.8, icon:'💧', desc:'Agiza maji na gesi kwa ratiba.', installs:'21K', tag:'SUBSCRIPTION', dev:'NyumbaniFresh', price:'Free', webUrl: EXTERNAL_LINKS['maji-gas'], features:['Scheduled delivery','Rider tracking','M‑Pesa payment'], mpaisa:true },
+      { id:'agriculture', name:'Kilimo Smart', cat:'Kenya Local', rating:4.9, icon:'🌾', desc:'Digital agriculture: pest diagnosis, weather, market prices.', installs:'78K', tag:'WHATSAPP BOT', dev:'FarmTech KE', price:'Free', webUrl: EXTERNAL_LINKS.agriculture, features:['Crop diagnosis','Weather alerts','Market prices'], whatsapp:true },
+      { id:'ke12', name:'Creator Shamba', cat:'Kenya Local', rating:4.6, icon:'💡', desc:'Wauza presets, LUTs kwa TikTok.', installs:'8K', tag:'M‑PESA PAYOUT', dev:'ContentHub KE', price:'Free', features:['Digital product sales','M‑Pesa checkout'], mpaisa:true },
+      { id:'ke15', name:'ChamaLedger', cat:'Kenya Local', rating:4.9, icon:'🤝', desc:'Dhibiti michango ya kikundi, mikopo, M‑Pesa.', installs:'27K', tag:'M‑PESA READY', dev:'PamojaTech', price:'Free', features:['Group contributions','Loan requests','Auto reminders'], mpaisa:true }
     ];
-
-    const KENYAN_APPS = [
-      { id:'ke1', name:'M‑Pesa Business Manager', cat:'Kenya Local', rating:4.9, icon:'💸', desc:'Weka rekodi za malipo ya Till na PayBill moja kwa moja. Pata ripoti za faida/hasara kila siku, deni za wateja, na utume risiti kwa WhatsApp.', installs:'48K', tag:'M‑PESA READY', dev:'BiasharaTech', price:'KSh 1,200/m', features:['Till/PayBill tracking','Daily P&L','Debt ledger','WhatsApp receipts','CSV export'], reviews:[{user:'Mama Pima',stars:5,text:'Ninaona faida yangu kila siku bila kazi ya ziada.'}], size:'18 MB', version:'2.4.0', mpaisa:true },
-      { id:'ke2', name:'Smart POS + Inventory', cat:'Kenya Local', rating:4.8, icon:'🧾', desc:'POS kamili kwa vibanda, minimart, cyber na pharmacy. Scan barcode, fanya hesabu, pokea M‑Pesa, na fanya kazi offline.', installs:'32K', tag:'OFFLINE‑FIRST', dev:'DukaSmart', price:'Free / KSh 1,800/m pro', features:['Barcode scan','Inventory mgmt','Customer debt tracking','M‑Pesa integration','Offline sync'], reviews:[{user:'Duka la Karibu',stars:5,text:'Hata mtandao ukipotea, bado naweza kuuza.'}], size:'42 MB', version:'1.7.3', mpaisa:true, offline:true },
-      { id:'ke3', name:'SchoolMaster 360', cat:'Kenya Local', rating:4.7, icon:'🏫', desc:'Endeleza shule kirahisi: lipa ada kwa M‑Pesa, ripoti za CBC, portal ya wazazi, homework, announcements, attendance ya walimu.', installs:'14K', tag:'M‑PESA READY', dev:'ElimuPro', price:'KSh 1,500/m', features:['M‑Pesa fee tracking','Parent portal','CBC report cards','Teacher attendance','Bulk SMS'], reviews:[{user:'Principal Mwangi',stars:5,text:'Wazazi wanalipa haraka kupitia M‑Pesa.'}], size:'35 MB', version:'3.0.1', mpaisa:true },
-      { id:'ke4', name:'AI WhatsApp Shop Builder', cat:'Kenya Local', rating:4.9, icon:'🤖', desc:'Jenga duka lako la WhatsApp kwa dakika chache. Catalogue auto‑generated, oda kwa chat, lipa na M‑Pesa, na fuatilia usafirishaji.', installs:'22K', tag:'WHATSAPP BOT', dev:'ChapChap AI', price:'Free / KSh 500/m', features:['Auto catalog','WhatsApp ordering','M‑Pesa checkout','Delivery tracking'], reviews:[{user:'Mama Shoe',stars:5,text:'Wateja wanapenda kuagiza kwa WhatsApp.'}], size:'8 MB', version:'1.5.0', mpaisa:true, whatsapp:true },
-      { id:'ke5', name:'Matatu Book & Track', cat:'Kenya Local', rating:4.6, icon:'🚍', desc:'Ona stage za matatu live, bei za njia, book kiti mapema, na SACCO dashibodi.', installs:'28K', tag:'LIVE UPDATES', dev:'Twende Tech', price:'Free', features:['Live stage map','Seat booking','Route pricing','SACCO dashboard'], reviews:[{user:'Driver Juma',stars:4,text:'Nasimamia safari zangu vizuri.'}], size:'26 MB', version:'2.1.2', mpaisa:true },
-      { id:'ke6', name:'Kilimo Assistant', cat:'Kenya Local', rating:4.8, icon:'🌾', desc:'Saidia wakulima kupitia picha ya mdudu, tahadhari ya hali ya hewa, bei za soko, na ufugaji. Inafanya kazi kwa WhatsApp/SMS tu.', installs:'56K', tag:'WHATSAPP BOT', dev:'ShambaAI', price:'Free', features:['Pest diagnosis (photo)','Weather alerts','Market prices','Livestock records'], reviews:[{user:'Mkulima Jane',stars:5,text:'WhatsApp inatosha kupata ushauri mzuri.'}], size:'-', version:'-', whatsapp:true, noInstall:true },
-      { id:'ke7', name:'Delivery Rider Pro', cat:'Kenya Local', rating:4.7, icon:'🏍️', desc:'Simamia wapanda‑baiskeli wako, fuatilia mizigo, lipa kupitia M‑Pesa, na angalia mapato ya kila rider.', installs:'9K', tag:'M‑PESA PAYOUT', dev:'SwiftCourier', price:'KSh 2,000/m', features:['Courier mgmt','Package tracking','Earnings dashboard','M‑Pesa auto‑payout'], reviews:[{user:'Bolt Courier',stars:5,text:'Nalipwa moja kwa moja kwa M‑Pesa.'}], size:'22 MB', version:'1.0.8', mpaisa:true },
-      { id:'ke8', name:'Kanisa Launcher', cat:'Kenya Local', rating:4.8, icon:'⛪', desc:'Fuatilia sadaka, matoleo, matukio ya kanisa, data ya washiriki, livestream, na maombi maalum.', installs:'7K', tag:'M‑PESA READY', dev:'NeemaTech', price:'KSh 1,200/m', features:['Tithe tracking','Event calendar','Member database','Prayer requests'], reviews:[{user:'Pastor Peter',stars:5,text:'Sadaka zinaingia wazi.'}], size:'18 MB', version:'2.0.0', mpaisa:true },
-      { id:'ke9', name:'Freelancer Kenya', cat:'Kenya Local', rating:4.6, icon:'💼', desc:'Unganisha wahariri, designers, videographers na developers. Escrow payments, portfolio, na zabuni.', installs:'13K', tag:'ESCROW', dev:'HuruWorks', price:'Free', features:['Escrow M‑Pesa','Portfolio hosting','Gig bidding','Ratings'], reviews:[{user:'Graphics Pro',stars:4,text:'Nimepata wateja wengi.'}], size:'30 MB', version:'1.3.1', mpaisa:true },
-      { id:'ke10', name:'Bedsitter Finder', cat:'Kenya Local', rating:4.5, icon:'🏘️', desc:'Tafuta hostels na bedsitters Nairobi na miji mingine. Landlord verified, lipa booking na M‑Pesa.', installs:'19K', tag:'M‑PESA BOOKING', dev:'NyumbaChap', price:'Free', features:['Landlord verification','In‑app booking','M‑Pesa deposit','Map integration'], reviews:[{user:'Mtafutaji Anna',stars:5,text:'Nilipata nyumba nzuri Thika rd.'}], size:'24 MB', version:'2.0.0', mpaisa:true },
-      { id:'ke11', name:'Daktari Mkononi', cat:'Kenya Local', rating:4.9, icon:'🩺', desc:'Book daktari, pokea ushauri mtandaoni, dawa kuagiza kwa pharmacy, na rekodi za afya.', installs:'41K', tag:'TELEMEDICINE', dev:'AfyaPap', price:'KSh 200/consult', features:['Doctor booking','Online prescription','Pharmacy delivery','Video call'], reviews:[{user:'Mama mtoto',stars:5,text:'Daktari alinisaidia haraka bila kwenda hospitali.'}], size:'40 MB', version:'3.2.0', mpaisa:true },
-      { id:'ke12', name:'Maji & Gas Delivery', cat:'Kenya Local', rating:4.7, icon:'💧', desc:'Agiza maji na gesi kwa ratiba. Subscriptions za wiki, vendor anathibitisha, rider anasupport na M‑Pesa.', installs:'11K', tag:'SUBSCRIPTION', dev:'NyumbaniFresh', price:'Free / sub fee', features:['Scheduled delivery','Vendor management','Rider tracking','M‑Pesa payment'], reviews:[{user:'Estate Dad',stars:5,text:'Maji yanafika mlangoni kila Jumatatu.'}], size:'16 MB', version:'1.4.3', mpaisa:true },
-      { id:'ke13', name:'Creator Shamba', cat:'Kenya Local', rating:4.6, icon:'💡', desc:'Wauza presets, LUTs, templates, na kozi kwa TikTok, IG. Lipa na M‑Pesa, pata wateja wa Kenya.', installs:'8K', tag:'M‑PESA PAYOUT', dev:'ContentHub KE', price:'Free', features:['Digital product sales','M‑Pesa checkout','Hosted delivery','Creator dashboard'], reviews:[{user:'Photographer Ray',stars:4,text:'Nauza presets zangu moja kwa moja.'}], size:'14 MB', version:'1.0.2', mpaisa:true },
-      { id:'ke14', name:'CV Pro Kenya', cat:'Kenya Local', rating:4.8, icon:'📄', desc:'Tengeneza CV ya kipekee kwa mtindo wa Kenya, optimize kwa ATS, na omba kazi moja kwa moja.', installs:'35K', tag:'AI POWERED', dev:'KaziTech', price:'Free', features:['AI CV builder','ATS optimization','Auto‑apply','Job alerts'], reviews:[{user:'Graduate Otieno',stars:5,text:'Nimepata kazi ndani ya wiki mbili.'}], size:'12 MB', version:'2.3.0' },
-      { id:'ke15', name:'ChamaLedger', cat:'Kenya Local', rating:4.9, icon:'🤝', desc:'Dhibiti michango ya kikundi, mikopo, malipo kwa M‑Pesa, reminder za auto, na dashibodi iliyo wazi.', installs:'27K', tag:'M‑PESA READY', dev:'PamojaTech', price:'Free / KSh 800/m', features:['Group contributions','Loan requests','Auto reminders','Transparency dashboard'], reviews:[{user:'Chairlady Njeri',stars:5,text:'Chama yetu ina account safi sasa.'}], size:'20 MB', version:'3.1.0', mpaisa:true },
-      { id:'ke16', name:'Tamasha Foods', cat:'Kenya Local', rating:4.7, icon:'🍲', desc:'Delivery ya chakula inayolenga miji midogo: Machakos, Embu, Kitui, Meru, Kisii.', installs:'6K', tag:'HYPERLOCAL', dev:'TamashaKitchen', price:'Free', features:['Vendor onboarding','M‑Pesa checkout','Rider mapping','Order tracking'], reviews:[{user:'Kisii Resident',stars:5,text:'Delivery inafika hapa kwetu!'}], size:'28 MB', version:'1.1.2', mpaisa:true },
-      { id:'ke17', name:'Ticket Chap', cat:'Kenya Local', rating:4.8, icon:'🎟️', desc:'Tiketi za matukio na QR entry. Inafaa kwa club, kanisa, campus, na concerts.', installs:'18K', tag:'QR ENTRY', dev:'EventPro KE', price:'Free', features:['Event creation','QR ticket','M‑Pesa payment','Partner check‑in'], reviews:[{user:'Event Organizer',stars:5,text:'QR scans ni za uhakika.'}], size:'22 MB', version:'2.5.0', mpaisa:true },
-      { id:'ke18', name:'Fundi Hub Kenya', cat:'Kenya Local', rating:4.5, icon:'🔧', desc:'Pata fundi wa umeme, plumber, welder, painter, n.k. Angalia reviews, pata quotation kwa pap.', installs:'21K', tag:'VERIFIED', dev:'MtaaTech', price:'Free', features:['Fundi profiles','Instant quoting','M‑Pesa escrow','Ratings'], reviews:[{user:'Landlord Wambui',stars:5,text:'Nilipata plumber mzuri kwa dakika tano.'}], size:'19 MB', version:'1.6.0', mpaisa:true },
-      { id:'ke19', name:'CyberPro Suite', cat:'Kenya Local', rating:4.7, icon:'🖨️', desc:'Panga foleni ya kuchapisha, tumia templates za NTSA, KRA, HELB, na eCitizen.', installs:'14K', tag:'OFFLINE‑FIRST', dev:'DigiCyber', price:'Free / KSh 600/m', features:['Print queue','Document templates','ID photo tool','KRA helper'], reviews:[{user:'Cyber Owner',stars:5,text:'Inanisaidia sana kuhudumia wateja haraka.'}], size:'25 MB', version:'1.3.2', offline:true },
-      { id:'ke20', name:'SuperApp ChapChap', cat:'Kenya Local', rating:4.6, icon:'🦸', desc:'App moja ya malipo, delivery, shopping, booking na messaging. Huduma zote za mtaani.', installs:'5K', tag:'SUPER APP', dev:'ChapSolutions', price:'Free (integrated)', features:['Unified wallet','Food & shop delivery','Service booking','Chat'], reviews:[{user:'Nairobian',stars:4,text:'Natumia app moja ku-agiza chakula na kulipa stima.'}], size:'65 MB', version:'0.9.0', mpaisa:true }
-    ];
-
-    APPS.push(...KENYAN_APPS);
 
     const GAMES = [
-      { id:'g1', name:'NeonRacer X', genre:'Racing', rating:4.7, icon:'🏎️', installs:'3.2M', c1:'#1a0a3e', c2:'#0d1b4e', desc:'High-speed neon racing through procedurally generated cities.' },
-      { id:'g2', name:'Void Tactics', genre:'Strategy', rating:4.8, icon:'🚀', installs:'1.8M', c1:'#030c1a', c2:'#0a1830', desc:'Real-time space strategy with AI commanders.' },
-      { id:'g3', name:'Ember Quest', genre:'RPG', rating:4.9, icon:'⚔️', installs:'4.1M', c1:'#1a0d00', c2:'#2d1500', desc:'Massive open-world RPG with AI-driven NPCs.' },
-      { id:'g4', name:'PuzzleMind', genre:'Puzzle', rating:4.6, icon:'🧩', installs:'2.3M', c1:'#001a1a', c2:'#002828', desc:'1000+ hand-crafted puzzles with AI infinite levels.' },
-      { id:'g5', name:'CyberBrawl', genre:'Fighting', rating:4.5, icon:'🥊', installs:'1.4M', c1:'#1a0030', c2:'#12002a', desc:'Cyberpunk fighting with 40 unique fighters.' },
-      { id:'g6', name:'SkyFarm', genre:'Simulation', rating:4.7, icon:'🌱', installs:'5.6M', c1:'#0a1a0a', c2:'#102010', desc:'Relaxing sky island farming sim with co-op.' }
+      { id:'g1', name:'NeonRacer X', genre:'Racing', rating:4.7, icon:'🏎️', installs:'3.2M', c1:'#1a0a3e', c2:'#0d1b4e', desc:'High-speed racing.' },
+      { id:'g2', name:'Void Tactics', genre:'Strategy', rating:4.8, icon:'🚀', installs:'1.8M', c1:'#030c1a', c2:'#0a1830', desc:'Real-time space strategy.' },
+      { id:'g3', name:'Ember Quest', genre:'RPG', rating:4.9, icon:'⚔️', installs:'4.1M', c1:'#1a0d00', c2:'#2d1500', desc:'Open-world RPG.' },
+      { id:'g4', name:'PuzzleMind', genre:'Puzzle', rating:4.6, icon:'🧩', installs:'2.3M', c1:'#001a1a', c2:'#002828', desc:'Infinite puzzles.' },
+      { id:'g5', name:'CyberBrawl', genre:'Fighting', rating:4.5, icon:'🥊', installs:'1.4M', c1:'#1a0030', c2:'#12002a', desc:'Cyberpunk fighting.' },
+      { id:'g6', name:'SkyFarm', genre:'Simulation', rating:4.7, icon:'🌱', installs:'5.6M', c1:'#0a1a0a', c2:'#102010', desc:'Relaxing farming sim.' }
     ];
 
     const CATEGORIES = [
-      { name:'Communication', icon:'💬', count: 48 },
-      { name:'Education', icon:'📚', count: 67 },
-      { name:'Entertainment', icon:'🎬', count: 89 },
-      { name:'Events', icon:'📅', count: 23 },
-      { name:'Finance', icon:'💰', count: 34 },
-      { name:'Food & Drink', icon:'🍔', count: 55 },
-      { name:'Games', icon:'🎮', count: 210 },
-      { name:'Health & Fitness', icon:'💪', count: 78 },
-      { name:'House & Home', icon:'🏠', count: 31 },
-      { name:'Lifestyle', icon:'🌟', count: 42 },
-      { name:'Kenya Local', icon:'🇰🇪', count: KENYAN_APPS.length }
+      { name:'Communication', icon:'💬', count: 48 },{ name:'Education', icon:'📚', count: 67 },{ name:'Entertainment', icon:'🎬', count: 89 },
+      { name:'Events', icon:'📅', count: 23 },{ name:'Finance', icon:'💰', count: 34 },{ name:'Food & Drink', icon:'🍔', count: 55 },
+      { name:'Games', icon:'🎮', count: 210 },{ name:'Health & Fitness', icon:'💪', count: 78 },{ name:'House & Home', icon:'🏠', count: 31 },
+      { name:'Lifestyle', icon:'🌟', count: 42 },{ name:'Kenya Local', icon:'🇰🇪', count: APPS.filter(a=>a.cat==='Kenya Local').length }
     ];
 
-    // ── STATE ──
+    // STATE
     let installedApps = new Set(JSON.parse(sessionStorage.getItem('installed') || '[]'));
     let reviewedCount = parseInt(sessionStorage.getItem('reviewed') || '0');
     let currentFilter = 'All';
+    let marketplaceSearchTerm = '';
 
-    function saveState() {
-      sessionStorage.setItem('installed', JSON.stringify([...installedApps]));
-      sessionStorage.setItem('reviewed', reviewedCount);
-    }
-
-    window.switchView = function(view) {
-      activeView = view;
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      const el = document.getElementById('view-' + view);
-      if (el) el.classList.add('active');
-      document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.toggle('active', b.dataset.nav === view));
-      document.querySelectorAll('#navLinks a[data-view]').forEach(a => a.classList.toggle('active', a.dataset.view === view));
-      if (view === 'marketplace') renderCinematicGrid(currentFilter);
-      if (view === 'you') renderProfileView();
-      if (view === 'search') { document.getElementById('globalSearchInput').focus(); renderSearchGrid(''); }
-      if (view === 'categories') renderCategories();
-      if (view === 'games') renderGames();
-      if (view === 'home') { renderFeatured(); renderEditors(); }
-      window.scrollTo(0, 0);
-    };
-
-    window.closeNav = () => document.getElementById('navLinks').classList.remove('mobile-open');
+    function saveState() { sessionStorage.setItem('installed', JSON.stringify([...installedApps])); sessionStorage.setItem('reviewed', reviewedCount); }
 
     function showToast(icon, msg, type = 'info') {
       const container = document.getElementById('toastContainer');
@@ -619,7 +587,7 @@
       toast.className = `toast ${type}`;
       toast.innerHTML = `<span class="toast-icon">${icon}</span><span class="toast-text">${msg}</span>`;
       container.appendChild(toast);
-      requestAnimationFrame(() => { requestAnimationFrame(() => toast.classList.add('show')); });
+      requestAnimationFrame(() => toast.classList.add('show'));
       setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 2800);
     }
 
@@ -627,36 +595,32 @@
       if (e) e.stopPropagation();
       const app = [...APPS, ...GAMES].find(a => a.id === appId);
       if (!app) return;
-      if (app.noInstall) {
-        showToast('💬', `${app.name} inafanya kazi kwa WhatsApp.`, 'info');
-        return;
-      }
+      if (app.noInstall) { showToast('💬', `${app.name} works via WhatsApp.`, 'info'); return; }
       if (installedApps.has(appId)) {
-        showToast(app.icon, `Opening ${app.name}...`, 'info');
-        setTimeout(() => openAppDetail(appId), 300);
+        if (app.webUrl) { window.open(app.webUrl, '_blank'); showToast('🔗', `Opening ${app.name}...`, 'info'); }
+        else showToast(app.icon, `Opening ${app.name}...`, 'info');
+        return;
       } else {
         installedApps.add(appId);
         saveState();
         if (btn) {
-          btn.innerHTML = '▶';
+          btn.innerHTML = app.webUrl ? '🔗' : '▶';
           btn.classList.add('open-btn');
-          const ripple = document.createElement('span');
-          ripple.className = 'ripple';
+          const ripple = document.createElement('span'); ripple.className = 'ripple';
           ripple.style.cssText = `width:${btn.offsetWidth}px;height:${btn.offsetWidth}px;left:0;top:0`;
-          btn.appendChild(ripple);
-          setTimeout(() => ripple.remove(), 700);
+          btn.appendChild(ripple); setTimeout(() => ripple.remove(), 700);
         }
-        showToast('✅', `${app.name} installed!`, 'success');
+        if (app.webUrl) { window.open(app.webUrl, '_blank'); showToast('✅', `${app.name} opened in new tab`, 'success'); }
+        else showToast('✅', `${app.name} installed!`, 'success');
         updateDashboard();
       }
       refreshInstallButtons();
     };
 
     window.uninstallApp = function(appId) {
-      const app = APPS.find(a => a.id === appId);
       installedApps.delete(appId);
       saveState();
-      showToast('🗑️', `${app ? app.name : 'App'} removed`, 'info');
+      showToast('🗑️', 'App removed', 'info');
       renderProfileView();
       refreshInstallButtons();
     };
@@ -665,295 +629,58 @@
       document.querySelectorAll('[data-install-id]').forEach(btn => {
         const id = btn.dataset.installId;
         const app = [...APPS, ...GAMES].find(a => a.id === id);
-        if (app && app.noInstall) {
-          btn.innerHTML = '💬';
-          btn.classList.add('open-btn');
-          return;
-        }
-        if (installedApps.has(id)) {
-          btn.innerHTML = '▶';
-          btn.classList.add('open-btn');
-        } else {
-          btn.innerHTML = '↓';
-          btn.classList.remove('open-btn');
-        }
+        if (app && app.noInstall) { btn.innerHTML = '💬'; btn.classList.add('open-btn'); return; }
+        if (installedApps.has(id)) btn.innerHTML = app?.webUrl ? '🔗' : '▶', btn.classList.add('open-btn');
+        else btn.innerHTML = '↓', btn.classList.remove('open-btn');
       });
       updateStats();
     }
 
-    function updateStats() {
-      document.getElementById('stat-installed').textContent = installedApps.size;
-      document.getElementById('stat-reviewed').textContent = reviewedCount;
-      document.getElementById('stat-wishlist').textContent = Math.floor(installedApps.size * 0.4);
-    }
+    function updateStats() { document.getElementById('stat-installed').textContent = installedApps.size; document.getElementById('stat-reviewed').textContent = reviewedCount; document.getElementById('stat-wishlist').textContent = Math.floor(installedApps.size * 0.4); }
+    function updateDashboard() { const el = document.getElementById('dash-installs'); if(el) el.textContent = ((12400 + installedApps.size * 37) / 1000).toFixed(1) + 'k'; }
 
-    function updateDashboard() {
-      const el = document.getElementById('dash-installs');
-      if (el) el.textContent = ((12400 + installedApps.size * 37) / 1000).toFixed(1) + 'k';
-    }
-
-    function getExtraTags(app) {
-      const tags = [];
-      if (app.mpaisa) tags.push({class:'mpaisa', text:'M‑PESA READY'});
-      if (app.offline) tags.push({class:'offline', text:'OFFLINE‑FIRST'});
-      if (app.whatsapp) tags.push({class:'whatsapp', text:'WHATSAPP BOT'});
-      return tags;
-    }
+    function getExtraTags(app) { const tags = []; if (app.mpaisa) tags.push({class:'mpaisa', text:'M‑PESA READY'}); if (app.offline) tags.push({class:'offline', text:'OFFLINE‑FIRST'}); if (app.whatsapp) tags.push({class:'whatsapp', text:'WHATSAPP BOT'}); return tags; }
 
     function renderFeatured() {
-      const mix = [...APPS.filter(a => a.tag === 'TRENDING').slice(0,3), ...KENYAN_APPS.filter(a => a.mpaisa).slice(0,2)];
-      document.getElementById('featuredCarousel').innerHTML = mix.map(a => `
-        <div class="featured-card" onclick="openAppDetail('${a.id}')">
-          <div class="fc-bg"></div>
-          <div class="fc-content">
-            <div class="category-icon" style="margin-bottom:8px">${a.icon}</div>
-            <h3 style="font-weight:700;margin-bottom:4px">${a.name}</h3>
-            <p style="font-size:0.8rem;color:rgba(255,255,255,0.7)">${a.cat} · ★${a.rating}</p>
-          </div>
-        </div>`).join('');
+      const mix = [...APPS.filter(a => a.tag === 'TRENDING').slice(0,3), ...APPS.filter(a => a.mpaisa).slice(0,2)];
+      document.getElementById('featuredCarousel').innerHTML = mix.map(a => `<div class="featured-card" onclick="openAppDetail('${a.id}')"><div class="fc-bg"></div><div class="fc-content"><div class="category-icon" style="margin-bottom:8px">${a.icon}</div><h3 style="font-weight:700;margin-bottom:4px">${a.name}</h3><p style="font-size:0.8rem;color:rgba(255,255,255,0.7)">${a.cat} · ★${a.rating}</p></div></div>`).join('');
     }
 
-    function renderCinematicGrid(filter = 'All') {
-      currentFilter = filter;
+    function renderCinematicGrid(filter = currentFilter, search = marketplaceSearchTerm) {
+      let filtered = filter === 'All' ? APPS : APPS.filter(a => a.cat === filter);
+      if (search.trim()) filtered = filtered.filter(a => a.name.toLowerCase().includes(search.toLowerCase()) || (a.desc||'').toLowerCase().includes(search.toLowerCase()));
       const grid = document.getElementById('cinematicGrid');
-      const filtered = filter === 'All' ? APPS : APPS.filter(a => a.cat === filter);
-      if (!filtered.length) {
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-muted)">🔍<p style="margin-top:12px">No apps in this category yet</p></div>`;
-        return;
-      }
+      if (!filtered.length) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-muted)">🔍<p style="margin-top:12px">No apps found</p></div>`; return; }
       grid.innerHTML = filtered.map(a => {
         const isInstalled = installedApps.has(a.id);
         const tagsHTML = getExtraTags(a).map(t => `<span class="ai-tag ${t.class}">${t.text}</span>`).join('');
-        return `
-          <div class="ai-card" onclick="openAppDetail('${a.id}')">
-            <div class="card-glow-ring"></div>
-            <div class="icon-container">${a.icon}</div>
-            <div class="card-info">
-              <div class="app-name">${a.name}</div>
-              <div class="app-category">${a.cat} · by ${a.dev}</div>
-              <div class="app-meta">
-                <span class="star-rating">★ ${a.rating}</span>
-                ${tagsHTML}
-                <span class="install-count">${a.installs} installs</span>
-              </div>
-            </div>
-            <button class="install-btn-cinematic ${isInstalled || a.noInstall ? 'open-btn' : ''}" data-install-id="${a.id}" onclick="toggleInstall('${a.id}',this,event)">${a.noInstall ? '💬' : (isInstalled ? '▶' : '↓')}</button>
-          </div>`;
+        const btnSymbol = a.noInstall ? '💬' : (isInstalled ? (a.webUrl ? '🔗' : '▶') : '↓');
+        return `<div class="ai-card" onclick="openAppDetail('${a.id}')"><div class="card-glow-ring"></div><div class="icon-container">${a.icon}</div><div class="card-info"><div class="app-name">${a.name}${a.webUrl ? ' <span style="font-size:0.7rem;">🔗</span>' : ''}</div><div class="app-category">${a.cat} · by ${a.dev || 'Studio'}</div><div class="app-meta"><span class="star-rating">★ ${a.rating}</span> ${tagsHTML} <span class="install-count">${a.installs || '1k+'} installs</span></div></div><button class="install-btn-cinematic ${isInstalled || a.noInstall ? 'open-btn' : ''}" data-install-id="${a.id}" onclick="toggleInstall('${a.id}',this,event)">${btnSymbol}</button></div>`;
       }).join('');
     }
 
-    function renderCategories() {
-      document.getElementById('categoriesGrid').innerHTML = CATEGORIES.map(cat => `
-        <div class="category-card" onclick="browseCategoryApps('${cat.name}')">
-          <div class="category-icon">${cat.icon}</div>
-          <div class="category-name">${cat.name}</div>
-          <div class="category-count">${cat.count} apps</div>
-        </div>`).join('');
-    }
+    function renderCategories() { document.getElementById('categoriesGrid').innerHTML = CATEGORIES.map(cat => `<div class="category-card" onclick="browseCategoryApps('${cat.name}')"><div class="category-icon">${cat.icon}</div><div class="category-name">${cat.name}</div><div class="category-count">${cat.count} apps</div></div>`).join(''); }
+    window.browseCategoryApps = function(catName) { if (catName === 'Games') { switchView('games'); return; } const chipTarget = catName === 'Kenya Local' ? 'Kenya Local' : catName; switchView('marketplace'); setTimeout(() => { document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.toggle('active', c.dataset.cat === chipTarget)); currentFilter = chipTarget !== 'All' ? chipTarget : 'All'; renderCinematicGrid(currentFilter, marketplaceSearchTerm); }, 100); };
+    function renderGames() { document.getElementById('gamesGrid').innerHTML = GAMES.map(g => { const isInstalled = installedApps.has(g.id); return `<div class="game-card" onclick="openAppDetail('${g.id}')"><div class="game-bg">${g.icon}</div><div class="game-content"><div class="game-title">${g.name}</div><div class="game-meta"><span class="game-genre">${g.genre}</span><span class="game-rating">★ ${g.rating}</span></div><div style="margin-top:10px;display:flex;justify-content:space-between"><span style="font-size:0.72rem;color:var(--text-muted)">${g.installs} players</span><button class="install-btn-cinematic ${isInstalled ? 'open-btn' : ''}" data-install-id="${g.id}" onclick="toggleInstall('${g.id}',this,event)" style="width:36px;height:36px;font-size:0.9rem">${isInstalled ? '▶' : '↓'}</button></div></div></div>`; }).join(''); }
+    function renderEditors() { const picks = [...APPS.filter(a => a.rating >= 4.8)].slice(0,4); document.getElementById('editorsGrid').innerHTML = picks.map(a => `<div class="glass-card" onclick="openAppDetail('${a.id}')"><div style="display:flex;align-items:center;gap:14px;margin-bottom:12px"><div class="category-icon">${a.icon}</div><div><strong>${a.name}</strong><p style="font-size:0.78rem;color:var(--text-muted)">${a.dev || 'Studio'}</p></div></div><p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.6;margin-bottom:14px">${(a.desc||'').substring(0,90)}...</p><div style="display:flex;align-items:center;justify-content:space-between"><span style="color:#ffb84d;font-size:0.82rem;font-weight:600">★ ${a.rating}</span><button class="install-btn-cinematic ${installedApps.has(a.id) ? 'open-btn' : ''}" data-install-id="${a.id}" onclick="toggleInstall('${a.id}',this,event)" style="width:36px;height:36px;font-size:0.9rem">${installedApps.has(a.id) ? (a.webUrl ? '🔗' : '▶') : '↓'}</button></div></div>`).join(''); }
+    function renderSearchGrid(query) { const grid = document.getElementById('searchGrid'), empty = document.getElementById('searchEmpty'), count = document.getElementById('searchResultsCount'); if (!query.trim()) { grid.innerHTML=''; empty.style.display='none'; count.textContent=''; return; } const q = query.toLowerCase(); const results = [...APPS, ...GAMES].filter(a => a.name.toLowerCase().includes(q) || (a.cat||'').toLowerCase().includes(q) || (a.desc||'').toLowerCase().includes(q)); count.textContent = results.length ? `${results.length} result${results.length!==1?'s':''} for "${query}"` : ''; if (!results.length) { grid.innerHTML=''; empty.style.display='block'; return; } empty.style.display='none'; grid.innerHTML = results.map(a => { const isInstalled = installedApps.has(a.id); const tagsHTML = getExtraTags(a).map(t => `<span class="ai-tag ${t.class}">${t.text}</span>`).join(''); const btnSymbol = a.noInstall ? '💬' : (isInstalled ? (a.webUrl ? '🔗' : '▶') : '↓'); return `<div class="ai-card" onclick="openAppDetail('${a.id}')"><div class="card-glow-ring"></div><div class="icon-container">${a.icon}</div><div class="card-info"><div class="app-name">${a.name}</div><div class="app-category">${a.cat || a.genre}</div><div class="app-meta"><span class="star-rating">★ ${a.rating}</span> ${tagsHTML} <span class="install-count">${a.installs || '1k+'} installs</span></div></div><button class="install-btn-cinematic ${isInstalled || a.noInstall ? 'open-btn' : ''}" data-install-id="${a.id}" onclick="toggleInstall('${a.id}',this,event)">${btnSymbol}</button></div>`; }).join(''); }
+    function renderProfileView() { updateStats(); const grid = document.getElementById('installedGrid'), empty = document.getElementById('installedEmpty'); if (installedApps.size === 0) { grid.innerHTML=''; empty.style.display='block'; return; } empty.style.display='none'; const all = [...APPS, ...GAMES]; grid.innerHTML = [...installedApps].map(id => { const a = all.find(x => x.id === id); if (!a) return ''; return `<div class="ai-card"><div class="card-glow-ring"></div><div class="icon-container">${a.icon}</div><div class="card-info" onclick="openAppDetail('${a.id}')"><div class="app-name">${a.name}</div><div class="app-category">${a.cat || a.genre}</div><div class="app-meta"><span class="star-rating">★ ${a.rating}</span></div></div><div style="display:flex;flex-direction:column;gap:6px;z-index:1"><button class="install-btn-cinematic open-btn" onclick="openAppDetail('${a.id}')">${a.webUrl ? '🔗' : '▶'}</button><button class="uninstall-btn" onclick="uninstallApp('${a.id}')">Remove</button></div></div>`; }).join(''); }
+    window.openAppDetail = function(id) { const app = [...APPS, ...GAMES].find(a => a.id === id); if (!app) return; const isInstalled = installedApps.has(id); const featuresHTML = (app.features||[]).map(f => `<span class="feature-chip">${f}</span>`).join(''); const reviewsHTML = (app.reviews||[]).map(r => `<div class="review-item"><div class="review-header"><span class="review-author">👤 ${r.user}</span><span class="review-stars">${'★'.repeat(r.stars)}</span></div><div class="review-text">${r.text}</div></div>`).join(''); const btnText = app.noInstall ? '💬 Chat on WhatsApp' : (isInstalled ? (app.webUrl ? `🔗 Open ${app.name}` : `▶ Open ${app.name}`) : '↓ Install — Free'); document.getElementById('modalBody').innerHTML = `<div class="modal-hero"><div class="modal-app-header"><div class="modal-icon">${app.icon}</div><div><div class="modal-title">${app.name}</div><div class="modal-developer">${app.dev || ''}</div>${getExtraTags(app).map(t => `<span class="ai-tag ${t.class}" style="margin-top:6px">${t.text}</span>`).join('')}</div></div><div class="modal-stats-row"><div class="modal-stat"><div class="modal-stat-val">★${app.rating}</div><div class="modal-stat-lbl">Rating</div></div><div class="modal-stat"><div class="modal-stat-val">${app.installs || '1k+'}</div><div class="modal-stat-lbl">Installs</div></div><div class="modal-stat"><div class="modal-stat-val">${app.price || 'Free'}</div><div class="modal-stat-lbl">Price</div></div></div></div><div class="modal-body"><div class="modal-section-title">About</div><p class="modal-desc">${app.desc}</p>${featuresHTML ? `<div class="modal-section-title">Features</div><div class="feature-chips">${featuresHTML}</div>` : ''}${app.size ? `<p style="font-size:0.78rem;color:var(--text-muted)">Size: ${app.size} · Version ${app.version}</p>` : ''}${app.mpaisa ? '<p style="color:var(--accent-blue);margin-top:8px">💡 Integrated with M‑Pesa</p>' : ''}${reviewsHTML ? `<div class="modal-section-title" style="margin-top:20px">Reviews</div><div class="reviews-list">${reviewsHTML}</div>` : ''}</div><div class="modal-actions"><button class="modal-install-btn ${isInstalled ? 'open-state' : ''}" id="modalInstallBtn" onclick="handleModalInstall('${id}')">${btnText}</button>${isInstalled && !app.noInstall ? `<button class="btn-secondary" onclick="uninstallApp('${id}');document.getElementById('appModal').classList.remove('active')">Remove</button>` : ''}</div>`; document.getElementById('appModal').classList.add('active'); };
+    window.handleModalInstall = function(id) { const app = [...APPS, ...GAMES].find(a => a.id === id); if (!app) return; if (app.noInstall) { showToast('💬', `${app.name} activated on WhatsApp.`,'info'); document.getElementById('appModal').classList.remove('active'); return; } const btn = document.getElementById('modalInstallBtn'); if (installedApps.has(id)) { if (app.webUrl) window.open(app.webUrl, '_blank'); else showToast(app.icon, `Opening ${app.name}...`,'info'); document.getElementById('appModal').classList.remove('active'); return; } installedApps.add(id); saveState(); btn.textContent = app.webUrl ? `🔗 Open ${app.name}` : `▶ Open ${app.name}`; btn.className = 'modal-install-btn open-state'; if (!btn.parentElement.querySelector('.btn-secondary')) { const rm = document.createElement('button'); rm.className='btn-secondary'; rm.style.whiteSpace='nowrap'; rm.textContent='Remove'; rm.onclick = () => { uninstallApp(id); document.getElementById('appModal').classList.remove('active'); }; btn.parentElement.appendChild(rm); } if (app.webUrl) window.open(app.webUrl, '_blank'); showToast('✅', `${app.name} ${app.webUrl ? 'opened' : 'installed'}!`,'success'); refreshInstallButtons(); updateDashboard(); };
 
-    window.browseCategoryApps = function(catName) {
-      if (catName === 'Games') { switchView('games'); return; }
-      const chipTarget = catName === 'Kenya Local' ? 'Kenya Local' : catName;
-      switchView('marketplace');
-      setTimeout(() => {
-        document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.toggle('active', c.dataset.cat === chipTarget));
-        renderCinematicGrid(chipTarget !== 'All' ? chipTarget : 'All');
-      }, 100);
-    };
-
-    function renderGames() {
-      document.getElementById('gamesGrid').innerHTML = GAMES.map(g => {
-        const isInstalled = installedApps.has(g.id);
-        return `
-          <div class="game-card" onclick="openAppDetail('${g.id}')">
-            <div class="game-bg">${g.icon}</div>
-            <div class="game-content">
-              <div class="game-title">${g.name}</div>
-              <div class="game-meta"><span class="game-genre">${g.genre}</span><span class="game-rating">★ ${g.rating}</span></div>
-              <div style="margin-top:10px;display:flex;justify-content:space-between">
-                <span style="font-size:0.72rem;color:var(--text-muted)">${g.installs} players</span>
-                <button class="install-btn-cinematic ${isInstalled ? 'open-btn' : ''}" data-install-id="${g.id}" onclick="toggleInstall('${g.id}',this,event)" style="width:36px;height:36px;font-size:0.9rem">${isInstalled ? '▶' : '↓'}</button>
-              </div>
-            </div>
-          </div>`;
-      }).join('');
-    }
-
-    function renderEditors() {
-      const picks = [...APPS.filter(a => a.rating >= 4.8), ...KENYAN_APPS.filter(a => a.rating >= 4.8)].slice(0,4);
-      document.getElementById('editorsGrid').innerHTML = picks.map(a => `
-        <div class="glass-card" onclick="openAppDetail('${a.id}')">
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px"><div class="category-icon">${a.icon}</div><div><strong>${a.name}</strong><p style="font-size:0.78rem;color:var(--text-muted)">${a.dev}</p></div></div>
-          <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.6;margin-bottom:14px">${a.desc.substring(0,90)}...</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="color:#ffb84d;font-size:0.82rem;font-weight:600">★ ${a.rating}</span>
-            <button class="install-btn-cinematic ${installedApps.has(a.id) ? 'open-btn' : ''}" data-install-id="${a.id}" onclick="toggleInstall('${a.id}',this,event)" style="width:36px;height:36px;font-size:0.9rem">${installedApps.has(a.id) ? '▶' : '↓'}</button>
-          </div>
-        </div>`).join('');
-    }
-
-    function renderSearchGrid(query) {
-      const grid = document.getElementById('searchGrid'), empty = document.getElementById('searchEmpty'), count = document.getElementById('searchResultsCount');
-      if (!query.trim()) { grid.innerHTML=''; empty.style.display='none'; count.textContent=''; return; }
-      const q = query.toLowerCase();
-      const results = [...APPS, ...GAMES].filter(a => a.name.toLowerCase().includes(q) || (a.cat||'').toLowerCase().includes(q) || (a.desc||'').toLowerCase().includes(q) || (a.dev||'').toLowerCase().includes(q) || (a.genre||'').toLowerCase().includes(q));
-      count.textContent = results.length ? `${results.length} result${results.length!==1?'s':''} for "${query}"` : '';
-      if (!results.length) { grid.innerHTML=''; empty.style.display='block'; return; }
-      empty.style.display='none';
-      grid.innerHTML = results.map(a => {
-        const isInstalled = installedApps.has(a.id);
-        const tagsHTML = getExtraTags(a).map(t => `<span class="ai-tag ${t.class}">${t.text}</span>`).join('');
-        return `
-          <div class="ai-card" onclick="openAppDetail('${a.id}')">
-            <div class="card-glow-ring"></div>
-            <div class="icon-container">${a.icon}</div>
-            <div class="card-info">
-              <div class="app-name">${a.name}</div>
-              <div class="app-category">${a.genre || a.cat}</div>
-              <div class="app-meta"><span class="star-rating">★ ${a.rating}</span> ${tagsHTML} <span class="install-count">${a.installs} installs</span></div>
-            </div>
-            <button class="install-btn-cinematic ${isInstalled || a.noInstall ? 'open-btn' : ''}" data-install-id="${a.id}" onclick="toggleInstall('${a.id}',this,event)">${a.noInstall ? '💬' : (isInstalled ? '▶' : '↓')}</button>
-          </div>`;
-      }).join('');
-    }
-
-    function renderProfileView() {
-      updateStats();
-      const grid = document.getElementById('installedGrid'), empty = document.getElementById('installedEmpty');
-      if (installedApps.size === 0) { grid.innerHTML=''; empty.style.display='block'; return; }
-      empty.style.display='none';
-      const all = [...APPS, ...GAMES];
-      grid.innerHTML = [...installedApps].map(id => {
-        const a = all.find(x => x.id === id);
-        if (!a) return '';
-        return `
-          <div class="ai-card">
-            <div class="card-glow-ring"></div>
-            <div class="icon-container">${a.icon}</div>
-            <div class="card-info" onclick="openAppDetail('${a.id}')">
-              <div class="app-name">${a.name}</div>
-              <div class="app-category">${a.cat || a.genre}</div>
-              <div class="app-meta"><span class="star-rating">★ ${a.rating}</span></div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:6px;z-index:1">
-              <button class="install-btn-cinematic open-btn" onclick="openAppDetail('${a.id}')">▶</button>
-              <button class="uninstall-btn" onclick="uninstallApp('${a.id}')">Remove</button>
-            </div>
-          </div>`;
-      }).join('');
-    }
-
-    window.openAppDetail = function(id) {
-      const app = [...APPS, ...GAMES].find(a => a.id === id);
-      if (!app) return;
-      const isInstalled = installedApps.has(id);
-      const featuresHTML = (app.features||[]).map(f => `<span class="feature-chip">${f}</span>`).join('');
-      const reviewsHTML = (app.reviews||[]).map(r => `<div class="review-item"><div class="review-header"><span class="review-author">👤 ${r.user}</span><span class="review-stars">${'★'.repeat(r.stars)}</span></div><div class="review-text">${r.text}</div></div>`).join('');
-      const btnText = app.noInstall ? '💬 Chat on WhatsApp' : (isInstalled ? `▶ Open ${app.name}` : '↓ Install — Free');
-      document.getElementById('modalBody').innerHTML = `
-        <div class="modal-hero">
-          <div class="modal-app-header">
-            <div class="modal-icon">${app.icon}</div>
-            <div><div class="modal-title">${app.name}</div><div class="modal-developer">${app.dev || ''}</div>${getExtraTags(app).map(t => `<span class="ai-tag ${t.class}" style="margin-top:6px">${t.text}</span>`).join('')}</div>
-          </div>
-          <div class="modal-stats-row">
-            <div class="modal-stat"><div class="modal-stat-val">★${app.rating}</div><div class="modal-stat-lbl">Rating</div></div>
-            <div class="modal-stat"><div class="modal-stat-val">${app.installs}</div><div class="modal-stat-lbl">Installs</div></div>
-            <div class="modal-stat"><div class="modal-stat-val">${app.price || 'Free'}</div><div class="modal-stat-lbl">Price</div></div>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="modal-section-title">About</div>
-          <p class="modal-desc">${app.desc}</p>
-          ${app.noInstall ? '<p style="margin-bottom:20px;color:var(--accent-blue)">🔹 Works via WhatsApp. No installation needed.</p>' : ''}
-          ${featuresHTML ? `<div class="modal-section-title">Features</div><div class="feature-chips">${featuresHTML}</div>` : ''}
-          ${app.size ? `<p style="font-size:0.78rem;color:var(--text-muted)">Size: ${app.size} · Version ${app.version}</p>` : ''}
-          ${app.mpaisa ? '<p style="color:var(--accent-blue);margin-top:8px">💡 Integrated with M‑Pesa</p>' : ''}
-          ${reviewsHTML ? `<div class="modal-section-title" style="margin-top:20px">Reviews</div><div class="reviews-list">${reviewsHTML}</div>` : ''}
-        </div>
-        <div class="modal-actions">
-          <button class="modal-install-btn ${isInstalled ? 'open-state' : ''}" id="modalInstallBtn" onclick="handleModalInstall('${id}')">${btnText}</button>
-          ${isInstalled && !app.noInstall ? `<button class="btn-secondary" onclick="uninstallApp('${id}');document.getElementById('appModal').classList.remove('active')">Remove</button>` : ''}
-        </div>`;
-      document.getElementById('appModal').classList.add('active');
-    };
-
-    window.handleModalInstall = function(id) {
-      const app = [...APPS, ...GAMES].find(a => a.id === id);
-      if (!app) return;
-      if (app.noInstall) { showToast('💬', `${app.name} activated on WhatsApp.`,'info'); document.getElementById('appModal').classList.remove('active'); return; }
-      const btn = document.getElementById('modalInstallBtn');
-      if (installedApps.has(id)) { showToast(app.icon, `Opening ${app.name}...`,'info'); document.getElementById('appModal').classList.remove('active'); return; }
-      installedApps.add(id); saveState();
-      btn.textContent = `▶ Open ${app.name}`; btn.className = 'modal-install-btn open-state';
-      if (!btn.parentElement.querySelector('.btn-secondary')) {
-        const rm = document.createElement('button'); rm.className='btn-secondary'; rm.style.whiteSpace='nowrap'; rm.textContent='Remove';
-        rm.onclick = () => { uninstallApp(id); document.getElementById('appModal').classList.remove('active'); };
-        btn.parentElement.appendChild(rm);
-      }
-      showToast('✅', `${app.name} installed!`,'success'); refreshInstallButtons(); updateDashboard();
-    };
-
-    document.getElementById('categoryChips').addEventListener('click', e => {
-      if (e.target.classList.contains('chip')) {
-        document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.remove('active'));
-        e.target.classList.add('active');
-        renderCinematicGrid(e.target.dataset.cat);
-      }
-    });
-
-    document.getElementById('aiSearchInput').addEventListener('input', e => {
-      const q = e.target.value.toLowerCase();
-      document.querySelectorAll('#cinematicGrid .ai-card').forEach(card => {
-        const name = card.querySelector('.app-name').textContent.toLowerCase();
-        card.style.display = name.includes(q) ? '' : 'none';
-      });
-    });
-
+    // Event listeners
+    document.getElementById('categoryChips').addEventListener('click', e => { if (e.target.classList.contains('chip')) { document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.remove('active')); e.target.classList.add('active'); currentFilter = e.target.dataset.cat; marketplaceSearchTerm = ''; document.getElementById('marketplaceSearchInput').value = ''; renderCinematicGrid(currentFilter, ''); } });
+    document.getElementById('marketplaceSearchInput').addEventListener('input', e => { marketplaceSearchTerm = e.target.value; renderCinematicGrid(currentFilter, marketplaceSearchTerm); });
     document.getElementById('globalSearchInput').addEventListener('input', e => renderSearchGrid(e.target.value));
-
     document.getElementById('appModal').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('active'); });
-
-    const dp = document.getElementById('dashboardPanel');
-    document.getElementById('dashboardToggle').addEventListener('click', () => dp.classList.toggle('open'));
-    document.getElementById('devPortalBtn').addEventListener('click', () => dp.classList.add('open'));
-    document.getElementById('closeDashboard').addEventListener('click', () => dp.classList.remove('open'));
-
-    function renderDashTopApps() {
-      const el = document.getElementById('dashTopApps');
-      if (!el) return;
-      el.innerHTML = APPS.sort((a,b)=>parseFloat(b.installs)-parseFloat(a.installs)).slice(0,4).map(a=>`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--glass-border)"><span>${a.icon}</span><div style="flex:1"><div style="font-size:0.85rem;font-weight:600">${a.name}</div><div style="font-size:0.72rem;color:var(--text-muted)">${a.installs} installs</div></div><span style="color:#ffb84d">★${a.rating}</span></div>`).join('');
-    }
-    renderDashTopApps();
-
-    new Chart(document.getElementById('analyticsChart'), {
-      type:'line', data:{labels:['Jan','Feb','Mar','Apr','May'], datasets:[{label:'Installs',data:[8000,12000,10500,15000,12400],borderColor:'#4a8eff',backgroundColor:'rgba(74,142,255,0.1)',tension:0.4,fill:true}]},
-      options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}}}
-    });
-
-    document.getElementById('hamburgerBtn').addEventListener('click', ()=> document.getElementById('navLinks').classList.toggle('mobile-open'));
-    document.getElementById('themeToggle').addEventListener('click', ()=> document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
-    window.addEventListener('scroll', ()=> document.getElementById('nav').classList.toggle('scrolled', window.scrollY>50));
-
-    (function(){
-      const container = document.getElementById('ambientParticles');
-      for (let i=0;i<35;i++) {
-        const dot=document.createElement('div'); dot.className='particle-dot';
-        dot.style.left=Math.random()*100+'%'; dot.style.top=Math.random()*100+'%'; dot.style.animationDelay=Math.random()*8+'s';
-        dot.style.animationDuration=(6+Math.random()*10)+'s'; dot.style.width=dot.style.height=(1+Math.random()*2)+'px';
-        container.appendChild(dot);
-      }
-    })();
-
-    const carousel = document.getElementById('featuredCarousel');
-    let isDown=false, startX, scrollLeft;
-    carousel.addEventListener('mousedown', e=>{ isDown=true; startX=e.pageX-carousel.offsetLeft; scrollLeft=carousel.scrollLeft; });
-    carousel.addEventListener('mouseleave',()=>isDown=false);
-    carousel.addEventListener('mouseup',()=>isDown=false);
-    carousel.addEventListener('mousemove', e=>{ if(!isDown)return; e.preventDefault(); carousel.scrollLeft=scrollLeft-(e.pageX-carousel.offsetLeft-startX)*1.5; });
-    carousel.addEventListener('touchstart', e=>{ startX=e.touches[0].pageX-carousel.offsetLeft; scrollLeft=carousel.scrollLeft; });
-    carousel.addEventListener('touchmove', e=>{ carousel.scrollLeft=scrollLeft-(e.touches[0].pageX-carousel.offsetLeft-startX)*1.5; });
-
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') document.getElementById('appModal').classList.remove('active'); });
+    const dp = document.getElementById('dashboardPanel'); document.getElementById('dashboardToggle').addEventListener('click', () => dp.classList.toggle('open')); document.getElementById('devPortalBtn').addEventListener('click', () => dp.classList.add('open')); document.getElementById('closeDashboard').addEventListener('click', () => dp.classList.remove('open'));
+    function renderDashTopApps() { const el = document.getElementById('dashTopApps'); if(el) el.innerHTML = APPS.sort((a,b)=>parseFloat(b.installs)-parseFloat(a.installs)).slice(0,4).map(a=>`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--glass-border)"><span>${a.icon}</span><div style="flex:1"><div style="font-size:0.85rem;font-weight:600">${a.name}</div><div style="font-size:0.72rem;color:var(--text-muted)">${a.installs} installs</div></div><span style="color:#ffb84d">★${a.rating}</span></div>`).join(''); } renderDashTopApps();
+    new Chart(document.getElementById('analyticsChart'), { type:'line', data:{labels:['Jan','Feb','Mar','Apr','May'], datasets:[{label:'Installs',data:[8000,12000,10500,15000,12400],borderColor:'#4a8eff',backgroundColor:'rgba(74,142,255,0.1)',tension:0.4,fill:true}]}, options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}}} });
+    document.getElementById('hamburgerBtn').addEventListener('click', ()=> document.getElementById('navLinks').classList.toggle('mobile-open')); document.getElementById('themeToggle').addEventListener('click', ()=> document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')); window.addEventListener('scroll', ()=> document.getElementById('nav').classList.toggle('scrolled', window.scrollY>50));
+    (function(){ const container = document.getElementById('ambientParticles'); for (let i=0;i<35;i++) { const dot=document.createElement('div'); dot.className='particle-dot'; dot.style.left=Math.random()*100+'%'; dot.style.top=Math.random()*100+'%'; dot.style.animationDelay=Math.random()*8+'s'; dot.style.animationDuration=(6+Math.random()*10)+'s'; dot.style.width=dot.style.height=(1+Math.random()*2)+'px'; container.appendChild(dot); } })();
+    const carousel = document.getElementById('featuredCarousel'); let isDown=false, startX, scrollLeft; carousel.addEventListener('mousedown', e=>{ isDown=true; startX=e.pageX-carousel.offsetLeft; scrollLeft=carousel.scrollLeft; }); carousel.addEventListener('mouseleave',()=>isDown=false); carousel.addEventListener('mouseup',()=>isDown=false); carousel.addEventListener('mousemove', e=>{ if(!isDown)return; e.preventDefault(); carousel.scrollLeft=scrollLeft-(e.pageX-carousel.offsetLeft-startX)*1.5; }); carousel.addEventListener('touchstart', e=>{ startX=e.touches[0].pageX-carousel.offsetLeft; scrollLeft=carousel.scrollLeft; }); carousel.addEventListener('touchmove', e=>{ carousel.scrollLeft=scrollLeft-(e.touches[0].pageX-carousel.offsetLeft-startX)*1.5; });
+    window.switchView = function(view) { document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); document.getElementById('view-'+view).classList.add('active'); document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.toggle('active', b.dataset.nav === view)); document.querySelectorAll('#navLinks a[data-view]').forEach(a => a.classList.toggle('active', a.dataset.view === view)); if (view === 'marketplace') renderCinematicGrid(currentFilter, marketplaceSearchTerm); if (view === 'you') renderProfileView(); if (view === 'search') { document.getElementById('globalSearchInput').focus(); renderSearchGrid(''); } if (view === 'categories') renderCategories(); if (view === 'games') renderGames(); if (view === 'home') { renderFeatured(); renderEditors(); } window.scrollTo(0,0); }; window.closeNav = () => document.getElementById('navLinks').classList.remove('mobile-open');
     renderFeatured(); renderEditors(); renderCinematicGrid(); renderCategories(); renderGames(); updateStats();
   </script>
 </body>
