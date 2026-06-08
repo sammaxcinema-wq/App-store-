@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Sage | Premium App Marketplace</title>
-  <meta name="description" content="Sage App Store – Discover enterprise-grade software, productivity tools, AI apps, business solutions.">
+  <title>Sage | Premium App Marketplace with M-Pesa</title>
+  <meta name="description" content="Sage App Store – Daraja M-Pesa STK Push integrated for seamless payments">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -23,14 +23,14 @@
       border-radius: 14px;
       box-shadow: 0 6px 12px -6px rgba(0,0,0,0.3);
     }
-    /* Ensure images never break */
-    img { display: inline-block; vertical-align: middle; }
+    .toast { position: fixed; bottom: 20px; right: 20px; z-index: 9999; animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
   </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
 <div id="app" class="min-h-screen flex flex-col">
-  <!-- Header with Sage branding (attached logo style) -->
+  <!-- Header -->
   <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
     <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
@@ -62,6 +62,27 @@
   <div id="toastContainer"></div>
 </div>
 
+<!-- M-Pesa Payment Modal (hidden initially) -->
+<div id="mpesaModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden modal-transition">
+  <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md mx-4">
+    <h2 class="text-2xl font-bold mb-2">Pay with M-Pesa</h2>
+    <p id="mpesaAppName" class="text-gray-600 dark:text-gray-300 mb-4"></p>
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">Phone Number (e.g., 0712345678)</label>
+      <input type="tel" id="mpesaPhone" placeholder="0712345678" class="w-full p-2 border rounded-lg dark:bg-gray-700">
+    </div>
+    <div class="mb-4">
+      <label class="block text-sm font-medium mb-1">Amount (KES)</label>
+      <input type="number" id="mpesaAmount" readonly class="w-full p-2 border rounded-lg bg-gray-100 dark:bg-gray-600">
+    </div>
+    <div class="flex gap-3">
+      <button id="mpesaConfirmBtn" class="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">Pay Now</button>
+      <button id="mpesaCancelBtn" class="flex-1 bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-white py-2 rounded-lg">Cancel</button>
+    </div>
+    <p class="text-xs text-gray-500 mt-3 text-center">STK push will be sent to your phone. Enter M-Pesa PIN to complete.</p>
+  </div>
+</div>
+
 <script>
   // ---------- FULL 15 APPS (original names & workflows) ----------
   const appList = [
@@ -82,10 +103,9 @@
     { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher", shortDesc: "Church management & engagement", category: "Religion", price: 0, isFree: true, rating: 4.7, ratingCount: 156, downloads: 5300, version: "1.2.0", features: ["Events", "Giving platform", "Member directory", "Live stream"], description: "Digital tools for modern ministry." }
   ];
 
-  // Attach developer and screenshot placeholders (internal SVG to avoid broken external images)
+  // Add metadata
   appList.forEach(app => {
     app.developer = { name: "Sage Software", verified: true };
-    // Use data:image/svg+xml for screenshots (never broken)
     app.screenshots = [
       `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%231e293b'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3E${app.name} Preview%3C/text%3E%3C/svg%3E`,
       `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23334155'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3EFeature Demo%3C/text%3E%3C/svg%3E`
@@ -95,7 +115,7 @@
     if (!app.downloads) app.downloads = Math.floor(Math.random() * 30000) + 1000;
   });
 
-  // ----- ROBUST LOGO GENERATOR (SVG with proper encoding, never broken) -----
+  // ----- ROBUST LOGO GENERATOR (SVG inline, never broken) -----
   function generateAppLogo(appId, size = 80) {
     const colorMap = {
       "maji-gas": { primary: "#2563EB", secondary: "#F97316", letter: "M" },
@@ -121,8 +141,77 @@
       <circle cx="256" cy="256" r="140" fill="${c.secondary}" opacity="0.9"/>
       <text x="256" y="340" text-anchor="middle" fill="white" font-size="180" font-weight="bold" font-family="Inter, sans-serif">${c.letter}</text>
     </svg>`;
-    const encoded = encodeURIComponent(svgString);
-    return `data:image/svg+xml,${encoded}`;
+    return `data:image/svg+xml,${encodeURIComponent(svgString)}`;
+  }
+
+  // ---------- DARAJA M-PESA API (Mock + Real endpoint support) ----------
+  // Set to true if you have the actual backend at /api/mpesa/stkpush
+  const USE_REAL_MPESA_API = false; // Change to true when backend ready
+
+  async function initiateMpesaPayment(phoneNumber, amount, accountReference, appName) {
+    if (USE_REAL_MPESA_API) {
+      const response = await fetch('/api/mpesa/stkpush', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phoneNumber, amount, accountReference, transactionDesc: `Purchase of ${appName}` })
+      });
+      const data = await response.json();
+      if (data.success) {
+        showToast(`STK push sent to ${phoneNumber}. Enter PIN on your phone.`, "success");
+        return true;
+      } else {
+        showToast(data.error || "Payment failed", "error");
+        return false;
+      }
+    } else {
+      // Mock simulation for demo
+      return new Promise((resolve) => {
+        showToast(`📱 M-Pesa STK push sent to ${phoneNumber} for KES ${amount}. Please check your phone.`, "info");
+        setTimeout(() => {
+          // Simulate successful payment after 3 seconds
+          showToast(`✅ Payment of KES ${amount} for ${appName} successful! Receipt: MOCK${Date.now()}`, "success");
+          resolve(true);
+        }, 3000);
+      });
+    }
+  }
+
+  // Show M-Pesa modal for a specific app
+  let currentPaymentApp = null;
+  function showMpesaPaymentModal(app) {
+    if (!currentUser) {
+      showToast("Please login to make a purchase", "error");
+      return;
+    }
+    currentPaymentApp = app;
+    document.getElementById("mpesaAppName").innerText = `App: ${app.name} - KES ${app.price}`;
+    document.getElementById("mpesaAmount").value = app.price;
+    document.getElementById("mpesaPhone").value = "";
+    document.getElementById("mpesaModal").classList.remove("hidden");
+  }
+
+  async function confirmMpesaPayment() {
+    const phone = document.getElementById("mpesaPhone").value.trim();
+    if (!phone) {
+      showToast("Enter your M-Pesa phone number", "error");
+      return;
+    }
+    if (!currentPaymentApp) return;
+    const amount = currentPaymentApp.price;
+    const accountReference = `SAGE_${currentPaymentApp.id}_${Date.now()}`;
+    document.getElementById("mpesaModal").classList.add("hidden");
+    const success = await initiateMpesaPayment(phone, amount, accountReference, currentPaymentApp.name);
+    if (success) {
+      // Grant download access (add to user downloads)
+      if (!userDownloads.find(d => d.appId === currentPaymentApp.id)) {
+        userDownloads.push({ appId: currentPaymentApp.id, downloadedAt: new Date().toISOString(), version: currentPaymentApp.version });
+        currentPaymentApp.downloads += 1;
+        saveState();
+        showToast(`✅ ${currentPaymentApp.name} added to your library`, "success");
+        renderCurrentView();
+      }
+    }
+    currentPaymentApp = null;
   }
 
   // ---------- State Management ----------
@@ -143,13 +232,12 @@
 
   function showToast(msg, type = "success") {
     const container = document.getElementById("toastContainer");
-    if (!container) return;
     const toast = document.createElement("div");
-    toast.className = `toast bg-white dark:bg-gray-800 shadow-lg rounded-xl px-4 py-3 border-l-4 ${type === "success" ? "border-green-500" : "border-red-500"} flex items-center gap-2`;
+    toast.className = `toast bg-white dark:bg-gray-800 shadow-lg rounded-xl px-4 py-3 border-l-4 ${type === "success" ? "border-green-500" : type === "error" ? "border-red-500" : "border-blue-500"} flex items-center gap-2`;
     toast.innerHTML = `<i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5"></i><span>${msg}</span>`;
     container.appendChild(toast);
     if (window.lucide) lucide.createIcons();
-    setTimeout(() => toast.remove(), 3000);
+    setTimeout(() => toast.remove(), 4000);
   }
 
   function loginUser(email, role = "user") {
@@ -171,16 +259,17 @@
   
   function downloadApp(app) {
     if (!currentUser) { showToast("Please login to download", "error"); return; }
-    if (!app.isFree && currentUser.role !== "admin" && !userDownloads.some(d => d.appId === app.id)) {
-      showToast("Premium app. Subscribe or purchase to access.", "error");
+    if (!app.isFree) {
+      // Paid app: show M-Pesa payment modal
+      showMpesaPaymentModal(app);
       return;
     }
+    // Free app: direct download
     if (!userDownloads.find(d => d.appId === app.id)) {
       userDownloads.push({ appId: app.id, downloadedAt: new Date().toISOString(), version: app.version });
-      const targetApp = appList.find(a => a.id === app.id);
-      if (targetApp) targetApp.downloads += 1;
+      app.downloads += 1;
       saveState();
-      showToast(`Downloaded ${app.name} via Sage Store`, "success");
+      showToast(`Downloaded ${app.name}`, "success");
       renderCurrentView();
     } else { showToast("Already installed", "info"); }
   }
@@ -199,7 +288,7 @@
     return true;
   }
   
-  // UI rendering functions (all images guaranteed to work)
+  // UI rendering functions (identical to previous but modified download button)
   function renderNav() {
     const authDiv = document.getElementById("authSection");
     if (!authDiv) return;
@@ -262,7 +351,7 @@
         <div class="flex-1"><h3 class="font-bold">${app.name}</h3><p class="text-sm text-gray-500">${app.shortDesc}</p><div class="flex items-center gap-1 mt-1"><i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i><span>${app.rating}</span><span class="text-xs text-gray-400 ml-1">(${app.ratingCount})</span></div></div>
         <button class="text-red-500" onclick="event.stopPropagation(); toggleFavorite('${app.id}')"><i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500' : ''}"></i></button>
       </div>
-      <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-4 py-1 rounded-lg text-sm">${app.isFree ? 'Free' : '$'+app.price}</button></div>
+      <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-4 py-1 rounded-lg text-sm">${app.isFree ? 'Free' : 'Buy KES '+app.price}</button></div>
     </div>`;
   }
   
@@ -280,7 +369,7 @@
       <div class="space-y-12">
         <div class="bg-gradient-to-r from-[#0a2b3e] to-[#1b4a6e] rounded-2xl p-8 text-white shadow-xl">
           <h1 class="text-3xl md:text-4xl font-bold">Sage Software Marketplace</h1>
-          <p class="text-lg opacity-90 mt-2">Enterprise-ready apps for business, AI, productivity & logistics</p>
+          <p class="text-lg opacity-90 mt-2">Enterprise-ready apps • Pay with M-Pesa via STK Push</p>
         </div>
         <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">⭐ Featured Solutions</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div>
         <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🔥 Trending on Sage</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div>
@@ -296,7 +385,7 @@
     const screenshotHtml = app.screenshots.map(url => `<img src="${url}" class="rounded-xl border border-gray-200 dark:border-gray-700 w-64 h-40 object-cover" alt="screenshot">`).join('');
     return `<div class="max-w-4xl mx-auto"><button onclick="window.backToHome()" class="flex items-center gap-1 text-blue-600 mb-4">&larr; Back to Store</button>
       <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-        <div class="flex gap-5 flex-wrap"><img src="${logoUrl}" class="w-24 h-24 rounded-2xl shadow" alt="${app.name}"><div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div><div><i data-lucide="download"></i> ${app.downloads.toLocaleString()}</div></div><div class="flex gap-3 mt-4"><button onclick="downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-6 py-2 rounded-full">${app.isFree ? 'Download' : 'Buy $'+app.price}</button><button onclick="toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
+        <div class="flex gap-5 flex-wrap"><img src="${logoUrl}" class="w-24 h-24 rounded-2xl shadow" alt="${app.name}"><div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div><div><i data-lucide="download"></i> ${app.downloads.toLocaleString()}</div></div><div class="flex gap-3 mt-4"><button onclick="downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-6 py-2 rounded-full">${app.isFree ? 'Download' : 'Buy with M-Pesa (KES '+app.price+')'}</button><button onclick="toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
         <div class="mt-6"><h2 class="text-xl font-semibold">Description</h2><p>${app.description}</p><h3 class="font-semibold mt-4">Key Features</h3><ul class="list-disc pl-5">${app.features.map(f=>`<li>${f}</li>`).join('')}</ul></div>
         <div class="mt-6"><h2 class="text-xl font-semibold">Screenshots</h2><div class="flex gap-3 overflow-x-auto pb-2">${screenshotHtml}</div></div>
         <div class="mt-8"><h2 class="text-xl font-semibold">Rate & Review (Sage verified)</h2><div id="reviewStars" class="flex gap-1 my-2"></div><textarea id="reviewText" class="w-full border rounded p-2 dark:bg-gray-700" rows="2" placeholder="Write your review..."></textarea><button id="submitReviewBtn" class="mt-2 bg-purple-600 text-white px-4 py-1 rounded">Submit Review</button>
@@ -355,6 +444,13 @@
   const themeToggle = document.getElementById("themeToggle");
   themeToggle?.addEventListener("click",()=>{ document.documentElement.classList.toggle("dark"); localStorage.setItem("sageTheme", document.documentElement.classList.contains("dark") ? "dark" : "light"); if(window.lucide) lucide.createIcons(); });
   if(localStorage.getItem("sageTheme") === "dark") document.documentElement.classList.add("dark");
+  
+  // M-Pesa modal buttons
+  document.getElementById("mpesaConfirmBtn")?.addEventListener("click", confirmMpesaPayment);
+  document.getElementById("mpesaCancelBtn")?.addEventListener("click", () => {
+    document.getElementById("mpesaModal").classList.add("hidden");
+    currentPaymentApp = null;
+  });
   
   renderNav();
   renderCurrentView();
