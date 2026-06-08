@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Sage App Hub | Premium Application Marketplace</title>
-  <meta name="description" content="Discover and download the best applications for productivity, business, education, transport, and more.">
+  <title>Sage | Premium App Marketplace</title>
+  <meta name="description" content="Sage App Store – Discover enterprise-grade software, productivity tools, AI apps, business solutions. Curated marketplace for professionals.">
   <!-- Tailwind CSS + Fonts + Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -20,30 +20,25 @@
     .card-hover { transition: all 0.2s ease; }
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1); }
     .sage-logo-bg {
-      background: linear-gradient(135deg, #2d6a4f, #1b4d3e);
-      border-radius: 1rem;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 0.5rem 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: linear-gradient(145deg, #0a1a2f 0%, #07121f 100%);
+      border-radius: 14px;
+      box-shadow: 0 6px 12px -6px rgba(0,0,0,0.3);
     }
   </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
 <div id="app" class="min-h-screen flex flex-col">
-  <!-- Header with Sage logo and theme toggle -->
+  <!-- Header with Sage branding + attached-photo style logo -->
   <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
     <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-      <!-- Sage Logo (based on attached image) -->
+      <!-- Sage Logo using the attached photo concept: "SAGE" + "SOFTWARE DEVELOPMENT COMPANY" -->
       <div class="flex items-center gap-3">
-        <div class="sage-logo-bg text-center">
+        <div class="sage-logo-bg px-4 py-2 flex flex-col items-start leading-tight">
           <span class="text-white font-extrabold text-2xl tracking-wide">SAGE</span>
-          <span class="text-white/80 text-[10px] font-semibold -mt-1">SOFTWARE DEVELOPMENT COMPANY</span>
+          <span class="text-[11px] font-medium text-gray-300 tracking-wider uppercase">SOFTWARE DEVELOPMENT COMPANY</span>
         </div>
-        <span class="font-bold text-xl tracking-tight text-gray-800 dark:text-white">Sage App Hub</span>
+        <span class="font-bold text-xl tracking-tight hidden sm:inline-block">Sage Store</span>
       </div>
       <div class="flex items-center gap-3">
         <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
@@ -53,10 +48,10 @@
         <div id="authSection" class="flex items-center gap-2"></div>
       </div>
     </div>
-    <!-- Navigation -->
+    <!-- Navigation tabs (renamed store context) -->
     <div class="container mx-auto px-4">
       <div class="flex gap-6 overflow-x-auto pb-2 scrollbar-hide">
-        <button data-nav="home" class="nav-btn font-semibold py-2 border-b-2 border-emerald-600 text-emerald-600">Home</button>
+        <button data-nav="home" class="nav-btn font-semibold py-2 border-b-2 border-blue-600 text-blue-600">Home</button>
         <button data-nav="dashboard" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">My Dashboard</button>
         <button data-nav="admin" id="adminNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Admin Panel</button>
         <button data-nav="developer" id="devNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Developer Hub</button>
@@ -64,12 +59,13 @@
     </div>
   </header>
 
+  <!-- Main dynamic content -->
   <main id="mainContent" class="flex-1 container mx-auto px-4 py-8"></main>
   <div id="toastContainer"></div>
 </div>
 
 <script>
-  // ---------- 15 APPS (same portfolio) ----------
+  // ---------- FULL APP DATA (15 APPS) with original identity preserved ----------
   const appList = [
     { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand", category: "Utilities", price: 0, isFree: true, rating: 4.6, ratingCount: 234, downloads: 12540, version: "2.1.0", features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"], description: "Fast, reliable LPG and water delivery service with live order tracking." },
     { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker", category: "Productivity", price: 4.99, isFree: false, rating: 4.8, ratingCount: 1890, downloads: 45200, version: "3.0.2", features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"], description: "Boost productivity with science-backed focus tools." },
@@ -87,24 +83,46 @@
     { id: "school-360", name: "School 360", slug: "school-360", shortDesc: "School management system", category: "Education", price: 49.99, isFree: false, rating: 4.8, ratingCount: 245, downloads: 6700, version: "4.1.0", features: ["Student records", "Fee mgmt", "Parent portal", "CBC support"], description: "Complete school ERP with CBC." },
     { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher", shortDesc: "Church management & engagement", category: "Religion", price: 0, isFree: true, rating: 4.7, ratingCount: 156, downloads: 5300, version: "1.2.0", features: ["Events", "Giving platform", "Member directory", "Live stream"], description: "Digital tools for modern ministry." }
   ];
-  appList.forEach(app => { app.developer = { name: "Sage Software", verified: true }; app.screenshots = ["https://placehold.co/600x400/2d6a4f/white?text=App+Preview", "https://placehold.co/600x400/1b4d3e/white?text=Feature+Demo"]; app.versions = [{ version: app.version, changelog: "Latest improvements", createdAt: new Date().toISOString() }]; });
-  
-  // ----- Logo generator with Sage color palette (emerald/sage) -----
+  // Add developer info and additional metadata for full experience
+  appList.forEach(app => {
+    app.developer = { name: "Sage Software", verified: true };
+    app.screenshots = ["https://placehold.co/600x400/1e293b/white?text=App+Preview", "https://placehold.co/600x400/334155/white?text=Feature+Demo"];
+    app.versions = [{ version: app.version, changelog: "Latest stable release", createdAt: new Date().toISOString() }];
+    if (!app.ratingCount) app.ratingCount = Math.floor(Math.random() * 800) + 50;
+    if (!app.downloads) app.downloads = Math.floor(Math.random() * 30000) + 1000;
+  });
+
+  // Logo generator using app identity (modern flat vector design as requested)
   function generateAppLogo(appId, size = 80) {
-    const sageGreen = "#2d6a4f";
-    const goldAccent = "#d4af37";
-    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='${sageGreen}'/%3E%3Ccircle cx='256' cy='256' r='140' fill='${goldAccent}' opacity='0.85'/%3E%3Ctext x='256' y='320' text-anchor='middle' fill='white' font-size='180' font-weight='bold'%3E${appId.charAt(0).toUpperCase()}%3C/text%3E%3C/svg%3E`;
+    const colors = {
+      "maji-gas": { primary: "#2563EB", secondary: "#F97316" },
+      "deep-focus": { primary: "#4F46E5", secondary: "#7C3AED" },
+      "guard-ai": { primary: "#3B82F6", secondary: "#94A3B8" },
+      "data-vision": { primary: "#10B981", secondary: "#3B82F6" },
+      "rider-app": { primary: "#EA580C", secondary: "#111827" },
+      "insight": { primary: "#A855F7", secondary: "#06B6D4" },
+      "clients-hub": { primary: "#1E3A8A", secondary: "#3B82F6" },
+      "smart-duka": { primary: "#10B981", secondary: "#F59E0B" },
+      "agriculture": { primary: "#059669", secondary: "#78350F" },
+      "luminor-studio": { primary: "#D97706", secondary: "#111827" },
+      "cv-maker": { primary: "#2563EB", secondary: "#FFFFFF" },
+      "matatu-booking": { primary: "#EAB308", secondary: "#111827" },
+      "home-search": { primary: "#0D9488", secondary: "#3B82F6" },
+      "school-360": { primary: "#2563EB", secondary: "#10B981" },
+      "kanisa-launcher": { primary: "#9333EA", secondary: "#D97706" }
+    };
+    const c = colors[appId] || { primary: "#0F172A", secondary: "#334155" };
+    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='${c.primary.replace("#","%23")}'/%3E%3Ccircle cx='256' cy='256' r='140' fill='${c.secondary.replace("#","%23")}' opacity='0.9'/%3E%3Ctext x='256' y='340' text-anchor='middle' fill='white' font-size='160' font-weight='bold'%3E${appId.charAt(0).toUpperCase()}%3C/text%3E%3C/svg%3E`;
   }
-  
-  // ---------- State Management ----------
+
+  // ---------- State management ----------
   let currentUser = JSON.parse(localStorage.getItem("sageUser")) || null;
   let activeView = "home";
   let selectedApp = null;
-  let allApps = [...appList];
   let userFavorites = JSON.parse(localStorage.getItem("sageFavorites")) || [];
   let userDownloads = JSON.parse(localStorage.getItem("sageDownloads")) || [];
   let reviewsData = JSON.parse(localStorage.getItem("sageReviews")) || {};
-  
+
   function saveState() {
     if (currentUser) localStorage.setItem("sageUser", JSON.stringify(currentUser));
     else localStorage.removeItem("sageUser");
@@ -112,53 +130,57 @@
     localStorage.setItem("sageDownloads", JSON.stringify(userDownloads));
     localStorage.setItem("sageReviews", JSON.stringify(reviewsData));
   }
-  
+
   function showToast(msg, type = "success") {
     const container = document.getElementById("toastContainer");
     const toast = document.createElement("div");
-    toast.className = `toast bg-white dark:bg-gray-800 shadow-lg rounded-xl px-4 py-3 border-l-4 ${type === "success" ? "border-emerald-500" : "border-red-500"} flex items-center gap-2`;
+    toast.className = `toast bg-white dark:bg-gray-800 shadow-lg rounded-xl px-4 py-3 border-l-4 ${type === "success" ? "border-green-500" : "border-red-500"} flex items-center gap-2`;
     toast.innerHTML = `<i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5"></i><span>${msg}</span>`;
     container.appendChild(toast);
     lucide.createIcons();
     setTimeout(() => toast.remove(), 3000);
   }
-  
+
   function loginUser(email, role = "user") {
     currentUser = { id: Date.now(), email, name: email.split('@')[0], role: role };
     saveState();
     renderNav();
     renderCurrentView();
-    showToast(`Welcome ${currentUser.name}!`, "success");
+    showToast(`Welcome to Sage, ${currentUser.name}!`, "success");
   }
   function logout() { currentUser = null; userFavorites = []; userDownloads = []; saveState(); renderNav(); renderCurrentView(); showToast("Logged out", "success"); }
+  
   function toggleFavorite(appId) {
-    if (!currentUser) { showToast("Login to save favorites", "error"); return false; }
+    if (!currentUser) { showToast("Sign in to save favorites", "error"); return false; }
     const idx = userFavorites.indexOf(appId);
     if (idx === -1) { userFavorites.push(appId); showToast("Added to favorites", "success"); }
     else { userFavorites.splice(idx,1); showToast("Removed from favorites", "success"); }
     saveState(); renderCurrentView(); return true;
   }
+  
   function downloadApp(app) {
     if (!currentUser) { showToast("Please login to download", "error"); return; }
     if (!app.isFree && currentUser.role !== "admin" && !userDownloads.some(d => d.appId === app.id)) {
-      showToast("Premium app — subscription required", "error");
+      showToast("Premium app. Subscribe or purchase to access.", "error");
       return;
     }
     if (!userDownloads.find(d => d.appId === app.id)) {
       userDownloads.push({ appId: app.id, downloadedAt: new Date().toISOString(), version: app.version });
-      app.downloads += 1;
+      const targetApp = appList.find(a => a.id === app.id);
+      if (targetApp) targetApp.downloads += 1;
       saveState();
-      showToast(`Downloaded ${app.name}`, "success");
+      showToast(`Downloaded ${app.name} via Sage Store`, "success");
       renderCurrentView();
-    } else { showToast("Already downloaded", "info"); }
+    } else { showToast("Already installed", "info"); }
   }
+  
   function submitReview(appId, rating, content) {
     if (!currentUser) { showToast("Login to review", "error"); return false; }
     if (!reviewsData[appId]) reviewsData[appId] = [];
     reviewsData[appId].push({ userId: currentUser.id, user: currentUser.name, rating, content, date: new Date().toISOString() });
     const allRatings = reviewsData[appId].map(r => r.rating);
     const avg = allRatings.reduce((a,b)=>a+b,0)/allRatings.length;
-    const appObj = allApps.find(a=>a.id === appId);
+    const appObj = appList.find(a=>a.id === appId);
     if(appObj) { appObj.rating = parseFloat(avg.toFixed(1)); appObj.ratingCount = allRatings.length; }
     saveState();
     showToast("Review submitted", "success");
@@ -166,10 +188,11 @@
     return true;
   }
   
+  // UI helpers
   function renderNav() {
     const authDiv = document.getElementById("authSection");
     if (currentUser) {
-      authDiv.innerHTML = `<span class="text-sm hidden sm:inline">${currentUser.email}</span><button id="logoutBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-sm font-medium">Logout</button>`;
+      authDiv.innerHTML = `<span class="text-sm hidden sm:inline">${currentUser.email}</span><button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium">Logout</button>`;
       document.getElementById("logoutBtn")?.addEventListener("click", logout);
       const adminBtn = document.getElementById("adminNavBtn");
       const devBtn = document.getElementById("devNavBtn");
@@ -178,39 +201,46 @@
       if (currentUser.role === "developer") devBtn?.classList.remove("hidden");
       else devBtn?.classList.add("hidden");
     } else {
-      authDiv.innerHTML = `<button id="showLoginModalBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-1.5 rounded-lg text-sm font-medium">Sign In</button>`;
+      authDiv.innerHTML = `<button id="showLoginModalBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-lg text-sm font-medium">Sign In</button>`;
       document.getElementById("showLoginModalBtn")?.addEventListener("click", () => showAuthModal());
       document.getElementById("adminNavBtn")?.classList.add("hidden");
       document.getElementById("devNavBtn")?.classList.add("hidden");
     }
     lucide.createIcons();
   }
-  
+
   function showAuthModal() {
     const modalHtml = `
       <div id="authModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 modal-transition">
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md mx-4">
           <h2 class="text-2xl font-bold mb-4">Sage Account</h2>
           <input type="email" id="loginEmail" placeholder="Email" class="w-full p-2 border rounded-lg dark:bg-gray-700 mb-3">
-          <input type="password" id="loginPassword" placeholder="Password (any)" class="w-full p-2 border rounded-lg dark:bg-gray-700 mb-4">
+          <input type="password" id="loginPassword" placeholder="Password (any for demo)" class="w-full p-2 border rounded-lg dark:bg-gray-700 mb-4">
           <div class="flex gap-2 mb-3">
-            <button id="loginEmailBtn" class="flex-1 bg-emerald-600 text-white py-2 rounded-lg">Login</button>
-            <button id="registerBtn" class="flex-1 bg-emerald-800 text-white py-2 rounded-lg">Sign Up</button>
+            <button id="loginEmailBtn" class="flex-1 bg-blue-600 text-white py-2 rounded-lg">Login</button>
+            <button id="registerBtn" class="flex-1 bg-green-600 text-white py-2 rounded-lg">Sign Up</button>
           </div>
           <button id="demoAdminBtn" class="w-full bg-purple-100 dark:bg-purple-900 py-2 rounded-lg mb-2">Demo Admin Access</button>
-          <button id="demoDevBtn" class="w-full bg-amber-100 dark:bg-amber-900 py-2 rounded-lg mb-2">Demo Developer Access</button>
+          <button id="demoDevBtn" class="w-full bg-amber-100 dark:bg-amber-900 py-2 rounded-lg">Demo Developer Access</button>
           <button id="closeModal" class="w-full mt-3 text-gray-500">Cancel</button>
         </div>
       </div>`;
     document.body.insertAdjacentHTML("beforeend", modalHtml);
-    document.getElementById("loginEmailBtn")?.addEventListener("click", () => { const email = document.getElementById("loginEmail").value; if(email) loginUser(email, "user"); document.getElementById("authModal")?.remove(); });
-    document.getElementById("registerBtn")?.addEventListener("click", () => { const email = document.getElementById("loginEmail").value; if(email) loginUser(email, "user"); document.getElementById("authModal")?.remove(); });
-    document.getElementById("demoAdminBtn")?.addEventListener("click", () => { loginUser("admin@sagehub.com", "admin"); document.getElementById("authModal")?.remove(); });
-    document.getElementById("demoDevBtn")?.addEventListener("click", () => { loginUser("dev@sagehub.com", "developer"); document.getElementById("authModal")?.remove(); });
+    document.getElementById("loginEmailBtn")?.addEventListener("click", () => {
+      const email = document.getElementById("loginEmail").value;
+      if(email) loginUser(email, "user");
+      document.getElementById("authModal")?.remove();
+    });
+    document.getElementById("registerBtn")?.addEventListener("click", () => {
+      const email = document.getElementById("loginEmail").value;
+      if(email) loginUser(email, "user");
+      document.getElementById("authModal")?.remove();
+    });
+    document.getElementById("demoAdminBtn")?.addEventListener("click", () => { loginUser("admin@sage.com", "admin"); document.getElementById("authModal")?.remove(); });
+    document.getElementById("demoDevBtn")?.addEventListener("click", () => { loginUser("dev@sage.com", "developer"); document.getElementById("authModal")?.remove(); });
     document.getElementById("closeModal")?.addEventListener("click", () => document.getElementById("authModal")?.remove());
   }
-  
-  // ----- UI RENDERING (Home, Dashboard, Admin, Developer, Detail) -----
+
   function appCard(app) {
     const isFav = currentUser && userFavorites.includes(app.id);
     return `<div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 card-hover cursor-pointer" onclick="window.showAppDetail('${app.id}')">
@@ -219,90 +249,92 @@
         <div class="flex-1"><h3 class="font-bold">${app.name}</h3><p class="text-sm text-gray-500">${app.shortDesc}</p><div class="flex items-center gap-1 mt-1"><i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i><span>${app.rating}</span><span class="text-xs text-gray-400 ml-1">(${app.ratingCount})</span></div></div>
         <button class="text-red-500" onclick="event.stopPropagation(); toggleFavorite('${app.id}')"><i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500' : ''}"></i></button>
       </div>
-      <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-emerald-600 text-white px-4 py-1 rounded-lg text-sm">${app.isFree ? 'Free' : '$'+app.price}</button></div>
+      <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-4 py-1 rounded-lg text-sm">${app.isFree ? 'Free' : '$'+app.price}</button></div>
     </div>`;
   }
   
+  window.showAppDetail = (appId) => {
+    selectedApp = appList.find(a=>a.id === appId);
+    renderCurrentView();
+  };
+  window.backToHome = () => { selectedApp = null; renderCurrentView(); };
+  
   function renderHome() {
-    const featured = allApps.filter(a => ["guard-ai", "deep-focus", "luminor-studio"].includes(a.id));
-    const trending = [...allApps].sort((a,b)=>b.downloads - a.downloads).slice(0,6);
-    const newReleases = [...allApps].reverse().slice(0,6);
+    const featured = appList.filter(a => ["guard-ai", "deep-focus", "luminor-studio"].includes(a.id));
+    const trending = [...appList].sort((a,b)=>b.downloads - a.downloads).slice(0,6);
+    const newReleases = [...appList].reverse().slice(0,6);
     return `
       <div class="space-y-12">
-        <div class="bg-gradient-to-r from-emerald-700 to-teal-600 rounded-2xl p-8 text-white shadow-xl">
-          <h1 class="text-3xl md:text-4xl font-bold">Sage App Hub</h1>
-          <p class="text-lg opacity-90 mt-2">Enterprise-grade app marketplace by Sage Software Development Company</p>
+        <div class="bg-gradient-to-r from-[#0a2b3e] to-[#1b4a6e] rounded-2xl p-8 text-white shadow-xl">
+          <h1 class="text-3xl md:text-4xl font-bold">Sage Software Marketplace</h1>
+          <p class="text-lg opacity-90 mt-2">Enterprise-ready apps for business, AI, productivity & logistics</p>
         </div>
-        <div><h2 class="text-2xl font-bold mb-4">⭐ Featured</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div>
-        <div><h2 class="text-2xl font-bold mb-4">🔥 Trending</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div>
-        <div><h2 class="text-2xl font-bold mb-4">🆕 New Releases</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div>
+        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">⭐ Featured Solutions</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div>
+        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🔥 Trending on Sage</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div>
+        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🆕 New Releases</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div>
       </div>`;
   }
-  
-  window.showAppDetail = (appId) => { selectedApp = allApps.find(a=>a.id === appId); renderCurrentView(); };
-  window.backToHome = () => { selectedApp = null; renderCurrentView(); };
   
   function renderAppDetail() {
     if (!selectedApp) return renderHome();
     const app = selectedApp;
     const appReviews = reviewsData[app.id] || [];
-    return `<div class="max-w-4xl mx-auto"><button onclick="window.backToHome()" class="flex items-center gap-1 text-emerald-600 mb-4">&larr; Back to Store</button>
+    return `<div class="max-w-4xl mx-auto"><button onclick="window.backToHome()" class="flex items-center gap-1 text-blue-600 mb-4">&larr; Back to Store</button>
       <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-        <div class="flex gap-5 flex-wrap"><img src="${generateAppLogo(app.id, 100)}" class="w-24 h-24 rounded-2xl"><div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div><div><i data-lucide="download"></i> ${app.downloads.toLocaleString()}</div></div><div class="flex gap-3 mt-4"><button onclick="downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-emerald-600 text-white px-6 py-2 rounded-full">${app.isFree ? 'Download' : 'Buy $'+app.price}</button><button onclick="toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
+        <div class="flex gap-5 flex-wrap"><img src="${generateAppLogo(app.id, 100)}" class="w-24 h-24 rounded-2xl"><div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div><div><i data-lucide="download"></i> ${app.downloads.toLocaleString()}</div></div><div class="flex gap-3 mt-4"><button onclick="downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-6 py-2 rounded-full">${app.isFree ? 'Download' : 'Buy $'+app.price}</button><button onclick="toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
         <div class="mt-6"><h2 class="text-xl font-semibold">Description</h2><p>${app.description}</p><h3 class="font-semibold mt-4">Key Features</h3><ul class="list-disc pl-5">${app.features.map(f=>`<li>${f}</li>`).join('')}</ul></div>
-        <div class="mt-8"><h2 class="text-xl font-semibold">Rate this app</h2><div id="reviewStars" class="flex gap-1 my-2"></div><textarea id="reviewText" class="w-full border rounded p-2 dark:bg-gray-700" rows="2" placeholder="Share your experience..."></textarea><button id="submitReviewBtn" class="mt-2 bg-emerald-600 text-white px-4 py-1 rounded">Submit Review</button>
-        <div class="mt-6 space-y-3"><h3 class="font-bold">User Reviews</h3>${appReviews.map(r => `<div class="border-b pb-2"><div class="font-semibold">${r.user}</div><div class="flex text-yellow-400">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><p>${r.content}</p><small>${new Date(r.date).toLocaleDateString()}</small></div>`).join('') || '<p class="text-gray-400">No reviews yet. Be the first!</p>'}</div></div>
+        <div class="mt-8"><h2 class="text-xl font-semibold">Rate & Review (Sage verified)</h2><div id="reviewStars" class="flex gap-1 my-2"></div><textarea id="reviewText" class="w-full border rounded p-2 dark:bg-gray-700" rows="2" placeholder="Write your review..."></textarea><button id="submitReviewBtn" class="mt-2 bg-purple-600 text-white px-4 py-1 rounded">Submit Review</button>
+        <div class="mt-6 space-y-3">${appReviews.map(r => `<div class="border-b pb-2"><div class="font-semibold">${r.user}</div><div class="flex text-yellow-400">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><p>${r.content}</p><small>${new Date(r.date).toLocaleDateString()}</small></div>`).join('')}</div></div>
       </div></div>`;
   }
   
   function renderDashboard() {
-    if(!currentUser) return `<div class="text-center py-12">Please login to view dashboard</div>`;
-    const downloadedApps = allApps.filter(a => userDownloads.some(d => d.appId === a.id));
-    const favApps = allApps.filter(a => userFavorites.includes(a.id));
-    return `<div><h1 class="text-2xl font-bold">My Dashboard</h1><div class="grid md:grid-cols-2 gap-6 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">📦 Installed Apps (${downloadedApps.length})</h2>${downloadedApps.map(a=>`<div class="flex gap-2 items-center mt-2"><img src="${generateAppLogo(a.id,40)}" class="w-10 h-10 rounded">${a.name}</div>`).join('')||"None"}</div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">❤️ Favorites (${favApps.length})</h2>${favApps.map(a=>`<div class="flex gap-2 mt-2"><img src="${generateAppLogo(a.id,40)}" class="w-10 h-10 rounded">${a.name}</div>`).join('')}</div></div></div>`;
+    if(!currentUser) return `<div class="text-center py-12">Access Sage dashboard after login</div>`;
+    const downloadedApps = appList.filter(a => userDownloads.some(d => d.appId === a.id));
+    const favApps = appList.filter(a => userFavorites.includes(a.id));
+    return `<div><h1 class="text-2xl font-bold">Sage Workspace</h1><div class="grid md:grid-cols-2 gap-6 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">📦 Installed Apps (${downloadedApps.length})</h2>${downloadedApps.map(a=>`<div class="flex gap-2 items-center mt-2"><img src="${generateAppLogo(a.id,40)}" class="w-10 h-10 rounded">${a.name}</div>`).join('')||"No downloads yet"}</div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">❤️ Favorites (${favApps.length})</h2>${favApps.map(a=>`<div class="flex gap-2 mt-2"><img src="${generateAppLogo(a.id,40)}" class="w-10 h-10 rounded">${a.name}</div>`).join('')}</div></div></div>`;
   }
   
   function renderAdmin() {
-    if(!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin')) return `<div class="text-center py-12">Access Denied</div>`;
-    const totalUsers = 1240; const totalRevenue = 12450; const totalDownloads = allApps.reduce((s,a)=>s+a.downloads,0);
-    return `<div><h1 class="text-2xl font-bold">Admin Dashboard — Sage Console</h1><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="users"></i><div class="text-2xl font-bold">${totalUsers}</div><div>Total Users</div></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="download"></i><div class="text-2xl font-bold">${totalDownloads.toLocaleString()}</div><div>Global Downloads</div></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="dollar-sign"></i><div class="text-2xl font-bold">$${totalRevenue}</div><div>Revenue</div></div></div><div class="mt-8"><h2 class="font-bold">App Management (Sage Portfolio)</h2><div class="grid gap-2">${allApps.map(a=>`<div class="flex justify-between items-center bg-white dark:bg-gray-800 p-2 rounded"><div>${a.name}</div><button class="text-sm bg-emerald-600 text-white px-2 py-1 rounded" onclick="alert('Edit feature — ready for production')">Manage</button></div>`).join('')}</div></div></div>`;
+    if(!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin')) return `<div class="text-center py-12">Restricted to Sage Admin</div>`;
+    const totalDownloads = appList.reduce((s,a)=>s+a.downloads,0);
+    return `<div><h1 class="text-2xl font-bold">Sage Admin Console</h1><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="users"></i><div class="text-2xl font-bold">1,240</div><div>Active Users</div></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="download"></i><div class="text-2xl font-bold">${totalDownloads.toLocaleString()}</div><div>Total Downloads</div></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="dollar-sign"></i><div class="text-2xl font-bold">$18,240</div><div>Revenue (Sage)</div></div></div><div class="mt-8"><h2 class="font-bold">App Portfolio Management</h2><div class="grid gap-2">${appList.map(a=>`<div class="flex justify-between items-center bg-white dark:bg-gray-800 p-2 rounded"><div>${a.name}</div><button class="text-sm bg-blue-600 text-white px-2 py-1 rounded" onclick="alert('Sage Admin: Edit ${a.name} (demo)')">Manage</button></div>`).join('')}</div></div></div>`;
   }
   
   function renderDeveloper() {
-    if(!currentUser || currentUser.role !== 'developer') return `<div class="text-center py-12">Developer access only</div>`;
-    return `<div><h1 class="text-2xl font-bold">Developer Hub | Sage Software</h1><p>Submit apps, track analytics, manage versions</p><div class="bg-white dark:bg-gray-800 p-4 rounded-xl mt-4"><h3 class="font-semibold">Your Apps Performance</h3><div class="space-y-2 mt-2">${allApps.slice(0,4).map(a=>`<div>${a.name} — Downloads: ${a.downloads} | Rating: ${a.rating}</div>`).join('')}</div><button class="mt-4 bg-emerald-600 text-white px-4 py-2 rounded">+ Submit New Release</button></div></div>`;
+    if(!currentUser || currentUser.role !== 'developer') return `<div class="text-center py-12">Developer portal - Sage Partners only</div>`;
+    return `<div><h1 class="text-2xl font-bold">Sage Developer Hub</h1><p>Submit and analyze your software solutions</p><div class="bg-white dark:bg-gray-800 p-4 rounded-xl mt-4"><h3 class="font-semibold">Your Apps Performance</h3><div class="space-y-2 mt-2">${appList.slice(0,4).map(a=>`<div>${a.name} - Downloads: ${a.downloads} | Rating: ${a.rating}</div>`).join('')}</div><button class="mt-4 bg-green-600 text-white px-4 py-2 rounded">+ Submit New App Version</button></div></div>`;
   }
   
   function renderCurrentView() {
     const container = document.getElementById("mainContent");
-    let content = "";
-    if(selectedApp) content = renderAppDetail();
-    else if(activeView === "home") content = renderHome();
-    else if(activeView === "dashboard") content = renderDashboard();
-    else if(activeView === "admin") content = renderAdmin();
-    else if(activeView === "developer") content = renderDeveloper();
-    container.innerHTML = content;
+    if(selectedApp) container.innerHTML = renderAppDetail();
+    else if(activeView === "home") container.innerHTML = renderHome();
+    else if(activeView === "dashboard") container.innerHTML = renderDashboard();
+    else if(activeView === "admin") container.innerHTML = renderAdmin();
+    else if(activeView === "developer") container.innerHTML = renderDeveloper();
     lucide.createIcons();
     if(selectedApp && document.getElementById("reviewStars")) {
       let ratingVal = 0;
       const starDiv = document.getElementById("reviewStars");
+      starDiv.innerHTML = '';
       for(let i=1;i<=5;i++){ let star=document.createElement('i'); star.setAttribute('data-lucide','star'); star.className='w-6 h-6 cursor-pointer rating-star'; star.onclick=()=>{ratingVal=i; document.querySelectorAll('#reviewStars i').forEach((s,idx)=>s.style.fill= idx<i ? '#facc15' : 'none');}; starDiv.appendChild(star);}
       lucide.createIcons();
-      document.getElementById("submitReviewBtn")?.addEventListener("click",()=>{ const txt=document.getElementById("reviewText").value; if(ratingVal && txt) submitReview(selectedApp.id, ratingVal, txt); else showToast("Please provide rating and review", "error");});
+      document.getElementById("submitReviewBtn")?.addEventListener("click",()=>{ const txt=document.getElementById("reviewText").value; if(ratingVal && txt) submitReview(selectedApp.id, ratingVal, txt); else showToast("Please provide rating and comment", "error");});
     }
   }
   
-  // Navigation listeners
+  // Event listeners for navigation
   document.querySelectorAll(".nav-btn").forEach(btn=>{
     btn.addEventListener("click",(e)=>{
       const view = btn.getAttribute("data-nav");
       if(view) { activeView = view; selectedApp = null; renderCurrentView(); }
-      document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("border-emerald-600","text-emerald-600"));
-      btn.classList.add("border-emerald-600","text-emerald-600");
+      document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("border-blue-600","text-blue-600"));
+      btn.classList.add("border-blue-600","text-blue-600");
     });
   });
   
-  // Theme
+  // Theme toggle
   const themeToggle = document.getElementById("themeToggle");
   themeToggle?.addEventListener("click",()=>{ document.documentElement.classList.toggle("dark"); localStorage.setItem("sageTheme", document.documentElement.classList.contains("dark") ? "dark" : "light"); lucide.createIcons(); });
   if(localStorage.getItem("sageTheme") === "dark") document.documentElement.classList.add("dark");
