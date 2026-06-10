@@ -32,7 +32,7 @@
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
 <div id="app" class="min-h-screen flex flex-col">
-  <!-- Header (unchanged) -->
+  <!-- Header (rebranded Meon) -->
   <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
     <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
@@ -107,7 +107,7 @@
     "kanisa-launcher": "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png"
   };
 
-  // ---------- APP DATA (15 apps) ----------
+  // ---------- APP DATA (15 apps, unchanged) ----------
   const appList = [
     { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand", category: "Utilities", price: 0, isFree: true, rating: 4.6, ratingCount: 234, downloads: 12540, version: "2.1.0", features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"], description: "Fast, reliable LPG and water delivery service with live order tracking." },
     { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker", category: "Productivity", price: 4.99, isFree: false, rating: 4.8, ratingCount: 1890, downloads: 45200, version: "3.0.2", features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"], description: "Boost productivity with science-backed focus tools." },
@@ -177,7 +177,7 @@
       onerror="this.onerror=null; this.src='${fallbackSvg}';">`;
   }
 
-  // ---------- STATE MANAGEMENT (unchanged but rebranded) ----------
+  // ---------- STATE MANAGEMENT (unchanged but rebranded localStorage) ----------
   let currentUser = JSON.parse(localStorage.getItem("meonUser")) || null;
   let activeView = "home";
   let selectedApp = null;
@@ -309,7 +309,7 @@
     currentPaymentApp = null;
   }
 
-  // ---------- UI COMPONENTS (Homepage with NEW Design 2) ----------
+  // ---------- UI COMPONENTS (Homepage with Design 2) ----------
   function getFilteredApps() {
     let filtered = [...appList];
     if (searchQuery) {
@@ -338,7 +338,6 @@
       { name: "Creativity", gradient: "from-indigo-600 to-purple-600", filter: "design" }
     ];
 
-    // NEW DESIGN 2 HERO SECTION
     return `
       <div class="space-y-12">
         <!-- Design 2 Hero Block -->
@@ -359,14 +358,12 @@
                 <button id="exploreMarketplaceBtn" class="bg-white text-purple-900 px-8 py-3 rounded-xl font-bold shadow-lg hover:scale-105 transition">EXPLORE APPS</button>
                 <button id="becomeDevBtn" class="border border-white/30 px-8 py-3 rounded-xl backdrop-blur-md hover:bg-white/10 transition text-white font-semibold">BECOME A DEVELOPER</button>
               </div>
-              <!-- Stats row integrated -->
               <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
                 <div><div class="text-2xl md:text-3xl font-bold text-white">15+</div><div class="text-sm text-purple-200">Applications</div></div>
                 <div><div class="text-2xl md:text-3xl font-bold text-white">500K+</div><div class="text-sm text-purple-200">Downloads</div></div>
                 <div><div class="text-2xl md:text-3xl font-bold text-white">4.8★</div><div class="text-sm text-purple-200">Average Rating</div></div>
                 <div><div class="text-2xl md:text-3xl font-bold text-white">24/7</div><div class="text-sm text-purple-200">Innovation</div></div>
               </div>
-              <!-- Three core values -->
               <div class="flex flex-wrap gap-6 mt-10 pt-6 border-t border-white/20">
                 <span class="text-purple-200 font-semibold tracking-wide">INTELLIGENCE</span>
                 <span class="text-purple-200 font-semibold tracking-wide">INNOVATION</span>
