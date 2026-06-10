@@ -25,12 +25,12 @@
     }
     .toast { position: fixed; bottom: 20px; right: 20px; z-index: 9999; animation: slideIn 0.3s ease; }
     @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    img.app-logo { background: #1e293b; object-fit: cover; }
   </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
 <div id="app" class="min-h-screen flex flex-col">
-  <!-- Header -->
   <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
     <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
@@ -62,7 +62,7 @@
   <div id="toastContainer"></div>
 </div>
 
-<!-- M-Pesa Payment Modal (hidden initially) -->
+<!-- M-Pesa Modal -->
 <div id="mpesaModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden modal-transition">
   <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md mx-4">
     <h2 class="text-2xl font-bold mb-2">Pay with M-Pesa</h2>
@@ -84,39 +84,27 @@
 </div>
 
 <script>
-  // ---------- FULL 15 APPS (original names & workflows) ----------
+  // ---------- APP DATA (15 apps) with EXTERNAL LOGO URLs from Vercel deployments ----------
   const appList = [
-    { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand", category: "Utilities", price: 0, isFree: true, rating: 4.6, ratingCount: 234, downloads: 12540, version: "2.1.0", features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"], description: "Fast, reliable LPG and water delivery service with live order tracking." },
-    { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker", category: "Productivity", price: 4.99, isFree: false, rating: 4.8, ratingCount: 1890, downloads: 45200, version: "3.0.2", features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"], description: "Boost productivity with science-backed focus tools." },
-    { id: "guard-ai", name: "Guard AI", slug: "guard-ai", shortDesc: "AI cybersecurity protection", category: "AI Tools", price: 9.99, isFree: false, rating: 4.9, ratingCount: 523, downloads: 18730, version: "1.5.0", features: ["Threat detection", "VPN", "Password manager", "Dark web monitoring"], description: "Next-gen AI shield for digital security." },
-    { id: "data-vision", name: "Data Vision", slug: "data-vision", shortDesc: "AI business intelligence", category: "Analytics", price: 19.99, isFree: false, rating: 4.7, ratingCount: 312, downloads: 9800, version: "4.2.1", features: ["Dashboards", "AI predictions", "Data connectors", "Reports"], description: "Turn data into insights with AI." },
-    { id: "rider-app", name: "Rider App", slug: "rider-app", shortDesc: "Logistics & delivery platform", category: "Transport", price: 0, isFree: true, rating: 4.5, ratingCount: 892, downloads: 67300, version: "2.3.0", features: ["Route optimization", "Live tracking", "Earnings dashboard", "Proof of delivery"], description: "Complete solution for riders and fleets." },
-    { id: "insight", name: "Insight", slug: "insight", shortDesc: "Customer analytics platform", category: "Analytics", price: 29.99, isFree: false, rating: 4.6, ratingCount: 178, downloads: 5400, version: "1.8.0", features: ["Segmentation", "Behavioral analytics", "Predictive models", "APIs"], description: "Deep customer behavior intelligence." },
-    { id: "clients-hub", name: "Clients Hub", slug: "clients-hub", shortDesc: "CRM for modern business", category: "CRM", price: 14.99, isFree: false, rating: 4.4, ratingCount: 421, downloads: 12400, version: "3.1.0", features: ["Contact mgmt", "Deal tracking", "Email sync", "Forecasting"], description: "Grow relationships with powerful CRM." },
-    { id: "smart-duka", name: "Smart Duka", slug: "smart-duka", shortDesc: "Retail management system", category: "Business", price: 9.99, isFree: false, rating: 4.7, ratingCount: 563, downloads: 28900, version: "2.0.0", features: ["Inventory", "POS", "Sales reports", "Supplier mgmt"], description: "Modern POS for small shops." },
-    { id: "agriculture", name: "Agriculture", slug: "agriculture", shortDesc: "Smart farming solution", category: "Agriculture", price: 0, isFree: true, rating: 4.3, ratingCount: 197, downloads: 8100, version: "1.4.0", features: ["Crop monitor", "Weather", "Market prices", "Expert advice"], description: "Empower farmers with digital tools." },
-    { id: "luminor-studio", name: "Luminor Studio", slug: "luminor-studio", shortDesc: "AI photo & video editing", category: "Design", price: 12.99, isFree: false, rating: 4.9, ratingCount: 734, downloads: 34200, version: "5.0.1", features: ["AI enhancement", "Layer editing", "Filters", "4K export"], description: "Creative suite for professionals." },
-    { id: "cv-maker", name: "CV Maker", slug: "cv-maker", shortDesc: "Professional resume builder", category: "Productivity", price: 0, isFree: true, rating: 4.6, ratingCount: 1280, downloads: 98700, version: "1.9.0", features: ["Templates", "PDF export", "LinkedIn import", "Cover letter"], description: "Create job-winning resumes instantly." },
-    { id: "matatu-booking", name: "Matatu Booking", slug: "matatu-booking", shortDesc: "Public transport booking", category: "Transport", price: 0, isFree: true, rating: 4.5, ratingCount: 567, downloads: 45300, version: "2.2.0", features: ["Real-time tracking", "Digital tickets", "Route planning", "Fare calc"], description: "Book matatus and track in real-time." },
-    { id: "home-search", name: "Home Search", slug: "home-search", shortDesc: "Real estate marketplace", category: "Real Estate", price: 0, isFree: true, rating: 4.4, ratingCount: 398, downloads: 22500, version: "3.3.0", features: ["Property search", "Virtual tours", "Mortgage calc", "Agent contact"], description: "Find dream home or rental." },
-    { id: "school-360", name: "School 360", slug: "school-360", shortDesc: "School management system", category: "Education", price: 49.99, isFree: false, rating: 4.8, ratingCount: 245, downloads: 6700, version: "4.1.0", features: ["Student records", "Fee mgmt", "Parent portal", "CBC support"], description: "Complete school ERP with CBC." },
-    { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher", shortDesc: "Church management & engagement", category: "Religion", price: 0, isFree: true, rating: 4.7, ratingCount: 156, downloads: 5300, version: "1.2.0", features: ["Events", "Giving platform", "Member directory", "Live stream"], description: "Digital tools for modern ministry." }
+    { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand", category: "Utilities", price: 0, isFree: true, rating: 4.6, ratingCount: 234, downloads: 12540, version: "2.1.0", features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"], description: "Fast, reliable LPG and water delivery service with live order tracking.", logoUrl: "https://maji-gasdelivery.vercel.app/favicon.ico" },
+    { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker", category: "Productivity", price: 4.99, isFree: false, rating: 4.8, ratingCount: 1890, downloads: 45200, version: "3.0.2", features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"], description: "Boost productivity with science-backed focus tools.", logoUrl: "https://deepfocus-roan.vercel.app/favicon.ico" },
+    { id: "guard-ai", name: "Guard AI", slug: "guard-ai", shortDesc: "AI cybersecurity protection", category: "AI Tools", price: 9.99, isFree: false, rating: 4.9, ratingCount: 523, downloads: 18730, version: "1.5.0", features: ["Threat detection", "VPN", "Password manager", "Dark web monitoring"], description: "Next-gen AI shield for digital security.", logoUrl: "https://guard-ai-six.vercel.app/favicon.ico" },
+    { id: "data-vision", name: "Data Vision", slug: "data-vision", shortDesc: "AI business intelligence", category: "Analytics", price: 19.99, isFree: false, rating: 4.7, ratingCount: 312, downloads: 9800, version: "4.2.1", features: ["Dashboards", "AI predictions", "Data connectors", "Reports"], description: "Turn data into insights with AI.", logoUrl: "https://datavision-beta.vercel.app/favicon.ico" },
+    { id: "rider-app", name: "Rider App", slug: "rider-app", shortDesc: "Logistics & delivery platform", category: "Transport", price: 0, isFree: true, rating: 4.5, ratingCount: 892, downloads: 67300, version: "2.3.0", features: ["Route optimization", "Live tracking", "Earnings dashboard", "Proof of delivery"], description: "Complete solution for riders and fleets.", logoUrl: "https://rider-app-psi.vercel.app/favicon.ico" },
+    { id: "insight", name: "Insight", slug: "insight", shortDesc: "Customer analytics platform", category: "Analytics", price: 29.99, isFree: false, rating: 4.6, ratingCount: 178, downloads: 5400, version: "1.8.0", features: ["Segmentation", "Behavioral analytics", "Predictive models", "APIs"], description: "Deep customer behavior intelligence.", logoUrl: "https://insight-eta-lime.vercel.app/favicon.ico" },
+    { id: "clients-hub", name: "Clients Hub", slug: "clients-hub", shortDesc: "CRM for modern business", category: "CRM", price: 14.99, isFree: false, rating: 4.4, ratingCount: 421, downloads: 12400, version: "3.1.0", features: ["Contact mgmt", "Deal tracking", "Email sync", "Forecasting"], description: "Grow relationships with powerful CRM.", logoUrl: "https://clients-hub.vercel.app/favicon.ico" },
+    { id: "smart-duka", name: "Smart Duka", slug: "smart-duka", shortDesc: "Retail management system", category: "Business", price: 9.99, isFree: false, rating: 4.7, ratingCount: 563, downloads: 28900, version: "2.0.0", features: ["Inventory", "POS", "Sales reports", "Supplier mgmt"], description: "Modern POS for small shops.", logoUrl: "https://smartduka-rho.vercel.app/favicon.ico" },
+    { id: "agriculture", name: "Agriculture", slug: "agriculture", shortDesc: "Smart farming solution", category: "Agriculture", price: 0, isFree: true, rating: 4.3, ratingCount: 197, downloads: 8100, version: "1.4.0", features: ["Crop monitor", "Weather", "Market prices", "Expert advice"], description: "Empower farmers with digital tools.", logoUrl: "https://agriculture-puce-eta.vercel.app/favicon.ico" },
+    { id: "luminor-studio", name: "Luminor Studio", slug: "luminor-studio", shortDesc: "AI photo & video editing", category: "Design", price: 12.99, isFree: false, rating: 4.9, ratingCount: 734, downloads: 34200, version: "5.0.1", features: ["AI enhancement", "Layer editing", "Filters", "4K export"], description: "Creative suite for professionals.", logoUrl: "https://luminor-studio.vercel.app/favicon.ico" },
+    { id: "cv-maker", name: "CV Maker", slug: "cv-maker", shortDesc: "Professional resume builder", category: "Productivity", price: 0, isFree: true, rating: 4.6, ratingCount: 1280, downloads: 98700, version: "1.9.0", features: ["Templates", "PDF export", "LinkedIn import", "Cover letter"], description: "Create job-winning resumes instantly.", logoUrl: "https://cv-maker-five-mu.vercel.app/favicon.ico" },
+    { id: "matatu-booking", name: "Matatu Booking", slug: "matatu-booking", shortDesc: "Public transport booking", category: "Transport", price: 0, isFree: true, rating: 4.5, ratingCount: 567, downloads: 45300, version: "2.2.0", features: ["Real-time tracking", "Digital tickets", "Route planning", "Fare calc"], description: "Book matatus and track in real-time.", logoUrl: "https://matatu-booking.vercel.app/favicon.ico" },
+    { id: "home-search", name: "Home Search", slug: "home-search", shortDesc: "Real estate marketplace", category: "Real Estate", price: 0, isFree: true, rating: 4.4, ratingCount: 398, downloads: 22500, version: "3.3.0", features: ["Property search", "Virtual tours", "Mortgage calc", "Agent contact"], description: "Find dream home or rental.", logoUrl: "https://home-search-j529.vercel.app/favicon.ico" },
+    { id: "school-360", name: "School 360", slug: "school-360", shortDesc: "School management system", category: "Education", price: 49.99, isFree: false, rating: 4.8, ratingCount: 245, downloads: 6700, version: "4.1.0", features: ["Student records", "Fee mgmt", "Parent portal", "CBC support"], description: "Complete school ERP with CBC.", logoUrl: "https://school-360-one.vercel.app/favicon.ico" },
+    { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher", shortDesc: "Church management & engagement", category: "Religion", price: 0, isFree: true, rating: 4.7, ratingCount: 156, downloads: 5300, version: "1.2.0", features: ["Events", "Giving platform", "Member directory", "Live stream"], description: "Digital tools for modern ministry.", logoUrl: "https://kanisa-launcher.vercel.app/favicon.ico" }
   ];
 
-  // Add metadata
-  appList.forEach(app => {
-    app.developer = { name: "Sage Software", verified: true };
-    app.screenshots = [
-      `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%231e293b'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3E${app.name} Preview%3C/text%3E%3C/svg%3E`,
-      `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23334155'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3EFeature Demo%3C/text%3E%3C/svg%3E`
-    ];
-    app.versions = [{ version: app.version, changelog: "Latest stable release", createdAt: new Date().toISOString() }];
-    if (!app.ratingCount) app.ratingCount = Math.floor(Math.random() * 800) + 50;
-    if (!app.downloads) app.downloads = Math.floor(Math.random() * 30000) + 1000;
-  });
-
-  // ----- ROBUST LOGO GENERATOR (SVG inline, never broken) -----
-  function generateAppLogo(appId, size = 80) {
+  // Fallback SVG logo generator (in case external logo fails)
+  function generateFallbackSVG(appId, size = 80) {
     const colorMap = {
       "maji-gas": { primary: "#2563EB", secondary: "#F97316", letter: "M" },
       "deep-focus": { primary: "#4F46E5", secondary: "#7C3AED", letter: "D" },
@@ -134,8 +122,7 @@
       "school-360": { primary: "#2563EB", secondary: "#10B981", letter: "S" },
       "kanisa-launcher": { primary: "#9333EA", secondary: "#D97706", letter: "K" }
     };
-    const defaultColor = { primary: "#0F172A", secondary: "#334155", letter: "S" };
-    const c = colorMap[appId] || defaultColor;
+    const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "S" };
     const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="${size}" height="${size}">
       <rect width="512" height="512" rx="96" fill="${c.primary}"/>
       <circle cx="256" cy="256" r="140" fill="${c.secondary}" opacity="0.9"/>
@@ -144,10 +131,31 @@
     return `data:image/svg+xml,${encodeURIComponent(svgString)}`;
   }
 
-  // ---------- DARAJA M-PESA API (Mock + Real endpoint support) ----------
-  // Set to true if you have the actual backend at /api/mpesa/stkpush
-  const USE_REAL_MPESA_API = false; // Change to true when backend ready
+  // Get logo URL with fallback
+  function getAppLogoUrl(app, size = 80) {
+    if (app.logoUrl) {
+      // Use external URL but attach onerror fallback via HTML later
+      return app.logoUrl;
+    }
+    return generateFallbackSVG(app.id, size);
+  }
 
+  // Add fallback handling via img onerror attribute (implemented in templates)
+  
+  // Add screenshots and versions metadata
+  appList.forEach(app => {
+    app.developer = { name: "Sage Software", verified: true };
+    app.screenshots = [
+      `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%231e293b'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3E${app.name} Preview%3C/text%3E%3C/svg%3E`,
+      `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23334155'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3EFeature Demo%3C/text%3E%3C/svg%3E`
+    ];
+    app.versions = [{ version: app.version, changelog: "Latest stable release", createdAt: new Date().toISOString() }];
+    if (!app.ratingCount) app.ratingCount = Math.floor(Math.random() * 800) + 50;
+    if (!app.downloads) app.downloads = Math.floor(Math.random() * 30000) + 1000;
+  });
+
+  // ---------- DARAJA M-PESA API Mock ----------
+  const USE_REAL_MPESA_API = false;
   async function initiateMpesaPayment(phoneNumber, amount, accountReference, appName) {
     if (USE_REAL_MPESA_API) {
       const response = await fetch('/api/mpesa/stkpush', {
@@ -164,11 +172,9 @@
         return false;
       }
     } else {
-      // Mock simulation for demo
       return new Promise((resolve) => {
         showToast(`📱 M-Pesa STK push sent to ${phoneNumber} for KES ${amount}. Please check your phone.`, "info");
         setTimeout(() => {
-          // Simulate successful payment after 3 seconds
           showToast(`✅ Payment of KES ${amount} for ${appName} successful! Receipt: MOCK${Date.now()}`, "success");
           resolve(true);
         }, 3000);
@@ -176,13 +182,9 @@
     }
   }
 
-  // Show M-Pesa modal for a specific app
   let currentPaymentApp = null;
   function showMpesaPaymentModal(app) {
-    if (!currentUser) {
-      showToast("Please login to make a purchase", "error");
-      return;
-    }
+    if (!currentUser) { showToast("Please login to make a purchase", "error"); return; }
     currentPaymentApp = app;
     document.getElementById("mpesaAppName").innerText = `App: ${app.name} - KES ${app.price}`;
     document.getElementById("mpesaAmount").value = app.price;
@@ -192,17 +194,13 @@
 
   async function confirmMpesaPayment() {
     const phone = document.getElementById("mpesaPhone").value.trim();
-    if (!phone) {
-      showToast("Enter your M-Pesa phone number", "error");
-      return;
-    }
+    if (!phone) { showToast("Enter your M-Pesa phone number", "error"); return; }
     if (!currentPaymentApp) return;
     const amount = currentPaymentApp.price;
     const accountReference = `SAGE_${currentPaymentApp.id}_${Date.now()}`;
     document.getElementById("mpesaModal").classList.add("hidden");
     const success = await initiateMpesaPayment(phone, amount, accountReference, currentPaymentApp.name);
     if (success) {
-      // Grant download access (add to user downloads)
       if (!userDownloads.find(d => d.appId === currentPaymentApp.id)) {
         userDownloads.push({ appId: currentPaymentApp.id, downloadedAt: new Date().toISOString(), version: currentPaymentApp.version });
         currentPaymentApp.downloads += 1;
@@ -260,11 +258,9 @@
   function downloadApp(app) {
     if (!currentUser) { showToast("Please login to download", "error"); return; }
     if (!app.isFree) {
-      // Paid app: show M-Pesa payment modal
       showMpesaPaymentModal(app);
       return;
     }
-    // Free app: direct download
     if (!userDownloads.find(d => d.appId === app.id)) {
       userDownloads.push({ appId: app.id, downloadedAt: new Date().toISOString(), version: app.version });
       app.downloads += 1;
@@ -288,7 +284,81 @@
     return true;
   }
   
-  // UI rendering functions (identical to previous but modified download button)
+  // Helper to create img tag with fallback
+  function appLogoImg(app, sizeClass = "w-16 h-16", pixelSize = 60) {
+    const externalUrl = app.logoUrl || generateFallbackSVG(app.id, pixelSize);
+    const fallbackSvg = generateFallbackSVG(app.id, pixelSize);
+    return `<img src="${externalUrl}" class="${sizeClass} rounded-xl shadow object-cover" alt="${app.name}" 
+      onerror="this.onerror=null; this.src='${fallbackSvg}';">`;
+  }
+  
+  function appCard(app) {
+    const isFav = currentUser && userFavorites.includes(app.id);
+    return `<div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 card-hover cursor-pointer" onclick="window.showAppDetail('${app.id}')">
+      <div class="flex gap-3">
+        ${appLogoImg(app, "w-16 h-16", 60)}
+        <div class="flex-1"><h3 class="font-bold">${app.name}</h3><p class="text-sm text-gray-500">${app.shortDesc}</p><div class="flex items-center gap-1 mt-1"><i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i><span>${app.rating}</span><span class="text-xs text-gray-400 ml-1">(${app.ratingCount})</span></div></div>
+        <button class="text-red-500" onclick="event.stopPropagation(); toggleFavorite('${app.id}')"><i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500' : ''}"></i></button>
+      </div>
+      <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-4 py-1 rounded-lg text-sm">${app.isFree ? 'Free' : 'Buy KES '+app.price}</button></div>
+    </div>`;
+  }
+  
+  window.showAppDetail = (appId) => {
+    selectedApp = appList.find(a=>a.id === appId);
+    renderCurrentView();
+  };
+  window.backToHome = () => { selectedApp = null; renderCurrentView(); };
+  
+  function renderHome() {
+    const featured = appList.filter(a => ["guard-ai", "deep-focus", "luminor-studio"].includes(a.id));
+    const trending = [...appList].sort((a,b)=>b.downloads - a.downloads).slice(0,6);
+    const newReleases = [...appList].reverse().slice(0,6);
+    return `
+      <div class="space-y-12">
+        <div class="bg-gradient-to-r from-[#0a2b3e] to-[#1b4a6e] rounded-2xl p-8 text-white shadow-xl">
+          <h1 class="text-3xl md:text-4xl font-bold">Sage Software Marketplace</h1>
+          <p class="text-lg opacity-90 mt-2">Enterprise-ready apps • Pay with M-Pesa via STK Push</p>
+        </div>
+        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">⭐ Featured Solutions</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div>
+        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🔥 Trending on Sage</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div>
+        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🆕 New Releases</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div>
+      </div>`;
+  }
+  
+  function renderAppDetail() {
+    if (!selectedApp) return renderHome();
+    const app = selectedApp;
+    const appReviews = reviewsData[app.id] || [];
+    const screenshotHtml = app.screenshots.map(url => `<img src="${url}" class="rounded-xl border border-gray-200 dark:border-gray-700 w-64 h-40 object-cover" alt="screenshot">`).join('');
+    return `<div class="max-w-4xl mx-auto"><button onclick="window.backToHome()" class="flex items-center gap-1 text-blue-600 mb-4">&larr; Back to Store</button>
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
+        <div class="flex gap-5 flex-wrap">${appLogoImg(app, "w-24 h-24", 100)}<div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div><div><i data-lucide="download"></i> ${app.downloads.toLocaleString()}</div></div><div class="flex gap-3 mt-4"><button onclick="downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-6 py-2 rounded-full">${app.isFree ? 'Download' : 'Buy with M-Pesa (KES '+app.price+')'}</button><button onclick="toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
+        <div class="mt-6"><h2 class="text-xl font-semibold">Description</h2><p>${app.description}</p><h3 class="font-semibold mt-4">Key Features</h3><ul class="list-disc pl-5">${app.features.map(f=>`<li>${f}</li>`).join('')}</ul></div>
+        <div class="mt-6"><h2 class="text-xl font-semibold">Screenshots</h2><div class="flex gap-3 overflow-x-auto pb-2">${screenshotHtml}</div></div>
+        <div class="mt-8"><h2 class="text-xl font-semibold">Rate & Review (Sage verified)</h2><div id="reviewStars" class="flex gap-1 my-2"></div><textarea id="reviewText" class="w-full border rounded p-2 dark:bg-gray-700" rows="2" placeholder="Write your review..."></textarea><button id="submitReviewBtn" class="mt-2 bg-purple-600 text-white px-4 py-1 rounded">Submit Review</button>
+        <div class="mt-6 space-y-3">${appReviews.map(r => `<div class="border-b pb-2"><div class="font-semibold">${r.user}</div><div class="flex text-yellow-400">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><p>${r.content}</p><small>${new Date(r.date).toLocaleDateString()}</small></div>`).join('')}</div></div>
+      </div></div>`;
+  }
+  
+  function renderDashboard() {
+    if(!currentUser) return `<div class="text-center py-12">Access Sage dashboard after login</div>`;
+    const downloadedApps = appList.filter(a => userDownloads.some(d => d.appId === a.id));
+    const favApps = appList.filter(a => userFavorites.includes(a.id));
+    return `<div><h1 class="text-2xl font-bold">Sage Workspace</h1><div class="grid md:grid-cols-2 gap-6 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">📦 Installed Apps (${downloadedApps.length})</h2>${downloadedApps.map(a=>`<div class="flex gap-2 items-center mt-2">${appLogoImg(a, "w-10 h-10", 40)}<span>${a.name}</span></div>`).join('')||"No downloads yet"}</div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">❤️ Favorites (${favApps.length})</h2>${favApps.map(a=>`<div class="flex gap-2 mt-2">${appLogoImg(a, "w-10 h-10", 40)}<span>${a.name}</span></div>`).join('')}</div></div></div>`;
+  }
+  
+  function renderAdmin() {
+    if(!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin')) return `<div class="text-center py-12">Restricted to Sage Admin</div>`;
+    const totalDownloads = appList.reduce((s,a)=>s+a.downloads,0);
+    return `<div><h1 class="text-2xl font-bold">Sage Admin Console</h1><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="users"></i><div class="text-2xl font-bold">1,240</div><div>Active Users</div></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="download"></i><div class="text-2xl font-bold">${totalDownloads.toLocaleString()}</div><div>Total Downloads</div></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="dollar-sign"></i><div class="text-2xl font-bold">$18,240</div><div>Revenue (Sage)</div></div></div><div class="mt-8"><h2 class="font-bold">App Portfolio Management</h2><div class="grid gap-2">${appList.map(a=>`<div class="flex justify-between items-center bg-white dark:bg-gray-800 p-2 rounded"><div>${a.name}</div><button class="text-sm bg-blue-600 text-white px-2 py-1 rounded" onclick="alert('Sage Admin: Edit ${a.name} (demo)')">Manage</button></div>`).join('')}</div></div></div>`;
+  }
+  
+  function renderDeveloper() {
+    if(!currentUser || currentUser.role !== 'developer') return `<div class="text-center py-12">Developer portal - Sage Partners only</div>`;
+    return `<div><h1 class="text-2xl font-bold">Sage Developer Hub</h1><p>Submit and analyze your software solutions</p><div class="bg-white dark:bg-gray-800 p-4 rounded-xl mt-4"><h3 class="font-semibold">Your Apps Performance</h3><div class="space-y-2 mt-2">${appList.slice(0,4).map(a=>`<div>${a.name} - Downloads: ${a.downloads} | Rating: ${a.rating}</div>`).join('')}</div><button class="mt-4 bg-green-600 text-white px-4 py-2 rounded">+ Submit New App Version</button></div></div>`;
+  }
+  
   function renderNav() {
     const authDiv = document.getElementById("authSection");
     if (!authDiv) return;
@@ -342,75 +412,6 @@
     document.getElementById("closeModal")?.addEventListener("click", () => document.getElementById("authModal")?.remove());
   }
 
-  function appCard(app) {
-    const isFav = currentUser && userFavorites.includes(app.id);
-    const logoUrl = generateAppLogo(app.id, 60);
-    return `<div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 card-hover cursor-pointer" onclick="window.showAppDetail('${app.id}')">
-      <div class="flex gap-3">
-        <img src="${logoUrl}" class="w-16 h-16 rounded-xl shadow" alt="${app.name}" style="background: #0f172a;">
-        <div class="flex-1"><h3 class="font-bold">${app.name}</h3><p class="text-sm text-gray-500">${app.shortDesc}</p><div class="flex items-center gap-1 mt-1"><i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i><span>${app.rating}</span><span class="text-xs text-gray-400 ml-1">(${app.ratingCount})</span></div></div>
-        <button class="text-red-500" onclick="event.stopPropagation(); toggleFavorite('${app.id}')"><i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500' : ''}"></i></button>
-      </div>
-      <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-4 py-1 rounded-lg text-sm">${app.isFree ? 'Free' : 'Buy KES '+app.price}</button></div>
-    </div>`;
-  }
-  
-  window.showAppDetail = (appId) => {
-    selectedApp = appList.find(a=>a.id === appId);
-    renderCurrentView();
-  };
-  window.backToHome = () => { selectedApp = null; renderCurrentView(); };
-  
-  function renderHome() {
-    const featured = appList.filter(a => ["guard-ai", "deep-focus", "luminor-studio"].includes(a.id));
-    const trending = [...appList].sort((a,b)=>b.downloads - a.downloads).slice(0,6);
-    const newReleases = [...appList].reverse().slice(0,6);
-    return `
-      <div class="space-y-12">
-        <div class="bg-gradient-to-r from-[#0a2b3e] to-[#1b4a6e] rounded-2xl p-8 text-white shadow-xl">
-          <h1 class="text-3xl md:text-4xl font-bold">Sage Software Marketplace</h1>
-          <p class="text-lg opacity-90 mt-2">Enterprise-ready apps • Pay with M-Pesa via STK Push</p>
-        </div>
-        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">⭐ Featured Solutions</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div>
-        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🔥 Trending on Sage</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div>
-        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🆕 New Releases</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div>
-      </div>`;
-  }
-  
-  function renderAppDetail() {
-    if (!selectedApp) return renderHome();
-    const app = selectedApp;
-    const appReviews = reviewsData[app.id] || [];
-    const logoUrl = generateAppLogo(app.id, 100);
-    const screenshotHtml = app.screenshots.map(url => `<img src="${url}" class="rounded-xl border border-gray-200 dark:border-gray-700 w-64 h-40 object-cover" alt="screenshot">`).join('');
-    return `<div class="max-w-4xl mx-auto"><button onclick="window.backToHome()" class="flex items-center gap-1 text-blue-600 mb-4">&larr; Back to Store</button>
-      <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-        <div class="flex gap-5 flex-wrap"><img src="${logoUrl}" class="w-24 h-24 rounded-2xl shadow" alt="${app.name}"><div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div><div><i data-lucide="download"></i> ${app.downloads.toLocaleString()}</div></div><div class="flex gap-3 mt-4"><button onclick="downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-blue-600 text-white px-6 py-2 rounded-full">${app.isFree ? 'Download' : 'Buy with M-Pesa (KES '+app.price+')'}</button><button onclick="toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
-        <div class="mt-6"><h2 class="text-xl font-semibold">Description</h2><p>${app.description}</p><h3 class="font-semibold mt-4">Key Features</h3><ul class="list-disc pl-5">${app.features.map(f=>`<li>${f}</li>`).join('')}</ul></div>
-        <div class="mt-6"><h2 class="text-xl font-semibold">Screenshots</h2><div class="flex gap-3 overflow-x-auto pb-2">${screenshotHtml}</div></div>
-        <div class="mt-8"><h2 class="text-xl font-semibold">Rate & Review (Sage verified)</h2><div id="reviewStars" class="flex gap-1 my-2"></div><textarea id="reviewText" class="w-full border rounded p-2 dark:bg-gray-700" rows="2" placeholder="Write your review..."></textarea><button id="submitReviewBtn" class="mt-2 bg-purple-600 text-white px-4 py-1 rounded">Submit Review</button>
-        <div class="mt-6 space-y-3">${appReviews.map(r => `<div class="border-b pb-2"><div class="font-semibold">${r.user}</div><div class="flex text-yellow-400">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><p>${r.content}</p><small>${new Date(r.date).toLocaleDateString()}</small></div>`).join('')}</div></div>
-      </div></div>`;
-  }
-  
-  function renderDashboard() {
-    if(!currentUser) return `<div class="text-center py-12">Access Sage dashboard after login</div>`;
-    const downloadedApps = appList.filter(a => userDownloads.some(d => d.appId === a.id));
-    const favApps = appList.filter(a => userFavorites.includes(a.id));
-    return `<div><h1 class="text-2xl font-bold">Sage Workspace</h1><div class="grid md:grid-cols-2 gap-6 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">📦 Installed Apps (${downloadedApps.length})</h2>${downloadedApps.map(a=>`<div class="flex gap-2 items-center mt-2"><img src="${generateAppLogo(a.id,40)}" class="w-10 h-10 rounded">${a.name}</div>`).join('')||"No downloads yet"}</div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">❤️ Favorites (${favApps.length})</h2>${favApps.map(a=>`<div class="flex gap-2 mt-2"><img src="${generateAppLogo(a.id,40)}" class="w-10 h-10 rounded">${a.name}</div>`).join('')}</div></div></div>`;
-  }
-  
-  function renderAdmin() {
-    if(!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin')) return `<div class="text-center py-12">Restricted to Sage Admin</div>`;
-    const totalDownloads = appList.reduce((s,a)=>s+a.downloads,0);
-    return `<div><h1 class="text-2xl font-bold">Sage Admin Console</h1><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="users"></i><div class="text-2xl font-bold">1,240</div><div>Active Users</div></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="download"></i><div class="text-2xl font-bold">${totalDownloads.toLocaleString()}</div><div>Total Downloads</div></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><i data-lucide="dollar-sign"></i><div class="text-2xl font-bold">$18,240</div><div>Revenue (Sage)</div></div></div><div class="mt-8"><h2 class="font-bold">App Portfolio Management</h2><div class="grid gap-2">${appList.map(a=>`<div class="flex justify-between items-center bg-white dark:bg-gray-800 p-2 rounded"><div>${a.name}</div><button class="text-sm bg-blue-600 text-white px-2 py-1 rounded" onclick="alert('Sage Admin: Edit ${a.name} (demo)')">Manage</button></div>`).join('')}</div></div></div>`;
-  }
-  
-  function renderDeveloper() {
-    if(!currentUser || currentUser.role !== 'developer') return `<div class="text-center py-12">Developer portal - Sage Partners only</div>`;
-    return `<div><h1 class="text-2xl font-bold">Sage Developer Hub</h1><p>Submit and analyze your software solutions</p><div class="bg-white dark:bg-gray-800 p-4 rounded-xl mt-4"><h3 class="font-semibold">Your Apps Performance</h3><div class="space-y-2 mt-2">${appList.slice(0,4).map(a=>`<div>${a.name} - Downloads: ${a.downloads} | Rating: ${a.rating}</div>`).join('')}</div><button class="mt-4 bg-green-600 text-white px-4 py-2 rounded">+ Submit New App Version</button></div></div>`;
-  }
-  
   function renderCurrentView() {
     const container = document.getElementById("mainContent");
     if (!container) return;
@@ -430,7 +431,7 @@
     }
   }
   
-  // Navigation event listeners
+  // Navigation listeners
   document.querySelectorAll(".nav-btn").forEach(btn=>{
     btn.addEventListener("click",(e)=>{
       const view = btn.getAttribute("data-nav");
@@ -445,7 +446,7 @@
   themeToggle?.addEventListener("click",()=>{ document.documentElement.classList.toggle("dark"); localStorage.setItem("sageTheme", document.documentElement.classList.contains("dark") ? "dark" : "light"); if(window.lucide) lucide.createIcons(); });
   if(localStorage.getItem("sageTheme") === "dark") document.documentElement.classList.add("dark");
   
-  // M-Pesa modal buttons
+  // M-Pesa modal handlers
   document.getElementById("mpesaConfirmBtn")?.addEventListener("click", confirmMpesaPayment);
   document.getElementById("mpesaCancelBtn")?.addEventListener("click", () => {
     document.getElementById("mpesaModal").classList.add("hidden");
