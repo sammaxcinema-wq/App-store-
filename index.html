@@ -18,7 +18,6 @@
     .scrollbar-hide::-webkit-scrollbar { display: none; }
     .card-hover { transition: all 0.2s ease; }
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1); }
-    /* Rebranded logo box – Meon style */
     .meon-logo-bg {
       background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%);
       border-radius: 14px;
@@ -33,10 +32,10 @@
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
 <div id="app" class="min-h-screen flex flex-col">
+  <!-- Header (unchanged, rebranded to Meon) -->
   <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
     <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
-        <!-- MEON BRANDING (replaces SAGE) -->
         <div class="meon-logo-bg px-4 py-2 flex flex-col items-start leading-tight">
           <span class="text-white font-extrabold text-2xl tracking-wide">meon</span>
           <span class="text-[10px] font-medium text-purple-200 tracking-wider uppercase">INTELLIGENCE·INNOVATION·INSPIRATION</span>
@@ -65,7 +64,7 @@
   <div id="toastContainer"></div>
 </div>
 
-<!-- M-Pesa Modal (unchanged functionality, only text rebranded) -->
+<!-- M-Pesa Modal -->
 <div id="mpesaModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden modal-transition">
   <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md mx-4">
     <h2 class="text-2xl font-bold mb-2">Pay with M-Pesa</h2>
@@ -91,21 +90,21 @@
   // EXACT LOGO MAPPING (as confirmed by user)
   // ============================================================
   const logoMapping = {
-    "maji-gas": "https://i.ibb.co/sJwP77mq/file-000000002a7c724698774712139656f9.png",          // Maji Gas Delivery
-    "deep-focus": "https://i.ibb.co/204QYyVF/file-00000000c6707243af95f3105457c8b5.png",         // Deep Focus
-    "data-vision": "https://i.ibb.co/NfCgDtT/file-00000000b57072438b98c6777ee7804e.png",         // Data Vision
-    "insight": "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",              // Insight
-    "rider-app": "https://i.ibb.co/Myk5kQFw/file-00000000888871f482a587c6a8d8847e.png",           // Rider App
-    "guard-ai": "https://i.ibb.co/GQWZnykb/file-00000000379c71f4a01216ae10901877.png",            // Guard AI
-    "clients-hub": "https://i.ibb.co/ynD8T6th/file-00000000225471f4a1e44c664b9fd555.png",         // Clients Hub
-    "cv-maker": "https://i.ibb.co/cSvLqcLX/file-00000000d5e071f4ba22a75f0817c803.png",            // CV Maker
-    "smart-duka": "https://i.ibb.co/nMBpS9WF/file-00000000826c71f48191fe3abb47a9d3.png",          // Smart Duka
-    "agriculture": "https://i.ibb.co/xqM1JCWG/file-000000004a8071f480fdac11e406f891.png",         // Agriculture
-    "luminor-studio": "https://i.ibb.co/3959zVpj/file-000000008d8c71f49373b77a647572d6.png",      // Luminor Studio
-    "matatu-booking": "https://i.ibb.co/392pGZq9/file-0000000093b871f4b17cbccefe4d7bc7.png",      // Matatu Booking
-    "home-search": "https://i.ibb.co/N6jb2762/file-000000004c4871f49ca1cb9d0d2c1de4.png",         // Home Search
-    "school-360": "https://i.ibb.co/rK4xNYFs/file-000000001ee871f4b8169a28703091b7.png",          // School 360
-    "kanisa-launcher": "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png"      // Kanisa Launcher
+    "maji-gas": "https://i.ibb.co/sJwP77mq/file-000000002a7c724698774712139656f9.png",
+    "deep-focus": "https://i.ibb.co/204QYyVF/file-00000000c6707243af95f3105457c8b5.png",
+    "data-vision": "https://i.ibb.co/NfCgDtT/file-00000000b57072438b98c6777ee7804e.png",
+    "insight": "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",
+    "rider-app": "https://i.ibb.co/Myk5kQFw/file-00000000888871f482a587c6a8d8847e.png",
+    "guard-ai": "https://i.ibb.co/GQWZnykb/file-00000000379c71f4a01216ae10901877.png",
+    "clients-hub": "https://i.ibb.co/ynD8T6th/file-00000000225471f4a1e44c664b9fd555.png",
+    "cv-maker": "https://i.ibb.co/cSvLqcLX/file-00000000d5e071f4ba22a75f0817c803.png",
+    "smart-duka": "https://i.ibb.co/nMBpS9WF/file-00000000826c71f48191fe3abb47a9d3.png",
+    "agriculture": "https://i.ibb.co/xqM1JCWG/file-000000004a8071f480fdac11e406f891.png",
+    "luminor-studio": "https://i.ibb.co/3959zVpj/file-000000008d8c71f49373b77a647572d6.png",
+    "matatu-booking": "https://i.ibb.co/392pGZq9/file-0000000093b871f4b17cbccefe4d7bc7.png",
+    "home-search": "https://i.ibb.co/N6jb2762/file-000000004c4871f49ca1cb9d0d2c1de4.png",
+    "school-360": "https://i.ibb.co/rK4xNYFs/file-000000001ee871f4b8169a28703091b7.png",
+    "kanisa-launcher": "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png"
   };
 
   // ---------- APP DATA (15 apps) ----------
@@ -140,7 +139,7 @@
     if (!app.downloads) app.downloads = Math.floor(Math.random() * 30000) + 1000;
   });
 
-  // Fallback SVG generator (unchanged)
+  // Fallback SVG generator
   function generateFallbackSVG(appId, size = 80) {
     const colorMap = {
       "maji-gas": { primary: "#2563EB", secondary: "#F97316", letter: "M" },
@@ -178,71 +177,16 @@
       onerror="this.onerror=null; this.src='${fallbackSvg}';">`;
   }
 
-  // ---------- DARAJA M-PESA API (mock) - unchanged ----------
-  const USE_REAL_MPESA_API = false;
-  async function initiateMpesaPayment(phoneNumber, amount, accountReference, appName) {
-    if (USE_REAL_MPESA_API) {
-      const response = await fetch('/api/mpesa/stkpush', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phoneNumber, amount, accountReference, transactionDesc: `Purchase of ${appName}` })
-      });
-      const data = await response.json();
-      if (data.success) {
-        showToast(`STK push sent to ${phoneNumber}. Enter PIN on your phone.`, "success");
-        return true;
-      } else {
-        showToast(data.error || "Payment failed", "error");
-        return false;
-      }
-    } else {
-      return new Promise((resolve) => {
-        showToast(`📱 M-Pesa STK push sent to ${phoneNumber} for KES ${amount}. Please check your phone.`, "info");
-        setTimeout(() => {
-          showToast(`✅ Payment of KES ${amount} for ${appName} successful! Receipt: MOCK${Date.now()}`, "success");
-          resolve(true);
-        }, 3000);
-      });
-    }
-  }
-
-  let currentPaymentApp = null;
-  function showMpesaPaymentModal(app) {
-    if (!currentUser) { showToast("Please login to make a purchase", "error"); return; }
-    currentPaymentApp = app;
-    document.getElementById("mpesaAppName").innerText = `App: ${app.name} - KES ${app.price}`;
-    document.getElementById("mpesaAmount").value = app.price;
-    document.getElementById("mpesaPhone").value = "";
-    document.getElementById("mpesaModal").classList.remove("hidden");
-  }
-
-  async function confirmMpesaPayment() {
-    const phone = document.getElementById("mpesaPhone").value.trim();
-    if (!phone) { showToast("Enter your M-Pesa phone number", "error"); return; }
-    if (!currentPaymentApp) return;
-    const amount = currentPaymentApp.price;
-    const accountReference = `MEON_${currentPaymentApp.id}_${Date.now()}`;
-    document.getElementById("mpesaModal").classList.add("hidden");
-    const success = await initiateMpesaPayment(phone, amount, accountReference, currentPaymentApp.name);
-    if (success) {
-      if (!userDownloads.find(d => d.appId === currentPaymentApp.id)) {
-        userDownloads.push({ appId: currentPaymentApp.id, downloadedAt: new Date().toISOString(), version: currentPaymentApp.version });
-        currentPaymentApp.downloads += 1;
-        saveState();
-        showToast(`✅ ${currentPaymentApp.name} added to your library`, "success");
-        renderCurrentView();
-      }
-    }
-    currentPaymentApp = null;
-  }
-
-  // ---------- State Management (unchanged except rebranded localStorage keys) ----------
+  // ---------- STATE MANAGEMENT (unchanged, but rebranded localStorage) ----------
   let currentUser = JSON.parse(localStorage.getItem("meonUser")) || null;
   let activeView = "home";
   let selectedApp = null;
   let userFavorites = JSON.parse(localStorage.getItem("meonFavorites")) || [];
   let userDownloads = JSON.parse(localStorage.getItem("meonDownloads")) || [];
   let reviewsData = JSON.parse(localStorage.getItem("meonReviews")) || {};
+  // For search filtering
+  let searchQuery = "";
+  let activeCategoryFilter = "";
 
   function saveState() {
     if (currentUser) localStorage.setItem("meonUser", JSON.stringify(currentUser));
@@ -308,7 +252,65 @@
     return true;
   }
 
-  // ---------- UI components (rebranded text) ----------
+  // ---------- DARAJA M-PESA (mock) ----------
+  const USE_REAL_MPESA_API = false;
+  async function initiateMpesaPayment(phoneNumber, amount, accountReference, appName) {
+    if (USE_REAL_MPESA_API) {
+      const response = await fetch('/api/mpesa/stkpush', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phoneNumber, amount, accountReference, transactionDesc: `Purchase of ${appName}` })
+      });
+      const data = await response.json();
+      if (data.success) {
+        showToast(`STK push sent to ${phoneNumber}. Enter PIN on your phone.`, "success");
+        return true;
+      } else {
+        showToast(data.error || "Payment failed", "error");
+        return false;
+      }
+    } else {
+      return new Promise((resolve) => {
+        showToast(`📱 M-Pesa STK push sent to ${phoneNumber} for KES ${amount}. Please check your phone.`, "info");
+        setTimeout(() => {
+          showToast(`✅ Payment of KES ${amount} for ${appName} successful! Receipt: MOCK${Date.now()}`, "success");
+          resolve(true);
+        }, 3000);
+      });
+    }
+  }
+
+  let currentPaymentApp = null;
+  function showMpesaPaymentModal(app) {
+    if (!currentUser) { showToast("Please login to make a purchase", "error"); return; }
+    currentPaymentApp = app;
+    document.getElementById("mpesaAppName").innerText = `App: ${app.name} - KES ${app.price}`;
+    document.getElementById("mpesaAmount").value = app.price;
+    document.getElementById("mpesaPhone").value = "";
+    document.getElementById("mpesaModal").classList.remove("hidden");
+  }
+
+  async function confirmMpesaPayment() {
+    const phone = document.getElementById("mpesaPhone").value.trim();
+    if (!phone) { showToast("Enter your M-Pesa phone number", "error"); return; }
+    if (!currentPaymentApp) return;
+    const amount = currentPaymentApp.price;
+    const accountReference = `MEON_${currentPaymentApp.id}_${Date.now()}`;
+    document.getElementById("mpesaModal").classList.add("hidden");
+    const success = await initiateMpesaPayment(phone, amount, accountReference, currentPaymentApp.name);
+    if (success) {
+      if (!userDownloads.find(d => d.appId === currentPaymentApp.id)) {
+        userDownloads.push({ appId: currentPaymentApp.id, downloadedAt: new Date().toISOString(), version: currentPaymentApp.version });
+        currentPaymentApp.downloads += 1;
+        saveState();
+        showToast(`✅ ${currentPaymentApp.name} added to your library`, "success");
+        renderCurrentView();
+      }
+    }
+    currentPaymentApp = null;
+  }
+
+  // ---------- UI COMPONENTS (enhanced homepage) ----------
   function appCard(app) {
     const isFav = currentUser && userFavorites.includes(app.id);
     return `<div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 card-hover cursor-pointer" onclick="window.showAppDetail('${app.id}')">
@@ -320,29 +322,137 @@
       <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); downloadApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-purple-600 text-white px-4 py-1 rounded-lg text-sm">${app.isFree ? 'Free' : 'Buy KES '+app.price}</button></div>
     </div>`;
   }
-  
+
+  // Filter apps based on search and category
+  function getFilteredApps() {
+    let filtered = [...appList];
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(app => app.name.toLowerCase().includes(q) || app.shortDesc.toLowerCase().includes(q) || app.category.toLowerCase().includes(q));
+    }
+    if (activeCategoryFilter) {
+      filtered = filtered.filter(app => app.category.toLowerCase() === activeCategoryFilter.toLowerCase());
+    }
+    return filtered;
+  }
+
+  function renderHome() {
+    const filteredApps = getFilteredApps();
+    const featuredIds = ["guard-ai", "deep-focus", "luminor-studio"];
+    const featured = filteredApps.filter(a => featuredIds.includes(a.id));
+    const trending = [...filteredApps].sort((a,b)=>b.downloads - a.downloads).slice(0,6);
+    const newReleases = [...filteredApps].reverse().slice(0,6);
+
+    // Categories for the grid (matching your design)
+    const categoryItems = [
+      { name: "AI Solutions", gradient: "from-purple-600 to-violet-600", filter: "ai tools" },
+      { name: "Business", gradient: "from-blue-600 to-cyan-600", filter: "business" },
+      { name: "Education", gradient: "from-green-600 to-emerald-600", filter: "education" },
+      { name: "Agriculture", gradient: "from-orange-600 to-amber-600", filter: "agriculture" },
+      { name: "Transport", gradient: "from-red-600 to-pink-600", filter: "transport" },
+      { name: "Creativity", gradient: "from-indigo-600 to-purple-600", filter: "design" }
+    ];
+
+    const stats = [
+      { value: "15+", label: "Marketplace Apps" },
+      { value: "500K+", label: "Downloads" },
+      { value: "4.8★", label: "Average Rating" },
+      { value: "24/7", label: "Innovation" }
+    ];
+
+    return `
+      <div class="space-y-12">
+        <!-- New Hero Section -->
+        <div class="relative bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 rounded-3xl overflow-hidden shadow-2xl">
+          <div class="relative z-10 px-6 py-16 md:px-12 md:py-20">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-lg border border-white/20">
+              <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+              <span class="text-sm font-medium text-white">MEON ECOSYSTEM</span>
+            </div>
+            <h1 class="mt-6 text-4xl md:text-6xl font-extrabold tracking-tight text-white">Meon Marketplace</h1>
+            <p class="mt-4 text-2xl font-semibold text-purple-200">LOGICDRIVEN. FUTUREPROVEN.</p>
+            <p class="mt-6 text-lg text-gray-200 max-w-2xl">Empowering tomorrow with technology, creativity and purpose. Discover innovative apps, AI solutions, business tools, education platforms and digital services built for the future.</p>
+            <div class="flex flex-wrap gap-4 mt-10">
+              <button id="exploreMarketplaceBtn" class="bg-white text-purple-900 px-8 py-3 rounded-xl font-bold shadow-lg hover:scale-105 transition">Explore Marketplace</button>
+              <button id="becomeDevBtn" class="border border-white/30 px-8 py-3 rounded-xl backdrop-blur-md hover:bg-white/10 transition text-white">Become a Developer</button>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-black/20"></div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="bg-white/10 dark:bg-gray-800/50 backdrop-blur-md rounded-2xl border border-gray-200 dark:border-gray-700 p-4 flex items-center gap-3 shadow-md">
+          <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+          <input type="text" id="globalSearchInput" placeholder="Search apps, services, AI tools, business solutions..." class="w-full bg-transparent outline-none text-gray-800 dark:text-gray-200" value="${searchQuery.replace(/"/g, '&quot;')}">
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          ${stats.map(s => `<div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow text-center"><div class="text-3xl font-bold text-purple-600">${s.value}</div><div class="text-sm text-gray-500">${s.label}</div></div>`).join('')}
+        </div>
+
+        <!-- Category Grid -->
+        <div>
+          <h2 class="text-2xl font-bold mb-6">Explore Categories</h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            ${categoryItems.map(cat => `<div class="rounded-2xl bg-gradient-to-r ${cat.gradient} text-white p-5 text-center font-semibold cursor-pointer hover:scale-105 transition category-chip" data-category="${cat.filter}">${cat.name}</div>`).join('')}
+            ${activeCategoryFilter ? `<div class="rounded-2xl bg-gray-500 text-white p-3 text-center cursor-pointer hover:bg-gray-600 transition" id="clearCategoryBtn">Clear filter ✕</div>` : ""}
+          </div>
+        </div>
+
+        <!-- App Sections (only show if no filters or after filter) -->
+        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">⭐ Featured Solutions</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="featuredGrid">${featured.map(app=>appCard(app)).join('')}</div></div>
+        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🔥 Trending on Meon</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="trendingGrid">${trending.map(app=>appCard(app)).join('')}</div></div>
+        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🆕 New Releases</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="newReleasesGrid">${newReleases.map(app=>appCard(app)).join('')}</div></div>
+      </div>
+    `;
+  }
+
+  // Attach event handlers after rendering home
+  function attachHomeInteractions() {
+    const searchInput = document.getElementById("globalSearchInput");
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value;
+        renderCurrentView();
+      });
+    }
+    const categoryChips = document.querySelectorAll(".category-chip");
+    categoryChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        activeCategoryFilter = chip.getAttribute("data-category");
+        renderCurrentView();
+      });
+    });
+    const clearBtn = document.getElementById("clearCategoryBtn");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        activeCategoryFilter = "";
+        renderCurrentView();
+      });
+    }
+    const exploreBtn = document.getElementById("exploreMarketplaceBtn");
+    if (exploreBtn) {
+      exploreBtn.addEventListener("click", () => {
+        document.getElementById("featuredGrid")?.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+    const becomeDevBtn = document.getElementById("becomeDevBtn");
+    if (becomeDevBtn) {
+      becomeDevBtn.addEventListener("click", () => {
+        if (!currentUser) showToast("Please login to become a developer", "error");
+        else activeView = "developer"; renderCurrentView();
+      });
+    }
+  }
+
+  // Rest of the view functions (app detail, dashboard, admin, developer) unchanged from previous working version
   window.showAppDetail = (appId) => {
     selectedApp = appList.find(a=>a.id === appId);
     renderCurrentView();
   };
   window.backToHome = () => { selectedApp = null; renderCurrentView(); };
-  
-  function renderHome() {
-    const featured = appList.filter(a => ["guard-ai", "deep-focus", "luminor-studio"].includes(a.id));
-    const trending = [...appList].sort((a,b)=>b.downloads - a.downloads).slice(0,6);
-    const newReleases = [...appList].reverse().slice(0,6);
-    return `
-      <div class="space-y-12">
-        <div class="bg-gradient-to-r from-[#1e1b4b] to-[#4c1d95] rounded-2xl p-8 text-white shadow-xl">
-          <h1 class="text-3xl md:text-4xl font-bold">Meon Marketplace</h1>
-          <p class="text-lg opacity-90 mt-2">LOGICDRIVEN. FUTUREPROVEN. — Empowering tomorrow with technology, creativity, and purpose.</p>
-        </div>
-        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">⭐ Featured Solutions</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div>
-        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🔥 Trending on Meon</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div>
-        <div><div class="flex justify-between items-center mb-4"><h2 class="text-2xl font-bold">🆕 New Releases</h2></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div>
-      </div>`;
-  }
-  
+
   function renderAppDetail() {
     if (!selectedApp) return renderHome();
     const app = selectedApp;
@@ -357,7 +467,7 @@
         <div class="mt-6 space-y-3">${appReviews.map(r => `<div class="border-b pb-2"><div class="font-semibold">${r.user}</div><div class="flex text-yellow-400">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><p>${r.content}</p><small>${new Date(r.date).toLocaleDateString()}</small></div>`).join('')}</div></div>
       </div></div>`;
   }
-  
+
   function renderDashboard() {
     if(!currentUser) return `<div class="text-center py-12">Access Meon dashboard after login</div>`;
     const downloadedApps = appList.filter(a => userDownloads.some(d => d.appId === a.id));
@@ -375,7 +485,7 @@
     if(!currentUser || currentUser.role !== 'developer') return `<div class="text-center py-12">Developer portal - Meon Partners only</div>`;
     return `<div><h1 class="text-2xl font-bold">Meon Developer Hub</h1><p>Submit and analyze your software solutions</p><div class="bg-white dark:bg-gray-800 p-4 rounded-xl mt-4"><h3 class="font-semibold">Your Apps Performance</h3><div class="space-y-2 mt-2">${appList.slice(0,4).map(a=>`<div>${a.name} - Downloads: ${a.downloads} | Rating: ${a.rating}</div>`).join('')}</div><button class="mt-4 bg-green-600 text-white px-4 py-2 rounded">+ Submit New App Version</button></div></div>`;
   }
-  
+
   function renderNav() {
     const authDiv = document.getElementById("authSection");
     if (!authDiv) return;
@@ -433,7 +543,7 @@
     const container = document.getElementById("mainContent");
     if (!container) return;
     if(selectedApp) container.innerHTML = renderAppDetail();
-    else if(activeView === "home") container.innerHTML = renderHome();
+    else if(activeView === "home") { container.innerHTML = renderHome(); setTimeout(attachHomeInteractions, 50); }
     else if(activeView === "dashboard") container.innerHTML = renderDashboard();
     else if(activeView === "admin") container.innerHTML = renderAdmin();
     else if(activeView === "developer") container.innerHTML = renderDeveloper();
@@ -458,7 +568,7 @@
     });
   });
   
-  // Theme toggle (unchanged)
+  // Theme toggle
   const themeToggle = document.getElementById("themeToggle");
   themeToggle?.addEventListener("click",()=>{ document.documentElement.classList.toggle("dark"); localStorage.setItem("meonTheme", document.documentElement.classList.contains("dark") ? "dark" : "light"); if(window.lucide) lucide.createIcons(); });
   if(localStorage.getItem("meonTheme") === "dark") document.documentElement.classList.add("dark");
