@@ -84,26 +84,60 @@
 </div>
 
 <script>
-  // ---------- APP DATA (15 apps) with EXTERNAL LOGO URLs from Vercel deployments ----------
-  const appList = [
-    { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand", category: "Utilities", price: 0, isFree: true, rating: 4.6, ratingCount: 234, downloads: 12540, version: "2.1.0", features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"], description: "Fast, reliable LPG and water delivery service with live order tracking.", logoUrl: "https://maji-gasdelivery.vercel.app/favicon.ico" },
-    { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker", category: "Productivity", price: 4.99, isFree: false, rating: 4.8, ratingCount: 1890, downloads: 45200, version: "3.0.2", features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"], description: "Boost productivity with science-backed focus tools.", logoUrl: "https://deepfocus-roan.vercel.app/favicon.ico" },
-    { id: "guard-ai", name: "Guard AI", slug: "guard-ai", shortDesc: "AI cybersecurity protection", category: "AI Tools", price: 9.99, isFree: false, rating: 4.9, ratingCount: 523, downloads: 18730, version: "1.5.0", features: ["Threat detection", "VPN", "Password manager", "Dark web monitoring"], description: "Next-gen AI shield for digital security.", logoUrl: "https://guard-ai-six.vercel.app/favicon.ico" },
-    { id: "data-vision", name: "Data Vision", slug: "data-vision", shortDesc: "AI business intelligence", category: "Analytics", price: 19.99, isFree: false, rating: 4.7, ratingCount: 312, downloads: 9800, version: "4.2.1", features: ["Dashboards", "AI predictions", "Data connectors", "Reports"], description: "Turn data into insights with AI.", logoUrl: "https://datavision-beta.vercel.app/favicon.ico" },
-    { id: "rider-app", name: "Rider App", slug: "rider-app", shortDesc: "Logistics & delivery platform", category: "Transport", price: 0, isFree: true, rating: 4.5, ratingCount: 892, downloads: 67300, version: "2.3.0", features: ["Route optimization", "Live tracking", "Earnings dashboard", "Proof of delivery"], description: "Complete solution for riders and fleets.", logoUrl: "https://rider-app-psi.vercel.app/favicon.ico" },
-    { id: "insight", name: "Insight", slug: "insight", shortDesc: "Customer analytics platform", category: "Analytics", price: 29.99, isFree: false, rating: 4.6, ratingCount: 178, downloads: 5400, version: "1.8.0", features: ["Segmentation", "Behavioral analytics", "Predictive models", "APIs"], description: "Deep customer behavior intelligence.", logoUrl: "https://insight-eta-lime.vercel.app/favicon.ico" },
-    { id: "clients-hub", name: "Clients Hub", slug: "clients-hub", shortDesc: "CRM for modern business", category: "CRM", price: 14.99, isFree: false, rating: 4.4, ratingCount: 421, downloads: 12400, version: "3.1.0", features: ["Contact mgmt", "Deal tracking", "Email sync", "Forecasting"], description: "Grow relationships with powerful CRM.", logoUrl: "https://clients-hub.vercel.app/favicon.ico" },
-    { id: "smart-duka", name: "Smart Duka", slug: "smart-duka", shortDesc: "Retail management system", category: "Business", price: 9.99, isFree: false, rating: 4.7, ratingCount: 563, downloads: 28900, version: "2.0.0", features: ["Inventory", "POS", "Sales reports", "Supplier mgmt"], description: "Modern POS for small shops.", logoUrl: "https://smartduka-rho.vercel.app/favicon.ico" },
-    { id: "agriculture", name: "Agriculture", slug: "agriculture", shortDesc: "Smart farming solution", category: "Agriculture", price: 0, isFree: true, rating: 4.3, ratingCount: 197, downloads: 8100, version: "1.4.0", features: ["Crop monitor", "Weather", "Market prices", "Expert advice"], description: "Empower farmers with digital tools.", logoUrl: "https://agriculture-puce-eta.vercel.app/favicon.ico" },
-    { id: "luminor-studio", name: "Luminor Studio", slug: "luminor-studio", shortDesc: "AI photo & video editing", category: "Design", price: 12.99, isFree: false, rating: 4.9, ratingCount: 734, downloads: 34200, version: "5.0.1", features: ["AI enhancement", "Layer editing", "Filters", "4K export"], description: "Creative suite for professionals.", logoUrl: "https://luminor-studio.vercel.app/favicon.ico" },
-    { id: "cv-maker", name: "CV Maker", slug: "cv-maker", shortDesc: "Professional resume builder", category: "Productivity", price: 0, isFree: true, rating: 4.6, ratingCount: 1280, downloads: 98700, version: "1.9.0", features: ["Templates", "PDF export", "LinkedIn import", "Cover letter"], description: "Create job-winning resumes instantly.", logoUrl: "https://cv-maker-five-mu.vercel.app/favicon.ico" },
-    { id: "matatu-booking", name: "Matatu Booking", slug: "matatu-booking", shortDesc: "Public transport booking", category: "Transport", price: 0, isFree: true, rating: 4.5, ratingCount: 567, downloads: 45300, version: "2.2.0", features: ["Real-time tracking", "Digital tickets", "Route planning", "Fare calc"], description: "Book matatus and track in real-time.", logoUrl: "https://matatu-booking.vercel.app/favicon.ico" },
-    { id: "home-search", name: "Home Search", slug: "home-search", shortDesc: "Real estate marketplace", category: "Real Estate", price: 0, isFree: true, rating: 4.4, ratingCount: 398, downloads: 22500, version: "3.3.0", features: ["Property search", "Virtual tours", "Mortgage calc", "Agent contact"], description: "Find dream home or rental.", logoUrl: "https://home-search-j529.vercel.app/favicon.ico" },
-    { id: "school-360", name: "School 360", slug: "school-360", shortDesc: "School management system", category: "Education", price: 49.99, isFree: false, rating: 4.8, ratingCount: 245, downloads: 6700, version: "4.1.0", features: ["Student records", "Fee mgmt", "Parent portal", "CBC support"], description: "Complete school ERP with CBC.", logoUrl: "https://school-360-one.vercel.app/favicon.ico" },
-    { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher", shortDesc: "Church management & engagement", category: "Religion", price: 0, isFree: true, rating: 4.7, ratingCount: 156, downloads: 5300, version: "1.2.0", features: ["Events", "Giving platform", "Member directory", "Live stream"], description: "Digital tools for modern ministry.", logoUrl: "https://kanisa-launcher.vercel.app/favicon.ico" }
+  // ---------- APP DATA with EXTERNAL LOGO URLs from user-provided images (first 15) ----------
+  const logoUrls = [
+    "https://i.ibb.co/gb1qn7Y3/file-00000000c32471f491da7d2b95a2d217.png",
+    "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png",
+    "https://i.ibb.co/rK4xNYFs/file-000000001ee871f4b8169a28703091b7.png",
+    "https://i.ibb.co/N6jb2762/file-000000004c4871f49ca1cb9d0d2c1de4.png",
+    "https://i.ibb.co/nN97ZJvN/file-0000000093b871f4b17cbccefe4d7bc7.png",
+    "https://i.ibb.co/3959zVpj/file-000000008d8c71f49373b77a647572d6.png",
+    "https://i.ibb.co/xqM1JCWG/file-000000004a8071f480fdac11e406f891.png",
+    "https://i.ibb.co/cSvLqcLX/file-00000000d5e071f4ba22a75f0817c803.png",
+    "https://i.ibb.co/nMBpS9WF/file-00000000826c71f48191fe3abb47a9d3.png",
+    "https://i.ibb.co/ynD8T6th/file-00000000225471f4a1e44c664b9fd555.png",
+    "https://i.ibb.co/GQWZnykb/file-00000000379c71f4a01216ae10901877.png",
+    "https://i.ibb.co/Myk5kQFw/file-00000000888871f482a587c6a8d8847e.png",
+    "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",
+    "https://i.ibb.co/NfCgDtT/file-00000000b57072438b98c6777ee7804e.png",
+    "https://i.ibb.co/204QYyVF/file-00000000c6707243af95f3105457c8b5.png"
   ];
 
-  // Fallback SVG logo generator (in case external logo fails)
+  const appList = [
+    { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand", category: "Utilities", price: 0, isFree: true, rating: 4.6, ratingCount: 234, downloads: 12540, version: "2.1.0", features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"], description: "Fast, reliable LPG and water delivery service with live order tracking." },
+    { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker", category: "Productivity", price: 4.99, isFree: false, rating: 4.8, ratingCount: 1890, downloads: 45200, version: "3.0.2", features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"], description: "Boost productivity with science-backed focus tools." },
+    { id: "guard-ai", name: "Guard AI", slug: "guard-ai", shortDesc: "AI cybersecurity protection", category: "AI Tools", price: 9.99, isFree: false, rating: 4.9, ratingCount: 523, downloads: 18730, version: "1.5.0", features: ["Threat detection", "VPN", "Password manager", "Dark web monitoring"], description: "Next-gen AI shield for digital security." },
+    { id: "data-vision", name: "Data Vision", slug: "data-vision", shortDesc: "AI business intelligence", category: "Analytics", price: 19.99, isFree: false, rating: 4.7, ratingCount: 312, downloads: 9800, version: "4.2.1", features: ["Dashboards", "AI predictions", "Data connectors", "Reports"], description: "Turn data into insights with AI." },
+    { id: "rider-app", name: "Rider App", slug: "rider-app", shortDesc: "Logistics & delivery platform", category: "Transport", price: 0, isFree: true, rating: 4.5, ratingCount: 892, downloads: 67300, version: "2.3.0", features: ["Route optimization", "Live tracking", "Earnings dashboard", "Proof of delivery"], description: "Complete solution for riders and fleets." },
+    { id: "insight", name: "Insight", slug: "insight", shortDesc: "Customer analytics platform", category: "Analytics", price: 29.99, isFree: false, rating: 4.6, ratingCount: 178, downloads: 5400, version: "1.8.0", features: ["Segmentation", "Behavioral analytics", "Predictive models", "APIs"], description: "Deep customer behavior intelligence." },
+    { id: "clients-hub", name: "Clients Hub", slug: "clients-hub", shortDesc: "CRM for modern business", category: "CRM", price: 14.99, isFree: false, rating: 4.4, ratingCount: 421, downloads: 12400, version: "3.1.0", features: ["Contact mgmt", "Deal tracking", "Email sync", "Forecasting"], description: "Grow relationships with powerful CRM." },
+    { id: "smart-duka", name: "Smart Duka", slug: "smart-duka", shortDesc: "Retail management system", category: "Business", price: 9.99, isFree: false, rating: 4.7, ratingCount: 563, downloads: 28900, version: "2.0.0", features: ["Inventory", "POS", "Sales reports", "Supplier mgmt"], description: "Modern POS for small shops." },
+    { id: "agriculture", name: "Agriculture", slug: "agriculture", shortDesc: "Smart farming solution", category: "Agriculture", price: 0, isFree: true, rating: 4.3, ratingCount: 197, downloads: 8100, version: "1.4.0", features: ["Crop monitor", "Weather", "Market prices", "Expert advice"], description: "Empower farmers with digital tools." },
+    { id: "luminor-studio", name: "Luminor Studio", slug: "luminor-studio", shortDesc: "AI photo & video editing", category: "Design", price: 12.99, isFree: false, rating: 4.9, ratingCount: 734, downloads: 34200, version: "5.0.1", features: ["AI enhancement", "Layer editing", "Filters", "4K export"], description: "Creative suite for professionals." },
+    { id: "cv-maker", name: "CV Maker", slug: "cv-maker", shortDesc: "Professional resume builder", category: "Productivity", price: 0, isFree: true, rating: 4.6, ratingCount: 1280, downloads: 98700, version: "1.9.0", features: ["Templates", "PDF export", "LinkedIn import", "Cover letter"], description: "Create job-winning resumes instantly." },
+    { id: "matatu-booking", name: "Matatu Booking", slug: "matatu-booking", shortDesc: "Public transport booking", category: "Transport", price: 0, isFree: true, rating: 4.5, ratingCount: 567, downloads: 45300, version: "2.2.0", features: ["Real-time tracking", "Digital tickets", "Route planning", "Fare calc"], description: "Book matatus and track in real-time." },
+    { id: "home-search", name: "Home Search", slug: "home-search", shortDesc: "Real estate marketplace", category: "Real Estate", price: 0, isFree: true, rating: 4.4, ratingCount: 398, downloads: 22500, version: "3.3.0", features: ["Property search", "Virtual tours", "Mortgage calc", "Agent contact"], description: "Find dream home or rental." },
+    { id: "school-360", name: "School 360", slug: "school-360", shortDesc: "School management system", category: "Education", price: 49.99, isFree: false, rating: 4.8, ratingCount: 245, downloads: 6700, version: "4.1.0", features: ["Student records", "Fee mgmt", "Parent portal", "CBC support"], description: "Complete school ERP with CBC." },
+    { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher", shortDesc: "Church management & engagement", category: "Religion", price: 0, isFree: true, rating: 4.7, ratingCount: 156, downloads: 5300, version: "1.2.0", features: ["Events", "Giving platform", "Member directory", "Live stream"], description: "Digital tools for modern ministry." }
+  ];
+
+  // Attach external logos from the provided list (in order)
+  appList.forEach((app, idx) => {
+    if (idx < logoUrls.length) {
+      app.logoUrl = logoUrls[idx];
+    }
+    // Add screenshots, versions, etc.
+    app.developer = { name: "Sage Software", verified: true };
+    app.screenshots = [
+      `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%231e293b'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3E${app.name} Preview%3C/text%3E%3C/svg%3E`,
+      `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23334155'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3EFeature Demo%3C/text%3E%3C/svg%3E`
+    ];
+    app.versions = [{ version: app.version, changelog: "Latest stable release", createdAt: new Date().toISOString() }];
+    if (!app.ratingCount) app.ratingCount = Math.floor(Math.random() * 800) + 50;
+    if (!app.downloads) app.downloads = Math.floor(Math.random() * 30000) + 1000;
+  });
+
+  // Fallback SVG generator (in case external image fails)
   function generateFallbackSVG(appId, size = 80) {
     const colorMap = {
       "maji-gas": { primary: "#2563EB", secondary: "#F97316", letter: "M" },
@@ -131,28 +165,13 @@
     return `data:image/svg+xml,${encodeURIComponent(svgString)}`;
   }
 
-  // Get logo URL with fallback
-  function getAppLogoUrl(app, size = 80) {
-    if (app.logoUrl) {
-      // Use external URL but attach onerror fallback via HTML later
-      return app.logoUrl;
-    }
-    return generateFallbackSVG(app.id, size);
+  // Helper to generate image HTML with fallback
+  function appLogoImg(app, sizeClass = "w-16 h-16", pixelSize = 60) {
+    const externalUrl = app.logoUrl || generateFallbackSVG(app.id, pixelSize);
+    const fallbackSvg = generateFallbackSVG(app.id, pixelSize);
+    return `<img src="${externalUrl}" class="${sizeClass} rounded-xl shadow object-cover" alt="${app.name}" 
+      onerror="this.onerror=null; this.src='${fallbackSvg}';">`;
   }
-
-  // Add fallback handling via img onerror attribute (implemented in templates)
-  
-  // Add screenshots and versions metadata
-  appList.forEach(app => {
-    app.developer = { name: "Sage Software", verified: true };
-    app.screenshots = [
-      `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%231e293b'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3E${app.name} Preview%3C/text%3E%3C/svg%3E`,
-      `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23334155'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3EFeature Demo%3C/text%3E%3C/svg%3E`
-    ];
-    app.versions = [{ version: app.version, changelog: "Latest stable release", createdAt: new Date().toISOString() }];
-    if (!app.ratingCount) app.ratingCount = Math.floor(Math.random() * 800) + 50;
-    if (!app.downloads) app.downloads = Math.floor(Math.random() * 30000) + 1000;
-  });
 
   // ---------- DARAJA M-PESA API Mock ----------
   const USE_REAL_MPESA_API = false;
@@ -284,14 +303,7 @@
     return true;
   }
   
-  // Helper to create img tag with fallback
-  function appLogoImg(app, sizeClass = "w-16 h-16", pixelSize = 60) {
-    const externalUrl = app.logoUrl || generateFallbackSVG(app.id, pixelSize);
-    const fallbackSvg = generateFallbackSVG(app.id, pixelSize);
-    return `<img src="${externalUrl}" class="${sizeClass} rounded-xl shadow object-cover" alt="${app.name}" 
-      onerror="this.onerror=null; this.src='${fallbackSvg}';">`;
-  }
-  
+  // ----- UI Components -----
   function appCard(app) {
     const isFav = currentUser && userFavorites.includes(app.id);
     return `<div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 card-hover cursor-pointer" onclick="window.showAppDetail('${app.id}')">
