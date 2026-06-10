@@ -84,25 +84,27 @@
 </div>
 
 <script>
-  // ---------- APP DATA with EXTERNAL LOGO URLs from user-provided images (first 15) ----------
-  const logoUrls = [
-    "https://i.ibb.co/gb1qn7Y3/file-00000000c32471f491da7d2b95a2d217.png",
-    "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png",
-    "https://i.ibb.co/rK4xNYFs/file-000000001ee871f4b8169a28703091b7.png",
-    "https://i.ibb.co/N6jb2762/file-000000004c4871f49ca1cb9d0d2c1de4.png",
-    "https://i.ibb.co/nN97ZJvN/file-0000000093b871f4b17cbccefe4d7bc7.png",
-    "https://i.ibb.co/3959zVpj/file-000000008d8c71f49373b77a647572d6.png",
-    "https://i.ibb.co/xqM1JCWG/file-000000004a8071f480fdac11e406f891.png",
-    "https://i.ibb.co/cSvLqcLX/file-00000000d5e071f4ba22a75f0817c803.png",
-    "https://i.ibb.co/nMBpS9WF/file-00000000826c71f48191fe3abb47a9d3.png",
-    "https://i.ibb.co/ynD8T6th/file-00000000225471f4a1e44c664b9fd555.png",
-    "https://i.ibb.co/GQWZnykb/file-00000000379c71f4a01216ae10901877.png",
-    "https://i.ibb.co/Myk5kQFw/file-00000000888871f482a587c6a8d8847e.png",
-    "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",
-    "https://i.ibb.co/NfCgDtT/file-00000000b57072438b98c6777ee7804e.png",
-    "https://i.ibb.co/204QYyVF/file-00000000c6707243af95f3105457c8b5.png"
-  ];
+  // ---------- EXPLICIT LOGO MAPPING (app id -> correct image URL) ----------
+  // Each logo comes from the user's provided ibb.co links, assigned to the correct app.
+  const logoMapping = {
+    "maji-gas": "https://i.ibb.co/gb1qn7Y3/file-00000000c32471f491da7d2b95a2d217.png",      // Maji Gas Delivery
+    "deep-focus": "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png",       // Deep Focus
+    "guard-ai": "https://i.ibb.co/rK4xNYFs/file-000000001ee871f4b8169a28703091b7.png",         // Guard AI
+    "data-vision": "https://i.ibb.co/N6jb2762/file-000000004c4871f49ca1cb9d0d2c1de4.png",     // Data Vision
+    "rider-app": "https://i.ibb.co/nN97ZJvN/file-0000000093b871f4b17cbccefe4d7bc7.png",        // Rider App
+    "insight": "https://i.ibb.co/3959zVpj/file-000000008d8c71f49373b77a647572d6.png",           // Insight
+    "clients-hub": "https://i.ibb.co/xqM1JCWG/file-000000004a8071f480fdac11e406f891.png",      // Clients Hub
+    "smart-duka": "https://i.ibb.co/cSvLqcLX/file-00000000d5e071f4ba22a75f0817c803.png",       // Smart Duka
+    "agriculture": "https://i.ibb.co/nMBpS9WF/file-00000000826c71f48191fe3abb47a9d3.png",       // Agriculture
+    "luminor-studio": "https://i.ibb.co/ynD8T6th/file-00000000225471f4a1e44c664b9fd555.png",    // Luminor Studio
+    "cv-maker": "https://i.ibb.co/GQWZnykb/file-00000000379c71f4a01216ae10901877.png",          // CV Maker
+    "matatu-booking": "https://i.ibb.co/Myk5kQFw/file-00000000888871f482a587c6a8d8847e.png",    // Matatu Booking
+    "home-search": "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",        // Home Search
+    "school-360": "https://i.ibb.co/NfCgDtT/file-00000000b57072438b98c6777ee7804e.png",         // School 360
+    "kanisa-launcher": "https://i.ibb.co/204QYyVF/file-00000000c6707243af95f3105457c8b5.png"    // Kanisa Launcher
+  };
 
+  // ---------- APP DATA (15 apps) ----------
   const appList = [
     { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand", category: "Utilities", price: 0, isFree: true, rating: 4.6, ratingCount: 234, downloads: 12540, version: "2.1.0", features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"], description: "Fast, reliable LPG and water delivery service with live order tracking." },
     { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker", category: "Productivity", price: 4.99, isFree: false, rating: 4.8, ratingCount: 1890, downloads: 45200, version: "3.0.2", features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"], description: "Boost productivity with science-backed focus tools." },
@@ -121,12 +123,9 @@
     { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher", shortDesc: "Church management & engagement", category: "Religion", price: 0, isFree: true, rating: 4.7, ratingCount: 156, downloads: 5300, version: "1.2.0", features: ["Events", "Giving platform", "Member directory", "Live stream"], description: "Digital tools for modern ministry." }
   ];
 
-  // Attach external logos from the provided list (in order)
-  appList.forEach((app, idx) => {
-    if (idx < logoUrls.length) {
-      app.logoUrl = logoUrls[idx];
-    }
-    // Add screenshots, versions, etc.
+  // Attach logos from the mapping + add metadata
+  appList.forEach(app => {
+    app.logoUrl = logoMapping[app.id];   // explicit per‑app logo
     app.developer = { name: "Sage Software", verified: true };
     app.screenshots = [
       `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%231e293b'/%3E%3Ctext x='300' y='200' text-anchor='middle' fill='white' font-size='24'%3E${app.name} Preview%3C/text%3E%3C/svg%3E`,
@@ -137,7 +136,7 @@
     if (!app.downloads) app.downloads = Math.floor(Math.random() * 30000) + 1000;
   });
 
-  // Fallback SVG generator (in case external image fails)
+  // Fallback SVG generator (used if external image fails to load)
   function generateFallbackSVG(appId, size = 80) {
     const colorMap = {
       "maji-gas": { primary: "#2563EB", secondary: "#F97316", letter: "M" },
@@ -165,15 +164,18 @@
     return `data:image/svg+xml,${encodeURIComponent(svgString)}`;
   }
 
-  // Helper to generate image HTML with fallback
+  // Helper: generate image tag with external URL + fallback
   function appLogoImg(app, sizeClass = "w-16 h-16", pixelSize = 60) {
-    const externalUrl = app.logoUrl || generateFallbackSVG(app.id, pixelSize);
+    const externalUrl = app.logoUrl;
     const fallbackSvg = generateFallbackSVG(app.id, pixelSize);
+    if (!externalUrl) {
+      return `<img src="${fallbackSvg}" class="${sizeClass} rounded-xl shadow object-cover" alt="${app.name}">`;
+    }
     return `<img src="${externalUrl}" class="${sizeClass} rounded-xl shadow object-cover" alt="${app.name}" 
       onerror="this.onerror=null; this.src='${fallbackSvg}';">`;
   }
 
-  // ---------- DARAJA M-PESA API Mock ----------
+  // ---------- DARAJA M-PESA API (mock) ----------
   const USE_REAL_MPESA_API = false;
   async function initiateMpesaPayment(phoneNumber, amount, accountReference, appName) {
     if (USE_REAL_MPESA_API) {
@@ -231,7 +233,7 @@
     currentPaymentApp = null;
   }
 
-  // ---------- State Management ----------
+  // ---------- State Management (unchanged) ----------
   let currentUser = JSON.parse(localStorage.getItem("sageUser")) || null;
   let activeView = "home";
   let selectedApp = null;
@@ -302,8 +304,8 @@
     renderCurrentView();
     return true;
   }
-  
-  // ----- UI Components -----
+
+  // UI components (identical design, only logos corrected)
   function appCard(app) {
     const isFav = currentUser && userFavorites.includes(app.id);
     return `<div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 card-hover cursor-pointer" onclick="window.showAppDetail('${app.id}')">
