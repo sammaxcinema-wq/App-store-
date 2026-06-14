@@ -5,31 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Meon | Intelligence · Innovation · Inspiration</title>
   <meta name="description" content="Meon App Directory – Launch web apps instantly">
-  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Meon">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Meon Directory">
+  <meta name="msapplication-TileColor" content="#0f172a">
+  <meta name="msapplication-starturl" content="/">
+  
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+  
+  <!-- PWA Icon (used by manifest) -->
+  <link rel="icon" type="image/png" sizes="192x192" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+  
+  <script src="https://cdn.tailwindcss.com">
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@latest">
+  </script>
   <style>
-    * { font-family: 'Inter', sans-serif; }
-    body { transition: background-color 0.3s, color 0.3s; }
-    .dark { background-color: #0f172a; color: #e2e8f0; }
-    .rating-star { cursor: pointer; transition: transform 0.1s; }
-    .rating-star:hover { transform: scale(1.1); }
-    .modal-transition { transition: opacity 0.2s ease, visibility 0.2s; }
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .card-hover { transition: all 0.2s ease; }
-    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1); }
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .dark {
+      background-color: #0f172a;
+      color: #e2e8f0;
+    }
+    .rating-star {
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .rating-star:hover {
+      transform: scale(1.1);
+    }
+    .modal-transition {
+      transition: opacity 0.2s ease, visibility 0.2s;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .card-hover {
+      transition: all 0.2s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
+    }
     .meon-logo-bg {
       background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%);
       border-radius: 14px;
-      box-shadow: 0 6px 12px -6px rgba(0,0,0,0.3);
+      box-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(139, 92, 246, 0.3);
     }
-    .toast { position: fixed; bottom: 20px; right: 20px; z-index: 9999; animation: slideIn 0.3s ease; }
-    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    img.app-logo { background: #1e293b; object-fit: cover; }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    img.app-logo {
+      background: #1e293b;
+      object-fit: cover;
+    }
     @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
     .animate-spin-slow {
       animation: spin-slow 20s linear infinite;
@@ -37,9 +103,102 @@
     .animate-spin-reverse {
       animation: spin-slow 30s linear infinite reverse;
     }
+
+    /* PWA Install Banner */
+    #pwaInstallBanner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9998;
+      background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 2px solid rgba(139, 92, 246, 0.5);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
+    }
+    #pwaInstallBanner.show {
+      transform: translateY(0);
+    }
+    #pwaInstallBanner .install-btn {
+      background: #8b5cf6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    #pwaInstallBanner .install-btn:hover {
+      background: #7c3aed;
+    }
+    #pwaInstallBanner .dismiss-btn {
+      background: transparent;
+      color: #cbd5e1;
+      border: 1px solid #475569;
+      padding: 8px 14px;
+      border-radius: 25px;
+      cursor: pointer;
+      white-space: nowrap;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    #pwaInstallBanner .dismiss-btn:hover {
+      color: white;
+      border-color: #94a3b8;
+    }
+
+    /* Offline indicator */
+    #offlineIndicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      background: #ef4444;
+      color: white;
+      text-align: center;
+      padding: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    #offlineIndicator.show {
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+<!-- Offline indicator -->
+<div id="offlineIndicator">⚠️ You are offline — some features may be limited</div>
+
+<!-- PWA Install Banner -->
+<div id="pwaInstallBanner">
+  <div class="flex items-center gap-3">
+    <img src="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png"
+    alt="Meon"
+    class="w-10 h-10 rounded-xl shadow"
+    style="object-fit:cover;">
+    <div>
+      <div class="font-bold text-sm">Meon Directory</div>
+      <div class="text-xs text-purple-200">Install for quick access</div>
+    </div>
+  </div>
+  <div class="flex items-center gap-2">
+    <button class="dismiss-btn" id="pwaDismissBtn">Not now</button>
+    <button class="install-btn" id="pwaInstallBtn">📲 Install App</button>
+  </div>
+</div>
 
 <div id="app" class="min-h-screen flex flex-col">
   <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
@@ -52,6 +211,10 @@
         <span class="font-bold text-xl tracking-tight hidden sm:inline-block">Meon Directory</span>
       </div>
       <div class="flex items-center gap-3">
+        <!-- PWA Install button in header (shows when banner is dismissed) -->
+        <button id="headerInstallBtn" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition hidden" title="Install App">
+          <i data-lucide="download" class="w-5 h-5"></i>
+        </button>
         <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
           <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
           <i data-lucide="sun" class="w-5 h-5 hidden dark:inline"></i>
@@ -74,6 +237,318 @@
 </div>
 
 <script>
+  // ============================================================
+  // PWA: Generate Manifest as Blob URL
+  // ============================================================
+  (function setupPwaManifest() {
+    const iconUrl = 'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png';
+    const manifest = {
+      name: 'Meon Directory',
+      short_name: 'Meon',
+      description: 'Meon App Directory – Launch web apps instantly',
+      start_url: location.href.split('?')[0],
+      display: 'standalone',
+      orientation: 'any',
+      background_color: '#0f172a',
+      theme_color: '#0f172a',
+      categories: ['productivity', 'utilities', 'developer tools'],
+      icons: [
+        { src: iconUrl, sizes: '72x72', type: 'image/png' },
+        { src: iconUrl, sizes: '96x96', type: 'image/png' },
+        { src: iconUrl, sizes: '128x128', type: 'image/png' },
+        { src: iconUrl, sizes: '144x144', type: 'image/png' },
+        { src: iconUrl, sizes: '152x152', type: 'image/png' },
+        { src: iconUrl, sizes: '180x180', type: 'image/png' },
+        { src: iconUrl, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+        { src: iconUrl, sizes: '384x384', type: 'image/png' },
+        { src: iconUrl, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+      ],
+      shortcuts: [
+        { name: 'Explore Apps', url: '/?nav=home', description: 'Browse all web apps' },
+        { name: 'Favorites', url: '/?nav=dashboard', description: 'Your favorite apps' }
+      ],
+      scope: '/'
+    };
+
+    const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+    const manifestUrl = URL.createObjectURL(manifestBlob);
+
+    const linkEl = document.createElement('link');
+    linkEl.rel = 'manifest';
+    linkEl.href = manifestUrl;
+    document.head.appendChild(linkEl);
+
+    // Store for later cleanup if needed
+    window._pwaManifestUrl = manifestUrl;
+    window._pwaManifest = manifest;
+  })();
+
+  // ============================================================
+  // PWA: Service Worker Registration (with blob URL)
+  // ============================================================
+  (function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) {
+      console.log('[PWA] Service workers not supported');
+      return;
+    }
+
+    // Define cache name and resources to cache
+    const CACHE_NAME = 'meon-directory-v2';
+    const urlsToCache = [
+      location.href.split('?')[0],
+      'https://cdn.tailwindcss.com',
+      'https://unpkg.com/lucide@latest',
+      'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap',
+      'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png'
+    ];
+
+    const swCode = `
+      const CACHE_NAME = '${CACHE_NAME}';
+      const urlsToCache = ${JSON.stringify(urlsToCache)};
+
+      // Install event – cache core assets
+      self.addEventListener('install', (event) => {
+        console.log('[SW] Installing...');
+        event.waitUntil(
+          caches.open(CACHE_NAME).then((cache) => {
+            console.log('[SW] Caching app shell');
+            return cache.addAll(urlsToCache).catch((err) => {
+              console.warn('[SW] Some assets failed to cache:', err);
+            });
+          }).then(() => {
+            return self.skipWaiting();
+          })
+        );
+      });
+
+      // Activate event – clean old caches
+      self.addEventListener('activate', (event) => {
+        console.log('[SW] Activating...');
+        event.waitUntil(
+          caches.keys().then((cacheNames) => {
+            return Promise.all(
+              cacheNames.map((cache) => {
+                if (cache !== CACHE_NAME) {
+                  console.log('[SW] Deleting old cache:', cache);
+                  return caches.delete(cache);
+                }
+              })
+            );
+          }).then(() => {
+            return self.clients.claim();
+          })
+        );
+      });
+
+      // Fetch event – network-first with cache fallback
+      self.addEventListener('fetch', (event) => {
+        // Skip non-GET requests and chrome-extension requests
+        if (event.request.method !== 'GET') return;
+        if (event.request.url.startsWith('chrome-extension://')) return;
+
+        event.respondWith(
+          fetch(event.request)
+            .then((networkResponse) => {
+              // Cache the fresh response for next time
+              if (networkResponse && networkResponse.status === 200) {
+                const responseClone = networkResponse.clone();
+                caches.open(CACHE_NAME).then((cache) => {
+                  try {
+                    cache.put(event.request, responseClone);
+                  } catch (e) {
+                    // Ignore opaque response caching errors
+                  }
+                });
+              }
+              return networkResponse;
+            })
+            .catch(() => {
+              // Network failed – try cache
+              return caches.match(event.request).then((cachedResponse) => {
+                if (cachedResponse) {
+                  return cachedResponse;
+                }
+                // If requesting a page, return the cached root as fallback
+                if (event.request.mode === 'navigate') {
+                  return caches.match(urlsToCache[0]);
+                }
+                // Return a simple offline response for other requests
+                return new Response('Offline – resource not cached', {
+                  status: 503,
+                  statusText: 'Service Unavailable'
+                });
+              });
+            })
+        );
+      });
+
+      // Push notification event (placeholder)
+      self.addEventListener('push', (event) => {
+        const options = {
+          body: event.data ? event.data.text() : 'New update from Meon Directory',
+          icon: 'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
+          badge: 'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
+          vibrate: [200, 100, 200],
+          data: { url: self.location.origin }
+        };
+        event.waitUntil(
+          self.registration.showNotification('Meon Directory', options)
+        );
+      });
+
+      // Notification click
+      self.addEventListener('notificationclick', (event) => {
+        event.notification.close();
+        event.waitUntil(
+          clients.openWindow(event.notification.data.url || self.location.origin)
+        );
+      });
+    `;
+
+    const swBlob = new Blob([swCode], { type: 'application/javascript' });
+    const swUrl = URL.createObjectURL(swBlob);
+
+    navigator.serviceWorker.register(swUrl, { scope: '/' })
+      .then((registration) => {
+        console.log('[PWA] Service Worker registered with scope:', registration.scope);
+        window._pwaSwRegistration = registration;
+        window._pwaSwUrl = swUrl;
+
+        // Check for updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                console.log('[PWA] New content available – refresh to update');
+              }
+            });
+          }
+        });
+      })
+      .catch((err) => {
+        console.warn('[PWA] Service Worker registration failed:', err);
+      });
+  })();
+
+  // ============================================================
+  // PWA: Install Prompt Handling
+  // ============================================================
+  let deferredPrompt = null;
+  let pwaBannerDismissed = false;
+  let pwaBannerDismissTime = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the default mini-infobar
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+
+    console.log('[PWA] Install prompt available');
+
+    // Show the custom install banner if not recently dismissed
+    const dismissTime = localStorage.getItem('meonPwaBannerDismissTime');
+    if (dismissTime) {
+      const hoursSince = (Date.now() - parseInt(dismissTime)) / (1000 * 60 * 60);
+      if (hoursSince < 48) {
+        pwaBannerDismissed = true;
+      } else {
+        localStorage.removeItem('meonPwaBannerDismissTime');
+        pwaBannerDismissed = false;
+      }
+    }
+
+    if (!pwaBannerDismissed) {
+      setTimeout(() => {
+        document.getElementById('pwaInstallBanner')?.classList.add('show');
+      }, 1500);
+    }
+
+    // Show header install button
+    document.getElementById('headerInstallBtn')?.classList.remove('hidden');
+  });
+
+  // Listen for app installed
+  window.addEventListener('appinstalled', () => {
+    console.log('[PWA] App installed successfully!');
+    deferredPrompt = null;
+    document.getElementById('pwaInstallBanner')?.classList.remove('show');
+    document.getElementById('headerInstallBtn')?.classList.add('hidden');
+    showToast('🎉 Meon installed! Launch from your home screen.', 'success');
+  });
+
+  // Install button in banner
+  document.addEventListener('DOMContentLoaded', () => {
+    const installBannerBtn = document.getElementById('pwaInstallBtn');
+    const dismissBannerBtn = document.getElementById('pwaDismissBtn');
+    const headerInstallBtn = document.getElementById('headerInstallBtn');
+
+    function triggerInstall() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('[PWA] User accepted install');
+          } else {
+            console.log('[PWA] User dismissed install');
+          }
+          deferredPrompt = null;
+          document.getElementById('pwaInstallBanner')?.classList.remove('show');
+          if (headerInstallBtn) headerInstallBtn.classList.add('hidden');
+        });
+      } else {
+        showToast('Install option not available right now. Try refreshing.', 'info');
+      }
+    }
+
+    if (installBannerBtn) {
+      installBannerBtn.addEventListener('click', triggerInstall);
+    }
+
+    if (dismissBannerBtn) {
+      dismissBannerBtn.addEventListener('click', () => {
+        document.getElementById('pwaInstallBanner')?.classList.remove('show');
+        pwaBannerDismissed = true;
+        localStorage.setItem('meonPwaBannerDismissTime', Date.now().toString());
+        // Keep header button visible for manual install
+        if (headerInstallBtn && deferredPrompt) {
+          headerInstallBtn.classList.remove('hidden');
+        }
+        showToast('You can install later from the header 📲', 'info');
+      });
+    }
+
+    if (headerInstallBtn) {
+      headerInstallBtn.addEventListener('click', triggerInstall);
+    }
+  });
+
+  // ============================================================
+  // PWA: Online/Offline Status
+  // ============================================================
+  function updateOnlineStatus() {
+    const indicator = document.getElementById('offlineIndicator');
+    if (!navigator.onLine) {
+      indicator?.classList.add('show');
+    } else {
+      indicator?.classList.remove('show');
+    }
+  }
+
+  window.addEventListener('online', () => {
+    updateOnlineStatus();
+    showToast('🌐 Back online!', 'success');
+  });
+  window.addEventListener('offline', () => {
+    updateOnlineStatus();
+    showToast('⚠️ You are offline. Cached apps still work.', 'info');
+  });
+
+  // Initial check
+  if (!navigator.onLine) {
+    setTimeout(() => updateOnlineStatus(), 500);
+  }
+
   // ============================================================
   // LOGO MAPPING (all apps)
   // ============================================================
@@ -116,22 +591,76 @@
 
   // ---------- APP DATA (all web apps with external links, no pricing) ----------
   const appList = [
-    { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand", category: "Utilities", rating: 4.6, ratingCount: 234, version: "2.1.0", features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"], description: "Fast, reliable LPG and water delivery service with live order tracking.", externalUrl: "https://maji-gasdelivery.vercel.app/" },
-    { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker", category: "Productivity", rating: 4.8, ratingCount: 1890, version: "3.0.2", features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"], description: "Boost productivity with science-backed focus tools.", externalUrl: "https://deepfocus-roan.vercel.app/" },
-    { id: "guard-ai", name: "Guard AI", slug: "guard-ai", shortDesc: "AI cybersecurity protection", category: "AI Tools", rating: 4.9, ratingCount: 523, version: "1.5.0", features: ["Threat detection", "VPN", "Password manager", "Dark web monitoring"], description: "Next-gen AI shield for digital security.", externalUrl: "https://guard-ai-six.vercel.app/" },
-    { id: "data-vision", name: "Data Vision", slug: "data-vision", shortDesc: "AI business intelligence", category: "Analytics", rating: 4.7, ratingCount: 312, version: "4.2.1", features: ["Dashboards", "AI predictions", "Data connectors", "Reports"], description: "Turn data into insights with AI.", externalUrl: "https://datavision-beta.vercel.app/" },
-    { id: "rider-app", name: "Rider App", slug: "rider-app", shortDesc: "Logistics & delivery platform", category: "Transport", rating: 4.5, ratingCount: 892, version: "2.3.0", features: ["Route optimization", "Live tracking", "Earnings dashboard", "Proof of delivery"], description: "Complete solution for riders and fleets.", externalUrl: "https://rider-app-psi.vercel.app/" },
-    { id: "insight", name: "Insight", slug: "insight", shortDesc: "Customer analytics platform", category: "Analytics", rating: 4.6, ratingCount: 178, version: "1.8.0", features: ["Segmentation", "Behavioral analytics", "Predictive models", "APIs"], description: "Deep customer behavior intelligence.", externalUrl: "https://insight-eta-lime.vercel.app/" },
-    { id: "clients-hub", name: "Clients Hub", slug: "clients-hub", shortDesc: "CRM for modern business", category: "CRM", rating: 4.4, ratingCount: 421, version: "3.1.0", features: ["Contact mgmt", "Deal tracking", "Email sync", "Forecasting"], description: "Grow relationships with powerful CRM.", externalUrl: "https://clients-hub.vercel.app/" },
-    { id: "smart-duka", name: "Smart Duka", slug: "smart-duka", shortDesc: "Retail management system", category: "Business", rating: 4.7, ratingCount: 563, version: "2.0.0", features: ["Inventory", "POS", "Sales reports", "Supplier mgmt"], description: "Modern POS for small shops.", externalUrl: "https://smartduka-rho.vercel.app/" },
-    { id: "agriculture", name: "Agriculture", slug: "agriculture", shortDesc: "Smart farming solution", category: "Agriculture", rating: 4.3, ratingCount: 197, version: "1.4.0", features: ["Crop monitor", "Weather", "Market prices", "Expert advice"], description: "Empower farmers with digital tools.", externalUrl: "https://agriculture-puce-eta.vercel.app/" },
-    { id: "luminor-studio", name: "Luminor Studio", slug: "luminor-studio", shortDesc: "AI photo & video editing", category: "Design", rating: 4.9, ratingCount: 734, version: "5.0.1", features: ["AI enhancement", "Layer editing", "Filters", "4K export"], description: "Creative suite for professionals.", externalUrl: "https://luminor-studio.vercel.app/" },
-    { id: "cv-maker", name: "CV Maker", slug: "cv-maker", shortDesc: "Professional resume builder", category: "Productivity", rating: 4.6, ratingCount: 1280, version: "1.9.0", features: ["Templates", "PDF export", "LinkedIn import", "Cover letter"], description: "Create job-winning resumes instantly.", externalUrl: "https://cv-maker-five-mu.vercel.app/" },
-    { id: "matatu-booking", name: "Matatu Booking", slug: "matatu-booking", shortDesc: "Public transport booking", category: "Transport", rating: 4.5, ratingCount: 567, version: "2.2.0", features: ["Real-time tracking", "Digital tickets", "Route planning", "Fare calc"], description: "Book matatus and track in real-time.", externalUrl: "https://matatu-booking.vercel.app/" },
-    { id: "home-search", name: "Home Search", slug: "home-search", shortDesc: "Real estate marketplace", category: "Real Estate", rating: 4.4, ratingCount: 398, version: "3.3.0", features: ["Property search", "Virtual tours", "Mortgage calc", "Agent contact"], description: "Find dream home or rental.", externalUrl: "https://home-search-j529.vercel.app/" },
-    { id: "school-360", name: "School 360", slug: "school-360", shortDesc: "School management system", category: "Education", rating: 4.8, ratingCount: 245, version: "4.1.0", features: ["Student records", "Fee mgmt", "Parent portal", "CBC support"], description: "Complete school ERP with CBC.", externalUrl: "https://school-360-one.vercel.app/" },
-    { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher", shortDesc: "Church management & engagement", category: "Religion", rating: 4.7, ratingCount: 156, version: "1.2.0", features: ["Events", "Giving platform", "Member directory", "Live stream"], description: "Digital tools for modern ministry.", externalUrl: "https://kanisa-launcher.vercel.app/" },
-    { id: "spark-connect", name: "Spark Connect", slug: "spark-connect", shortDesc: "Authentic dating & meaningful connections", category: "Social", rating: 4.8, ratingCount: 342, version: "2.0.0", features: ["Smart matching", "Video calls", "Verified profiles", "Interest-based groups", "Safety tools"], description: "Find genuine relationships with AI-powered matching.", externalUrl: "https://dating-app-six-pi.vercel.app/" }
+    { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand",
+      category: "Utilities", rating: 4.6, ratingCount: 234, version: "2.1.0", features: ["Real-time tracking",
+        "Scheduled deliveries", "Multiple payments", "Loyalty rewards"
+      ],
+      description: "Fast, reliable LPG and water delivery service with live order tracking.",
+      externalUrl: "https://maji-gasdelivery.vercel.app/" },
+    { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker",
+      category: "Productivity", rating: 4.8, ratingCount: 1890, version: "3.0.2", features: ["Pomodoro timer",
+        "Website blocker", "Focus music", "Analytics"
+      ], description: "Boost productivity with science-backed focus tools.",
+      externalUrl: "https://deepfocus-roan.vercel.app/" },
+    { id: "guard-ai", name: "Guard AI", slug: "guard-ai", shortDesc: "AI cybersecurity protection", category: "AI Tools",
+      rating: 4.9, ratingCount: 523, version: "1.5.0", features: ["Threat detection", "VPN", "Password manager",
+        "Dark web monitoring"
+      ], description: "Next-gen AI shield for digital security.", externalUrl: "https://guard-ai-six.vercel.app/" },
+    { id: "data-vision", name: "Data Vision", slug: "data-vision", shortDesc: "AI business intelligence",
+      category: "Analytics", rating: 4.7, ratingCount: 312, version: "4.2.1", features: ["Dashboards",
+        "AI predictions", "Data connectors", "Reports"
+      ], description: "Turn data into insights with AI.", externalUrl: "https://datavision-beta.vercel.app/" },
+    { id: "rider-app", name: "Rider App", slug: "rider-app", shortDesc: "Logistics & delivery platform",
+      category: "Transport", rating: 4.5, ratingCount: 892, version: "2.3.0", features: ["Route optimization",
+        "Live tracking", "Earnings dashboard", "Proof of delivery"
+      ], description: "Complete solution for riders and fleets.", externalUrl: "https://rider-app-psi.vercel.app/" },
+    { id: "insight", name: "Insight", slug: "insight", shortDesc: "Customer analytics platform", category: "Analytics",
+      rating: 4.6, ratingCount: 178, version: "1.8.0", features: ["Segmentation", "Behavioral analytics",
+        "Predictive models", "APIs"
+      ], description: "Deep customer behavior intelligence.", externalUrl: "https://insight-eta-lime.vercel.app/" },
+    { id: "clients-hub", name: "Clients Hub", slug: "clients-hub", shortDesc: "CRM for modern business",
+      category: "CRM", rating: 4.4, ratingCount: 421, version: "3.1.0", features: ["Contact mgmt", "Deal tracking",
+        "Email sync", "Forecasting"
+      ], description: "Grow relationships with powerful CRM.", externalUrl: "https://clients-hub.vercel.app/" },
+    { id: "smart-duka", name: "Smart Duka", slug: "smart-duka", shortDesc: "Retail management system",
+      category: "Business", rating: 4.7, ratingCount: 563, version: "2.0.0", features: ["Inventory", "POS",
+        "Sales reports", "Supplier mgmt"
+      ], description: "Modern POS for small shops.", externalUrl: "https://smartduka-rho.vercel.app/" },
+    { id: "agriculture", name: "Agriculture", slug: "agriculture", shortDesc: "Smart farming solution",
+      category: "Agriculture", rating: 4.3, ratingCount: 197, version: "1.4.0", features: ["Crop monitor", "Weather",
+        "Market prices", "Expert advice"
+      ], description: "Empower farmers with digital tools.",
+    externalUrl: "https://agriculture-puce-eta.vercel.app/" },
+    { id: "luminor-studio", name: "Luminor Studio", slug: "luminor-studio", shortDesc: "AI photo & video editing",
+      category: "Design", rating: 4.9, ratingCount: 734, version: "5.0.1", features: ["AI enhancement", "Layer editing",
+        "Filters", "4K export"
+      ], description: "Creative suite for professionals.", externalUrl: "https://luminor-studio.vercel.app/" },
+    { id: "cv-maker", name: "CV Maker", slug: "cv-maker", shortDesc: "Professional resume builder",
+      category: "Productivity", rating: 4.6, ratingCount: 1280, version: "1.9.0", features: ["Templates", "PDF export",
+        "LinkedIn import", "Cover letter"
+      ], description: "Create job-winning resumes instantly.", externalUrl: "https://cv-maker-five-mu.vercel.app/" },
+    { id: "matatu-booking", name: "Matatu Booking", slug: "matatu-booking", shortDesc: "Public transport booking",
+      category: "Transport", rating: 4.5, ratingCount: 567, version: "2.2.0", features: ["Real-time tracking",
+        "Digital tickets", "Route planning", "Fare calc"
+      ], description: "Book matatus and track in real-time.", externalUrl: "https://matatu-booking.vercel.app/" },
+    { id: "home-search", name: "Home Search", slug: "home-search", shortDesc: "Real estate marketplace",
+      category: "Real Estate", rating: 4.4, ratingCount: 398, version: "3.3.0", features: ["Property search",
+        "Virtual tours", "Mortgage calc", "Agent contact"
+      ], description: "Find dream home or rental.", externalUrl: "https://home-search-j529.vercel.app/" },
+    { id: "school-360", name: "School 360", slug: "school-360", shortDesc: "School management system",
+      category: "Education", rating: 4.8, ratingCount: 245, version: "4.1.0", features: ["Student records", "Fee mgmt",
+        "Parent portal", "CBC support"
+      ], description: "Complete school ERP with CBC.", externalUrl: "https://school-360-one.vercel.app/" },
+    { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher",
+      shortDesc: "Church management & engagement", category: "Religion", rating: 4.7, ratingCount: 156, version: "1.2.0",
+      features: ["Events", "Giving platform", "Member directory", "Live stream"],
+      description: "Digital tools for modern ministry.", externalUrl: "https://kanisa-launcher.vercel.app/" },
+    { id: "spark-connect", name: "Spark Connect", slug: "spark-connect",
+      shortDesc: "Authentic dating & meaningful connections", category: "Social", rating: 4.8, ratingCount: 342,
+      version: "2.0.0", features: ["Smart matching", "Video calls", "Verified profiles", "Interest-based groups",
+        "Safety tools"
+      ], description: "Find genuine relationships with AI-powered matching.",
+      externalUrl: "https://dating-app-six-pi.vercel.app/" }
   ];
 
   // Attach logos + screenshots + developer info
@@ -141,7 +670,8 @@
     const screenshotIdx = idx % screenshotUrls.length;
     const mainScreenshot = screenshotUrls[screenshotIdx];
     app.screenshots = [mainScreenshot, mainScreenshot];
-    app.versions = [{ version: app.version, changelog: "Latest stable release", createdAt: new Date().toISOString() }];
+    app.versions = [{ version: app.version, changelog: "Latest stable release",
+      createdAt: new Date().toISOString() }];
     if (!app.ratingCount) app.ratingCount = Math.floor(Math.random() * 800) + 50;
   });
 
@@ -166,7 +696,8 @@
       "spark-connect": { primary: "#EC4899", secondary: "#F43F5E", letter: "S" }
     };
     const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "S" };
-    const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="${size}" height="${size}">
+    const svgString =
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="${size}" height="${size}">
       <rect width="512" height="512" rx="96" fill="${c.primary}"/>
       <circle cx="256" cy="256" r="140" fill="${c.secondary}" opacity="0.9"/>
       <text x="256" y="340" text-anchor="middle" fill="white" font-size="180" font-weight="bold" font-family="Inter, sans-serif">${c.letter}</text>
@@ -203,8 +734,10 @@
   function showToast(msg, type = "success") {
     const container = document.getElementById("toastContainer");
     const toast = document.createElement("div");
-    toast.className = `toast bg-white dark:bg-gray-800 shadow-lg rounded-xl px-4 py-3 border-l-4 ${type === "success" ? "border-green-500" : type === "error" ? "border-red-500" : "border-blue-500"} flex items-center gap-2`;
-    toast.innerHTML = `<i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5"></i><span>${msg}</span>`;
+    toast.className =
+      `toast bg-white dark:bg-gray-800 shadow-lg rounded-xl px-4 py-3 border-l-4 ${type === "success" ? "border-green-500" : type === "error" ? "border-red-500" : "border-blue-500"} flex items-center gap-2`;
+    toast.innerHTML =
+      `<i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5"></i><span>${msg}</span>`;
     container.appendChild(toast);
     if (window.lucide) lucide.createIcons();
     setTimeout(() => toast.remove(), 4000);
@@ -217,16 +750,27 @@
     renderCurrentView();
     showToast(`Welcome to Meon, ${currentUser.name}!`, "success");
   }
-  function logout() { currentUser = null; userFavorites = []; saveState(); renderNav(); renderCurrentView(); showToast("Logged out", "success"); }
-  
+
+  function logout() {
+    currentUser = null;
+    userFavorites = [];
+    saveState();
+    renderNav();
+    renderCurrentView();
+    showToast("Logged out", "success");
+  }
+
   function toggleFavorite(appId) {
     if (!currentUser) { showToast("Sign in to save favorites", "error"); return false; }
     const idx = userFavorites.indexOf(appId);
-    if (idx === -1) { userFavorites.push(appId); showToast("Added to favorites", "success"); }
-    else { userFavorites.splice(idx,1); showToast("Removed from favorites", "success"); }
-    saveState(); renderCurrentView(); return true;
+    if (idx === -1) { userFavorites.push(appId);
+      showToast("Added to favorites", "success"); } else { userFavorites.splice(idx, 1);
+      showToast("Removed from favorites", "success"); }
+    saveState();
+    renderCurrentView();
+    return true;
   }
-  
+
   // Open app in new tab (no download tracking, no payments)
   function openApp(app) {
     if (app.externalUrl) {
@@ -236,15 +780,17 @@
       showToast("No web link available for this app", "error");
     }
   }
-  
+
   function submitReview(appId, rating, content) {
     if (!currentUser) { showToast("Login to review", "error"); return false; }
     if (!reviewsData[appId]) reviewsData[appId] = [];
-    reviewsData[appId].push({ userId: currentUser.id, user: currentUser.name, rating, content, date: new Date().toISOString() });
+    reviewsData[appId].push({ userId: currentUser.id, user: currentUser.name, rating, content,
+      date: new Date().toISOString() });
     const allRatings = reviewsData[appId].map(r => r.rating);
-    const avg = allRatings.reduce((a,b)=>a+b,0)/allRatings.length;
-    const appObj = appList.find(a=>a.id === appId);
-    if(appObj) { appObj.rating = parseFloat(avg.toFixed(1)); appObj.ratingCount = allRatings.length; }
+    const avg = allRatings.reduce((a, b) => a + b, 0) / allRatings.length;
+    const appObj = appList.find(a => a.id === appId);
+    if (appObj) { appObj.rating = parseFloat(avg.toFixed(1));
+      appObj.ratingCount = allRatings.length; }
     saveState();
     showToast("Review submitted", "success");
     renderCurrentView();
@@ -255,7 +801,8 @@
     let filtered = [...appList];
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      filtered = filtered.filter(app => app.name.toLowerCase().includes(q) || app.shortDesc.toLowerCase().includes(q) || app.category.toLowerCase().includes(q));
+      filtered = filtered.filter(app => app.name.toLowerCase().includes(q) || app.shortDesc.toLowerCase().includes(q) ||
+        app.category.toLowerCase().includes(q));
     }
     if (activeCategoryFilter) {
       filtered = filtered.filter(app => app.category.toLowerCase() === activeCategoryFilter.toLowerCase());
@@ -265,30 +812,37 @@
 
   function appCard(app) {
     const isFav = currentUser && userFavorites.includes(app.id);
+    const appJson = JSON.stringify(app).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     return `<div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 card-hover cursor-pointer" onclick="window.showAppDetail('${app.id}')">
       <div class="flex gap-3">
         ${appLogoImg(app, "w-16 h-16", 60)}
         <div class="flex-1"><h3 class="font-bold">${app.name}</h3><p class="text-sm text-gray-500">${app.shortDesc}</p><div class="flex items-center gap-1 mt-1"><i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i><span>${app.rating}</span><span class="text-xs text-gray-400 ml-1">(${app.ratingCount})</span></div></div>
         <button class="text-red-500" onclick="event.stopPropagation(); toggleFavorite('${app.id}')"><i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500' : ''}"></i></button>
       </div>
-      <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); openApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-purple-600 text-white px-4 py-1 rounded-lg text-sm">Open App →</button></div>
+      <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); window.openApp(${appJson})" class="bg-purple-600 text-white px-4 py-1 rounded-lg text-sm">Open App →</button></div>
     </div>`;
   }
 
   window.showAppDetail = (appId) => {
-    selectedApp = appList.find(a=>a.id === appId);
+    selectedApp = appList.find(a => a.id === appId);
     renderCurrentView();
   };
-  window.backToHome = () => { selectedApp = null; renderCurrentView(); };
+  window.backToHome = () => { selectedApp = null;
+    renderCurrentView(); };
+  window.openApp = openApp;
+  window.toggleFavorite = toggleFavorite;
 
   function renderAppDetail() {
     if (!selectedApp) return renderHome();
     const app = selectedApp;
     const appReviews = reviewsData[app.id] || [];
-    const screenshotHtml = app.screenshots.map(url => `<img src="${url}" class="rounded-xl border border-gray-200 dark:border-gray-700 w-64 h-40 object-cover" alt="screenshot">`).join('');
+    const screenshotHtml = app.screenshots.map(url =>
+      `<img src="${url}" class="rounded-xl border border-gray-200 dark:border-gray-700 w-64 h-40 object-cover" alt="screenshot">`
+    ).join('');
+    const appJson = JSON.stringify(app).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     return `<div class="max-w-4xl mx-auto"><button onclick="window.backToHome()" class="flex items-center gap-1 text-purple-600 mb-4">&larr; Back to Store</button>
       <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-        <div class="flex gap-5 flex-wrap">${appLogoImg(app, "w-24 h-24", 100)}<div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div></div><div class="flex gap-3 mt-4"><button onclick="openApp(${JSON.stringify(app).replace(/"/g, '&quot;')})" class="bg-purple-600 text-white px-6 py-2 rounded-full">Open Web App →</button><button onclick="toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
+        <div class="flex gap-5 flex-wrap">${appLogoImg(app, "w-24 h-24", 100)}<div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div></div><div class="flex gap-3 mt-4"><button onclick="window.openApp(${appJson})" class="bg-purple-600 text-white px-6 py-2 rounded-full">Open Web App →</button><button onclick="window.toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
         <div class="mt-6"><h2 class="text-xl font-semibold">Description</h2><p>${app.description}</p><h3 class="font-semibold mt-4">Key Features</h3><ul class="list-disc pl-5">${app.features.map(f=>`<li>${f}</li>`).join('')}</ul></div>
         <div class="mt-6"><h2 class="text-xl font-semibold">Screenshots</h2><div class="flex gap-3 overflow-x-auto pb-2">${screenshotHtml}</div></div>
         <div class="mt-8"><h2 class="text-xl font-semibold">Rate & Review</h2><div id="reviewStars" class="flex gap-1 my-2"></div><textarea id="reviewText" class="w-full border rounded p-2 dark:bg-gray-700" rows="2" placeholder="Write your review..."></textarea><button id="submitReviewBtn" class="mt-2 bg-purple-600 text-white px-4 py-1 rounded">Submit Review</button>
@@ -297,18 +851,20 @@
   }
 
   function renderDashboard() {
-    if(!currentUser) return `<div class="text-center py-12">Sign in to access your Meon dashboard</div>`;
+    if (!currentUser) return `<div class="text-center py-12">Sign in to access your Meon dashboard</div>`;
     const favApps = appList.filter(a => userFavorites.includes(a.id));
-    return `<div><h1 class="text-2xl font-bold">My Meon Workspace</h1><div class="mt-6 bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">❤️ Favorite Apps (${favApps.length})</h2><div class="grid gap-3 mt-3">${favApps.map(a=>`<div class="flex gap-3 items-center p-2 border-b">${appLogoImg(a, "w-10 h-10", 40)}<span class="flex-1 font-medium">${a.name}</span><button onclick="openApp(${JSON.stringify(a).replace(/"/g, '&quot;')})" class="bg-purple-600 text-white px-3 py-1 rounded text-sm">Open</button></div>`).join('')||"<p class='text-gray-500'>No favorites yet. ❤️ apps to see them here.</p>"}</div></div></div>`;
+    return `<div><h1 class="text-2xl font-bold">My Meon Workspace</h1><div class="mt-6 bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">❤️ Favorite Apps (${favApps.length})</h2><div class="grid gap-3 mt-3">${favApps.map(a=>`<div class="flex gap-3 items-center p-2 border-b">${appLogoImg(a, "w-10 h-10", 40)}<span class="flex-1 font-medium">${a.name}</span><button onclick="window.openApp(${JSON.stringify(a).replace(/"/g, '&quot;').replace(/'/g, '&#39;')})" class="bg-purple-600 text-white px-3 py-1 rounded text-sm">Open</button></div>`).join('')||"<p class='text-gray-500'>No favorites yet. ❤️ apps to see them here.</p>"}</div></div></div>`;
   }
-  
+
   function renderAdmin() {
-    if(!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin')) return `<div class="text-center py-12">Restricted to Meon Admin</div>`;
+    if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin'))
+      return `<div class="text-center py-12">Restricted to Meon Admin</div>`;
     return `<div><h1 class="text-2xl font-bold">Meon Admin Console</h1><div class="grid md:grid-cols-2 gap-6 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">📊 Directory Stats</h2><p class="mt-2">Total apps: ${appList.length}</p><p>Categories: ${new Set(appList.map(a=>a.category)).size}</p></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">⭐ Top Rated</h2><ul>${appList.sort((a,b)=>b.rating-a.rating).slice(0,5).map(a=>`<li>${a.name} – ${a.rating} ★</li>`).join('')}</ul></div></div><div class="mt-8"><h2 class="font-bold">App Management</h2><div class="grid gap-2">${appList.map(a=>`<div class="flex justify-between items-center bg-white dark:bg-gray-800 p-2 rounded"><div>${a.name}</div><button class="text-sm bg-purple-600 text-white px-2 py-1 rounded" onclick="alert('Admin: Manage ${a.name} (demo)')">Edit</button></div>`).join('')}</div></div></div>`;
   }
-  
+
   function renderDeveloper() {
-    if(!currentUser || currentUser.role !== 'developer') return `<div class="text-center py-12">Developer portal - Meon Partners only</div>`;
+    if (!currentUser || currentUser.role !== 'developer')
+      return `<div class="text-center py-12">Developer portal - Meon Partners only</div>`;
     return `<div><h1 class="text-2xl font-bold">Meon Developer Hub</h1><p>Monitor your web apps listed on Meon Directory</p><div class="bg-white dark:bg-gray-800 p-4 rounded-xl mt-4"><h3 class="font-semibold">Your Apps Performance</h3><div class="space-y-2 mt-2">${appList.slice(0,5).map(a=>`<div>${a.name} - Rating: ${a.rating} (${a.ratingCount} reviews)</div>`).join('')}</div><button class="mt-4 bg-green-600 text-white px-4 py-2 rounded">+ Submit New App</button></div></div>`;
   }
 
@@ -316,8 +872,8 @@
     const filteredApps = getFilteredApps();
     const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas"];
     const featured = filteredApps.filter(a => featuredIds.includes(a.id));
-    const trending = [...filteredApps].sort((a,b)=>b.rating - a.rating).slice(0,6);
-    const newReleases = [...filteredApps].reverse().slice(0,6);
+    const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
+    const newReleases = [...filteredApps].reverse().slice(0, 6);
     const categoryItems = [
       { name: "Social", gradient: "from-pink-600 to-rose-600", filter: "social" },
       { name: "AI Tools", gradient: "from-purple-600 to-violet-600", filter: "ai tools" },
@@ -328,70 +884,119 @@
       { name: "Design", gradient: "from-indigo-600 to-purple-600", filter: "design" },
       { name: "Utilities", gradient: "from-teal-600 to-cyan-600", filter: "utilities" }
     ];
-    const heroHtml = `<div class="relative w-full max-w-6xl mx-auto overflow-hidden bg-gradient-to-br from-[#020024] via-[#050537] to-[#0a005c] p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8"><div class="flex flex-col md:flex-row justify-between items-center gap-6"><div><h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1><p class="text-purple-200 mt-2">Launch web apps instantly · No payments · No downloads</p><div class="flex gap-4 mt-4"><button id="exploreMarketplaceBtn" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-500">Explore Apps →</button><button id="becomeDevBtn" class="border border-purple-400 px-5 py-2 rounded-full text-sm">Become a Developer</button></div></div><div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center"><div class="text-3xl font-bold">${appList.length}+</div><div class="text-xs">Web Apps</div></div></div></div>`;
+    const heroHtml =
+      `<div class="relative w-full max-w-6xl mx-auto overflow-hidden bg-gradient-to-br from-[#020024] via-[#050537] to-[#0a005c] p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8"><div class="flex flex-col md:flex-row justify-between items-center gap-6"><div><h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1><p class="text-purple-200 mt-2">Launch web apps instantly · No payments · No downloads</p><div class="flex gap-4 mt-4"><button id="exploreMarketplaceBtn" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-500">Explore Apps →</button><button id="becomeDevBtn" class="border border-purple-400 px-5 py-2 rounded-full text-sm">Become a Developer</button></div></div><div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center"><div class="text-3xl font-bold">${appList.length}+</div><div class="text-xs">Web Apps</div></div></div></div>`;
     return `${heroHtml}<div class="space-y-10"><div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3"><i data-lucide="search"></i><input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none" value="${searchQuery.replace(/"/g, '&quot;')}"></div><div><h2 class="text-2xl font-bold mb-4">Categories</h2><div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">${categoryItems.map(cat => `<div class="rounded-xl bg-gradient-to-r ${cat.gradient} text-white p-3 text-center text-sm font-semibold cursor-pointer hover:scale-105 transition category-chip" data-category="${cat.filter}">${cat.name}</div>`).join('')}${activeCategoryFilter ? `<div class="rounded-xl bg-gray-500 text-white p-3 text-center cursor-pointer" id="clearCategoryBtn">Clear ✕</div>` : ""}</div></div><div><h2 class="text-2xl font-bold mb-4">⭐ Featured</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🔥 Top Rated</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🆕 Recently Added</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div></div>`;
   }
 
   function renderCurrentView() {
     const container = document.getElementById("mainContent");
     if (!container) return;
-    if(selectedApp) container.innerHTML = renderAppDetail();
-    else if(activeView === "home") { container.innerHTML = renderHome(); setTimeout(() => { document.getElementById("globalSearchInput")?.addEventListener("input", (e) => { searchQuery = e.target.value; renderCurrentView(); }); document.querySelectorAll(".category-chip").forEach(c => c.addEventListener("click", () => { activeCategoryFilter = c.dataset.category; renderCurrentView(); })); document.getElementById("clearCategoryBtn")?.addEventListener("click", () => { activeCategoryFilter = ""; renderCurrentView(); }); document.getElementById("exploreMarketplaceBtn")?.addEventListener("click", () => document.querySelector(".grid.sm\\:grid-cols-2")?.scrollIntoView({ behavior: "smooth" })); document.getElementById("becomeDevBtn")?.addEventListener("click", () => { if (!currentUser) showToast("Please login first", "error"); else { activeView = "developer"; renderCurrentView(); } }); }, 50); }
-    else if(activeView === "dashboard") container.innerHTML = renderDashboard();
-    else if(activeView === "admin") container.innerHTML = renderAdmin();
-    else if(activeView === "developer") container.innerHTML = renderDeveloper();
+    if (selectedApp) { container.innerHTML = renderAppDetail(); } else if (activeView === "home") { container.innerHTML =
+        renderHome();
+      setTimeout(() => {
+        const searchInput = document.getElementById("globalSearchInput");
+        if (searchInput) {
+          searchInput.addEventListener("input", (e) => { searchQuery = e.target.value;
+            renderCurrentView(); });
+        }
+        document.querySelectorAll(".category-chip").forEach(c => c.addEventListener("click", () => {
+          activeCategoryFilter = c.dataset.category;
+          renderCurrentView(); }));
+        document.getElementById("clearCategoryBtn")?.addEventListener("click", () => { activeCategoryFilter = "";
+          renderCurrentView(); });
+        document.getElementById("exploreMarketplaceBtn")?.addEventListener("click", () => document.querySelector(
+          ".grid.sm\\:grid-cols-2")?.scrollIntoView({ behavior: "smooth" }));
+        document.getElementById("becomeDevBtn")?.addEventListener("click", () => { if (!currentUser) showToast(
+            "Please login first", "error");
+          else { activeView = "developer";
+            renderCurrentView(); } });
+      }, 50); } else if (activeView === "dashboard") container.innerHTML = renderDashboard();
+    else if (activeView === "admin") container.innerHTML = renderAdmin();
+    else if (activeView === "developer") container.innerHTML = renderDeveloper();
     if (window.lucide) lucide.createIcons();
-    if(selectedApp && document.getElementById("reviewStars")) {
+    if (selectedApp && document.getElementById("reviewStars")) {
       let ratingVal = 0;
       const starDiv = document.getElementById("reviewStars");
       starDiv.innerHTML = '';
-      for(let i=1;i<=5;i++){ let star=document.createElement('i'); star.setAttribute('data-lucide','star'); star.className='w-6 h-6 cursor-pointer rating-star'; star.onclick=()=>{ratingVal=i; document.querySelectorAll('#reviewStars i').forEach((s,idx)=>s.style.fill= idx<i ? '#facc15' : 'none');}; starDiv.appendChild(star);}
+      for (let i = 1; i <= 5; i++) {
+        let star = document.createElement('i');
+        star.setAttribute('data-lucide', 'star');
+        star.className = 'w-6 h-6 cursor-pointer rating-star';
+        star.onclick = () => { ratingVal = i;
+          document.querySelectorAll('#reviewStars i').forEach((s, idx) => s.style.fill = idx < i ? '#facc15' :
+            'none'); };
+        starDiv.appendChild(star);
+      }
       lucide.createIcons();
-      document.getElementById("submitReviewBtn")?.addEventListener("click",()=>{ const txt=document.getElementById("reviewText").value; if(ratingVal && txt) submitReview(selectedApp.id, ratingVal, txt); else showToast("Please provide rating and comment", "error");});
+      document.getElementById("submitReviewBtn")?.addEventListener("click", () => {
+        const txt = document.getElementById("reviewText").value;
+        if (ratingVal && txt) submitReview(selectedApp.id, ratingVal, txt);
+        else showToast("Please provide rating and comment", "error"); });
     }
   }
-  
+
   // Navigation & theme init
-  document.querySelectorAll(".nav-btn").forEach(btn=>{
-    btn.addEventListener("click",()=>{
+  document.querySelectorAll(".nav-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
       const view = btn.getAttribute("data-nav");
-      if(view) { activeView = view; selectedApp = null; renderCurrentView(); }
-      document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("border-purple-600","text-purple-600"));
-      btn.classList.add("border-purple-600","text-purple-600");
+      if (view) { activeView = view;
+        selectedApp = null;
+        renderCurrentView(); }
+      document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("border-purple-600",
+        "text-purple-600"));
+      btn.classList.add("border-purple-600", "text-purple-600");
     });
   });
+
   function renderNav() {
     const authDiv = document.getElementById("authSection");
     if (!authDiv) return;
     if (currentUser) {
-      authDiv.innerHTML = `<span class="text-sm hidden sm:inline">${currentUser.email}</span><button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm">Logout</button>`;
+      authDiv.innerHTML =
+        `<span class="text-sm hidden sm:inline">${currentUser.email}</span><button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm">Logout</button>`;
       document.getElementById("logoutBtn")?.addEventListener("click", logout);
-      document.getElementById("adminNavBtn")?.classList.toggle("hidden", currentUser.role !== 'admin' && currentUser.role !== 'super_admin');
+      document.getElementById("adminNavBtn")?.classList.toggle("hidden", currentUser.role !== 'admin' && currentUser
+        .role !== 'super_admin');
       document.getElementById("devNavBtn")?.classList.toggle("hidden", currentUser.role !== 'developer');
     } else {
-      authDiv.innerHTML = `<button id="showLoginModalBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-lg text-sm">Sign In</button>`;
+      authDiv.innerHTML =
+        `<button id="showLoginModalBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-lg text-sm">Sign In</button>`;
       document.getElementById("showLoginModalBtn")?.addEventListener("click", () => showAuthModal());
       document.getElementById("adminNavBtn")?.classList.add("hidden");
       document.getElementById("devNavBtn")?.classList.add("hidden");
     }
     lucide.createIcons();
   }
+
   function showAuthModal() {
-    const modalHtml = `<div id="authModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md"><h2 class="text-2xl font-bold mb-4">Meon Account</h2><input type="email" id="loginEmail" placeholder="Email" class="w-full p-2 border rounded-lg dark:bg-gray-700 mb-3"><input type="password" id="loginPassword" placeholder="Password (any)" class="w-full p-2 border rounded-lg dark:bg-gray-700 mb-4"><div class="flex gap-2 mb-3"><button id="loginEmailBtn" class="flex-1 bg-purple-600 text-white py-2 rounded-lg">Login</button><button id="registerBtn" class="flex-1 bg-green-600 text-white py-2 rounded-lg">Sign Up</button></div><button id="demoAdminBtn" class="w-full bg-purple-100 dark:bg-purple-900 py-2 rounded-lg mb-2">Demo Admin Access</button><button id="demoDevBtn" class="w-full bg-amber-100 dark:bg-amber-900 py-2 rounded-lg">Demo Developer Access</button><button id="closeModal" class="w-full mt-3 text-gray-500">Cancel</button></div></div>`;
+    const modalHtml =
+      `<div id="authModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md"><h2 class="text-2xl font-bold mb-4">Meon Account</h2><input type="email" id="loginEmail" placeholder="Email" class="w-full p-2 border rounded-lg dark:bg-gray-700 mb-3"><input type="password" id="loginPassword" placeholder="Password (any)" class="w-full p-2 border rounded-lg dark:bg-gray-700 mb-4"><div class="flex gap-2 mb-3"><button id="loginEmailBtn" class="flex-1 bg-purple-600 text-white py-2 rounded-lg">Login</button><button id="registerBtn" class="flex-1 bg-green-600 text-white py-2 rounded-lg">Sign Up</button></div><button id="demoAdminBtn" class="w-full bg-purple-100 dark:bg-purple-900 py-2 rounded-lg mb-2">Demo Admin Access</button><button id="demoDevBtn" class="w-full bg-amber-100 dark:bg-amber-900 py-2 rounded-lg">Demo Developer Access</button><button id="closeModal" class="w-full mt-3 text-gray-500">Cancel</button></div></div>`;
     document.body.insertAdjacentHTML("beforeend", modalHtml);
-    document.getElementById("loginEmailBtn")?.addEventListener("click", () => { const email = document.getElementById("loginEmail").value; if(email) loginUser(email, "user"); document.getElementById("authModal")?.remove(); });
-    document.getElementById("registerBtn")?.addEventListener("click", () => { const email = document.getElementById("loginEmail").value; if(email) loginUser(email, "user"); document.getElementById("authModal")?.remove(); });
-    document.getElementById("demoAdminBtn")?.addEventListener("click", () => { loginUser("admin@meon.com", "admin"); document.getElementById("authModal")?.remove(); });
-    document.getElementById("demoDevBtn")?.addEventListener("click", () => { loginUser("dev@meon.com", "developer"); document.getElementById("authModal")?.remove(); });
+    document.getElementById("loginEmailBtn")?.addEventListener("click", () => { const email = document.getElementById(
+        "loginEmail").value;
+      if (email) loginUser(email, "user");
+      document.getElementById("authModal")?.remove(); });
+    document.getElementById("registerBtn")?.addEventListener("click", () => { const email = document.getElementById(
+        "loginEmail").value;
+      if (email) loginUser(email, "user");
+      document.getElementById("authModal")?.remove(); });
+    document.getElementById("demoAdminBtn")?.addEventListener("click", () => { loginUser("admin@meon.com", "admin");
+      document.getElementById("authModal")?.remove(); });
+    document.getElementById("demoDevBtn")?.addEventListener("click", () => { loginUser("dev@meon.com", "developer");
+      document.getElementById("authModal")?.remove(); });
     document.getElementById("closeModal")?.addEventListener("click", () => document.getElementById("authModal")?.remove());
   }
   const themeToggle = document.getElementById("themeToggle");
-  themeToggle?.addEventListener("click",()=>{ document.documentElement.classList.toggle("dark"); localStorage.setItem("meonTheme", document.documentElement.classList.contains("dark") ? "dark" : "light"); lucide.createIcons(); });
-  if(localStorage.getItem("meonTheme") === "dark") document.documentElement.classList.add("dark");
+  themeToggle?.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    localStorage.setItem("meonTheme", document.documentElement.classList.contains("dark") ? "dark" : "light");
+    lucide.createIcons();
+  });
+  if (localStorage.getItem("meonTheme") === "dark") document.documentElement.classList.add("dark");
   renderNav();
   renderCurrentView();
-  window.toggleFavorite = toggleFavorite;
-  window.openApp = openApp;
+  updateOnlineStatus();
 </script>
 </body>
 </html>
