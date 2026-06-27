@@ -520,7 +520,7 @@
     }
 
     // ============================================================
-    // LOGO MAPPING (all apps) – added CBO Three logo
+    // LOGO MAPPING (all apps) – added Gym Nine logo
     // ============================================================
     const logoMapping = {
       "maji-gas": "https://i.ibb.co/sJwP77mq/file-000000002a7c724698774712139656f9.png",
@@ -542,7 +542,8 @@
       "meal-planner-pro": "https://i.ibb.co/gLXWj0Tn/c8a71cc8d8bc8e067883b4c4f4d184b0.jpg",
       "finance-eight": "https://i.ibb.co/B5VkzwB7/1782584384508.png",
       "sacco-sable": "https://i.ibb.co/Psfr94nb/1782588375093.png",
-      "cbo-three": "https://i.ibb.co/BH83mCK9/1782590354801.png"  // New app logo
+      "cbo-three": "https://i.ibb.co/BH83mCK9/1782590354801.png",
+      "gym-nine": "https://i.ibb.co/GD2WMcJ/1782594191864.png"  // New Gym Nine app logo
     };
 
     // Screenshots array
@@ -563,7 +564,7 @@
       "https://i.ibb.co/PGT1M64C/Screenshot-20260611-023518-Chrome.jpg"
     ];
 
-    // ---------- APP DATA (added CBO Three) ----------
+    // ---------- APP DATA (added Gym Nine) ----------
     const appList = [{
       id: "maji-gas",
       name: "Maji Gas Delivery",
@@ -796,7 +797,6 @@
       description: "Sacco Sable helps you manage your savings, track investments, and grow your wealth with smart financial tools and insights.",
       externalUrl: "https://sacco-sable.vercel.app/"
     },
-    // 🆕 NEW APP: CBO Three
     {
       id: "cbo-three",
       name: "CBO Three",
@@ -809,6 +809,20 @@
       features: ["Member management", "Contribution tracking", "Project monitoring", "Financial reporting", "Communication tools"],
       description: "CBO Three is a comprehensive management platform for Community Based Organizations. Streamline member contributions, track projects, generate financial reports, and improve communication within your organization.",
       externalUrl: "https://c-b-o-three.vercel.app/"
+    },
+    // 🆕 NEW APP: Gym Nine
+    {
+      id: "gym-nine",
+      name: "Gym Nine",
+      slug: "gym-nine",
+      shortDesc: "Fitness tracker & workout planner",
+      category: "Health & Wellness",
+      rating: 4.7,
+      ratingCount: 124,
+      version: "1.0.0",
+      features: ["Workout tracking", "Progress monitoring", "Exercise library", "Goal setting", "Workout plans"],
+      description: "Gym Nine is your ultimate fitness companion. Track your workouts, monitor your progress, and achieve your fitness goals with personalized workout plans and an extensive exercise library.",
+      externalUrl: "https://gym-nine-sepia.vercel.app/"
     }];
 
     // Attach logos + screenshots + developer info
@@ -845,7 +859,8 @@
         "meal-planner-pro": { primary: "#22C55E", secondary: "#16A34A", letter: "M" },
         "finance-eight": { primary: "#0D9488", secondary: "#14B8A6", letter: "F" },
         "sacco-sable": { primary: "#1E40AF", secondary: "#3B82F6", letter: "S" },
-        "cbo-three": { primary: "#0D9488", secondary: "#0F766E", letter: "C" }  // New app color
+        "cbo-three": { primary: "#0D9488", secondary: "#0F766E", letter: "C" },
+        "gym-nine": { primary: "#DC2626", secondary: "#991B1B", letter: "G" }  // Gym Nine color scheme
       };
       const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "S" };
       const svgString =
@@ -1021,7 +1036,7 @@
 
     function renderHome() {
       const filteredApps = getFilteredApps();
-      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight", "sacco-sable", "cbo-three"];  // Added cbo-three to featured
+      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight", "sacco-sable", "cbo-three", "gym-nine"];  // Added gym-nine to featured
       const featured = filteredApps.filter(a => featuredIds.includes(a.id));
       const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
       const newReleases = [...filteredApps].reverse().slice(0, 6);
