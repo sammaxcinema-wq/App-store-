@@ -520,7 +520,7 @@
     }
 
     // ============================================================
-    // LOGO MAPPING (all apps) – updated Clients Hub with new image
+    // LOGO MAPPING (all apps) – updated with new Finance app
     // ============================================================
     const logoMapping = {
       "maji-gas": "https://i.ibb.co/sJwP77mq/file-000000002a7c724698774712139656f9.png",
@@ -539,11 +539,12 @@
       "school-360": "https://i.ibb.co/rK4xNYFs/file-000000001ee871f4b8169a28703091b7.png",
       "kanisa-launcher": "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png",
       "spark-connect": "https://i.ibb.co/ST5wWMn/file-00000000b6f871f4879ce38381ddcffe.png",
-      // NEW APP: Meal Planner PRO – updated with your provided image
-      "meal-planner-pro": "https://i.ibb.co/gLXWj0Tn/c8a71cc8d8bc8e067883b4c4f4d184b0.jpg"
+      "meal-planner-pro": "https://i.ibb.co/gLXWj0Tn/c8a71cc8d8bc8e067883b4c4f4d184b0.jpg",
+      // NEW APP: Finance Eight
+      "finance-eight": "https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png"
     };
 
-    // Screenshots array – added the new Clients Hub image at index 6
+    // Screenshots array
     const screenshotUrls = [
       "https://i.ibb.co/JPVGw2p/Screenshot-20260611-024707-Chrome.jpg",
       "https://i.ibb.co/8D8qyBGg/Screenshot-20260611-024637-Chrome.jpg",
@@ -755,7 +756,6 @@
       description: "Find genuine relationships with AI-powered matching.",
       externalUrl: "https://dating-app-six-pi.vercel.app/"
     },
-    // NEW APP: Meal Planner PRO
     {
       id: "meal-planner-pro",
       name: "Meal Planner PRO",
@@ -768,6 +768,20 @@
       features: ["7-day meal plans", "AI recommendations", "Grocery lists", "Dietary preferences", "Budget tracking"],
       description: "Meal Planner PRO designs daily meal plans tailored to your dietary goals, preferences, and budget. Save money and eat healthy with AI-generated weekly meal plans and aisle-sorted shopping lists.",
       externalUrl: "https://diet-snowy-five.vercel.app/"
+    },
+    // NEW APP: Finance Eight
+    {
+      id: "finance-eight",
+      name: "Finance Eight",
+      slug: "finance-eight",
+      shortDesc: "Smart personal finance & budgeting tool",
+      category: "Finance",
+      rating: 4.6,
+      ratingCount: 198,
+      version: "1.0.0",
+      features: ["Budget tracking", "Expense categorization", "Savings goals", "Financial insights", "Multi-currency support"],
+      description: "Take control of your finances with smart budgeting tools, expense tracking, and personalized financial insights to help you save more and spend wisely.",
+      externalUrl: "https://finance-eight-fawn.vercel.app/"
     }];
 
     // Attach logos + screenshots + developer info
@@ -801,7 +815,8 @@
         "school-360": { primary: "#2563EB", secondary: "#10B981", letter: "S" },
         "kanisa-launcher": { primary: "#9333EA", secondary: "#D97706", letter: "K" },
         "spark-connect": { primary: "#EC4899", secondary: "#F43F5E", letter: "S" },
-        "meal-planner-pro": { primary: "#22C55E", secondary: "#16A34A", letter: "M" }
+        "meal-planner-pro": { primary: "#22C55E", secondary: "#16A34A", letter: "M" },
+        "finance-eight": { primary: "#0D9488", secondary: "#14B8A6", letter: "F" }
       };
       const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "S" };
       const svgString =
@@ -978,7 +993,7 @@
     function renderHome() {
       const filteredApps = getFilteredApps();
       // Include the new app in featured
-      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro"];
+      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight"];
       const featured = filteredApps.filter(a => featuredIds.includes(a.id));
       const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
       const newReleases = [...filteredApps].reverse().slice(0, 6);
@@ -991,7 +1006,8 @@
         { name: "Transport", gradient: "from-red-600 to-pink-600", filter: "transport" },
         { name: "Design", gradient: "from-indigo-600 to-purple-600", filter: "design" },
         { name: "Utilities", gradient: "from-teal-600 to-cyan-600", filter: "utilities" },
-        { name: "Health & Wellness", gradient: "from-green-600 to-lime-600", filter: "health & wellness" }
+        { name: "Health & Wellness", gradient: "from-green-600 to-lime-600", filter: "health & wellness" },
+        { name: "Finance", gradient: "from-emerald-600 to-teal-600", filter: "finance" }
       ];
       const heroHtml =
         `<div class="relative w-full max-w-6xl mx-auto overflow-hidden bg-gradient-to-br from-[#020024] via-[#050537] to-[#0a005c] p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8"><div class="flex flex-col md:flex-row justify-between items-center gap-6"><div><h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1><p class="text-purple-200 mt-2">Launch web apps instantly · No payments · No downloads</p><div class="flex gap-4 mt-4"><button id="exploreMarketplaceBtn" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-500">Explore Apps →</button><button id="becomeDevBtn" class="border border-purple-400 px-5 py-2 rounded-full text-sm">Become a Developer</button></div></div><div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center"><div class="text-3xl font-bold">${appList.length}+</div><div class="text-xs">Web Apps</div></div></div></div>`;
