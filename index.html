@@ -529,7 +529,6 @@
       "insight": "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",
       "rider-app": "https://i.ibb.co/Myk5kQFw/file-00000000888871f482a587c6a8d8847e.png",
       "guard-ai": "https://i.ibb.co/GQWZnykb/file-00000000379c71f4a01216ae10901877.png",
-      // UPDATED: Clients Hub uses the user-provided image as logo
       "clients-hub": "https://i.ibb.co/Wp3tKrJp/IMG-20260611-WA0007.jpg",
       "cv-maker": "https://i.ibb.co/cSvLqcLX/file-00000000d5e071f4ba22a75f0817c803.png",
       "smart-duka": "https://i.ibb.co/nMBpS9WF/file-00000000826c71f48191fe3abb47a9d3.png",
@@ -539,7 +538,9 @@
       "home-search": "https://i.ibb.co/N6jb2762/file-000000004c4871f49ca1cb9d0d2c1de4.png",
       "school-360": "https://i.ibb.co/rK4xNYFs/file-000000001ee871f4b8169a28703091b7.png",
       "kanisa-launcher": "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png",
-      "spark-connect": "https://i.ibb.co/ST5wWMn/file-00000000b6f871f4879ce38381ddcffe.png"
+      "spark-connect": "https://i.ibb.co/ST5wWMn/file-00000000b6f871f4879ce38381ddcffe.png",
+      // NEW APP: Meal Planner PRO – updated with your provided image
+      "meal-planner-pro": "https://i.ibb.co/gLXWj0Tn/c8a71cc8d8bc8e067883b4c4f4d184b0.jpg"
     };
 
     // Screenshots array – added the new Clients Hub image at index 6
@@ -550,7 +551,6 @@
       "https://i.ibb.co/4g42CZRx/Screenshot-20260611-024506-Chrome.jpg",
       "https://i.ibb.co/cSpb60gC/Screenshot-20260611-024412-Chrome.jpg",
       "https://i.ibb.co/cXsqXjsx/Screenshot-20260611-024344-Chrome.jpg",
-      // New Clients Hub screenshot (index 6)
       "https://i.ibb.co/Wp3tKrJp/IMG-20260611-WA0007.jpg",
       "https://i.ibb.co/XxkBRrJ9/Screenshot-20260611-024111-Chrome.jpg",
       "https://i.ibb.co/rWr1ZWW/Screenshot-20260611-024047-Chrome.jpg",
@@ -754,6 +754,20 @@
       features: ["Smart matching", "Video calls", "Verified profiles", "Interest-based groups", "Safety tools"],
       description: "Find genuine relationships with AI-powered matching.",
       externalUrl: "https://dating-app-six-pi.vercel.app/"
+    },
+    // NEW APP: Meal Planner PRO
+    {
+      id: "meal-planner-pro",
+      name: "Meal Planner PRO",
+      slug: "meal-planner-pro",
+      shortDesc: "AI-powered weekly meal planning & grocery lists",
+      category: "Health & Wellness",
+      rating: 4.7,
+      ratingCount: 312,
+      version: "1.0.0",
+      features: ["7-day meal plans", "AI recommendations", "Grocery lists", "Dietary preferences", "Budget tracking"],
+      description: "Meal Planner PRO designs daily meal plans tailored to your dietary goals, preferences, and budget. Save money and eat healthy with AI-generated weekly meal plans and aisle-sorted shopping lists.",
+      externalUrl: "https://diet-snowy-five.vercel.app/"
     }];
 
     // Attach logos + screenshots + developer info
@@ -786,7 +800,8 @@
         "home-search": { primary: "#0D9488", secondary: "#3B82F6", letter: "H" },
         "school-360": { primary: "#2563EB", secondary: "#10B981", letter: "S" },
         "kanisa-launcher": { primary: "#9333EA", secondary: "#D97706", letter: "K" },
-        "spark-connect": { primary: "#EC4899", secondary: "#F43F5E", letter: "S" }
+        "spark-connect": { primary: "#EC4899", secondary: "#F43F5E", letter: "S" },
+        "meal-planner-pro": { primary: "#22C55E", secondary: "#16A34A", letter: "M" }
       };
       const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "S" };
       const svgString =
@@ -962,7 +977,8 @@
 
     function renderHome() {
       const filteredApps = getFilteredApps();
-      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub"];
+      // Include the new app in featured
+      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro"];
       const featured = filteredApps.filter(a => featuredIds.includes(a.id));
       const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
       const newReleases = [...filteredApps].reverse().slice(0, 6);
@@ -974,7 +990,8 @@
         { name: "Agriculture", gradient: "from-orange-600 to-amber-600", filter: "agriculture" },
         { name: "Transport", gradient: "from-red-600 to-pink-600", filter: "transport" },
         { name: "Design", gradient: "from-indigo-600 to-purple-600", filter: "design" },
-        { name: "Utilities", gradient: "from-teal-600 to-cyan-600", filter: "utilities" }
+        { name: "Utilities", gradient: "from-teal-600 to-cyan-600", filter: "utilities" },
+        { name: "Health & Wellness", gradient: "from-green-600 to-lime-600", filter: "health & wellness" }
       ];
       const heroHtml =
         `<div class="relative w-full max-w-6xl mx-auto overflow-hidden bg-gradient-to-br from-[#020024] via-[#050537] to-[#0a005c] p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8"><div class="flex flex-col md:flex-row justify-between items-center gap-6"><div><h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1><p class="text-purple-200 mt-2">Launch web apps instantly · No payments · No downloads</p><div class="flex gap-4 mt-4"><button id="exploreMarketplaceBtn" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-500">Explore Apps →</button><button id="becomeDevBtn" class="border border-purple-400 px-5 py-2 rounded-full text-sm">Become a Developer</button></div></div><div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center"><div class="text-3xl font-bold">${appList.length}+</div><div class="text-xs">Web Apps</div></div></div></div>`;
