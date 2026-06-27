@@ -540,8 +540,8 @@
       "kanisa-launcher": "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png",
       "spark-connect": "https://i.ibb.co/ST5wWMn/file-00000000b6f871f4879ce38381ddcffe.png",
       "meal-planner-pro": "https://i.ibb.co/gLXWj0Tn/c8a71cc8d8bc8e067883b4c4f4d184b0.jpg",
-      // NEW APP: Finance Eight with custom logo
-      "finance-eight": "https://i.ibb.co/B5VkzwB7/1782584384508.png"
+      "finance-eight": "https://i.ibb.co/B5VkzwB7/1782584384508.png",
+      "sacco-sable": "https://i.ibb.co/Ks6v9F8/sacco-sable-logo.png"
     };
 
     // Screenshots array
@@ -769,7 +769,6 @@
       description: "Meal Planner PRO designs daily meal plans tailored to your dietary goals, preferences, and budget. Save money and eat healthy with AI-generated weekly meal plans and aisle-sorted shopping lists.",
       externalUrl: "https://diet-snowy-five.vercel.app/"
     },
-    // NEW APP: Finance Eight
     {
       id: "finance-eight",
       name: "Finance Eight",
@@ -782,6 +781,19 @@
       features: ["Budget tracking", "Expense categorization", "Savings goals", "Financial insights", "Multi-currency support"],
       description: "Take control of your finances with smart budgeting tools, expense tracking, and personalized financial insights to help you save more and spend wisely.",
       externalUrl: "https://finance-eight-fawn.vercel.app/"
+    },
+    {
+      id: "sacco-sable",
+      name: "Sacco Sable",
+      slug: "sacco-sable",
+      shortDesc: "Digital savings & investment platform",
+      category: "Finance",
+      rating: 4.5,
+      ratingCount: 156,
+      version: "1.0.0",
+      features: ["Savings goals", "Investment tracking", "Dividend management", "Member contributions", "Financial reports"],
+      description: "Sacco Sable helps you manage your savings, track investments, and grow your wealth with smart financial tools and insights.",
+      externalUrl: "https://sacco-sable.vercel.app/"
     }];
 
     // Attach logos + screenshots + developer info
@@ -816,7 +828,8 @@
         "kanisa-launcher": { primary: "#9333EA", secondary: "#D97706", letter: "K" },
         "spark-connect": { primary: "#EC4899", secondary: "#F43F5E", letter: "S" },
         "meal-planner-pro": { primary: "#22C55E", secondary: "#16A34A", letter: "M" },
-        "finance-eight": { primary: "#0D9488", secondary: "#14B8A6", letter: "F" }
+        "finance-eight": { primary: "#0D9488", secondary: "#14B8A6", letter: "F" },
+        "sacco-sable": { primary: "#1E40AF", secondary: "#3B82F6", letter: "S" }
       };
       const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "S" };
       const svgString =
@@ -992,8 +1005,7 @@
 
     function renderHome() {
       const filteredApps = getFilteredApps();
-      // Include the new app in featured
-      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight"];
+      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight", "sacco-sable"];
       const featured = filteredApps.filter(a => featuredIds.includes(a.id));
       const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
       const newReleases = [...filteredApps].reverse().slice(0, 6);
