@@ -312,6 +312,30 @@
       z-index: 1;
     }
 
+    /* ATT Tab Background */
+    .att-bg {
+      background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      min-height: 400px;
+    }
+    .att-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.9) 0%, rgba(5, 5, 55, 0.85) 50%, rgba(10, 0, 92, 0.9) 100%);
+      border-radius: 1.5rem;
+    }
+    .att-content {
+      position: relative;
+      z-index: 1;
+    }
+
     /* PWA Install Banner */
     #pwaInstallBanner {
       position: fixed;
@@ -430,6 +454,7 @@
         <div class="flex gap-6 overflow-x-auto pb-2 scrollbar-hide">
           <button data-nav="home" class="nav-btn font-semibold py-2 border-b-2 border-purple-600 text-purple-600">Home</button>
           <button data-nav="dashboard" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">My Dashboard</button>
+          <button data-nav="att" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">ATT</button>
           <button data-nav="admin" id="adminNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Admin Panel</button>
           <button data-nav="developer" id="devNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Developer Hub</button>
         </div>
@@ -1250,6 +1275,52 @@
       </div>`;
     }
 
+    function renderATT() {
+      return `<div class="att-bg w-full max-w-6xl mx-auto">
+        <div class="att-content">
+          <h1 class="text-3xl font-bold text-white mb-6">ATT - Advanced Technology Tools</h1>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+              <div class="text-4xl mb-3">🚀</div>
+              <h3 class="text-xl font-bold text-white">AI Analytics</h3>
+              <p class="text-gray-300 mt-2">Real-time data insights powered by artificial intelligence</p>
+              <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+              <div class="text-4xl mb-3">🔒</div>
+              <h3 class="text-xl font-bold text-white">Security Suite</h3>
+              <p class="text-gray-300 mt-2">Enterprise-grade security tools and monitoring</p>
+              <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+              <div class="text-4xl mb-3">☁️</div>
+              <h3 class="text-xl font-bold text-white">Cloud Solutions</h3>
+              <p class="text-gray-300 mt-2">Scalable cloud infrastructure and deployment tools</p>
+              <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+              <div class="text-4xl mb-3">📊</div>
+              <h3 class="text-xl font-bold text-white">Data Visualization</h3>
+              <p class="text-gray-300 mt-2">Interactive dashboards and reporting tools</p>
+              <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+              <div class="text-4xl mb-3">🤖</div>
+              <h3 class="text-xl font-bold text-white">Automation Engine</h3>
+              <p class="text-gray-300 mt-2">Intelligent process automation and workflow management</p>
+              <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+              <div class="text-4xl mb-3">🌐</div>
+              <h3 class="text-xl font-bold text-white">Global Connectivity</h3>
+              <p class="text-gray-300 mt-2">Edge computing and distributed network solutions</p>
+              <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
+
     function renderAdmin() {
       if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin'))
         return `<div class="text-center py-12 text-white">Restricted to Meon Admin</div>`;
@@ -1440,6 +1511,7 @@
             else { activeView = "developer";
               renderCurrentView(); } });
         }, 50); } else if (activeView === "dashboard") container.innerHTML = renderDashboard();
+      else if (activeView === "att") container.innerHTML = renderATT();
       else if (activeView === "admin") container.innerHTML = renderAdmin();
       else if (activeView === "developer") container.innerHTML = renderDeveloper();
       if (window.lucide) lucide.createIcons();
