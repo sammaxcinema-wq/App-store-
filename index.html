@@ -104,6 +104,26 @@
       animation: spin-slow 30s linear infinite reverse;
     }
 
+    /* Hero Background */
+    .hero-bg {
+      background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.85) 0%, rgba(5, 5, 55, 0.8) 50%, rgba(10, 0, 92, 0.85) 100%);
+      border-radius: 1.5rem;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
     /* PWA Install Banner */
     #pwaInstallBanner {
       position: fixed;
@@ -293,7 +313,8 @@
         'https://cdn.tailwindcss.com',
         'https://unpkg.com/lucide@latest',
         'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap',
-        'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png'
+        'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
+        'https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg'
       ];
 
       const swCode = `
@@ -543,7 +564,7 @@
       "finance-eight": "https://i.ibb.co/B5VkzwB7/1782584384508.png",
       "sacco-sable": "https://i.ibb.co/Psfr94nb/1782588375093.png",
       "cbo-three": "https://i.ibb.co/BH83mCK9/1782590354801.png",
-      "gym-nine": "https://i.ibb.co/GD2WMcJ/1782594191864.png"  // New Gym Nine app logo
+      "gym-nine": "https://i.ibb.co/GD2WMcJ/1782594191864.png"
     };
 
     // Screenshots array
@@ -860,7 +881,7 @@
         "finance-eight": { primary: "#0D9488", secondary: "#14B8A6", letter: "F" },
         "sacco-sable": { primary: "#1E40AF", secondary: "#3B82F6", letter: "S" },
         "cbo-three": { primary: "#0D9488", secondary: "#0F766E", letter: "C" },
-        "gym-nine": { primary: "#DC2626", secondary: "#991B1B", letter: "G" }  // Gym Nine color scheme
+        "gym-nine": { primary: "#DC2626", secondary: "#991B1B", letter: "G" }
       };
       const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "S" };
       const svgString =
@@ -1036,7 +1057,7 @@
 
     function renderHome() {
       const filteredApps = getFilteredApps();
-      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight", "sacco-sable", "cbo-three", "gym-nine"];  // Added gym-nine to featured
+      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight", "sacco-sable", "cbo-three", "gym-nine"];
       const featured = filteredApps.filter(a => featuredIds.includes(a.id));
       const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
       const newReleases = [...filteredApps].reverse().slice(0, 6);
@@ -1052,8 +1073,26 @@
         { name: "Health & Wellness", gradient: "from-green-600 to-lime-600", filter: "health & wellness" },
         { name: "Finance", gradient: "from-emerald-600 to-teal-600", filter: "finance" }
       ];
+      
+      // Hero section with background image
       const heroHtml =
-        `<div class="relative w-full max-w-6xl mx-auto overflow-hidden bg-gradient-to-br from-[#020024] via-[#050537] to-[#0a005c] p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8"><div class="flex flex-col md:flex-row justify-between items-center gap-6"><div><h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1><p class="text-purple-200 mt-2">Launch web apps instantly · No payments · No downloads</p><div class="flex gap-4 mt-4"><button id="exploreMarketplaceBtn" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-500">Explore Apps →</button><button id="becomeDevBtn" class="border border-purple-400 px-5 py-2 rounded-full text-sm">Become a Developer</button></div></div><div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center"><div class="text-3xl font-bold">${appList.length}+</div><div class="text-xs">Web Apps</div></div></div></div>`;
+        `<div class="hero-bg w-full max-w-6xl mx-auto overflow-hidden p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8 min-h-[300px] flex items-center">
+          <div class="hero-content flex flex-col md:flex-row justify-between items-center gap-6 w-full">
+            <div>
+              <h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1>
+              <p class="text-purple-200 mt-2">Launch web apps instantly · No payments · No downloads</p>
+              <div class="flex gap-4 mt-4">
+                <button id="exploreMarketplaceBtn" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-500 transition">Explore Apps →</button>
+                <button id="becomeDevBtn" class="border border-purple-400 px-5 py-2 rounded-full text-sm hover:bg-purple-500/20 transition">Become a Developer</button>
+              </div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center">
+              <div class="text-3xl font-bold">${appList.length}+</div>
+              <div class="text-xs">Web Apps</div>
+            </div>
+          </div>
+        </div>`;
+        
       return `${heroHtml}<div class="space-y-10"><div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3"><i data-lucide="search"></i><input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none" value="${searchQuery.replace(/"/g, '&quot;')}"></div><div><h2 class="text-2xl font-bold mb-4">Categories</h2><div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">${categoryItems.map(cat => `<div class="rounded-xl bg-gradient-to-r ${cat.gradient} text-white p-3 text-center text-sm font-semibold cursor-pointer hover:scale-105 transition category-chip" data-category="${cat.filter}">${cat.name}</div>`).join('')}${activeCategoryFilter ? `<div class="rounded-xl bg-gray-500 text-white p-3 text-center cursor-pointer" id="clearCategoryBtn">Clear ✕</div>` : ""}</div></div><div><h2 class="text-2xl font-bold mb-4">⭐ Featured</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🔥 Top Rated</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🆕 Recently Added</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div></div>`;
     }
 
