@@ -147,6 +147,78 @@
       z-index: 1;
     }
 
+    /* Dashboard Background */
+    .dashboard-bg {
+      background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      min-height: 400px;
+    }
+    .dashboard-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.9) 0%, rgba(5, 5, 55, 0.85) 50%, rgba(10, 0, 92, 0.9) 100%);
+      border-radius: 1.5rem;
+    }
+    .dashboard-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Admin Panel Background */
+    .admin-bg {
+      background-image: url('https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      min-height: 400px;
+    }
+    .admin-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.92) 0%, rgba(5, 5, 55, 0.88) 50%, rgba(10, 0, 92, 0.92) 100%);
+      border-radius: 1.5rem;
+    }
+    .admin-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Developer Hub Background */
+    .developer-bg {
+      background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      min-height: 400px;
+    }
+    .developer-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.88) 0%, rgba(5, 5, 55, 0.82) 50%, rgba(10, 0, 92, 0.88) 100%);
+      border-radius: 1.5rem;
+    }
+    .developer-content {
+      position: relative;
+      z-index: 1;
+    }
+
     /* PWA Install Banner */
     #pwaInstallBanner {
       position: fixed;
@@ -1062,21 +1134,100 @@
     }
 
     function renderDashboard() {
-      if (!currentUser) return `<div class="text-center py-12">Sign in to access your Meon dashboard</div>`;
+      if (!currentUser) return `<div class="text-center py-12 text-white">Sign in to access your Meon dashboard</div>`;
       const favApps = appList.filter(a => userFavorites.includes(a.id));
-      return `<div><h1 class="text-2xl font-bold">My Meon Workspace</h1><div class="mt-6 bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">❤️ Favorite Apps (${favApps.length})</h2><div class="grid gap-3 mt-3">${favApps.map(a=>`<div class="flex gap-3 items-center p-2 border-b">${appLogoImg(a, "w-10 h-10", 40)}<span class="flex-1 font-medium">${a.name}</span><button onclick="window.openApp(${JSON.stringify(a).replace(/"/g, '&quot;').replace(/'/g, '&#39;')})" class="bg-purple-600 text-white px-3 py-1 rounded text-sm">Open</button></div>`).join('')||"<p class='text-gray-500'>No favorites yet. ❤️ apps to see them here.</p>"}</div></div></div>`;
+      return `<div class="dashboard-bg w-full max-w-6xl mx-auto">
+        <div class="dashboard-content">
+          <h1 class="text-3xl font-bold text-white mb-6">My Meon Workspace</h1>
+          <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6">
+            <h2 class="text-xl font-bold text-white">❤️ Favorite Apps (${favApps.length})</h2>
+            <div class="grid gap-3 mt-3">
+              ${favApps.map(a=>`<div class="flex gap-3 items-center p-3 bg-white/5 backdrop-blur rounded-lg border border-white/10">
+                ${appLogoImg(a, "w-10 h-10", 40)}
+                <span class="flex-1 font-medium text-white">${a.name}</span>
+                <button onclick="window.openApp(${JSON.stringify(a).replace(/"/g, '&quot;').replace(/'/g, '&#39;')})" class="bg-purple-600 text-white px-3 py-1 rounded text-sm hover:bg-purple-700 transition">Open</button>
+              </div>`).join('')||"<p class='text-gray-300'>No favorites yet. ❤️ apps to see them here.</p>"}
+            </div>
+          </div>
+        </div>
+      </div>`;
     }
 
     function renderAdmin() {
       if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin'))
-        return `<div class="text-center py-12">Restricted to Meon Admin</div>`;
-      return `<div><h1 class="text-2xl font-bold">Meon Admin Console</h1><div class="grid md:grid-cols-2 gap-6 mt-6"><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">📊 Directory Stats</h2><p class="mt-2">Total apps: ${appList.length}</p><p>Categories: ${new Set(appList.map(a=>a.category)).size}</p></div><div class="bg-white dark:bg-gray-800 p-4 rounded-xl"><h2 class="font-bold">⭐ Top Rated</h2><ul>${appList.sort((a,b)=>b.rating-a.rating).slice(0,5).map(a=>`<li>${a.name} – ${a.rating} ★</li>`).join('')}</ul></div></div><div class="mt-8"><h2 class="font-bold">App Management</h2><div class="grid gap-2">${appList.map(a=>`<div class="flex justify-between items-center bg-white dark:bg-gray-800 p-2 rounded"><div>${a.name}</div><button class="text-sm bg-purple-600 text-white px-2 py-1 rounded" onclick="alert('Admin: Manage ${a.name} (demo)')">Edit</button></div>`).join('')}</div></div></div>`;
+        return `<div class="text-center py-12 text-white">Restricted to Meon Admin</div>`;
+      return `<div class="admin-bg w-full max-w-6xl mx-auto">
+        <div class="admin-content">
+          <h1 class="text-3xl font-bold text-white mb-6">Meon Admin Console</h1>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+              <h2 class="text-xl font-bold text-white">📊 Directory Stats</h2>
+              <div class="mt-4 space-y-2 text-white">
+                <p class="text-lg">Total apps: <span class="font-bold text-purple-300">${appList.length}</span></p>
+                <p class="text-lg">Categories: <span class="font-bold text-purple-300">${new Set(appList.map(a=>a.category)).size}</span></p>
+                <p class="text-lg">Total reviews: <span class="font-bold text-purple-300">${Object.values(reviewsData).reduce((acc, curr) => acc + curr.length, 0)}</span></p>
+              </div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+              <h2 class="text-xl font-bold text-white">⭐ Top Rated</h2>
+              <ul class="mt-4 space-y-2 text-white">
+                ${appList.sort((a,b)=>b.rating-a.rating).slice(0,5).map(a=>`<li class="flex justify-between items-center p-2 bg-white/5 rounded"><span>${a.name}</span><span class="text-yellow-400">${a.rating} ★</span></li>`).join('')}
+              </ul>
+            </div>
+          </div>
+          <div class="mt-6">
+            <h2 class="text-xl font-bold text-white mb-4">App Management</h2>
+            <div class="grid gap-2 max-h-96 overflow-y-auto">
+              ${appList.map(a=>`<div class="flex justify-between items-center bg-white/10 backdrop-blur-lg p-3 rounded-lg border border-white/10">
+                <span class="text-white">${a.name}</span>
+                <button class="text-sm bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 transition" onclick="alert('Admin: Manage ${a.name} (demo)')">Edit</button>
+              </div>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>`;
     }
 
     function renderDeveloper() {
       if (!currentUser || currentUser.role !== 'developer')
-        return `<div class="text-center py-12">Developer portal - Meon Partners only</div>`;
-      return `<div><h1 class="text-2xl font-bold">Meon Developer Hub</h1><p>Monitor your web apps listed on Meon Directory</p><div class="bg-white dark:bg-gray-800 p-4 rounded-xl mt-4"><h3 class="font-semibold">Your Apps Performance</h3><div class="space-y-2 mt-2">${appList.slice(0,5).map(a=>`<div>${a.name} - Rating: ${a.rating} (${a.ratingCount} reviews)</div>`).join('')}</div><button class="mt-4 bg-green-600 text-white px-4 py-2 rounded">+ Submit New App</button></div></div>`;
+        return `<div class="text-center py-12 text-white">Developer portal - Meon Partners only</div>`;
+      return `<div class="developer-bg w-full max-w-6xl mx-auto">
+        <div class="developer-content">
+          <h1 class="text-3xl font-bold text-white mb-6">Meon Developer Hub</h1>
+          <p class="text-purple-200 text-lg mb-6">Monitor your web apps listed on Meon Directory</p>
+          <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-4">Your Apps Performance</h3>
+            <div class="space-y-3">
+              ${appList.slice(0,5).map(a=>`<div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/10">
+                <span class="text-white font-medium">${a.name}</span>
+                <span class="text-yellow-400">Rating: ${a.rating} (${a.ratingCount} reviews)</span>
+              </div>`).join('')}
+            </div>
+            <button class="mt-6 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition font-semibold">+ Submit New App</button>
+          </div>
+          <div class="mt-6 bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-4">📈 Analytics Overview</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="text-center p-4 bg-white/5 rounded-lg">
+                <div class="text-2xl font-bold text-purple-300">${appList.length}</div>
+                <div class="text-sm text-gray-300">Total Apps</div>
+              </div>
+              <div class="text-center p-4 bg-white/5 rounded-lg">
+                <div class="text-2xl font-bold text-purple-300">${appList.filter(a => a.rating >= 4.5).length}</div>
+                <div class="text-sm text-gray-300">High Rated</div>
+              </div>
+              <div class="text-center p-4 bg-white/5 rounded-lg">
+                <div class="text-2xl font-bold text-purple-300">${new Set(appList.map(a=>a.category)).size}</div>
+                <div class="text-sm text-gray-300">Categories</div>
+              </div>
+              <div class="text-center p-4 bg-white/5 rounded-lg">
+                <div class="text-2xl font-bold text-purple-300">${Object.values(reviewsData).reduce((acc, curr) => acc + curr.length, 0)}</div>
+                <div class="text-sm text-gray-300">Total Reviews</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
     }
 
     function renderHome() {
@@ -1198,14 +1349,14 @@
       if (!authDiv) return;
       if (currentUser) {
         authDiv.innerHTML =
-          `<span class="text-sm hidden sm:inline">${currentUser.email}</span><button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm">Logout</button>`;
+          `<span class="text-sm hidden sm:inline text-gray-700 dark:text-gray-300">${currentUser.email}</span><button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm transition">Logout</button>`;
         document.getElementById("logoutBtn")?.addEventListener("click", logout);
         document.getElementById("adminNavBtn")?.classList.toggle("hidden", currentUser.role !== 'admin' && currentUser
           .role !== 'super_admin');
         document.getElementById("devNavBtn")?.classList.toggle("hidden", currentUser.role !== 'developer');
       } else {
         authDiv.innerHTML =
-          `<button id="showLoginModalBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-lg text-sm">Sign In</button>`;
+          `<button id="showLoginModalBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-lg text-sm transition">Sign In</button>`;
         document.getElementById("showLoginModalBtn")?.addEventListener("click", () => showAuthModal());
         document.getElementById("adminNavBtn")?.classList.add("hidden");
         document.getElementById("devNavBtn")?.classList.add("hidden");
