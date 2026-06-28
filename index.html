@@ -124,6 +124,29 @@
       z-index: 1;
     }
 
+    /* Categories Background */
+    .categories-bg {
+      background-image: url('https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+    }
+    .categories-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.88) 0%, rgba(5, 5, 55, 0.82) 50%, rgba(10, 0, 92, 0.88) 100%);
+      border-radius: 1.5rem;
+    }
+    .categories-content {
+      position: relative;
+      z-index: 1;
+    }
+
     /* PWA Install Banner */
     #pwaInstallBanner {
       position: fixed;
@@ -314,7 +337,8 @@
         'https://unpkg.com/lucide@latest',
         'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap',
         'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
-        'https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg'
+        'https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg',
+        'https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg'
       ];
 
       const swCode = `
@@ -1093,7 +1117,18 @@
           </div>
         </div>`;
         
-      return `${heroHtml}<div class="space-y-10"><div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3"><i data-lucide="search"></i><input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none" value="${searchQuery.replace(/"/g, '&quot;')}"></div><div><h2 class="text-2xl font-bold mb-4">Categories</h2><div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">${categoryItems.map(cat => `<div class="rounded-xl bg-gradient-to-r ${cat.gradient} text-white p-3 text-center text-sm font-semibold cursor-pointer hover:scale-105 transition category-chip" data-category="${cat.filter}">${cat.name}</div>`).join('')}${activeCategoryFilter ? `<div class="rounded-xl bg-gray-500 text-white p-3 text-center cursor-pointer" id="clearCategoryBtn">Clear ✕</div>` : ""}</div></div><div><h2 class="text-2xl font-bold mb-4">⭐ Featured</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🔥 Top Rated</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🆕 Recently Added</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div></div>`;
+      // Categories section with background image
+      const categoriesHtml = `<div class="categories-bg w-full max-w-6xl mx-auto mb-8">
+        <div class="categories-content">
+          <h2 class="text-2xl font-bold text-white mb-4">Categories</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+            ${categoryItems.map(cat => `<div class="rounded-xl bg-gradient-to-r ${cat.gradient} text-white p-3 text-center text-sm font-semibold cursor-pointer hover:scale-105 transition category-chip" data-category="${cat.filter}">${cat.name}</div>`).join('')}
+            ${activeCategoryFilter ? `<div class="rounded-xl bg-gray-500 text-white p-3 text-center cursor-pointer" id="clearCategoryBtn">Clear ✕</div>` : ""}
+          </div>
+        </div>
+      </div>`;
+        
+      return `${heroHtml}<div class="space-y-10">${categoriesHtml}<div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3"><i data-lucide="search"></i><input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none" value="${searchQuery.replace(/"/g, '&quot;')}"></div><div><h2 class="text-2xl font-bold mb-4">⭐ Featured</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🔥 Top Rated</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🆕 Recently Added</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div></div>`;
     }
 
     function renderCurrentView() {
