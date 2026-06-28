@@ -104,6 +104,30 @@
       animation: spin-slow 30s linear infinite reverse;
     }
 
+    /* Global Background for Home and Dashboard */
+    .main-bg {
+      background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      min-height: 100vh;
+      padding: 1rem;
+      border-radius: 1.5rem;
+    }
+    .main-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.88) 0%, rgba(5, 5, 55, 0.82) 50%, rgba(10, 0, 92, 0.88) 100%);
+      border-radius: 1.5rem;
+    }
+    .main-content {
+      position: relative;
+      z-index: 1;
+    }
+
     /* Hero Background */
     .hero-bg {
       background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg');
@@ -218,7 +242,7 @@
 
     /* Dashboard Background */
     .dashboard-bg {
-      background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg');
+      background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -482,7 +506,8 @@
         'https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg',
         'https://i.ibb.co/n8LTRbLg/16dbce0c640116ad6a21751b15d0396e.jpg',
         'https://i.ibb.co/bMQhQB0P/fd8980ac75d8617208bdb4e65b549f04.jpg',
-        'https://i.ibb.co/4ZKz5tDD/669db1c2e2ee4ac1f1328ca814ccc930.jpg'
+        'https://i.ibb.co/4ZKz5tDD/669db1c2e2ee4ac1f1328ca814ccc930.jpg',
+        'https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg'
       ];
 
       const swCode = `
@@ -1211,7 +1236,7 @@
       return `<div class="dashboard-bg w-full max-w-6xl mx-auto">
         <div class="dashboard-content">
           <h1 class="text-3xl font-bold text-white mb-6">My Meon Workspace</h1>
-          <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6">
+          <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
             <h2 class="text-xl font-bold text-white">❤️ Favorite Apps (${favApps.length})</h2>
             <div class="grid gap-3 mt-3">
               ${favApps.map(a=>`<div class="flex gap-3 items-center p-3 bg-white/5 backdrop-blur rounded-lg border border-white/10">
@@ -1321,9 +1346,13 @@
         { name: "Finance", gradient: "from-emerald-600 to-teal-600", filter: "finance" }
       ];
       
+      // Wrap everything in the main background
+      const mainBgHtml = `<div class="main-bg w-full max-w-6xl mx-auto">
+        <div class="main-content">`;
+      
       // Hero section with background image
       const heroHtml =
-        `<div class="hero-bg w-full max-w-6xl mx-auto overflow-hidden p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8 min-h-[300px] flex items-center">
+        `<div class="hero-bg w-full mx-auto overflow-hidden p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8 min-h-[300px] flex items-center">
           <div class="hero-content flex flex-col md:flex-row justify-between items-center gap-6 w-full">
             <div>
               <h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1>
@@ -1341,7 +1370,7 @@
         </div>`;
         
       // Categories section with background image
-      const categoriesHtml = `<div class="categories-bg w-full max-w-6xl mx-auto mb-8">
+      const categoriesHtml = `<div class="categories-bg w-full mx-auto mb-8">
         <div class="categories-content">
           <h2 class="text-2xl font-bold text-white mb-4">Categories</h2>
           <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
@@ -1351,8 +1380,14 @@
         </div>
       </div>`;
       
+      // Search bar
+      const searchHtml = `<div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3 mb-8">
+        <i data-lucide="search" class="text-white"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none text-white placeholder-gray-300" value="${searchQuery.replace(/"/g, '&quot;')}">
+      </div>`;
+      
       // Featured section with its own background
-      const featuredHtml = `<div class="featured-bg w-full max-w-6xl mx-auto mb-8">
+      const featuredHtml = `<div class="featured-bg w-full mx-auto mb-8">
         <div class="featured-content">
           <h2 class="text-2xl font-bold text-white mb-4">⭐ Featured</h2>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div>
@@ -1360,7 +1395,7 @@
       </div>`;
       
       // Top Rated section with its own background
-      const topratedHtml = `<div class="toprated-bg w-full max-w-6xl mx-auto mb-8">
+      const topratedHtml = `<div class="toprated-bg w-full mx-auto mb-8">
         <div class="toprated-content">
           <h2 class="text-2xl font-bold text-white mb-4">🔥 Top Rated</h2>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div>
@@ -1368,14 +1403,17 @@
       </div>`;
       
       // Recently Added section with its own background
-      const recentHtml = `<div class="recent-bg w-full max-w-6xl mx-auto mb-8">
+      const recentHtml = `<div class="recent-bg w-full mx-auto mb-8">
         <div class="recent-content">
           <h2 class="text-2xl font-bold text-white mb-4">🆕 Recently Added</h2>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div>
         </div>
       </div>`;
+      
+      // Close the main wrapper
+      const closeHtml = `</div></div>`;
         
-      return `${heroHtml}<div class="space-y-10">${categoriesHtml}<div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3"><i data-lucide="search"></i><input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none" value="${searchQuery.replace(/"/g, '&quot;')}"></div>${featuredHtml}${topratedHtml}${recentHtml}</div>`;
+      return `${mainBgHtml}${heroHtml}${categoriesHtml}${searchHtml}${featuredHtml}${topratedHtml}${recentHtml}${closeHtml}`;
     }
 
     function renderCurrentView() {
