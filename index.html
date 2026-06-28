@@ -147,6 +147,75 @@
       z-index: 1;
     }
 
+    /* Featured Section Background */
+    .featured-bg {
+      background-image: url('https://i.ibb.co/n8LTRbLg/16dbce0c640116ad6a21751b15d0396e.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+    }
+    .featured-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.9) 0%, rgba(5, 5, 55, 0.85) 50%, rgba(10, 0, 92, 0.9) 100%);
+      border-radius: 1.5rem;
+    }
+    .featured-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top Rated Section Background */
+    .toprated-bg {
+      background-image: url('https://i.ibb.co/bMQhQB0P/fd8980ac75d8617208bdb4e65b549f04.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+    }
+    .toprated-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.92) 0%, rgba(5, 5, 55, 0.87) 50%, rgba(10, 0, 92, 0.92) 100%);
+      border-radius: 1.5rem;
+    }
+    .toprated-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Recently Added Section Background */
+    .recent-bg {
+      background-image: url('https://i.ibb.co/4ZKz5tDD/669db1c2e2ee4ac1f1328ca814ccc930.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+    }
+    .recent-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.88) 0%, rgba(5, 5, 55, 0.83) 50%, rgba(10, 0, 92, 0.88) 100%);
+      border-radius: 1.5rem;
+    }
+    .recent-content {
+      position: relative;
+      z-index: 1;
+    }
+
     /* Dashboard Background */
     .dashboard-bg {
       background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg');
@@ -410,7 +479,10 @@
         'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap',
         'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
         'https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg',
-        'https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg'
+        'https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg',
+        'https://i.ibb.co/n8LTRbLg/16dbce0c640116ad6a21751b15d0396e.jpg',
+        'https://i.ibb.co/bMQhQB0P/fd8980ac75d8617208bdb4e65b549f04.jpg',
+        'https://i.ibb.co/4ZKz5tDD/669db1c2e2ee4ac1f1328ca814ccc930.jpg'
       ];
 
       const swCode = `
@@ -1096,13 +1168,13 @@
     function appCard(app) {
       const isFav = currentUser && userFavorites.includes(app.id);
       const appJson = JSON.stringify(app).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-      return `<div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 card-hover cursor-pointer" onclick="window.showAppDetail('${app.id}')">
+      return `<div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-md p-4 card-hover cursor-pointer border border-white/20" onclick="window.showAppDetail('${app.id}')">
           <div class="flex gap-3">
             ${appLogoImg(app, "w-16 h-16", 60)}
-            <div class="flex-1"><h3 class="font-bold">${app.name}</h3><p class="text-sm text-gray-500">${app.shortDesc}</p><div class="flex items-center gap-1 mt-1"><i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i><span>${app.rating}</span><span class="text-xs text-gray-400 ml-1">(${app.ratingCount})</span></div></div>
+            <div class="flex-1"><h3 class="font-bold text-gray-900 dark:text-white">${app.name}</h3><p class="text-sm text-gray-600 dark:text-gray-300">${app.shortDesc}</p><div class="flex items-center gap-1 mt-1"><i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i><span class="text-gray-900 dark:text-white">${app.rating}</span><span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(${app.ratingCount})</span></div></div>
             <button class="text-red-500" onclick="event.stopPropagation(); toggleFavorite('${app.id}')"><i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500' : ''}"></i></button>
           </div>
-          <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); window.openApp(${appJson})" class="bg-purple-600 text-white px-4 py-1 rounded-lg text-sm">Open App →</button></div>
+          <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-purple-600/20 dark:bg-purple-600/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); window.openApp(${appJson})" class="bg-purple-600 text-white px-4 py-1 rounded-lg text-sm hover:bg-purple-700 transition">Open App →</button></div>
         </div>`;
     }
 
@@ -1124,7 +1196,7 @@
       ).join('');
       const appJson = JSON.stringify(app).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       return `<div class="max-w-4xl mx-auto"><button onclick="window.backToHome()" class="flex items-center gap-1 text-purple-600 mb-4">&larr; Back to Store</button>
-          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
+          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
             <div class="flex gap-5 flex-wrap">${appLogoImg(app, "w-24 h-24", 100)}<div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div></div><div class="flex gap-3 mt-4"><button onclick="window.openApp(${appJson})" class="bg-purple-600 text-white px-6 py-2 rounded-full">Open Web App →</button><button onclick="window.toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
             <div class="mt-6"><h2 class="text-xl font-semibold">Description</h2><p>${app.description}</p><h3 class="font-semibold mt-4">Key Features</h3><ul class="list-disc pl-5">${app.features.map(f=>`<li>${f}</li>`).join('')}</ul></div>
             <div class="mt-6"><h2 class="text-xl font-semibold">Screenshots</h2><div class="flex gap-3 overflow-x-auto pb-2">${screenshotHtml}</div></div>
@@ -1278,8 +1350,32 @@
           </div>
         </div>
       </div>`;
+      
+      // Featured section with its own background
+      const featuredHtml = `<div class="featured-bg w-full max-w-6xl mx-auto mb-8">
+        <div class="featured-content">
+          <h2 class="text-2xl font-bold text-white mb-4">⭐ Featured</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div>
+        </div>
+      </div>`;
+      
+      // Top Rated section with its own background
+      const topratedHtml = `<div class="toprated-bg w-full max-w-6xl mx-auto mb-8">
+        <div class="toprated-content">
+          <h2 class="text-2xl font-bold text-white mb-4">🔥 Top Rated</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div>
+        </div>
+      </div>`;
+      
+      // Recently Added section with its own background
+      const recentHtml = `<div class="recent-bg w-full max-w-6xl mx-auto mb-8">
+        <div class="recent-content">
+          <h2 class="text-2xl font-bold text-white mb-4">🆕 Recently Added</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div>
+        </div>
+      </div>`;
         
-      return `${heroHtml}<div class="space-y-10">${categoriesHtml}<div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3"><i data-lucide="search"></i><input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none" value="${searchQuery.replace(/"/g, '&quot;')}"></div><div><h2 class="text-2xl font-bold mb-4">⭐ Featured</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🔥 Top Rated</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div><div><h2 class="text-2xl font-bold mb-4">🆕 Recently Added</h2><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div></div>`;
+      return `${heroHtml}<div class="space-y-10">${categoriesHtml}<div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3"><i data-lucide="search"></i><input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none" value="${searchQuery.replace(/"/g, '&quot;')}"></div>${featuredHtml}${topratedHtml}${recentHtml}</div>`;
     }
 
     function renderCurrentView() {
