@@ -291,11 +291,12 @@
             </div>
             <div class="container mx-auto px-4">
                 <div class="flex gap-6 overflow-x-auto pb-2 scrollbar-hide">
+                    <!-- REARRANGED: Home first, then About Us, Terms, then others -->
                     <button data-nav="home" class="nav-btn font-semibold py-2 border-b-2 border-purple-600 text-purple-600">Home</button>
-                    <button data-nav="dashboard" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">My Dashboard</button>
-                    <button data-nav="att" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">ATT</button>
                     <button data-nav="about" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">About Us</button>
                     <button data-nav="terms" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">Terms</button>
+                    <button data-nav="dashboard" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">My Dashboard</button>
+                    <button data-nav="att" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">ATT</button>
                     <button data-nav="admin" id="adminNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Admin Panel</button>
                     <button data-nav="developer" id="devNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Developer Hub</button>
                     <button data-nav="pricing" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">💎 Pricing</button>
@@ -2957,6 +2958,7 @@
         console.log('👨‍💻 Demo Developer: dev@meon.com');
         console.log('📞 Consultation: +254 758 639 923');
         console.log('📜 Terms & Conditions: Active');
+        console.log('📋 Navigation order: Home → About Us → Terms → others');
     </script>
 </body>
 </html>
