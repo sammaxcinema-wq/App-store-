@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Meon | Intelligence · Innovation · Inspiration</title>
-  <meta name="description" content="Meon App Directory – Launch web apps instantly with premium subscriptions">
+  <meta name="description" content="Meon App Directory – Launch web apps instantly with premium subscriptions & M-Pesa payments">
   
   <!-- PWA Meta Tags -->
   <meta name="theme-color" content="#0f172a">
@@ -26,57 +26,36 @@
   <link rel="icon" type="image/png" sizes="192x192" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
   <link rel="icon" type="image/png" sizes="512x512" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
 
-  <script src="https://cdn.tailwindcss.com">
-  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest">
-  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
   
   <!-- Stripe.js -->
-  <script src="https://js.stripe.com/v3/">
-  </script>
+  <script src="https://js.stripe.com/v3/"></script>
   
   <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   
   <style>
-    * {
-      font-family: 'Inter', sans-serif;
-    }
-    body {
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .dark {
-      background-color: #0f172a;
-      color: #e2e8f0;
-    }
-    .rating-star {
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
-    .rating-star:hover {
-      transform: scale(1.1);
-    }
-    .modal-transition {
-      transition: opacity 0.2s ease, visibility 0.2s;
-    }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .card-hover {
-      transition: all 0.2s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.3);
-    }
+    * { font-family: 'Inter', sans-serif; }
+    body { transition: background-color 0.3s, color 0.3s; }
+    .dark { background-color: #0f172a; color: #e2e8f0; }
+    
+    .rating-star { cursor: pointer; transition: transform 0.1s; }
+    .rating-star:hover { transform: scale(1.1); }
+    .modal-transition { transition: opacity 0.2s ease, visibility 0.2s; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    
+    .card-hover { transition: all 0.2s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.3); }
+    
     .meon-logo-bg {
       background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%);
       border-radius: 14px;
       box-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(139, 92, 246, 0.3);
     }
+    
     .toast {
       position: fixed;
       bottom: 20px;
@@ -85,35 +64,20 @@
       animation: slideIn 0.3s ease;
     }
     @keyframes slideIn {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
-    img.app-logo {
-      background: #1e293b;
-      object-fit: cover;
-    }
+    
+    img.app-logo { background: #1e293b; object-fit: cover; }
+    
     @keyframes spin-slow {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
-    .animate-spin-slow {
-      animation: spin-slow 20s linear infinite;
-    }
-    .animate-spin-reverse {
-      animation: spin-slow 30s linear infinite reverse;
-    }
+    .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+    .animate-spin-reverse { animation: spin-slow 30s linear infinite reverse; }
 
-    /* Global Background for Home and Dashboard */
+    /* Backgrounds */
     .main-bg {
       background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg');
       background-size: cover;
@@ -132,12 +96,8 @@
       background: linear-gradient(135deg, rgba(2, 0, 36, 0.92) 0%, rgba(5, 5, 55, 0.88) 50%, rgba(10, 0, 92, 0.92) 100%);
       border-radius: 1.5rem;
     }
-    .main-content {
-      position: relative;
-      z-index: 1;
-    }
+    .main-content { position: relative; z-index: 1; }
 
-    /* Hero Background */
     .hero-bg {
       background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg');
       background-size: cover;
@@ -152,12 +112,8 @@
       background: linear-gradient(135deg, rgba(2, 0, 36, 0.85) 0%, rgba(5, 5, 55, 0.8) 50%, rgba(10, 0, 92, 0.85) 100%);
       border-radius: 1.5rem;
     }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
+    .hero-content { position: relative; z-index: 1; }
 
-    /* Categories Background */
     .categories-bg {
       background-image: url('https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg');
       background-size: cover;
@@ -175,12 +131,8 @@
       background: linear-gradient(135deg, rgba(2, 0, 36, 0.88) 0%, rgba(5, 5, 55, 0.82) 50%, rgba(10, 0, 92, 0.88) 100%);
       border-radius: 1.5rem;
     }
-    .categories-content {
-      position: relative;
-      z-index: 1;
-    }
+    .categories-content { position: relative; z-index: 1; }
 
-    /* Featured Section Background */
     .featured-bg {
       background-image: url('https://i.ibb.co/n8LTRbLg/16dbce0c640116ad6a21751b15d0396e.jpg');
       background-size: cover;
@@ -198,12 +150,8 @@
       background: linear-gradient(135deg, rgba(2, 0, 36, 0.9) 0%, rgba(5, 5, 55, 0.85) 50%, rgba(10, 0, 92, 0.9) 100%);
       border-radius: 1.5rem;
     }
-    .featured-content {
-      position: relative;
-      z-index: 1;
-    }
+    .featured-content { position: relative; z-index: 1; }
 
-    /* Top Rated Section Background */
     .toprated-bg {
       background-image: url('https://i.ibb.co/bMQhQB0P/fd8980ac75d8617208bdb4e65b549f04.jpg');
       background-size: cover;
@@ -221,12 +169,8 @@
       background: linear-gradient(135deg, rgba(2, 0, 36, 0.92) 0%, rgba(5, 5, 55, 0.87) 50%, rgba(10, 0, 92, 0.92) 100%);
       border-radius: 1.5rem;
     }
-    .toprated-content {
-      position: relative;
-      z-index: 1;
-    }
+    .toprated-content { position: relative; z-index: 1; }
 
-    /* Recently Added Section Background */
     .recent-bg {
       background-image: url('https://i.ibb.co/4ZKz5tDD/669db1c2e2ee4ac1f1328ca814ccc930.jpg');
       background-size: cover;
@@ -244,12 +188,8 @@
       background: linear-gradient(135deg, rgba(2, 0, 36, 0.88) 0%, rgba(5, 5, 55, 0.83) 50%, rgba(10, 0, 92, 0.88) 100%);
       border-radius: 1.5rem;
     }
-    .recent-content {
-      position: relative;
-      z-index: 1;
-    }
+    .recent-content { position: relative; z-index: 1; }
 
-    /* Dashboard Background */
     .dashboard-bg {
       background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg');
       background-size: cover;
@@ -268,23 +208,71 @@
       background: linear-gradient(135deg, rgba(2, 0, 36, 0.9) 0%, rgba(5, 5, 55, 0.85) 50%, rgba(10, 0, 92, 0.9) 100%);
       border-radius: 1.5rem;
     }
-    .dashboard-content {
-      position: relative;
-      z-index: 1;
-    }
+    .dashboard-content { position: relative; z-index: 1; }
 
-    /* Subscription Cards */
-    .tier-card {
-      transition: all 0.3s ease;
+    .admin-bg {
+      background-image: url('https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      min-height: 400px;
     }
-    .tier-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    .admin-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.92) 0%, rgba(5, 5, 55, 0.88) 50%, rgba(10, 0, 92, 0.92) 100%);
+      border-radius: 1.5rem;
     }
-    .tier-card.popular {
-      border: 2px solid #8b5cf6;
-      box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+    .admin-content { position: relative; z-index: 1; }
+
+    .developer-bg {
+      background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      min-height: 400px;
     }
+    .developer-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.88) 0%, rgba(5, 5, 55, 0.82) 50%, rgba(10, 0, 92, 0.88) 100%);
+      border-radius: 1.5rem;
+    }
+    .developer-content { position: relative; z-index: 1; }
+
+    .att-bg {
+      background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      min-height: 400px;
+    }
+    .att-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.9) 0%, rgba(5, 5, 55, 0.85) 50%, rgba(10, 0, 92, 0.9) 100%);
+      border-radius: 1.5rem;
+    }
+    .att-content { position: relative; z-index: 1; }
+
+    .tier-card { transition: all 0.3s ease; }
+    .tier-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+    .tier-card.popular { border: 2px solid #8b5cf6; box-shadow: 0 0 30px rgba(139, 92, 246, 0.2); }
     .tier-badge {
       position: absolute;
       top: -12px;
@@ -316,9 +304,7 @@
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
     }
-    #pwaInstallBanner.show {
-      transform: translateY(0);
-    }
+    #pwaInstallBanner.show { transform: translateY(0); }
     #pwaInstallBanner .install-btn {
       background: #8b5cf6;
       color: white;
@@ -330,9 +316,7 @@
       white-space: nowrap;
       transition: background 0.2s;
     }
-    #pwaInstallBanner .install-btn:hover {
-      background: #7c3aed;
-    }
+    #pwaInstallBanner .install-btn:hover { background: #7c3aed; }
     #pwaInstallBanner .dismiss-btn {
       background: transparent;
       color: #cbd5e1;
@@ -344,12 +328,8 @@
       font-size: 0.85rem;
       transition: all 0.2s;
     }
-    #pwaInstallBanner .dismiss-btn:hover {
-      color: white;
-      border-color: #94a3b8;
-    }
+    #pwaInstallBanner .dismiss-btn:hover { color: white; border-color: #94a3b8; }
 
-    /* Offline indicator */
     #offlineIndicator {
       position: fixed;
       top: 0;
@@ -365,17 +345,23 @@
       transform: translateY(-100%);
       transition: transform 0.3s ease;
     }
-    #offlineIndicator.show {
-      transform: translateY(0);
-    }
+    #offlineIndicator.show { transform: translateY(0); }
 
-    /* Trial badge pulse */
+    .trial-badge {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
     @keyframes pulse-glow {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.5; }
     }
-    .trial-badge {
-      animation: pulse-glow 2s ease-in-out infinite;
+
+    /* M-Pesa specific */
+    .mpesa-pulse {
+      animation: mpesa-pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes mpesa-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
   </style>
 </head>
@@ -438,14 +424,25 @@
 
   <script>
     // ============================================================
-    // CONFIGURATION
+    // FULL CONFIGURATION
     // ============================================================
     
     const CONFIG = {
+      // Stripe
       STRIPE_PUBLISHABLE_KEY: 'pk_test_your_key_here',
+      
+      // EmailJS
       EMAILJS_PUBLIC_KEY: 'your_public_key',
       EMAILJS_SERVICE_ID: 'service_your_service',
       EMAILJS_TEMPLATE_ID: 'template_your_template',
+      
+      // M-Pesa
+      MPESA_CONSUMER_KEY: 'VpH0nHGpoWhgoAjl9KsLgwRbXiPa3wh43YIx1sMGMNjzNXo7',
+      MPESA_CONSUMER_SECRET: 'yAzAOBs49lN5yrzzNyap9h1bKqUDG1FluObamNEMrdXOZdaBZ0UjhuCx51HaGO4X',
+      MPESA_SHORTCODE: '174379',
+      MPESA_PASSKEY: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
+      MPESA_BASE_URL: 'https://sandbox.safaricom.co.ke',
+      MPESA_CALLBACK_URL: 'https://your-app.com/api/mpesa/callback',
     };
 
     // ============================================================
@@ -457,13 +454,13 @@
       const manifest = {
         name: 'Meon Directory',
         short_name: 'Meon',
-        description: 'Meon App Directory – Launch web apps instantly with premium subscriptions',
+        description: 'Meon App Directory – Launch web apps instantly with premium subscriptions & M-Pesa payments',
         start_url: location.href.split('?')[0],
         display: 'standalone',
         orientation: 'any',
         background_color: '#0f172a',
         theme_color: '#0f172a',
-        categories: ['productivity', 'utilities', 'developer tools'],
+        categories: ['productivity', 'utilities', 'developer tools', 'finance'],
         icons: [
           { src: iconUrl, sizes: '72x72', type: 'image/png' },
           { src: iconUrl, sizes: '96x96', type: 'image/png' },
@@ -505,7 +502,7 @@
         return;
       }
 
-      const CACHE_NAME = 'meon-directory-v3';
+      const CACHE_NAME = 'meon-directory-v4';
       const urlsToCache = [
         location.href.split('?')[0],
         'https://cdn.tailwindcss.com',
@@ -734,8 +731,7 @@
     }
 
     // ============================================================
-    // LOGO MAPPING
-    // ============================================================
+    // LOGO MAPPING    // ============================================================
     
     const logoMapping = {
       "maji-gas": "https://i.ibb.co/sJwP77mq/file-000000002a7c724698774712139656f9.png",
@@ -785,8 +781,9 @@
     const DEFAULT_TIERS = {
       FREE: {
         name: 'Free',
-        price: '$0',
+        price: '$0 / KES 0',
         priceId: null,
+        mpesaPrice: 0,
         features: ['Basic listing', 'Standard visibility', '1 screenshot', 'Community support'],
         color: 'gray',
         trialDays: 0,
@@ -796,6 +793,7 @@
         name: 'Standard',
         price: '$9/mo',
         priceId: 'price_standard_monthly_id',
+        mpesaPrice: 500,
         features: ['Enhanced listing', 'Priority visibility', '5 screenshots', 'Basic analytics', 'Email support'],
         color: 'purple',
         trialDays: 14,
@@ -805,6 +803,7 @@
         name: 'Featured',
         price: '$29/mo',
         priceId: 'price_featured_monthly_id',
+        mpesaPrice: 1500,
         features: ['Premium listing', 'Top placement', 'Unlimited screenshots', 'Advanced analytics', 
                   'Featured badge', 'Priority support', 'Marketing boost'],
         color: 'amber',
@@ -1240,6 +1239,8 @@
     let searchQuery = "";
     let activeCategoryFilter = "";
     let customPricing = JSON.parse(localStorage.getItem("meonCustomPricing")) || {};
+    let mpesaTransactions = JSON.parse(localStorage.getItem("meonMpesaTransactions")) || {};
+    let notifications = JSON.parse(localStorage.getItem("meonNotifications")) || [];
 
     function saveState() {
       if (currentUser) localStorage.setItem("meonUser", JSON.stringify(currentUser));
@@ -1247,6 +1248,8 @@
       localStorage.setItem("meonFavorites", JSON.stringify(userFavorites));
       localStorage.setItem("meonReviews", JSON.stringify(reviewsData));
       localStorage.setItem("meonCustomPricing", JSON.stringify(customPricing));
+      localStorage.setItem("meonMpesaTransactions", JSON.stringify(mpesaTransactions));
+      localStorage.setItem("meonNotifications", JSON.stringify(notifications));
     }
 
     function loginUser(email, role = "user", name = null) {
@@ -1367,6 +1370,7 @@
     
     async function sendEmail(template, params) {
       try {
+        // This would call your backend API
         const response = await fetch('/api/send-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1380,7 +1384,440 @@
     }
 
     // ============================================================
-    // SUBSCRIPTION SYSTEM
+    // M-PESA SYSTEM
+    // ============================================================
+    
+    class MpesaClient {
+      constructor() {
+        this.accessToken = null;
+        this.tokenExpiry = null;
+      }
+
+      async getAccessToken() {
+        if (this.accessToken && this.tokenExpiry > Date.now()) {
+          return this.accessToken;
+        }
+
+        try {
+          const response = await fetch(
+            `${CONFIG.MPESA_BASE_URL}/oauth/v1/generate?grant_type=client_credentials`,
+            {
+              method: 'GET',
+              headers: {
+                'Authorization': `Basic ${btoa(`${CONFIG.MPESA_CONSUMER_KEY}:${CONFIG.MPESA_CONSUMER_SECRET}`)}`,
+              }
+            }
+          );
+
+          const data = await response.json();
+          
+          if (data.access_token) {
+            this.accessToken = data.access_token;
+            this.tokenExpiry = Date.now() + (data.expires_in || 3600) * 1000 - 60000;
+            return this.accessToken;
+          } else {
+            throw new Error('Failed to get access token');
+          }
+        } catch (error) {
+          console.error('M-Pesa Token Error:', error);
+          throw error;
+        }
+      }
+
+      async stkPush(phoneNumber, amount, accountReference = 'MEON-PAY') {
+        const token = await this.getAccessToken();
+        const timestamp = this.getTimestamp();
+        const password = this.generatePassword(timestamp);
+
+        const payload = {
+          BusinessShortCode: CONFIG.MPESA_SHORTCODE,
+          Password: password,
+          Timestamp: timestamp,
+          TransactionType: 'CustomerPayBillOnline',
+          Amount: amount,
+          PartyA: phoneNumber,
+          PartyB: CONFIG.MPESA_SHORTCODE,
+          PhoneNumber: phoneNumber,
+          CallBackURL: CONFIG.MPESA_CALLBACK_URL,
+          AccountReference: accountReference,
+          TransactionDesc: 'Meon App Subscription',
+        };
+
+        try {
+          const response = await fetch(
+            `${CONFIG.MPESA_BASE_URL}/mpesa/stkpush/v1/processrequest`,
+            {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(payload),
+            }
+          );
+
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error('STK Push Error:', error);
+          throw error;
+        }
+      }
+
+      async queryStkStatus(checkoutRequestId) {
+        const token = await this.getAccessToken();
+        const timestamp = this.getTimestamp();
+        const password = this.generatePassword(timestamp);
+
+        const payload = {
+          BusinessShortCode: CONFIG.MPESA_SHORTCODE,
+          Password: password,
+          Timestamp: timestamp,
+          CheckoutRequestID: checkoutRequestId,
+        };
+
+        try {
+          const response = await fetch(
+            `${CONFIG.MPESA_BASE_URL}/mpesa/stkpushquery/v1/query`,
+            {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(payload),
+            }
+          );
+
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error('STK Query Error:', error);
+          throw error;
+        }
+      }
+
+      getTimestamp() {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${year}${month}${day}${hours}${minutes}${seconds}`;
+      }
+
+      generatePassword(timestamp) {
+        const str = `${CONFIG.MPESA_SHORTCODE}${CONFIG.MPESA_PASSKEY}${timestamp}`;
+        return btoa(str);
+      }
+
+      formatPhoneNumber(phone) {
+        let cleaned = phone.replace(/[^0-9]/g, '');
+        if (cleaned.startsWith('0')) {
+          cleaned = '254' + cleaned.substring(1);
+        } else if (cleaned.startsWith('7')) {
+          cleaned = '254' + cleaned;
+        } else if (!cleaned.startsWith('254')) {
+          cleaned = '254' + cleaned;
+        }
+        return cleaned;
+      }
+    }
+
+    class MpesaSubscriptionHandler {
+      constructor() {
+        this.mpesa = new MpesaClient();
+        this.transactions = mpesaTransactions;
+      }
+
+      async initiatePayment(appId, tierKey, phoneNumber) {
+        const app = appList.find(a => a.id === appId);
+        if (!app) {
+          throw new Error('App not found');
+        }
+
+        const tier = DEFAULT_TIERS[tierKey];
+        if (!tier) {
+          throw new Error('Invalid tier');
+        }
+
+        const custom = customPricing[appId] || {};
+        const amount = custom[`${tierKey.toLowerCase()}PriceMpesa`] || tier.mpesaPrice || 0;
+
+        if (!amount || amount <= 0) {
+          throw new Error('Invalid amount for M-Pesa payment');
+        }
+
+        const formattedPhone = this.mpesa.formatPhoneNumber(phoneNumber);
+        const accountReference = `MEON-${appId.substring(0, 8)}-${Date.now().toString().slice(-6)}`;
+
+        try {
+          const response = await this.mpesa.stkPush(
+            formattedPhone,
+            amount,
+            accountReference
+          );
+
+          const transaction = {
+            id: response.CheckoutRequestID,
+            appId,
+            tier: tierKey,
+            phoneNumber: formattedPhone,
+            amount,
+            accountReference,
+            status: 'pending',
+            createdAt: new Date().toISOString(),
+          };
+
+          this.transactions[response.CheckoutRequestID] = transaction;
+          saveState();
+
+          this.pollTransactionStatus(response.CheckoutRequestID);
+
+          return {
+            ...response,
+            transaction,
+          };
+        } catch (error) {
+          console.error('Payment initiation error:', error);
+          throw error;
+        }
+      }
+
+      async pollTransactionStatus(checkoutRequestId, maxAttempts = 15, interval = 3000) {
+        let attempts = 0;
+
+        const poll = async () => {
+          if (attempts >= maxAttempts) {
+            const transaction = this.transactions[checkoutRequestId];
+            if (transaction && transaction.status === 'pending') {
+              transaction.status = 'timeout';
+              saveState();
+              showToast('⏰ Payment request timed out. Please try again.', 'error');
+            }
+            return;
+          }
+
+          attempts++;
+          await new Promise(resolve => setTimeout(resolve, interval));
+
+          try {
+            const status = await this.mpesa.queryStkStatus(checkoutRequestId);
+            const transaction = this.transactions[checkoutRequestId];
+
+            if (status.ResultCode === '0') {
+              transaction.status = 'completed';
+              transaction.completedAt = new Date().toISOString();
+              transaction.mpesaReceipt = status.MPesaReceiptNumber;
+              
+              saveState();
+              
+              const app = appList.find(a => a.id === transaction.appId);
+              if (app) {
+                app.tier = transaction.tier;
+                app.trialActive = false;
+                app.expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+                app.mpesaReceipt = transaction.mpesaReceipt;
+                saveState();
+                
+                showToast(`✅ Payment successful! Receipt: ${status.MPesaReceiptNumber}`, 'success');
+                renderCurrentView();
+                
+                // Send email notification
+                await sendEmail('subscription_activated', {
+                  appName: app.name,
+                  tier: transaction.tier,
+                  receipt: transaction.mpesaReceipt,
+                  amount: transaction.amount,
+                  email: currentUser?.email || 'user@example.com'
+                });
+              }
+              
+              return;
+            } else if (status.ResultCode === '1032') {
+              transaction.status = 'cancelled';
+              saveState();
+              showToast('❌ Payment cancelled by user', 'error');
+              return;
+            } else if (status.ResultCode !== '200001') {
+              transaction.status = 'failed';
+              transaction.error = status.ResultDesc;
+              saveState();
+              showToast(`❌ Payment failed: ${status.ResultDesc}`, 'error');
+              return;
+            }
+
+            poll();
+          } catch (error) {
+            console.error('Polling error:', error);
+            poll();
+          }
+        };
+
+        poll();
+      }
+
+      getTransactionStatus(checkoutRequestId) {
+        return this.transactions[checkoutRequestId] || null;
+      }
+
+      getAllTransactions() {
+        return Object.values(this.transactions);
+      }
+
+      getTransactionsForApp(appId) {
+        return Object.values(this.transactions).filter(t => t.appId === appId);
+      }
+    }
+
+    // ============================================================
+    // M-PESA UI COMPONENTS
+    // ============================================================
+    
+    function renderMpesaPaymentModal(appId, tierKey) {
+      const app = appList.find(a => a.id === appId);
+      if (!app) return;
+
+      const tier = DEFAULT_TIERS[tierKey];
+      const custom = customPricing[appId] || {};
+      const price = custom[`${tierKey.toLowerCase()}PriceMpesa`] || tier.mpesaPrice || 0;
+      const priceDisplay = custom[`${tierKey.toLowerCase()}Price`] || tier.price;
+      const trialDays = custom[`${tierKey.toLowerCase()}TrialDays`] || tier.trialDays;
+
+      const modalHtml = `
+        <div id="mpesaModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div class="bg-gray-900 rounded-2xl p-6 w-full max-w-md">
+            <div class="text-center mb-6">
+              <div class="text-4xl mb-2">💳</div>
+              <h2 class="text-2xl font-bold text-white">M-Pesa Payment</h2>
+              <p class="text-gray-400 text-sm">Pay for ${app.name} - ${tier.name} Tier</p>
+              <div class="text-3xl font-bold text-green-400 mt-2">KES ${price}</div>
+              ${trialDays > 0 ? `<div class="text-green-400 text-sm mt-1">🎁 ${trialDays}-day free trial included</div>` : ''}
+            </div>
+
+            <form id="mpesaPaymentForm" class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">M-Pesa Phone Number</label>
+                <input type="tel" id="mpesaPhone" placeholder="0712345678" required
+                       class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white text-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                <p class="text-xs text-gray-400 mt-1">Enter the M-Pesa number you want to pay from</p>
+              </div>
+
+              <div class="flex gap-3 pt-4">
+                <button type="submit" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition font-semibold flex items-center justify-center gap-2 mpesa-pulse">
+                  <span>💳</span> Pay with M-Pesa
+                </button>
+                <button type="button" onclick="document.getElementById('mpesaModal')?.remove()" 
+                        class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg transition">
+                  Cancel
+                </button>
+              </div>
+            </form>
+
+            <div class="mt-4 text-xs text-gray-400 text-center border-t border-gray-700 pt-4">
+              <p>🔒 Secured by Safaricom M-Pesa API</p>
+              <p class="mt-1">You'll receive a prompt on your phone to confirm payment</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+      document.getElementById('mpesaPaymentForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const phone = document.getElementById('mpesaPhone').value;
+        if (!phone) {
+          showToast('Please enter your M-Pesa number', 'error');
+          return;
+        }
+
+        if (phone.length < 10) {
+          showToast('Please enter a valid phone number', 'error');
+          return;
+        }
+
+        try {
+          const handler = new MpesaSubscriptionHandler();
+          const result = await handler.initiatePayment(appId, tierKey, phone);
+          
+          document.getElementById('mpesaModal')?.remove();
+          showToast('📱 STK Push sent! Check your phone and enter PIN.', 'info');
+          showToast(`Transaction ID: ${result.CheckoutRequestID}`, 'info');
+          
+        } catch (error) {
+          showToast(`❌ Payment initiation failed: ${error.message}`, 'error');
+        }
+      });
+    }
+
+    function renderMpesaDashboard() {
+      if (!currentUser) return '';
+
+      const handler = new MpesaSubscriptionHandler();
+      const transactions = handler.getAllTransactions();
+      const userTransactions = transactions.filter(t => {
+        const app = appList.find(a => a.id === t.appId);
+        return app && (app.developer === currentUser.email || app.ownerId === currentUser.id);
+      });
+
+      if (userTransactions.length === 0) {
+        return `
+          <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">💰 M-Pesa Transactions</h3>
+            <p class="text-gray-400">No M-Pesa transactions found</p>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+          <h3 class="text-xl font-bold text-white mb-4">💰 M-Pesa Transactions</h3>
+          <div class="space-y-3 max-h-96 overflow-y-auto">
+            ${userTransactions.map(t => {
+              const app = appList.find(a => a.id === t.appId);
+              const statusColors = {
+                pending: 'bg-yellow-500/20 text-yellow-300',
+                completed: 'bg-green-500/20 text-green-300',
+                cancelled: 'bg-red-500/20 text-red-300',
+                failed: 'bg-red-500/20 text-red-300',
+                timeout: 'bg-gray-500/20 text-gray-300',
+              };
+              const statusColor = statusColors[t.status] || 'bg-gray-500/20 text-gray-300';
+
+              return `
+                <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                  <div class="flex justify-between items-start">
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="font-bold text-white">${app?.name || 'Unknown App'}</span>
+                        <span class="text-xs px-2 py-1 rounded-full ${statusColor}">${t.status}</span>
+                      </div>
+                      <div class="text-sm text-gray-400 mt-1">
+                        KES ${t.amount} • ${t.tier} Tier
+                      </div>
+                      <div class="text-xs text-gray-500 mt-1">
+                        ${new Date(t.createdAt).toLocaleString()}
+                      </div>
+                      ${t.mpesaReceipt ? `<div class="text-xs text-green-400">Receipt: ${t.mpesaReceipt}</div>` : ''}
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                      ${t.accountReference}
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // ============================================================
+    // SUBSCRIPTION HANDLER
     // ============================================================
     
     async function handleUpgrade(appId, tierKey) {
@@ -1388,33 +1825,52 @@
         showToast('Please sign in to upgrade', 'error');
         return;
       }
+
+      // Show payment method selection
+      const modalHtml = `
+        <div id="paymentModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div class="bg-gray-900 rounded-2xl p-6 w-full max-w-md">
+            <h2 class="text-2xl font-bold text-white mb-4 text-center">💎 Choose Payment Method</h2>
+            <div class="space-y-3">
+              <button onclick="document.getElementById('paymentModal')?.remove(); renderMpesaPaymentModal('${appId}', '${tierKey}')" 
+                      class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition font-semibold flex items-center justify-center gap-3">
+                <span class="text-2xl">📱</span> M-Pesa (KES)
+              </button>
+              <button onclick="document.getElementById('paymentModal')?.remove(); handleStripePayment('${appId}', '${tierKey}')" 
+                      class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition font-semibold flex items-center justify-center gap-3">
+                <span class="text-2xl">💳</span> Card (USD)
+              </button>
+              <button onclick="document.getElementById('paymentModal')?.remove()" 
+                      class="w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg transition">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
       
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+    }
+
+    async function handleStripePayment(appId, tierKey) {
       const tier = DEFAULT_TIERS[tierKey];
-      if (!tier) {
-        showToast('Invalid tier selected', 'error');
+      if (!tier.priceId) {
+        showToast('Stripe payment not available for this tier', 'error');
         return;
       }
 
-      // Check if custom pricing exists
-      const custom = customPricing[appId];
-      const price = custom ? custom[`${tierKey.toLowerCase()}Price`] : tier.price;
-      const trialDays = custom ? custom[`${tierKey.toLowerCase()}TrialDays`] : tier.trialDays;
-
       try {
-        showToast('⏳ Processing...', 'info');
+        showToast('⏳ Preparing checkout...', 'info');
         
         const response = await fetch('/api/create-checkout-session', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             appId: appId,
             tier: tierKey,
             priceId: tier.priceId,
             userId: currentUser.id,
             userEmail: currentUser.email,
-            trialDays: trialDays || 0,
             returnUrl: window.location.href
           }),
         });
@@ -1423,32 +1879,11 @@
 
         if (data.url) {
           window.location.href = data.url;
-        } else if (data.trialStarted) {
-          // Start trial locally
-          const app = appList.find(a => a.id === appId);
-          if (app) {
-            app.tier = tierKey;
-            app.trialActive = true;
-            app.trialEnd = data.trialEnd;
-            
-            // Send trial email
-            await sendEmail('trial_started', {
-              appName: app.name,
-              tier: tierKey,
-              trialDays: trialDays,
-              trialEnd: new Date(data.trialEnd).toLocaleDateString(),
-              features: tier.features.join(', '),
-              appUrl: window.location.href + '?app=' + appId
-            });
-            
-            showToast(`🎉 Free trial started! ${trialDays} days remaining.`, 'success');
-            renderCurrentView();
-          }
         } else {
-          showToast(data.error || 'Failed to process request', 'error');
+          showToast('Failed to create checkout session', 'error');
         }
       } catch (error) {
-        console.error('Upgrade error:', error);
+        console.error('Stripe error:', error);
         showToast('Something went wrong. Please try again.', 'error');
       }
     }
@@ -1468,7 +1903,7 @@
           <div class="flex gap-3">
             ${appLogoImg(app, "w-16 h-16", 60)}
             <div class="flex-1">
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2 flex-wrap">
                 <h3 class="font-bold text-gray-900 dark:text-white">${app.name}</h3>
                 <span class="text-xs px-2 py-0.5 rounded-full ${tierColor}">${getTierBadge(app.tier)} ${app.tier}</span>
                 ${isTrial ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full trial-badge">🎁 Trial</span>` : ''}
@@ -1542,6 +1977,10 @@
                 <div class="text-3xl font-bold">${appList.filter(a => a.tier !== 'FREE').length}</div>
                 <div class="text-xs">Premium</div>
               </div>
+              <div class="bg-green-500/20 backdrop-blur rounded-2xl p-4 text-center border border-green-500/30">
+                <div class="text-2xl font-bold text-green-400">📱</div>
+                <div class="text-xs">M-Pesa Accepted</div>
+              </div>
             </div>
           </div>
         </div>`;
@@ -1599,6 +2038,10 @@
       const tier = getTierConfig(app.tier);
       const tierColor = getTierColor(app.tier);
       const isTrial = app.trialActive;
+      const custom = customPricing[app.id] || {};
+      
+      // Check if M-Pesa is available
+      const hasMpesa = Object.values(DEFAULT_TIERS).some(t => custom[`${Object.keys(DEFAULT_TIERS).find(k => DEFAULT_TIERS[k] === t)?.toLowerCase()}PriceMpesa`] || t.mpesaPrice);
       
       return `<div class="max-w-4xl mx-auto">
         <button onclick="window.backToHome()" class="flex items-center gap-1 text-purple-600 mb-4">&larr; Back to Store</button>
@@ -1661,7 +2104,6 @@
       if (!currentUser || currentUser.role !== 'developer') return '';
       
       const currentTier = app.tier || 'FREE';
-      const isTrial = app.trialActive;
       const custom = customPricing[app.id] || {};
       
       return `
@@ -1672,7 +2114,9 @@
               const isCurrent = currentTier === key;
               const hasTrial = (custom[`${key.toLowerCase()}TrialDays`] || tier.trialDays) > 0;
               const price = custom[`${key.toLowerCase()}Price`] || tier.price;
+              const mpesaPrice = custom[`${key.toLowerCase()}PriceMpesa`] || tier.mpesaPrice || 0;
               const trialDays = custom[`${key.toLowerCase()}TrialDays`] || tier.trialDays;
+              const hasMpesa = mpesaPrice > 0;
               
               return `
                 <div class="tier-card bg-white/5 backdrop-blur-lg rounded-xl p-4 border ${isCurrent ? 'border-purple-500 ring-2 ring-purple-500/50' : 'border-white/10'} relative ${key === 'FEATURED' ? 'popular' : ''}">
@@ -1682,7 +2126,8 @@
                     ${isCurrent ? '<span class="text-xs bg-purple-600 px-2 py-1 rounded-full">Current</span>' : ''}
                     ${hasTrial && !isCurrent ? `<span class="text-xs bg-green-600 px-2 py-1 rounded-full">${trialDays}-day trial</span>` : ''}
                   </div>
-                  <div class="text-2xl font-bold text-white mb-3">${price}</div>
+                  <div class="text-2xl font-bold text-white mb-1">${price}</div>
+                  ${hasMpesa ? `<div class="text-sm text-green-400 mb-2">or KES ${mpesaPrice} via M-Pesa</div>` : ''}
                   <ul class="text-sm text-gray-300 space-y-1 mb-4">
                     ${tier.features.map(f => `<li class="flex items-center gap-1"><span class="text-green-400">✓</span> ${f}</li>`).join('')}
                   </ul>
@@ -1702,8 +2147,8 @@
             }).join('')}
           </div>
           <div class="mt-4 text-xs text-gray-400">
-            🔒 Secure payments powered by Stripe. Cancel anytime.
-            ${isTrial ? `<div class="mt-1 text-green-400">⏳ Trial ends: ${new Date(app.trialEnd).toLocaleDateString()}</div>` : ''}
+            <p>💳 Pay with <span class="text-green-400">M-Pesa</span> (KES) or <span class="text-purple-400">Stripe</span> (USD)</p>
+            <p class="mt-1">🔒 Secure payments. Cancel anytime.</p>
           </div>
         </div>
       `;
@@ -1726,6 +2171,14 @@
       
       const favApps = appList.filter(a => userFavorites.includes(a.id));
       
+      // Get M-Pesa transactions
+      const handler = new MpesaSubscriptionHandler();
+      const transactions = handler.getAllTransactions();
+      const userTransactions = transactions.filter(t => {
+        const app = appList.find(a => a.id === t.appId);
+        return app && (app.developer === currentUser.email || app.ownerId === currentUser.id);
+      });
+      
       return `
         <div class="dashboard-bg w-full max-w-6xl mx-auto">
           <div class="dashboard-content">
@@ -1737,7 +2190,7 @@
             </div>
             
             <!-- Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
               <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
                 <div class="text-2xl font-bold text-purple-300">${userApps.length}</div>
                 <div class="text-sm text-gray-300">Your Apps</div>
@@ -1753,6 +2206,10 @@
               <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
                 <div class="text-2xl font-bold text-green-300">${userApps.filter(a => a.trialActive).length}</div>
                 <div class="text-sm text-gray-300">Active Trials</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-green-500/30">
+                <div class="text-2xl font-bold text-green-400">${userTransactions.filter(t => t.status === 'completed').length}</div>
+                <div class="text-sm text-gray-300">M-Pesa Payments</div>
               </div>
             </div>
             
@@ -1775,7 +2232,7 @@
             </div>
             
             <!-- Your Apps -->
-            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 mb-6">
               <h2 class="text-xl font-bold text-white mb-4">📱 Your Apps</h2>
               <div class="space-y-4">
                 ${userApps.map(app => {
@@ -1829,6 +2286,9 @@
                 ` : ''}
               </div>
             </div>
+            
+            <!-- M-Pesa Transactions -->
+            ${renderMpesaDashboard()}
           </div>
         </div>
       `;
@@ -1845,6 +2305,7 @@
               ${Object.entries(DEFAULT_TIERS).map(([key, tier]) => {
                 const isPopular = key === 'FEATURED';
                 const hasTrial = tier.trialDays > 0;
+                const hasMpesa = tier.mpesaPrice > 0;
                 
                 return `
                   <div class="tier-card bg-white/10 backdrop-blur-lg rounded-2xl p-6 border ${isPopular ? 'border-amber-500/50 ring-2 ring-amber-500/30' : 'border-white/10'} relative">
@@ -1852,6 +2313,7 @@
                     <div class="text-4xl mb-3">${tier.icon}</div>
                     <h3 class="text-2xl font-bold text-white">${tier.name}</h3>
                     <div class="text-4xl font-bold text-white mt-2">${tier.price}</div>
+                    ${hasMpesa ? `<div class="text-green-400 text-sm">or KES ${tier.mpesaPrice} via M-Pesa</div>` : ''}
                     ${hasTrial ? `<div class="text-green-400 text-sm mt-1">🎁 ${tier.trialDays}-day free trial</div>` : ''}
                     <ul class="mt-6 space-y-2">
                       ${tier.features.map(f => `
@@ -1870,8 +2332,9 @@
             </div>
             
             <div class="mt-8 text-center text-gray-400 text-sm">
-              <p>🔒 All plans include secure payments, cancel anytime</p>
-              <p class="mt-1">💳 Developers: Set custom pricing for your apps in the Developer Hub</p>
+              <p>💳 Pay with <span class="text-green-400">M-Pesa</span> (KES) or <span class="text-purple-400">Stripe</span> (USD)</p>
+              <p class="mt-1">🔒 All plans include secure payments, cancel anytime</p>
+              <p class="mt-1">💎 Developers: Set custom pricing for your apps in the Developer Hub</p>
             </div>
           </div>
         </div>
@@ -1933,10 +2396,16 @@
         </div>`;
       }
       
+      // Count M-Pesa transactions
+      const handler = new MpesaSubscriptionHandler();
+      const allTransactions = handler.getAllTransactions();
+      const completedPayments = allTransactions.filter(t => t.status === 'completed');
+      const totalRevenue = completedPayments.reduce((sum, t) => sum + t.amount, 0);
+      
       return `<div class="admin-bg w-full max-w-6xl mx-auto">
         <div class="admin-content">
           <h1 class="text-3xl font-bold text-white mb-6">🛠️ Meon Admin Console</h1>
-          <div class="grid md:grid-cols-2 gap-6">
+          <div class="grid md:grid-cols-3 gap-6 mb-6">
             <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
               <h2 class="text-xl font-bold text-white">📊 Directory Stats</h2>
               <div class="mt-4 space-y-2 text-white">
@@ -1944,7 +2413,14 @@
                 <p class="text-lg">Categories: <span class="font-bold text-purple-300">${new Set(appList.map(a=>a.category)).size}</span></p>
                 <p class="text-lg">Premium apps: <span class="font-bold text-amber-300">${appList.filter(a => a.tier !== 'FREE').length}</span></p>
                 <p class="text-lg">Active trials: <span class="font-bold text-green-300">${appList.filter(a => a.trialActive).length}</span></p>
-                <p class="text-lg">Total reviews: <span class="font-bold text-purple-300">${Object.values(reviewsData).reduce((acc, curr) => acc + curr.length, 0)}</span></p>
+              </div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+              <h2 class="text-xl font-bold text-white">💰 Revenue</h2>
+              <div class="mt-4 space-y-2 text-white">
+                <p class="text-lg">M-Pesa payments: <span class="font-bold text-green-400">${completedPayments.length}</span></p>
+                <p class="text-lg">Total revenue: <span class="font-bold text-green-400">KES ${totalRevenue.toLocaleString()}</span></p>
+                <p class="text-lg">Avg payment: <span class="font-bold text-green-400">KES ${completedPayments.length ? Math.round(totalRevenue / completedPayments.length) : 0}</span></p>
               </div>
             </div>
             <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
@@ -2006,7 +2482,6 @@
               </button>
             </div>
             
-            <!-- Stats -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
                 <div class="text-2xl font-bold text-purple-300">${userApps.length}</div>
@@ -2026,7 +2501,6 @@
               </div>
             </div>
             
-            <!-- Your Apps -->
             <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
               <h2 class="text-xl font-bold text-white mb-4">📱 Your Apps</h2>
               ${userApps.length > 0 ? `
@@ -2085,7 +2559,6 @@
               `}
             </div>
             
-            <!-- Developer Resources -->
             <div class="mt-6 grid md:grid-cols-3 gap-4">
               <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10">
                 <div class="text-2xl mb-2">📚</div>
@@ -2100,10 +2573,10 @@
                 <button class="mt-3 text-purple-400 text-sm hover:text-purple-300">Join community →</button>
               </div>
               <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10">
-                <div class="text-2xl mb-2">🚀</div>
-                <h3 class="font-bold text-white">Marketing Tools</h3>
-                <p class="text-sm text-gray-300 mt-1">Promote your app and grow your user base</p>
-                <button class="mt-3 text-purple-400 text-sm hover:text-purple-300">Learn more →</button>
+                <div class="text-2xl mb-2">💰</div>
+                <h3 class="font-bold text-white">M-Pesa Integration</h3>
+                <p class="text-sm text-gray-300 mt-1">Accept payments via M-Pesa with our seamless integration</p>
+                <button class="mt-3 text-green-400 text-sm hover:text-green-300">Learn more →</button>
               </div>
             </div>
           </div>
@@ -2262,7 +2735,6 @@
                        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
               </div>
               
-              <!-- Custom Pricing Section -->
               <div class="border-t border-gray-700 pt-4">
                 <h3 class="text-lg font-semibold text-white mb-3">💰 Set Your Pricing</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -2272,13 +2744,30 @@
                            class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Standard Price</label>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Standard Price (USD)</label>
                     <input type="text" id="submitStandardPrice" value="$9/mo" 
                            class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Featured Price</label>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Featured Price (USD)</label>
                     <input type="text" id="submitFeaturedPrice" value="$29/mo" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Standard Price (KES)</label>
+                    <input type="number" id="submitStandardMpesa" value="500" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Featured Price (KES)</label>
+                    <input type="number" id="submitFeaturedMpesa" value="1500" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Free Tier (KES)</label>
+                    <input type="number" id="submitFreeMpesa" value="0" 
                            class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
                   </div>
                 </div>
@@ -2333,21 +2822,21 @@
           rating: 0,
           ratingCount: 0,
           version: '1.0.0',
-          screenshots: ['https://via.placeholder.com/400x250/1a1a2e/8b5cf6?text=' + document.getElementById('appName')
-            .value],
+          screenshots: ['https://via.placeholder.com/400x250/1a1a2e/8b5cf6?text=' + document.getElementById('appName').value],
           pricing: {
             freePrice: document.getElementById('submitFreePrice').value,
             standardPrice: document.getElementById('submitStandardPrice').value,
             featuredPrice: document.getElementById('submitFeaturedPrice').value,
+            freePriceMpesa: parseInt(document.getElementById('submitFreeMpesa').value) || 0,
+            standardPriceMpesa: parseInt(document.getElementById('submitStandardMpesa').value) || 500,
+            featuredPriceMpesa: parseInt(document.getElementById('submitFeaturedMpesa').value) || 1500,
             standardTrialDays: parseInt(document.getElementById('submitStandardTrial').value) || 14,
             featuredTrialDays: parseInt(document.getElementById('submitFeaturedTrial').value) || 7,
           }
         };
         
-        // Add to app list
         appList.push(appData);
         
-        // Save custom pricing
         customPricing[appData.id] = appData.pricing;
         saveState();
         
@@ -2355,7 +2844,6 @@
         document.getElementById('submitAppModal')?.remove();
         renderCurrentView();
         
-        // Send notification email
         await sendEmail('app_submitted', {
           appName: appData.name,
           developerEmail: currentUser.email,
@@ -2382,13 +2870,30 @@
                          class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-300 mb-1">Standard Tier Price</label>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Standard Price (USD)</label>
                   <input type="text" id="pricingStandard" value="${pricing.standardPrice || '$9/mo'}" 
                          class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-300 mb-1">Featured Tier Price</label>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Featured Price (USD)</label>
                   <input type="text" id="pricingFeatured" value="${pricing.featuredPrice || '$29/mo'}" 
+                         class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Free Tier (KES)</label>
+                  <input type="number" id="pricingFreeMpesa" value="${pricing.freePriceMpesa || 0}" 
+                         class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Standard Price (KES)</label>
+                  <input type="number" id="pricingStandardMpesa" value="${pricing.standardPriceMpesa || 500}" 
+                         class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Featured Price (KES)</label>
+                  <input type="number" id="pricingFeaturedMpesa" value="${pricing.featuredPriceMpesa || 1500}" 
                          class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
                 </div>
               </div>
@@ -2427,6 +2932,9 @@
           freePrice: document.getElementById('pricingFree').value,
           standardPrice: document.getElementById('pricingStandard').value,
           featuredPrice: document.getElementById('pricingFeatured').value,
+          freePriceMpesa: parseInt(document.getElementById('pricingFreeMpesa').value) || 0,
+          standardPriceMpesa: parseInt(document.getElementById('pricingStandardMpesa').value) || 500,
+          featuredPriceMpesa: parseInt(document.getElementById('pricingFeaturedMpesa').value) || 1500,
           standardTrialDays: parseInt(document.getElementById('pricingStandardTrial').value) || 0,
           featuredTrialDays: parseInt(document.getElementById('pricingFeaturedTrial').value) || 0,
         };
@@ -2544,7 +3052,6 @@
       
       if (window.lucide) lucide.createIcons();
       
-      // Review stars setup
       if (selectedApp && document.getElementById("reviewStars")) {
         let ratingVal = 0;
         const starDiv = document.getElementById("reviewStars");
@@ -2632,6 +3139,8 @@
     window.openApp = openApp;
     window.toggleFavorite = toggleFavorite;
     window.handleUpgrade = handleUpgrade;
+    window.handleStripePayment = handleStripePayment;
+    window.renderMpesaPaymentModal = renderMpesaPaymentModal;
     window.showSubmitAppModal = showSubmitAppModal;
     window.editAppPricing = editAppPricing;
     window.manageSubscription = manageSubscription;
@@ -2647,23 +3156,26 @@
     renderCurrentView();
     updateOnlineStatus();
     
-    console.log('🚀 Meon App Directory v3.0');
+    console.log('🚀 Meon Directory v4.0 - Complete Edition');
     console.log('📦 Features:');
     console.log('  ✅ PWA Ready');
     console.log('  ✅ Dark Mode');
     console.log('  ✅ User Authentication');
     console.log('  ✅ Favorites System');
     console.log('  ✅ Reviews & Ratings');
-    console.log('  ✅ Subscription Tiers');
+    console.log('  ✅ Subscription Tiers (Free/Standard/Featured)');
     console.log('  ✅ Free Trials');
     console.log('  ✅ Custom Pricing');
     console.log('  ✅ Email Notifications');
     console.log('  ✅ Developer Hub');
     console.log('  ✅ Admin Panel');
     console.log('  ✅ App Analytics');
-    console.log('  ✅ Stripe Integration');
+    console.log('  ✅ Stripe Integration (USD)');
+    console.log('  ✅ M-Pesa Integration (KES)');
     console.log('  ✅ Offline Support');
-    console.log('💎 Premium tiers: Free, Standard ($9/mo), Featured ($29/mo)');
+    console.log('  ✅ Payment Method Selection');
+    console.log('💎 Premium tiers: Free, Standard ($9/mo / KES 500), Featured ($29/mo / KES 1500)');
+    console.log('📱 M-Pesa Sandbox ready for testing');
   </script>
 </body>
 </html>
