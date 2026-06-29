@@ -176,13 +176,19 @@
         .stat-widget { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; transition: all 0.3s ease; }
         .stat-widget:hover { background: rgba(255,255,255,0.06); border-color: rgba(139,92,246,0.2); }
 
-        /* ATT Card hover effects */
+        /* ATT Card styles */
         .att-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .att-card:hover { transform: translateY(-4px); border-color: rgba(139,92,246,0.3); background: rgba(255,255,255,0.08); }
+        .att-card:hover { transform: translateY(-6px); border-color: rgba(139,92,246,0.3); background: rgba(255,255,255,0.08); }
         .att-card .icon-wrapper { transition: transform 0.3s ease; }
         .att-card:hover .icon-wrapper { transform: scale(1.1) rotate(-3deg); }
-        .att-card .cta-btn { transition: all 0.3s ease; }
-        .att-card:hover .cta-btn { box-shadow: 0 8px 25px rgba(139,92,246,0.25); }
+        .att-card .cta-btn { transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .att-card .cta-btn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent); opacity: 0; transition: opacity 0.3s ease; }
+        .att-card .cta-btn:hover::after { opacity: 1; }
+        .att-card .cta-btn:hover { transform: translateY(-2px); }
+        .att-card .docs-link { transition: all 0.3s ease; }
+        .att-card .docs-link:hover { color: white; transform: translateX(4px); }
+        .att-card .feature-tag { transition: all 0.3s ease; }
+        .att-card:hover .feature-tag { background: rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.2); }
     </style>
 </head>
 <body>
@@ -344,7 +350,7 @@
                 return;
             }
 
-            const CACHE_NAME = 'meon-directory-v10';
+            const CACHE_NAME = 'meon-directory-v11';
             const urlsToCache = [
                 location.href.split('?')[0],
                 'https://cdn.tailwindcss.com',
@@ -1941,6 +1947,10 @@
             `;
         }
 
+        // ============================================================
+        // ATT - ADVANCED TECHNOLOGY TOOLS - FULLY POPULATED WITH WORKING BUTTONS
+        // ============================================================
+        
         function renderATT() {
             return `
                 <div class="att-bg w-full max-w-7xl mx-auto">
@@ -1968,7 +1978,7 @@
                                     <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
                                         🤖
                                     </div>
-                                    <span class="text-xs bg-purple-500/20 text-purple-300 px-2.5 py-1 rounded-full">AI-Powered</span>
+                                    <span class="feature-tag text-xs bg-purple-500/20 text-purple-300 px-2.5 py-1 rounded-full border border-purple-500/10">AI-Powered</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-white mb-2">AI Analytics</h3>
                                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
@@ -1987,10 +1997,12 @@
                                     <span class="bg-white/5 px-2 py-1 rounded-full">🛡️ Reduce business risks</span>
                                 </div>
                                 <div class="flex flex-wrap gap-3">
-                                    <button class="cta-btn bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-purple-600/25">
+                                    <button onclick="showToast('🚀 Launching AI Analytics Dashboard...', 'info')" 
+                                            class="cta-btn bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-purple-600/25">
                                         <i data-lucide="rocket" class="w-4 h-4"></i> Launch AI Analytics
                                     </button>
-                                    <button class="text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
+                                    <button onclick="showToast('📚 Opening AI Analytics Documentation...', 'info')" 
+                                            class="docs-link text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
                                         <i data-lucide="file-text" class="w-4 h-4"></i> Docs
                                     </button>
                                 </div>
@@ -2002,7 +2014,7 @@
                                     <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
                                         🔒
                                     </div>
-                                    <span class="text-xs bg-blue-500/20 text-blue-300 px-2.5 py-1 rounded-full">Enterprise</span>
+                                    <span class="feature-tag text-xs bg-blue-500/20 text-blue-300 px-2.5 py-1 rounded-full border border-blue-500/10">Enterprise</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-white mb-2">Security Suite</h3>
                                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
@@ -2021,10 +2033,12 @@
                                     <span class="bg-white/5 px-2 py-1 rounded-full">👁️ Continuous monitoring</span>
                                 </div>
                                 <div class="flex flex-wrap gap-3">
-                                    <button class="cta-btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-blue-600/25">
+                                    <button onclick="showToast('🔐 Opening Security Center...', 'info')" 
+                                            class="cta-btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-blue-600/25">
                                         <i data-lucide="shield" class="w-4 h-4"></i> Open Security Center
                                     </button>
-                                    <button class="text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
+                                    <button onclick="showToast('📚 Opening Security Documentation...', 'info')" 
+                                            class="docs-link text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
                                         <i data-lucide="file-text" class="w-4 h-4"></i> Docs
                                     </button>
                                 </div>
@@ -2036,7 +2050,7 @@
                                     <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
                                         ☁️
                                     </div>
-                                    <span class="text-xs bg-cyan-500/20 text-cyan-300 px-2.5 py-1 rounded-full">Scalable</span>
+                                    <span class="feature-tag text-xs bg-cyan-500/20 text-cyan-300 px-2.5 py-1 rounded-full border border-cyan-500/10">Scalable</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-white mb-2">Cloud Solutions</h3>
                                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
@@ -2055,10 +2069,12 @@
                                     <span class="bg-white/5 px-2 py-1 rounded-full">🚀 Faster deployments</span>
                                 </div>
                                 <div class="flex flex-wrap gap-3">
-                                    <button class="cta-btn bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-cyan-600/25">
+                                    <button onclick="showToast('☁️ Deploying to Cloud...', 'info')" 
+                                            class="cta-btn bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-cyan-600/25">
                                         <i data-lucide="cloud" class="w-4 h-4"></i> Deploy to Cloud
                                     </button>
-                                    <button class="text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
+                                    <button onclick="showToast('📚 Opening Cloud Documentation...', 'info')" 
+                                            class="docs-link text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
                                         <i data-lucide="file-text" class="w-4 h-4"></i> Docs
                                     </button>
                                 </div>
@@ -2070,7 +2086,7 @@
                                     <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
                                         📊
                                     </div>
-                                    <span class="text-xs bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full">Interactive</span>
+                                    <span class="feature-tag text-xs bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full border border-amber-500/10">Interactive</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-white mb-2">Data Visualization</h3>
                                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
@@ -2089,10 +2105,12 @@
                                     <span class="bg-white/5 px-2 py-1 rounded-full">🤝 Improved collaboration</span>
                                 </div>
                                 <div class="flex flex-wrap gap-3">
-                                    <button class="cta-btn bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-amber-600/25">
+                                    <button onclick="showToast('📊 Opening Dashboard...', 'info')" 
+                                            class="cta-btn bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-amber-600/25">
                                         <i data-lucide="bar-chart" class="w-4 h-4"></i> View Dashboard
                                     </button>
-                                    <button class="text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
+                                    <button onclick="showToast('📚 Opening Visualization Documentation...', 'info')" 
+                                            class="docs-link text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
                                         <i data-lucide="file-text" class="w-4 h-4"></i> Docs
                                     </button>
                                 </div>
@@ -2104,7 +2122,7 @@
                                     <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-green-500/20 to-green-600/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
                                         ⚡
                                     </div>
-                                    <span class="text-xs bg-green-500/20 text-green-300 px-2.5 py-1 rounded-full">Intelligent</span>
+                                    <span class="feature-tag text-xs bg-green-500/20 text-green-300 px-2.5 py-1 rounded-full border border-green-500/10">Intelligent</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-white mb-2">Automation Engine</h3>
                                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
@@ -2123,10 +2141,12 @@
                                     <span class="bg-white/5 px-2 py-1 rounded-full">📈 Increase productivity</span>
                                 </div>
                                 <div class="flex flex-wrap gap-3">
-                                    <button class="cta-btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-green-600/25">
+                                    <button onclick="showToast('⚡ Building Workflow...', 'info')" 
+                                            class="cta-btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-green-600/25">
                                         <i data-lucide="zap" class="w-4 h-4"></i> Build Workflow
                                     </button>
-                                    <button class="text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
+                                    <button onclick="showToast('📚 Opening Automation Documentation...', 'info')" 
+                                            class="docs-link text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
                                         <i data-lucide="file-text" class="w-4 h-4"></i> Docs
                                     </button>
                                 </div>
@@ -2138,7 +2158,7 @@
                                     <div class="icon-wrapper w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500/20 to-indigo-600/10 flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
                                         🌐
                                     </div>
-                                    <span class="text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full">Global</span>
+                                    <span class="feature-tag text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-500/10">Global</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-white mb-2">Global Connectivity</h3>
                                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
@@ -2157,10 +2177,12 @@
                                     <span class="bg-white/5 px-2 py-1 rounded-full">🔗 Improved reliability</span>
                                 </div>
                                 <div class="flex flex-wrap gap-3">
-                                    <button class="cta-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-indigo-600/25">
+                                    <button onclick="showToast('🌐 Exploring Global Network...', 'info')" 
+                                            class="cta-btn bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 group-hover:shadow-lg group-hover:shadow-indigo-600/25">
                                         <i data-lucide="globe" class="w-4 h-4"></i> Explore Network
                                     </button>
-                                    <button class="text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
+                                    <button onclick="showToast('📚 Opening Connectivity Documentation...', 'info')" 
+                                            class="docs-link text-gray-400 hover:text-white text-sm transition flex items-center gap-1">
                                         <i data-lucide="file-text" class="w-4 h-4"></i> Docs
                                     </button>
                                 </div>
@@ -2173,7 +2195,8 @@
                             <div class="bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 rounded-2xl p-8 border border-white/5 max-w-4xl mx-auto">
                                 <h3 class="text-2xl font-bold text-white mb-2">Ready to transform your business?</h3>
                                 <p class="text-gray-400 mb-6">Contact our enterprise team for a custom solution tailored to your needs.</p>
-                                <button class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition flex items-center gap-2 mx-auto shadow-lg shadow-purple-600/25">
+                                <button onclick="showToast('📞 Connecting to Sales Team...', 'success')" 
+                                        class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition flex items-center gap-2 mx-auto shadow-lg shadow-purple-600/25">
                                     <i data-lucide="phone" class="w-5 h-5"></i> Talk to Sales
                                 </button>
                             </div>
@@ -2788,13 +2811,14 @@
         renderCurrentView();
         updateOnlineStatus();
         
-        console.log('🚀 Meon App Directory v10.0 - Enterprise Edition');
+        console.log('🚀 Meon App Directory v11.0 - Enterprise Edition with Working ATT');
         console.log('📱 M-Pesa Sandbox: Active');
         console.log('💳 Plans: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
         console.log('👤 User:', currentUser?.email || 'Not logged in');
         console.log('🔐 Demo Admin: admin@meon.com');
         console.log('👨‍💻 Demo Developer: dev@meon.com');
-        console.log('📊 ATT Section: Fully populated with enterprise content');
+        console.log('📊 ATT Section: Fully populated with working buttons');
+        console.log('💡 All ATT buttons trigger toast notifications for demo');
     </script>
 </body>
 </html>
