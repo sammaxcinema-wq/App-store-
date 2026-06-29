@@ -109,7 +109,7 @@
         .pricing-bg { background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
         .pricing-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
         .pricing-content { position: relative; z-index: 1; }
-        
+
         .tier-card { transition: all 0.3s ease; }
         .tier-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
         .tier-card.popular { border: 2px solid #8b5cf6; box-shadow: 0 0 30px rgba(139,92,246,0.2); }
@@ -125,7 +125,7 @@
         #offlineIndicator { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; background: #ef4444; color: white; text-align: center; padding: 6px; font-size: 0.8rem; font-weight: 600; transform: translateY(-100%); transition: transform 0.3s ease; }
         #offlineIndicator.show { transform: translateY(0); }
 
-        /* Modal enhancements */
+        /* Modal styles */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
         .modal { background: #1e293b; border-radius: 24px; padding: 40px; max-width: 480px; width: 100%; border: 1px solid rgba(255,255,255,0.08); animation: modalIn 0.3s ease; }
@@ -253,7 +253,9 @@
                 SHORTCODE: '174379',
                 PASSKEY: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
                 BASE_URL: 'https://sandbox.safaricom.co.ke',
-                CALLBACK_URL: 'https://webhook.site/fe92fd8e-1324-46b7-b730-fb89bc424a46'
+                CALLBACK_URL: 'https://webhook.site/fe92fd8e-1324-46b7-b730-fb89bc424a46',
+                ACCOUNT_REFERENCE: 'MeonPayment',
+                TRANSACTION_DESC: 'Meon App Subscription'
             }
         };
 
@@ -314,7 +316,7 @@
                 return;
             }
 
-            const CACHE_NAME = 'meon-directory-v7';
+            const CACHE_NAME = 'meon-directory-v8';
             const urlsToCache = [
                 location.href.split('?')[0],
                 'https://cdn.tailwindcss.com',
@@ -732,7 +734,7 @@
             toast.className =
                 `toast bg-white dark:bg-gray-800 shadow-lg rounded-xl px-4 py-3 border-l-4 ${type === "success" ? "border-green-500" : type === "error" ? "border-red-500" : "border-blue-500"} flex items-center gap-2`;
             toast.innerHTML =
-                `<span class="toast-icon">${icons[type] || 'ℹ️'}</span><span>${msg}</span>`;
+                `<span>${icons[type] || 'ℹ️'}</span><span>${msg}</span>`;
             container.appendChild(toast);
             if (window.lucide) lucide.createIcons();
             setTimeout(() => toast.remove(), 4000);
@@ -936,7 +938,7 @@
                         PhoneNumber: this.formatPhoneNumber(phoneNumber),
                         CallBackURL: CONFIG.MPESA.CALLBACK_URL,
                         AccountReference: accountReference || `MEON-${Date.now()}`,
-                        TransactionDesc: 'Meon App Subscription'
+                        TransactionDesc: CONFIG.MPESA.TRANSACTION_DESC
                     };
 
                     const response = await fetch(
@@ -1009,7 +1011,7 @@
             }
 
             simulateQueryStatus(checkoutRequestId) {
-                const isSuccess = Math.random() > 0.2;
+                const isSuccess = Math.random() > 0.3;
                 return {
                     ResultCode: isSuccess ? '0' : '1032',
                     ResultDesc: isSuccess ? 'The service request is processed successfully.' : 'Request cancelled by user',
@@ -1329,8 +1331,6 @@
                 document.getElementById('confirmPayment').disabled = false;
                 document.getElementById('confirmPayment').textContent = '💳 Pay with M-Pesa';
             }, 30000);
-
-            // Don't close modal immediately - show progress
         }
 
         // ============================================================
@@ -2177,32 +2177,6 @@
         }
 
         // ============================================================
-        // UPGRADE HANDLER
-        // ============================================================
-        
-        window.handleUpgrade = function(appId, tierKey) {
-            if (!currentUser) {
-                showToast('Please sign in to upgrade', 'error');
-                showAuthModal();
-                return;
-            }
-
-            const app = appList.find(a => a.id === appId);
-            if (!app) {
-                showToast('App not found', 'error');
-                return;
-            }
-
-            const tier = DEFAULT_TIERS[tierKey];
-            if (app.tier === tierKey && !app.trialActive) {
-                showToast(`Already on ${tier.name} tier`, 'info');
-                return;
-            }
-
-            openPaymentModal(tierKey.toLowerCase());
-        };
-
-        // ============================================================
         // MAIN RENDER FUNCTION
         // ============================================================
         
@@ -2353,12 +2327,13 @@
         renderCurrentView();
         updateOnlineStatus();
         
-        console.log('🚀 Meon App Directory v7.0 - Full Production');
+        console.log('🚀 Meon App Directory v8.0 - Full Production');
         console.log('📱 M-Pesa Sandbox: Active');
         console.log('💳 Plans: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
         console.log('👤 User:', currentUser?.email || 'Not logged in');
         console.log('🔐 Demo Admin: admin@meon.com');
         console.log('👨‍💻 Demo Developer: dev@meon.com');
+        console.log('💡 Click "Get Started" on Pricing page to test payments');
     </script>
 </body>
 </html>
