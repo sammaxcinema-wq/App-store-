@@ -36,66 +36,88 @@
     * { font-family: 'Inter', sans-serif; }
     body { transition: background-color 0.3s, color 0.3s; }
     .dark { background-color: #0f172a; color: #e2e8f0; }
+    
     .rating-star { cursor: pointer; transition: transform 0.1s; }
     .rating-star:hover { transform: scale(1.1); }
     .modal-transition { transition: opacity 0.2s ease, visibility 0.2s; }
     .scrollbar-hide::-webkit-scrollbar { display: none; }
+    
     .card-hover { transition: all 0.2s ease; }
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.3); }
+    
     .meon-logo-bg { background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%); border-radius: 14px; box-shadow: 0 6px 12px -6px rgba(0,0,0,0.3); border: 1px solid rgba(139,92,246,0.3); }
+    
     .toast { position: fixed; bottom: 20px; right: 20px; z-index: 9999; animation: slideIn 0.3s ease; }
     @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    
     img.app-logo { background: #1e293b; object-fit: cover; }
+    
     @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .animate-spin-slow { animation: spin-slow 20s linear infinite; }
     .animate-spin-reverse { animation: spin-slow 30s linear infinite reverse; }
+    
     @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     .trial-badge { animation: pulse-glow 2s ease-in-out infinite; }
+    
     @keyframes payment-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); } 50% { box-shadow: 0 0 0 15px rgba(16,185,129,0); } }
     .payment-btn { animation: payment-pulse 2s infinite; }
+    
     .spinner { border: 3px solid rgba(255,255,255,0.1); border-radius: 50%; border-top: 3px solid #fff; width: 24px; height: 24px; animation: spin 1s linear infinite; display: inline-block; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
+    /* Backgrounds */
     .main-bg { background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; min-height: 100vh; padding: 1rem; border-radius: 1.5rem; }
     .main-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.92) 0%, rgba(5,5,55,0.88) 50%, rgba(10,0,92,0.92) 100%); border-radius: 1.5rem; }
     .main-content { position: relative; z-index: 1; }
+    
     .hero-bg { background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; }
     .hero-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.85) 0%, rgba(5,5,55,0.8) 50%, rgba(10,0,92,0.85) 100%); border-radius: 1.5rem; }
     .hero-content { position: relative; z-index: 1; }
+    
     .categories-bg { background-image: url('https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; }
     .categories-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.88) 0%, rgba(5,5,55,0.82) 50%, rgba(10,0,92,0.88) 100%); border-radius: 1.5rem; }
     .categories-content { position: relative; z-index: 1; }
+    
     .featured-bg { background-image: url('https://i.ibb.co/n8LTRbLg/16dbce0c640116ad6a21751b15d0396e.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; }
     .featured-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
     .featured-content { position: relative; z-index: 1; }
+    
     .toprated-bg { background-image: url('https://i.ibb.co/bMQhQB0P/fd8980ac75d8617208bdb4e65b549f04.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; }
     .toprated-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.92) 0%, rgba(5,5,55,0.87) 50%, rgba(10,0,92,0.92) 100%); border-radius: 1.5rem; }
     .toprated-content { position: relative; z-index: 1; }
+    
     .recent-bg { background-image: url('https://i.ibb.co/4ZKz5tDD/669db1c2e2ee4ac1f1328ca814ccc930.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; }
     .recent-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.88) 0%, rgba(5,5,55,0.83) 50%, rgba(10,0,92,0.88) 100%); border-radius: 1.5rem; }
     .recent-content { position: relative; z-index: 1; }
+    
     .dashboard-bg { background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
     .dashboard-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
     .dashboard-content { position: relative; z-index: 1; }
+    
     .admin-bg { background-image: url('https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
     .admin-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.92) 0%, rgba(5,5,55,0.88) 50%, rgba(10,0,92,0.92) 100%); border-radius: 1.5rem; }
     .admin-content { position: relative; z-index: 1; }
+    
     .developer-bg { background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
     .developer-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.88) 0%, rgba(5,5,55,0.82) 50%, rgba(10,0,92,0.88) 100%); border-radius: 1.5rem; }
     .developer-content { position: relative; z-index: 1; }
+    
     .att-bg { background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
     .att-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
     .att-content { position: relative; z-index: 1; }
+    
     .tier-card { transition: all 0.3s ease; }
     .tier-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
     .tier-card.popular { border: 2px solid #8b5cf6; box-shadow: 0 0 30px rgba(139,92,246,0.2); }
     .tier-badge { position: absolute; top: -12px; right: 20px; background: #8b5cf6; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+
     #pwaInstallBanner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9998; background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%); color: white; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 2px solid rgba(139,92,246,0.5); transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 -8px 32px rgba(0,0,0,0.4); }
     #pwaInstallBanner.show { transform: translateY(0); }
     #pwaInstallBanner .install-btn { background: #8b5cf6; color: white; border: none; padding: 10px 20px; border-radius: 25px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
     #pwaInstallBanner .install-btn:hover { background: #7c3aed; }
     #pwaInstallBanner .dismiss-btn { background: transparent; color: #cbd5e1; border: 1px solid #475569; padding: 8px 14px; border-radius: 25px; cursor: pointer; white-space: nowrap; font-size: 0.85rem; transition: all 0.2s; }
     #pwaInstallBanner .dismiss-btn:hover { color: white; border-color: #94a3b8; }
+
     #offlineIndicator { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; background: #ef4444; color: white; text-align: center; padding: 6px; font-size: 0.8rem; font-weight: 600; transform: translateY(-100%); transition: transform 0.3s ease; }
     #offlineIndicator.show { transform: translateY(0); }
   </style>
@@ -230,7 +252,7 @@
         return;
       }
 
-      const CACHE_NAME = 'meon-directory-v5';
+      const CACHE_NAME = 'meon-directory-v6';
       const urlsToCache = [
         location.href.split('?')[0],
         'https://cdn.tailwindcss.com',
@@ -781,7 +803,7 @@
     }
 
     // ============================================================
-    // M-PESA INTEGRATION - PRODUCTION READY
+    // M-PESA INTEGRATION
     // ============================================================
     
     class MpesaClient {
@@ -825,7 +847,6 @@
             await new Promise(resolve => setTimeout(resolve, 2000 * this.retryCount));
             return this.getAccessToken();
           }
-          // Fallback to demo mode
           return 'demo_token';
         }
       }
@@ -1051,7 +1072,6 @@
             showToast('📱 STK Push sent! Check your phone and enter PIN.', 'success');
             showToast(`Transaction ID: ${checkoutId}`, 'info');
 
-            // Start polling
             this.pollStatus(checkoutId);
           } else {
             showToast(`❌ Payment failed: ${response.ResponseDescription || 'Unknown error'}`, 'error');
@@ -1087,7 +1107,6 @@
             const transaction = mpesaTransactions[checkoutRequestId];
 
             if (status.ResultCode === '0') {
-              // Success
               transaction.status = 'completed';
               transaction.completedAt = new Date().toISOString();
               transaction.mpesaReceipt = status.MPesaReceiptNumber || 'RECEIPT-' + Date.now();
@@ -1098,13 +1117,11 @@
               renderCurrentView();
               return;
             } else if (status.ResultCode === '1032') {
-              // Cancelled
               transaction.status = 'cancelled';
               saveState();
               showToast('❌ Payment cancelled by user', 'error');
               return;
             } else if (status.ResultCode && status.ResultCode !== '200001') {
-              // Error
               transaction.status = 'failed';
               transaction.error = status.ResultDesc || 'Unknown error';
               saveState();
@@ -1112,7 +1129,6 @@
               return;
             }
 
-            // Still pending - continue polling
             poll();
           } catch (error) {
             console.error('Polling error:', error);
@@ -1133,7 +1149,6 @@
         app.mpesaReceipt = transaction.mpesaReceipt;
         saveState();
 
-        // Create notification
         const notifications = JSON.parse(localStorage.getItem('meonNotifications')) || [];
         notifications.push({
           id: Date.now(),
@@ -2280,10 +2295,12 @@
     renderCurrentView();
     updateOnlineStatus();
     
-    console.log('🚀 Meon App Directory v5.0 - M-Pesa Production Ready');
+    console.log('🚀 Meon App Directory v6.0 - Full M-Pesa Integration');
     console.log('📱 M-Pesa Sandbox Mode: Active');
     console.log('💳 Pricing: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
     console.log('🎯 Click "Upgrade" buttons on any app to test payments');
+    console.log('🔐 Demo Admin: admin@meon.com / any password');
+    console.log('👨‍💻 Demo Developer: dev@meon.com / any password');
   </script>
 </body>
 </html>
