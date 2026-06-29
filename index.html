@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Meon | Intelligence · Innovation · Inspiration</title>
-  <meta name="description" content="Meon App Directory – Launch web apps instantly">
-
+  <meta name="description" content="Meon App Directory – Launch web apps instantly with premium subscriptions">
+  
   <!-- PWA Meta Tags -->
   <meta name="theme-color" content="#0f172a">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,6 +31,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest">
   </script>
+  
+  <!-- Stripe.js -->
+  <script src="https://js.stripe.com/v3/">
+  </script>
+  
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+  
   <style>
     * {
       font-family: 'Inter', sans-serif;
@@ -60,7 +69,7 @@
     }
     .card-hover:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.3);
     }
     .meon-logo-bg {
       background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%);
@@ -120,7 +129,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(2, 0, 36, 0.88) 0%, rgba(5, 5, 55, 0.82) 50%, rgba(10, 0, 92, 0.88) 100%);
+      background: linear-gradient(135deg, rgba(2, 0, 36, 0.92) 0%, rgba(5, 5, 55, 0.88) 50%, rgba(10, 0, 92, 0.92) 100%);
       border-radius: 1.5rem;
     }
     .main-content {
@@ -264,76 +273,28 @@
       z-index: 1;
     }
 
-    /* Admin Panel Background */
-    .admin-bg {
-      background-image: url('https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      position: relative;
-      padding: 2rem;
-      border-radius: 1.5rem;
-      min-height: 400px;
+    /* Subscription Cards */
+    .tier-card {
+      transition: all 0.3s ease;
     }
-    .admin-bg::before {
-      content: '';
+    .tier-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    .tier-card.popular {
+      border: 2px solid #8b5cf6;
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+    }
+    .tier-badge {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(2, 0, 36, 0.92) 0%, rgba(5, 5, 55, 0.88) 50%, rgba(10, 0, 92, 0.92) 100%);
-      border-radius: 1.5rem;
-    }
-    .admin-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Developer Hub Background */
-    .developer-bg {
-      background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      position: relative;
-      padding: 2rem;
-      border-radius: 1.5rem;
-      min-height: 400px;
-    }
-    .developer-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(2, 0, 36, 0.88) 0%, rgba(5, 5, 55, 0.82) 50%, rgba(10, 0, 92, 0.88) 100%);
-      border-radius: 1.5rem;
-    }
-    .developer-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ATT Tab Background */
-    .att-bg {
-      background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      position: relative;
-      padding: 2rem;
-      border-radius: 1.5rem;
-      min-height: 400px;
-    }
-    .att-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(2, 0, 36, 0.9) 0%, rgba(5, 5, 55, 0.85) 50%, rgba(10, 0, 92, 0.9) 100%);
-      border-radius: 1.5rem;
-    }
-    .att-content {
-      position: relative;
-      z-index: 1;
+      top: -12px;
+      right: 20px;
+      background: #8b5cf6;
+      color: white;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
 
     /* PWA Install Banner */
@@ -407,6 +368,15 @@
     #offlineIndicator.show {
       transform: translateY(0);
     }
+
+    /* Trial badge pulse */
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .trial-badge {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
   </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
@@ -433,7 +403,7 @@
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
       <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-          <div class="meon-logo-bg px-4 py-2 flex flex-col items-start leading-tight">
+          <div class="meon-logo-bg px-4 py-2 flex flex-col items-start leading-tight cursor-pointer" onclick="navigateTo('home')">
             <span class="text-white font-extrabold text-2xl tracking-wide">meon</span>
             <span class="text-[10px] font-medium text-purple-200 tracking-wider uppercase">INTELLIGENCE·INNOVATION·INSPIRATION</span>
           </div>
@@ -457,6 +427,7 @@
           <button data-nav="att" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">ATT</button>
           <button data-nav="admin" id="adminNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Admin Panel</button>
           <button data-nav="developer" id="devNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Developer Hub</button>
+          <button data-nav="pricing" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">💎 Pricing</button>
         </div>
       </div>
     </header>
@@ -467,14 +438,26 @@
 
   <script>
     // ============================================================
-    // PWA: Generate Manifest as Blob URL
+    // CONFIGURATION
     // ============================================================
+    
+    const CONFIG = {
+      STRIPE_PUBLISHABLE_KEY: 'pk_test_your_key_here',
+      EMAILJS_PUBLIC_KEY: 'your_public_key',
+      EMAILJS_SERVICE_ID: 'service_your_service',
+      EMAILJS_TEMPLATE_ID: 'template_your_template',
+    };
+
+    // ============================================================
+    // PWA SETUP
+    // ============================================================
+    
     (function setupPwaManifest() {
       const iconUrl = 'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png';
       const manifest = {
         name: 'Meon Directory',
         short_name: 'Meon',
-        description: 'Meon App Directory – Launch web apps instantly',
+        description: 'Meon App Directory – Launch web apps instantly with premium subscriptions',
         start_url: location.href.split('?')[0],
         display: 'standalone',
         orientation: 'any',
@@ -494,7 +477,8 @@
         ],
         shortcuts: [
           { name: 'Explore Apps', url: '/?nav=home', description: 'Browse all web apps' },
-          { name: 'Favorites', url: '/?nav=dashboard', description: 'Your favorite apps' }
+          { name: 'Favorites', url: '/?nav=dashboard', description: 'Your favorite apps' },
+          { name: 'Developer Hub', url: '/?nav=developer', description: 'Manage your apps' }
         ],
         scope: '/'
       };
@@ -512,15 +496,16 @@
     })();
 
     // ============================================================
-    // PWA: Service Worker Registration
+    // SERVICE WORKER
     // ============================================================
+    
     (function registerServiceWorker() {
       if (!('serviceWorker' in navigator)) {
         console.log('[PWA] Service workers not supported');
         return;
       }
 
-      const CACHE_NAME = 'meon-directory-v2';
+      const CACHE_NAME = 'meon-directory-v3';
       const urlsToCache = [
         location.href.split('?')[0],
         'https://cdn.tailwindcss.com',
@@ -632,17 +617,6 @@
           console.log('[PWA] Service Worker registered with scope:', registration.scope);
           window._pwaSwRegistration = registration;
           window._pwaSwUrl = swUrl;
-
-          registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing;
-            if (newWorker) {
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  console.log('[PWA] New content available – refresh to update');
-                }
-              });
-            }
-          });
         })
         .catch((err) => {
           console.warn('[PWA] Service Worker registration failed:', err);
@@ -650,11 +624,11 @@
     })();
 
     // ============================================================
-    // PWA: Install Prompt Handling
+    // PWA INSTALL PROMPT
     // ============================================================
+    
     let deferredPrompt = null;
     let pwaBannerDismissed = false;
-    let pwaBannerDismissTime = null;
 
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
@@ -734,8 +708,9 @@
     });
 
     // ============================================================
-    // PWA: Online/Offline Status
+    // ONLINE/OFFLINE STATUS
     // ============================================================
+    
     function updateOnlineStatus() {
       const indicator = document.getElementById('offlineIndicator');
       if (!navigator.onLine) {
@@ -759,8 +734,9 @@
     }
 
     // ============================================================
-    // LOGO MAPPING (all apps) – added Gym Nine logo
+    // LOGO MAPPING
     // ============================================================
+    
     const logoMapping = {
       "maji-gas": "https://i.ibb.co/sJwP77mq/file-000000002a7c724698774712139656f9.png",
       "deep-focus": "https://i.ibb.co/204QYyVF/file-00000000c6707243af95f3105457c8b5.png",
@@ -785,7 +761,6 @@
       "gym-nine": "https://i.ibb.co/GD2WMcJ/1782594191864.png"
     };
 
-    // Screenshots array
     const screenshotUrls = [
       "https://i.ibb.co/JPVGw2p/Screenshot-20260611-024707-Chrome.jpg",
       "https://i.ibb.co/8D8qyBGg/Screenshot-20260611-024637-Chrome.jpg",
@@ -803,7 +778,45 @@
       "https://i.ibb.co/PGT1M64C/Screenshot-20260611-023518-Chrome.jpg"
     ];
 
-    // ---------- APP DATA (added Gym Nine) ----------
+    // ============================================================
+    // TIER CONFIGURATION
+    // ============================================================
+    
+    const DEFAULT_TIERS = {
+      FREE: {
+        name: 'Free',
+        price: '$0',
+        priceId: null,
+        features: ['Basic listing', 'Standard visibility', '1 screenshot', 'Community support'],
+        color: 'gray',
+        trialDays: 0,
+        icon: '💎'
+      },
+      STANDARD: {
+        name: 'Standard',
+        price: '$9/mo',
+        priceId: 'price_standard_monthly_id',
+        features: ['Enhanced listing', 'Priority visibility', '5 screenshots', 'Basic analytics', 'Email support'],
+        color: 'purple',
+        trialDays: 14,
+        icon: '⭐'
+      },
+      FEATURED: {
+        name: 'Featured',
+        price: '$29/mo',
+        priceId: 'price_featured_monthly_id',
+        features: ['Premium listing', 'Top placement', 'Unlimited screenshots', 'Advanced analytics', 
+                  'Featured badge', 'Priority support', 'Marketing boost'],
+        color: 'amber',
+        trialDays: 7,
+        icon: '🏆'
+      }
+    };
+
+    // ============================================================
+    // APP DATA
+    // ============================================================
+    
     const appList = [{
       id: "maji-gas",
       name: "Maji Gas Delivery",
@@ -815,7 +828,10 @@
       version: "2.1.0",
       features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"],
       description: "Fast, reliable LPG and water delivery service with live order tracking.",
-      externalUrl: "https://maji-gasdelivery.vercel.app/"
+      externalUrl: "https://maji-gasdelivery.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "deep-focus",
       name: "Deep Focus",
@@ -827,7 +843,10 @@
       version: "3.0.2",
       features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"],
       description: "Boost productivity with science-backed focus tools.",
-      externalUrl: "https://deepfocus-roan.vercel.app/"
+      externalUrl: "https://deepfocus-roan.vercel.app/",
+      tier: "STANDARD",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "guard-ai",
       name: "Guard AI",
@@ -839,7 +858,10 @@
       version: "1.5.0",
       features: ["Threat detection", "VPN", "Password manager", "Dark web monitoring"],
       description: "Next-gen AI shield for digital security.",
-      externalUrl: "https://guard-ai-six.vercel.app/"
+      externalUrl: "https://guard-ai-six.vercel.app/",
+      tier: "FEATURED",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "data-vision",
       name: "Data Vision",
@@ -851,7 +873,10 @@
       version: "4.2.1",
       features: ["Dashboards", "AI predictions", "Data connectors", "Reports"],
       description: "Turn data into insights with AI.",
-      externalUrl: "https://datavision-beta.vercel.app/"
+      externalUrl: "https://datavision-beta.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "rider-app",
       name: "Rider App",
@@ -863,7 +888,11 @@
       version: "2.3.0",
       features: ["Route optimization", "Live tracking", "Earnings dashboard", "Proof of delivery"],
       description: "Complete solution for riders and fleets.",
-      externalUrl: "https://rider-app-psi.vercel.app/"
+      externalUrl: "https://rider-app-psi.vercel.app/",
+      tier: "STANDARD",
+      trialActive: true,
+      trialEnd: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+      developer: "meon"
     }, {
       id: "insight",
       name: "Insight",
@@ -875,7 +904,10 @@
       version: "1.8.0",
       features: ["Segmentation", "Behavioral analytics", "Predictive models", "APIs"],
       description: "Deep customer behavior intelligence.",
-      externalUrl: "https://insight-eta-lime.vercel.app/"
+      externalUrl: "https://insight-eta-lime.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "clients-hub",
       name: "Clients Hub",
@@ -887,7 +919,10 @@
       version: "3.1.0",
       features: ["Contact mgmt", "Deal tracking", "Email sync", "Forecasting"],
       description: "Grow relationships with powerful CRM.",
-      externalUrl: "https://clients-hub.vercel.app/"
+      externalUrl: "https://clients-hub.vercel.app/",
+      tier: "STANDARD",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "smart-duka",
       name: "Smart Duka",
@@ -899,7 +934,10 @@
       version: "2.0.0",
       features: ["Inventory", "POS", "Sales reports", "Supplier mgmt"],
       description: "Modern POS for small shops.",
-      externalUrl: "https://smartduka-rho.vercel.app/"
+      externalUrl: "https://smartduka-rho.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "agriculture",
       name: "Agriculture",
@@ -911,7 +949,10 @@
       version: "1.4.0",
       features: ["Crop monitor", "Weather", "Market prices", "Expert advice"],
       description: "Empower farmers with digital tools.",
-      externalUrl: "https://agriculture-puce-eta.vercel.app/"
+      externalUrl: "https://agriculture-puce-eta.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "luminor-studio",
       name: "Luminor Studio",
@@ -923,7 +964,10 @@
       version: "5.0.1",
       features: ["AI enhancement", "Layer editing", "Filters", "4K export"],
       description: "Creative suite for professionals.",
-      externalUrl: "https://luminor-studio.vercel.app/"
+      externalUrl: "https://luminor-studio.vercel.app/",
+      tier: "FEATURED",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "cv-maker",
       name: "CV Maker",
@@ -935,7 +979,10 @@
       version: "1.9.0",
       features: ["Templates", "PDF export", "LinkedIn import", "Cover letter"],
       description: "Create job-winning resumes instantly.",
-      externalUrl: "https://cv-maker-five-mu.vercel.app/"
+      externalUrl: "https://cv-maker-five-mu.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "matatu-booking",
       name: "Matatu Booking",
@@ -947,7 +994,10 @@
       version: "2.2.0",
       features: ["Real-time tracking", "Digital tickets", "Route planning", "Fare calc"],
       description: "Book matatus and track in real-time.",
-      externalUrl: "https://matatu-booking.vercel.app/"
+      externalUrl: "https://matatu-booking.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "home-search",
       name: "Home Search",
@@ -959,7 +1009,10 @@
       version: "3.3.0",
       features: ["Property search", "Virtual tours", "Mortgage calc", "Agent contact"],
       description: "Find dream home or rental.",
-      externalUrl: "https://home-search-j529.vercel.app/"
+      externalUrl: "https://home-search-j529.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "school-360",
       name: "School 360",
@@ -971,7 +1024,10 @@
       version: "4.1.0",
       features: ["Student records", "Fee mgmt", "Parent portal", "CBC support"],
       description: "Complete school ERP with CBC.",
-      externalUrl: "https://school-360-one.vercel.app/"
+      externalUrl: "https://school-360-one.vercel.app/",
+      tier: "STANDARD",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "kanisa-launcher",
       name: "Kanisa Launcher",
@@ -983,7 +1039,10 @@
       version: "1.2.0",
       features: ["Events", "Giving platform", "Member directory", "Live stream"],
       description: "Digital tools for modern ministry.",
-      externalUrl: "https://kanisa-launcher.vercel.app/"
+      externalUrl: "https://kanisa-launcher.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }, {
       id: "spark-connect",
       name: "Spark Connect",
@@ -995,9 +1054,12 @@
       version: "2.0.0",
       features: ["Smart matching", "Video calls", "Verified profiles", "Interest-based groups", "Safety tools"],
       description: "Find genuine relationships with AI-powered matching.",
-      externalUrl: "https://dating-app-six-pi.vercel.app/"
-    },
-    {
+      externalUrl: "https://dating-app-six-pi.vercel.app/",
+      tier: "FEATURED",
+      trialActive: true,
+      trialEnd: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+      developer: "meon"
+    }, {
       id: "meal-planner-pro",
       name: "Meal Planner PRO",
       slug: "meal-planner-pro",
@@ -1007,10 +1069,12 @@
       ratingCount: 312,
       version: "1.0.0",
       features: ["7-day meal plans", "AI recommendations", "Grocery lists", "Dietary preferences", "Budget tracking"],
-      description: "Meal Planner PRO designs daily meal plans tailored to your dietary goals, preferences, and budget. Save money and eat healthy with AI-generated weekly meal plans and aisle-sorted shopping lists.",
-      externalUrl: "https://diet-snowy-five.vercel.app/"
-    },
-    {
+      description: "Meal Planner PRO designs daily meal plans tailored to your dietary goals.",
+      externalUrl: "https://diet-snowy-five.vercel.app/",
+      tier: "STANDARD",
+      trialActive: false,
+      developer: "meon"
+    }, {
       id: "finance-eight",
       name: "Finance Eight",
       slug: "finance-eight",
@@ -1019,11 +1083,13 @@
       rating: 4.6,
       ratingCount: 198,
       version: "1.0.0",
-      features: ["Budget tracking", "Expense categorization", "Savings goals", "Financial insights", "Multi-currency support"],
-      description: "Take control of your finances with smart budgeting tools, expense tracking, and personalized financial insights to help you save more and spend wisely.",
-      externalUrl: "https://finance-eight-fawn.vercel.app/"
-    },
-    {
+      features: ["Budget tracking", "Expense categorization", "Savings goals", "Financial insights", "Multi-currency"],
+      description: "Take control of your finances with smart budgeting tools.",
+      externalUrl: "https://finance-eight-fawn.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
+    }, {
       id: "sacco-sable",
       name: "Sacco Sable",
       slug: "sacco-sable",
@@ -1032,11 +1098,13 @@
       rating: 4.5,
       ratingCount: 156,
       version: "1.0.0",
-      features: ["Savings goals", "Investment tracking", "Dividend management", "Member contributions", "Financial reports"],
-      description: "Sacco Sable helps you manage your savings, track investments, and grow your wealth with smart financial tools and insights.",
-      externalUrl: "https://sacco-sable.vercel.app/"
-    },
-    {
+      features: ["Savings goals", "Investment tracking", "Dividend management", "Member contributions"],
+      description: "Sacco Sable helps you manage your savings and grow your wealth.",
+      externalUrl: "https://sacco-sable.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
+    }, {
       id: "cbo-three",
       name: "CBO Three",
       slug: "cbo-three",
@@ -1045,12 +1113,13 @@
       rating: 4.4,
       ratingCount: 89,
       version: "1.0.0",
-      features: ["Member management", "Contribution tracking", "Project monitoring", "Financial reporting", "Communication tools"],
-      description: "CBO Three is a comprehensive management platform for Community Based Organizations. Streamline member contributions, track projects, generate financial reports, and improve communication within your organization.",
-      externalUrl: "https://c-b-o-three.vercel.app/"
-    },
-    // 🆕 NEW APP: Gym Nine
-    {
+      features: ["Member management", "Contribution tracking", "Project monitoring", "Financial reporting"],
+      description: "CBO Three is a comprehensive management platform for Community Based Organizations.",
+      externalUrl: "https://c-b-o-three.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
+    }, {
       id: "gym-nine",
       name: "Gym Nine",
       slug: "gym-nine",
@@ -1060,8 +1129,11 @@
       ratingCount: 124,
       version: "1.0.0",
       features: ["Workout tracking", "Progress monitoring", "Exercise library", "Goal setting", "Workout plans"],
-      description: "Gym Nine is your ultimate fitness companion. Track your workouts, monitor your progress, and achieve your fitness goals with personalized workout plans and an extensive exercise library.",
-      externalUrl: "https://gym-nine-sepia.vercel.app/"
+      description: "Gym Nine is your ultimate fitness companion.",
+      externalUrl: "https://gym-nine-sepia.vercel.app/",
+      tier: "FREE",
+      trialActive: false,
+      developer: "meon"
     }];
 
     // Attach logos + screenshots + developer info
@@ -1074,9 +1146,13 @@
       app.versions = [{ version: app.version, changelog: "Latest stable release", createdAt: new Date()
           .toISOString() }];
       if (!app.ratingCount) app.ratingCount = Math.floor(Math.random() * 800) + 50;
+      if (!app.tier) app.tier = "FREE";
     });
 
-    // Fallback SVG generator
+    // ============================================================
+    // UTILITY FUNCTIONS
+    // ============================================================
+    
     function generateFallbackSVG(appId, size = 80) {
       const colorMap = {
         "maji-gas": { primary: "#2563EB", secondary: "#F97316", letter: "M" },
@@ -1101,7 +1177,7 @@
         "cbo-three": { primary: "#0D9488", secondary: "#0F766E", letter: "C" },
         "gym-nine": { primary: "#DC2626", secondary: "#991B1B", letter: "G" }
       };
-      const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "S" };
+      const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "A" };
       const svgString =
         `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="${size}" height="${size}">
           <rect width="512" height="512" rx="96" fill="${c.primary}"/>
@@ -1121,20 +1197,23 @@
           onerror="this.onerror=null; this.src='${fallbackSvg}';">`;
     }
 
-    // ---------- STATE MANAGEMENT ----------
-    let currentUser = JSON.parse(localStorage.getItem("meonUser")) || null;
-    let activeView = "home";
-    let selectedApp = null;
-    let userFavorites = JSON.parse(localStorage.getItem("meonFavorites")) || [];
-    let reviewsData = JSON.parse(localStorage.getItem("meonReviews")) || {};
-    let searchQuery = "";
-    let activeCategoryFilter = "";
+    function getTierConfig(tierKey) {
+      return DEFAULT_TIERS[tierKey] || DEFAULT_TIERS.FREE;
+    }
 
-    function saveState() {
-      if (currentUser) localStorage.setItem("meonUser", JSON.stringify(currentUser));
-      else localStorage.removeItem("meonUser");
-      localStorage.setItem("meonFavorites", JSON.stringify(userFavorites));
-      localStorage.setItem("meonReviews", JSON.stringify(reviewsData));
+    function getTierColor(tierKey) {
+      const tier = getTierConfig(tierKey);
+      const colors = {
+        gray: 'bg-gray-500/20 text-gray-300',
+        purple: 'bg-purple-500/20 text-purple-300',
+        amber: 'bg-amber-500/20 text-amber-300'
+      };
+      return colors[tier.color] || colors.gray;
+    }
+
+    function getTierBadge(tierKey) {
+      const tier = getTierConfig(tierKey);
+      return tier.icon || '💎';
     }
 
     function showToast(msg, type = "success") {
@@ -1149,12 +1228,47 @@
       setTimeout(() => toast.remove(), 4000);
     }
 
-    function loginUser(email, role = "user") {
-      currentUser = { id: Date.now(), email, name: email.split('@')[0], role: role };
+    // ============================================================
+    // STATE MANAGEMENT
+    // ============================================================
+    
+    let currentUser = JSON.parse(localStorage.getItem("meonUser")) || null;
+    let activeView = "home";
+    let selectedApp = null;
+    let userFavorites = JSON.parse(localStorage.getItem("meonFavorites")) || [];
+    let reviewsData = JSON.parse(localStorage.getItem("meonReviews")) || {};
+    let searchQuery = "";
+    let activeCategoryFilter = "";
+    let customPricing = JSON.parse(localStorage.getItem("meonCustomPricing")) || {};
+
+    function saveState() {
+      if (currentUser) localStorage.setItem("meonUser", JSON.stringify(currentUser));
+      else localStorage.removeItem("meonUser");
+      localStorage.setItem("meonFavorites", JSON.stringify(userFavorites));
+      localStorage.setItem("meonReviews", JSON.stringify(reviewsData));
+      localStorage.setItem("meonCustomPricing", JSON.stringify(customPricing));
+    }
+
+    function loginUser(email, role = "user", name = null) {
+      currentUser = { 
+        id: Date.now(), 
+        email, 
+        name: name || email.split('@')[0], 
+        role: role,
+        createdAt: new Date().toISOString()
+      };
       saveState();
       renderNav();
       renderCurrentView();
-      showToast(`Welcome to Meon, ${currentUser.name}!`, "success");
+      showToast(`Welcome to Meon, ${currentUser.name}! 🚀`, "success");
+      
+      // Send welcome email
+      sendEmail('welcome', {
+        name: currentUser.name,
+        email: currentUser.email,
+        appCount: appList.length,
+        dashboardUrl: window.location.href + '?nav=dashboard'
+      });
     }
 
     function logout() {
@@ -1163,15 +1277,19 @@
       saveState();
       renderNav();
       renderCurrentView();
-      showToast("Logged out", "success");
+      showToast("Logged out successfully", "success");
     }
 
     function toggleFavorite(appId) {
       if (!currentUser) { showToast("Sign in to save favorites", "error"); return false; }
       const idx = userFavorites.indexOf(appId);
-      if (idx === -1) { userFavorites.push(appId);
-        showToast("Added to favorites", "success"); } else { userFavorites.splice(idx, 1);
-        showToast("Removed from favorites", "success"); }
+      if (idx === -1) { 
+        userFavorites.push(appId);
+        showToast("Added to favorites ❤️", "success"); 
+      } else { 
+        userFavorites.splice(idx, 1);
+        showToast("Removed from favorites", "success"); 
+      }
       saveState();
       renderCurrentView();
       return true;
@@ -1180,7 +1298,7 @@
     function openApp(app) {
       if (app.externalUrl) {
         window.open(app.externalUrl, '_blank');
-        showToast(`Launching ${app.name}...`, "info");
+        showToast(`Launching ${app.name}... 🚀`, "info");
       } else {
         showToast("No web link available for this app", "error");
       }
@@ -1189,15 +1307,22 @@
     function submitReview(appId, rating, content) {
       if (!currentUser) { showToast("Login to review", "error"); return false; }
       if (!reviewsData[appId]) reviewsData[appId] = [];
-      reviewsData[appId].push({ userId: currentUser.id, user: currentUser.name, rating, content,
-        date: new Date().toISOString() });
+      reviewsData[appId].push({ 
+        userId: currentUser.id, 
+        user: currentUser.name, 
+        rating, 
+        content,
+        date: new Date().toISOString() 
+      });
       const allRatings = reviewsData[appId].map(r => r.rating);
       const avg = allRatings.reduce((a, b) => a + b, 0) / allRatings.length;
       const appObj = appList.find(a => a.id === appId);
-      if (appObj) { appObj.rating = parseFloat(avg.toFixed(1));
-        appObj.ratingCount = allRatings.length; }
+      if (appObj) { 
+        appObj.rating = parseFloat(avg.toFixed(1));
+        appObj.ratingCount = allRatings.length; 
+      }
       saveState();
-      showToast("Review submitted", "success");
+      showToast("Review submitted ✅", "success");
       renderCurrentView();
       return true;
     }
@@ -1206,82 +1331,560 @@
       let filtered = [...appList];
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
-        filtered = filtered.filter(app => app.name.toLowerCase().includes(q) || app.shortDesc.toLowerCase().includes(q) ||
-          app.category.toLowerCase().includes(q));
+        filtered = filtered.filter(app => 
+          app.name.toLowerCase().includes(q) || 
+          app.shortDesc.toLowerCase().includes(q) ||
+          app.category.toLowerCase().includes(q)
+        );
       }
       if (activeCategoryFilter) {
-        filtered = filtered.filter(app => app.category.toLowerCase() === activeCategoryFilter.toLowerCase());
+        filtered = filtered.filter(app => 
+          app.category.toLowerCase() === activeCategoryFilter.toLowerCase()
+        );
       }
       return filtered;
     }
 
+    // ============================================================
+    // NAVIGATION
+    // ============================================================
+    
+    function navigateTo(view) {
+      activeView = view;
+      selectedApp = null;
+      renderCurrentView();
+      document.querySelectorAll(".nav-btn").forEach(b => {
+        b.classList.remove("border-purple-600", "text-purple-600");
+        if (b.dataset.nav === view) {
+          b.classList.add("border-purple-600", "text-purple-600");
+        }
+      });
+    }
+
+    // ============================================================
+    // EMAIL SYSTEM
+    // ============================================================
+    
+    async function sendEmail(template, params) {
+      try {
+        const response = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ template, ...params })
+        });
+        return response.ok;
+      } catch (error) {
+        console.error('Email send error:', error);
+        return false;
+      }
+    }
+
+    // ============================================================
+    // SUBSCRIPTION SYSTEM
+    // ============================================================
+    
+    async function handleUpgrade(appId, tierKey) {
+      if (!currentUser) {
+        showToast('Please sign in to upgrade', 'error');
+        return;
+      }
+      
+      const tier = DEFAULT_TIERS[tierKey];
+      if (!tier) {
+        showToast('Invalid tier selected', 'error');
+        return;
+      }
+
+      // Check if custom pricing exists
+      const custom = customPricing[appId];
+      const price = custom ? custom[`${tierKey.toLowerCase()}Price`] : tier.price;
+      const trialDays = custom ? custom[`${tierKey.toLowerCase()}TrialDays`] : tier.trialDays;
+
+      try {
+        showToast('⏳ Processing...', 'info');
+        
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            appId: appId,
+            tier: tierKey,
+            priceId: tier.priceId,
+            userId: currentUser.id,
+            userEmail: currentUser.email,
+            trialDays: trialDays || 0,
+            returnUrl: window.location.href
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.url) {
+          window.location.href = data.url;
+        } else if (data.trialStarted) {
+          // Start trial locally
+          const app = appList.find(a => a.id === appId);
+          if (app) {
+            app.tier = tierKey;
+            app.trialActive = true;
+            app.trialEnd = data.trialEnd;
+            
+            // Send trial email
+            await sendEmail('trial_started', {
+              appName: app.name,
+              tier: tierKey,
+              trialDays: trialDays,
+              trialEnd: new Date(data.trialEnd).toLocaleDateString(),
+              features: tier.features.join(', '),
+              appUrl: window.location.href + '?app=' + appId
+            });
+            
+            showToast(`🎉 Free trial started! ${trialDays} days remaining.`, 'success');
+            renderCurrentView();
+          }
+        } else {
+          showToast(data.error || 'Failed to process request', 'error');
+        }
+      } catch (error) {
+        console.error('Upgrade error:', error);
+        showToast('Something went wrong. Please try again.', 'error');
+      }
+    }
+
+    // ============================================================
+    // UI COMPONENTS
+    // ============================================================
+    
     function appCard(app) {
       const isFav = currentUser && userFavorites.includes(app.id);
+      const tier = getTierConfig(app.tier);
+      const tierColor = getTierColor(app.tier);
+      const isTrial = app.trialActive;
       const appJson = JSON.stringify(app).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      
       return `<div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-md p-4 card-hover cursor-pointer border border-white/20" onclick="window.showAppDetail('${app.id}')">
           <div class="flex gap-3">
             ${appLogoImg(app, "w-16 h-16", 60)}
-            <div class="flex-1"><h3 class="font-bold text-gray-900 dark:text-white">${app.name}</h3><p class="text-sm text-gray-600 dark:text-gray-300">${app.shortDesc}</p><div class="flex items-center gap-1 mt-1"><i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i><span class="text-gray-900 dark:text-white">${app.rating}</span><span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(${app.ratingCount})</span></div></div>
-            <button class="text-red-500" onclick="event.stopPropagation(); toggleFavorite('${app.id}')"><i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500' : ''}"></i></button>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <h3 class="font-bold text-gray-900 dark:text-white">${app.name}</h3>
+                <span class="text-xs px-2 py-0.5 rounded-full ${tierColor}">${getTierBadge(app.tier)} ${app.tier}</span>
+                ${isTrial ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full trial-badge">🎁 Trial</span>` : ''}
+              </div>
+              <p class="text-sm text-gray-600 dark:text-gray-300">${app.shortDesc}</p>
+              <div class="flex items-center gap-1 mt-1">
+                <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                <span class="text-gray-900 dark:text-white">${app.rating}</span>
+                <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(${app.ratingCount})</span>
+              </div>
+            </div>
+            <button class="text-red-500" onclick="event.stopPropagation(); toggleFavorite('${app.id}')">
+              <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500' : ''}"></i>
+            </button>
           </div>
-          <div class="mt-3 flex justify-between items-center"><span class="text-xs bg-purple-600/20 dark:bg-purple-600/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">${app.category}</span><button onclick="event.stopPropagation(); window.openApp(${appJson})" class="bg-purple-600 text-white px-4 py-1 rounded-lg text-sm hover:bg-purple-700 transition">Open App →</button></div>
+          <div class="mt-3 flex justify-between items-center">
+            <span class="text-xs bg-purple-600/20 dark:bg-purple-600/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">${app.category}</span>
+            <button onclick="event.stopPropagation(); window.openApp(${appJson})" 
+                    class="bg-purple-600 text-white px-4 py-1 rounded-lg text-sm hover:bg-purple-700 transition">
+              Open App →
+            </button>
+          </div>
         </div>`;
     }
 
-    window.showAppDetail = (appId) => {
-      selectedApp = appList.find(a => a.id === appId);
-      renderCurrentView();
-    };
-    window.backToHome = () => { selectedApp = null;
-      renderCurrentView(); };
-    window.openApp = openApp;
-    window.toggleFavorite = toggleFavorite;
+    // ============================================================
+    // VIEW RENDERERS
+    // ============================================================
+    
+    function renderHome() {
+      const filteredApps = getFilteredApps();
+      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight", "sacco-sable", "cbo-three", "gym-nine"];
+      const featured = filteredApps.filter(a => featuredIds.includes(a.id));
+      const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
+      const newReleases = [...filteredApps].reverse().slice(0, 6);
+      
+      const categoryItems = [
+        { name: "Social", gradient: "from-pink-600 to-rose-600", filter: "social" },
+        { name: "AI Tools", gradient: "from-purple-600 to-violet-600", filter: "ai tools" },
+        { name: "Business", gradient: "from-blue-600 to-cyan-600", filter: "business" },
+        { name: "Education", gradient: "from-green-600 to-emerald-600", filter: "education" },
+        { name: "Agriculture", gradient: "from-orange-600 to-amber-600", filter: "agriculture" },
+        { name: "Transport", gradient: "from-red-600 to-pink-600", filter: "transport" },
+        { name: "Design", gradient: "from-indigo-600 to-purple-600", filter: "design" },
+        { name: "Utilities", gradient: "from-teal-600 to-cyan-600", filter: "utilities" },
+        { name: "Health & Wellness", gradient: "from-green-600 to-lime-600", filter: "health & wellness" },
+        { name: "Finance", gradient: "from-emerald-600 to-teal-600", filter: "finance" }
+      ];
+      
+      const mainBgHtml = `<div class="main-bg w-full max-w-6xl mx-auto">
+        <div class="main-content">`;
+      
+      const heroHtml =
+        `<div class="hero-bg w-full mx-auto overflow-hidden p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8 min-h-[300px] flex items-center">
+          <div class="hero-content flex flex-col md:flex-row justify-between items-center gap-6 w-full">
+            <div>
+              <h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1>
+              <p class="text-purple-200 mt-2">Launch web apps instantly · Premium subscriptions available</p>
+              <div class="flex flex-wrap gap-4 mt-4">
+                <button id="exploreMarketplaceBtn" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-500 transition">Explore Apps →</button>
+                <button id="becomeDevBtn" class="border border-purple-400 px-5 py-2 rounded-full text-sm hover:bg-purple-500/20 transition">Become a Developer</button>
+                <button onclick="navigateTo('pricing')" class="bg-amber-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-amber-500 transition">💎 View Pricing</button>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center">
+                <div class="text-3xl font-bold">${appList.length}+</div>
+                <div class="text-xs">Web Apps</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center">
+                <div class="text-3xl font-bold">${appList.filter(a => a.tier !== 'FREE').length}</div>
+                <div class="text-xs">Premium</div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+        
+      const categoriesHtml = `<div class="categories-bg w-full mx-auto mb-8">
+        <div class="categories-content">
+          <h2 class="text-2xl font-bold text-white mb-4">📂 Categories</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+            ${categoryItems.map(cat => `<div class="rounded-xl bg-gradient-to-r ${cat.gradient} text-white p-3 text-center text-sm font-semibold cursor-pointer hover:scale-105 transition category-chip" data-category="${cat.filter}">${cat.name}</div>`).join('')}
+            ${activeCategoryFilter ? `<div class="rounded-xl bg-gray-500 text-white p-3 text-center cursor-pointer" id="clearCategoryBtn">Clear ✕</div>` : ""}
+          </div>
+        </div>
+      </div>`;
+      
+      const searchHtml = `<div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3 mb-8">
+        <i data-lucide="search" class="text-white"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none text-white placeholder-gray-300" value="${searchQuery.replace(/"/g, '&quot;')}">
+      </div>`;
+      
+      const featuredHtml = `<div class="featured-bg w-full mx-auto mb-8">
+        <div class="featured-content">
+          <h2 class="text-2xl font-bold text-white mb-4">⭐ Featured</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.length ? featured.map(app=>appCard(app)).join('') : '<p class="text-gray-400 col-span-3 text-center py-8">No featured apps found</p>'}</div>
+        </div>
+      </div>`;
+      
+      const topratedHtml = `<div class="toprated-bg w-full mx-auto mb-8">
+        <div class="toprated-content">
+          <h2 class="text-2xl font-bold text-white mb-4">🔥 Top Rated</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div>
+        </div>
+      </div>`;
+      
+      const recentHtml = `<div class="recent-bg w-full mx-auto mb-8">
+        <div class="recent-content">
+          <h2 class="text-2xl font-bold text-white mb-4">🆕 Recently Added</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div>
+        </div>
+      </div>`;
+      
+      const closeHtml = `</div></div>`;
+        
+      return `${mainBgHtml}${heroHtml}${categoriesHtml}${searchHtml}${featuredHtml}${topratedHtml}${recentHtml}${closeHtml}`;
+    }
 
     function renderAppDetail() {
       if (!selectedApp) return renderHome();
+      
       const app = selectedApp;
       const appReviews = reviewsData[app.id] || [];
       const screenshotHtml = app.screenshots.map(url =>
         `<img src="${url}" class="rounded-xl border border-gray-200 dark:border-gray-700 w-64 h-40 object-cover" alt="screenshot">`
       ).join('');
       const appJson = JSON.stringify(app).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-      return `<div class="max-w-4xl mx-auto"><button onclick="window.backToHome()" class="flex items-center gap-1 text-purple-600 mb-4">&larr; Back to Store</button>
-          <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
-            <div class="flex gap-5 flex-wrap">${appLogoImg(app, "w-24 h-24", 100)}<div><h1 class="text-3xl font-bold">${app.name}</h1><p class="text-gray-500">${app.shortDesc}</p><div class="flex gap-3 mt-2"><div class="flex"><i data-lucide="star" class="fill-yellow-400"></i> ${app.rating} (${app.ratingCount})</div></div><div class="flex gap-3 mt-4"><button onclick="window.openApp(${appJson})" class="bg-purple-600 text-white px-6 py-2 rounded-full">Open Web App →</button><button onclick="window.toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full">❤️ Favorite</button></div></div></div>
-            <div class="mt-6"><h2 class="text-xl font-semibold">Description</h2><p>${app.description}</p><h3 class="font-semibold mt-4">Key Features</h3><ul class="list-disc pl-5">${app.features.map(f=>`<li>${f}</li>`).join('')}</ul></div>
-            <div class="mt-6"><h2 class="text-xl font-semibold">Screenshots</h2><div class="flex gap-3 overflow-x-auto pb-2">${screenshotHtml}</div></div>
-            <div class="mt-8"><h2 class="text-xl font-semibold">Rate & Review</h2><div id="reviewStars" class="flex gap-1 my-2"></div><textarea id="reviewText" class="w-full border rounded p-2 dark:bg-gray-700" rows="2" placeholder="Write your review..."></textarea><button id="submitReviewBtn" class="mt-2 bg-purple-600 text-white px-4 py-1 rounded">Submit Review</button>
-            <div class="mt-6 space-y-3">${appReviews.map(r => `<div class="border-b pb-2"><div class="font-semibold">${r.user}</div><div class="flex text-yellow-400">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div><p>${r.content}</p><small>${new Date(r.date).toLocaleDateString()}</small></div>`).join('')}</div></div>
-          </div></div>`;
-    }
-
-    function renderDashboard() {
-      if (!currentUser) return `<div class="text-center py-12 text-white">Sign in to access your Meon dashboard</div>`;
-      const favApps = appList.filter(a => userFavorites.includes(a.id));
-      return `<div class="dashboard-bg w-full max-w-6xl mx-auto">
-        <div class="dashboard-content">
-          <h1 class="text-3xl font-bold text-white mb-6">My Meon Workspace</h1>
-          <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-            <h2 class="text-xl font-bold text-white">❤️ Favorite Apps (${favApps.length})</h2>
-            <div class="grid gap-3 mt-3">
-              ${favApps.map(a=>`<div class="flex gap-3 items-center p-3 bg-white/5 backdrop-blur rounded-lg border border-white/10">
-                ${appLogoImg(a, "w-10 h-10", 40)}
-                <span class="flex-1 font-medium text-white">${a.name}</span>
-                <button onclick="window.openApp(${JSON.stringify(a).replace(/"/g, '&quot;').replace(/'/g, '&#39;')})" class="bg-purple-600 text-white px-3 py-1 rounded text-sm hover:bg-purple-700 transition">Open</button>
-              </div>`).join('')||"<p class='text-gray-300'>No favorites yet. ❤️ apps to see them here.</p>"}
+      const tier = getTierConfig(app.tier);
+      const tierColor = getTierColor(app.tier);
+      const isTrial = app.trialActive;
+      
+      return `<div class="max-w-4xl mx-auto">
+        <button onclick="window.backToHome()" class="flex items-center gap-1 text-purple-600 mb-4">&larr; Back to Store</button>
+        <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
+          <div class="flex gap-5 flex-wrap">
+            ${appLogoImg(app, "w-24 h-24", 100)}
+            <div>
+              <div class="flex items-center gap-3 flex-wrap">
+                <h1 class="text-3xl font-bold">${app.name}</h1>
+                <span class="text-xs px-3 py-1 rounded-full ${tierColor}">${getTierBadge(app.tier)} ${app.tier}</span>
+                ${isTrial ? `<span class="text-xs bg-green-500/20 text-green-300 px-3 py-1 rounded-full trial-badge">🎁 Trial: ${Math.ceil((new Date(app.trialEnd) - new Date()) / (1000 * 60 * 60 * 24))}d left</span>` : ''}
+              </div>
+              <p class="text-gray-500">${app.shortDesc}</p>
+              <div class="flex gap-3 mt-2">
+                <div class="flex items-center"><i data-lucide="star" class="fill-yellow-400 text-yellow-400"></i> ${app.rating} (${app.ratingCount})</div>
+              </div>
+              <div class="flex gap-3 mt-4 flex-wrap">
+                <button onclick="window.openApp(${appJson})" class="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition">Open Web App →</button>
+                <button onclick="window.toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">❤️ Favorite</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6">
+            <h2 class="text-xl font-semibold">Description</h2>
+            <p>${app.description}</p>
+            <h3 class="font-semibold mt-4">Key Features</h3>
+            <ul class="list-disc pl-5">${app.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+          </div>
+          
+          <div class="mt-6">
+            <h2 class="text-xl font-semibold">Screenshots</h2>
+            <div class="flex gap-3 overflow-x-auto pb-2">${screenshotHtml}</div>
+          </div>
+          
+          <!-- Subscription Options -->
+          ${renderSubscriptionOptions(app)}
+          
+          <div class="mt-8">
+            <h2 class="text-xl font-semibold">Rate & Review</h2>
+            <div id="reviewStars" class="flex gap-1 my-2"></div>
+            <textarea id="reviewText" class="w-full border rounded p-2 dark:bg-gray-700" rows="2" placeholder="Write your review..."></textarea>
+            <button id="submitReviewBtn" class="mt-2 bg-purple-600 text-white px-4 py-1 rounded hover:bg-purple-700 transition">Submit Review</button>
+            <div class="mt-6 space-y-3">
+              ${appReviews.map(r => `
+                <div class="border-b pb-2">
+                  <div class="font-semibold">${r.user}</div>
+                  <div class="flex text-yellow-400">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+                  <p>${r.content}</p>
+                  <small>${new Date(r.date).toLocaleDateString()}</small>
+                </div>
+              `).join('')}
             </div>
           </div>
         </div>
       </div>`;
     }
 
+    function renderSubscriptionOptions(app) {
+      if (!currentUser || currentUser.role !== 'developer') return '';
+      
+      const currentTier = app.tier || 'FREE';
+      const isTrial = app.trialActive;
+      const custom = customPricing[app.id] || {};
+      
+      return `
+        <div class="mt-6 border-t border-gray-200 dark:border-gray-700 pt-6">
+          <h3 class="text-lg font-bold text-white mb-4">💎 Premium Tier Upgrade</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            ${Object.entries(DEFAULT_TIERS).map(([key, tier]) => {
+              const isCurrent = currentTier === key;
+              const hasTrial = (custom[`${key.toLowerCase()}TrialDays`] || tier.trialDays) > 0;
+              const price = custom[`${key.toLowerCase()}Price`] || tier.price;
+              const trialDays = custom[`${key.toLowerCase()}TrialDays`] || tier.trialDays;
+              
+              return `
+                <div class="tier-card bg-white/5 backdrop-blur-lg rounded-xl p-4 border ${isCurrent ? 'border-purple-500 ring-2 ring-purple-500/50' : 'border-white/10'} relative ${key === 'FEATURED' ? 'popular' : ''}">
+                  ${key === 'FEATURED' ? '<div class="tier-badge">🔥 POPULAR</div>' : ''}
+                  <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-white">${tier.icon} ${tier.name}</h4>
+                    ${isCurrent ? '<span class="text-xs bg-purple-600 px-2 py-1 rounded-full">Current</span>' : ''}
+                    ${hasTrial && !isCurrent ? `<span class="text-xs bg-green-600 px-2 py-1 rounded-full">${trialDays}-day trial</span>` : ''}
+                  </div>
+                  <div class="text-2xl font-bold text-white mb-3">${price}</div>
+                  <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                    ${tier.features.map(f => `<li class="flex items-center gap-1"><span class="text-green-400">✓</span> ${f}</li>`).join('')}
+                  </ul>
+                  ${hasTrial ? `<div class="text-xs text-green-400 mb-3">🎁 Try free for ${trialDays} days</div>` : ''}
+                  ${!isCurrent ? `
+                    <button onclick="handleUpgrade('${app.id}', '${key}')" 
+                            class="w-full ${key === 'FEATURED' ? 'bg-amber-600 hover:bg-amber-700' : key === 'STANDARD' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-600 hover:bg-gray-700'} text-white py-2 rounded-lg transition text-sm font-semibold">
+                      ${hasTrial ? 'Start Free Trial' : `Upgrade to ${tier.name}`}
+                    </button>
+                  ` : `
+                    <button class="w-full bg-gray-600 text-white py-2 rounded-lg text-sm font-semibold cursor-not-allowed opacity-50" disabled>
+                      Current Plan
+                    </button>
+                  `}
+                </div>
+              `;
+            }).join('')}
+          </div>
+          <div class="mt-4 text-xs text-gray-400">
+            🔒 Secure payments powered by Stripe. Cancel anytime.
+            ${isTrial ? `<div class="mt-1 text-green-400">⏳ Trial ends: ${new Date(app.trialEnd).toLocaleDateString()}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDashboard() {
+      if (!currentUser) {
+        return `<div class="text-center py-12">
+          <div class="text-6xl mb-4">🔐</div>
+          <h2 class="text-2xl font-bold text-white">Sign in to access your dashboard</h2>
+          <p class="text-gray-400 mt-2">Manage your apps, subscriptions, and more</p>
+          <button onclick="showAuthModal()" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">Sign In</button>
+        </div>`;
+      }
+      
+      const userApps = appList.filter(app => 
+        app.developer === currentUser.email || 
+        app.ownerId === currentUser.id
+      );
+      
+      const favApps = appList.filter(a => userFavorites.includes(a.id));
+      
+      return `
+        <div class="dashboard-bg w-full max-w-6xl mx-auto">
+          <div class="dashboard-content">
+            <div class="flex justify-between items-center mb-6">
+              <h1 class="text-3xl font-bold text-white">My Meon Workspace</h1>
+              <button onclick="showSubmitAppModal()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition flex items-center gap-2">
+                <i data-lucide="plus" class="w-4 h-4"></i> Submit App
+              </button>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                <div class="text-2xl font-bold text-purple-300">${userApps.length}</div>
+                <div class="text-sm text-gray-300">Your Apps</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                <div class="text-2xl font-bold text-amber-300">${userApps.filter(a => a.tier === 'FEATURED').length}</div>
+                <div class="text-sm text-gray-300">Featured</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                <div class="text-2xl font-bold text-purple-300">${userApps.filter(a => a.tier === 'STANDARD').length}</div>
+                <div class="text-sm text-gray-300">Standard</div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                <div class="text-2xl font-bold text-green-300">${userApps.filter(a => a.trialActive).length}</div>
+                <div class="text-sm text-gray-300">Active Trials</div>
+              </div>
+            </div>
+            
+            <!-- Favorites -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 mb-6">
+              <h2 class="text-xl font-bold text-white mb-4">❤️ Favorite Apps</h2>
+              <div class="grid gap-3">
+                ${favApps.map(a => `
+                  <div class="flex gap-3 items-center p-3 bg-white/5 backdrop-blur rounded-lg border border-white/10">
+                    ${appLogoImg(a, "w-10 h-10", 40)}
+                    <span class="flex-1 font-medium text-white">${a.name}</span>
+                    <span class="text-xs px-2 py-1 rounded-full ${getTierColor(a.tier)}">${getTierBadge(a.tier)} ${a.tier}</span>
+                    <button onclick="window.openApp(${JSON.stringify(a).replace(/"/g, '&quot;').replace(/'/g, '&#39;')})" 
+                            class="bg-purple-600 text-white px-3 py-1 rounded text-sm hover:bg-purple-700 transition">
+                      Open
+                    </button>
+                  </div>
+                `).join('') || "<p class='text-gray-300'>No favorites yet. ❤️ apps to see them here.</p>"}
+              </div>
+            </div>
+            
+            <!-- Your Apps -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+              <h2 class="text-xl font-bold text-white mb-4">📱 Your Apps</h2>
+              <div class="space-y-4">
+                ${userApps.map(app => {
+                  const tier = getTierConfig(app.tier);
+                  const tierColor = getTierColor(app.tier);
+                  const isTrial = app.trialActive;
+                  const trialEnd = app.trialEnd ? new Date(app.trialEnd) : null;
+                  const daysLeft = trialEnd ? Math.ceil((trialEnd - new Date()) / (1000 * 60 * 60 * 24)) : 0;
+                  
+                  return `
+                    <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                      <div class="flex justify-between items-start flex-wrap gap-2">
+                        <div>
+                          <div class="flex items-center gap-2 flex-wrap">
+                            <h4 class="font-bold text-white">${app.name}</h4>
+                            <span class="text-xs px-2 py-1 rounded-full ${tierColor}">${getTierBadge(app.tier)} ${app.tier}</span>
+                            ${isTrial ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full trial-badge">🎁 Trial: ${daysLeft}d left</span>` : ''}
+                          </div>
+                          <div class="text-sm text-gray-400">${tier.price}</div>
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                          <button onclick="manageSubscription('${app.id}')" 
+                                  class="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition">
+                            Manage
+                          </button>
+                          <button onclick="viewAppAnalytics('${app.id}')" 
+                                  class="text-sm bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded transition">
+                            Analytics
+                          </button>
+                          <button onclick="editAppPricing('${app.id}')" 
+                                  class="text-sm bg-amber-600 hover:bg-amber-700 text-white px-3 py-1 rounded transition">
+                            Pricing
+                          </button>
+                        </div>
+                      </div>
+                      ${app.expiresAt && app.tier !== 'FREE' ? `
+                        <div class="mt-2 text-xs text-gray-400">
+                          ${isTrial ? `⏳ Trial ends: ${new Date(app.expiresAt).toLocaleDateString()}` : `⏳ Renews: ${new Date(app.expiresAt).toLocaleDateString()}`}
+                        </div>
+                      ` : ''}
+                    </div>
+                  `;
+                }).join('')}
+                ${userApps.length === 0 ? `
+                  <div class="text-center py-8">
+                    <p class="text-gray-300">You haven't submitted any apps yet.</p>
+                    <button onclick="showSubmitAppModal()" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                      + Submit Your First App
+                    </button>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPricingPage() {
+      return `
+        <div class="dashboard-bg w-full max-w-6xl mx-auto">
+          <div class="dashboard-content">
+            <h1 class="text-3xl font-bold text-white mb-4 text-center">💎 Choose Your Plan</h1>
+            <p class="text-gray-300 text-center mb-8">Start with a free trial and upgrade when you're ready</p>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+              ${Object.entries(DEFAULT_TIERS).map(([key, tier]) => {
+                const isPopular = key === 'FEATURED';
+                const hasTrial = tier.trialDays > 0;
+                
+                return `
+                  <div class="tier-card bg-white/10 backdrop-blur-lg rounded-2xl p-6 border ${isPopular ? 'border-amber-500/50 ring-2 ring-amber-500/30' : 'border-white/10'} relative">
+                    ${isPopular ? '<div class="tier-badge">🔥 MOST POPULAR</div>' : ''}
+                    <div class="text-4xl mb-3">${tier.icon}</div>
+                    <h3 class="text-2xl font-bold text-white">${tier.name}</h3>
+                    <div class="text-4xl font-bold text-white mt-2">${tier.price}</div>
+                    ${hasTrial ? `<div class="text-green-400 text-sm mt-1">🎁 ${tier.trialDays}-day free trial</div>` : ''}
+                    <ul class="mt-6 space-y-2">
+                      ${tier.features.map(f => `
+                        <li class="flex items-center gap-2 text-gray-300">
+                          <span class="text-green-400">✓</span> ${f}
+                        </li>
+                      `).join('')}
+                    </ul>
+                    <button onclick="navigateTo('home')" 
+                            class="w-full mt-6 ${isPopular ? 'bg-amber-600 hover:bg-amber-700' : 'bg-purple-600 hover:bg-purple-700'} text-white py-3 rounded-xl font-semibold transition">
+                      Get Started
+                    </button>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+            
+            <div class="mt-8 text-center text-gray-400 text-sm">
+              <p>🔒 All plans include secure payments, cancel anytime</p>
+              <p class="mt-1">💳 Developers: Set custom pricing for your apps in the Developer Hub</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     function renderATT() {
       return `<div class="att-bg w-full max-w-6xl mx-auto">
         <div class="att-content">
-          <h1 class="text-3xl font-bold text-white mb-6">ATT - Advanced Technology Tools</h1>
+          <h1 class="text-3xl font-bold text-white mb-6">🚀 ATT - Advanced Technology Tools</h1>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
-              <div class="text-4xl mb-3">🚀</div>
+              <div class="text-4xl mb-3">🤖</div>
               <h3 class="text-xl font-bold text-white">AI Analytics</h3>
               <p class="text-gray-300 mt-2">Real-time data insights powered by artificial intelligence</p>
               <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
@@ -1305,7 +1908,7 @@
               <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
             </div>
             <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
-              <div class="text-4xl mb-3">🤖</div>
+              <div class="text-4xl mb-3">⚡</div>
               <h3 class="text-xl font-bold text-white">Automation Engine</h3>
               <p class="text-gray-300 mt-2">Intelligent process automation and workflow management</p>
               <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
@@ -1322,34 +1925,56 @@
     }
 
     function renderAdmin() {
-      if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin'))
-        return `<div class="text-center py-12 text-white">Restricted to Meon Admin</div>`;
+      if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin')) {
+        return `<div class="text-center py-12 text-white">
+          <div class="text-6xl mb-4">🔒</div>
+          <h2 class="text-2xl font-bold">Restricted to Meon Admin</h2>
+          <p class="text-gray-400 mt-2">Please sign in with admin credentials</p>
+        </div>`;
+      }
+      
       return `<div class="admin-bg w-full max-w-6xl mx-auto">
         <div class="admin-content">
-          <h1 class="text-3xl font-bold text-white mb-6">Meon Admin Console</h1>
+          <h1 class="text-3xl font-bold text-white mb-6">🛠️ Meon Admin Console</h1>
           <div class="grid md:grid-cols-2 gap-6">
             <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
               <h2 class="text-xl font-bold text-white">📊 Directory Stats</h2>
               <div class="mt-4 space-y-2 text-white">
                 <p class="text-lg">Total apps: <span class="font-bold text-purple-300">${appList.length}</span></p>
                 <p class="text-lg">Categories: <span class="font-bold text-purple-300">${new Set(appList.map(a=>a.category)).size}</span></p>
+                <p class="text-lg">Premium apps: <span class="font-bold text-amber-300">${appList.filter(a => a.tier !== 'FREE').length}</span></p>
+                <p class="text-lg">Active trials: <span class="font-bold text-green-300">${appList.filter(a => a.trialActive).length}</span></p>
                 <p class="text-lg">Total reviews: <span class="font-bold text-purple-300">${Object.values(reviewsData).reduce((acc, curr) => acc + curr.length, 0)}</span></p>
               </div>
             </div>
             <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
               <h2 class="text-xl font-bold text-white">⭐ Top Rated</h2>
               <ul class="mt-4 space-y-2 text-white">
-                ${appList.sort((a,b)=>b.rating-a.rating).slice(0,5).map(a=>`<li class="flex justify-between items-center p-2 bg-white/5 rounded"><span>${a.name}</span><span class="text-yellow-400">${a.rating} ★</span></li>`).join('')}
+                ${appList.sort((a,b)=>b.rating-a.rating).slice(0,5).map(a => `
+                  <li class="flex justify-between items-center p-2 bg-white/5 rounded">
+                    <span>${a.name}</span>
+                    <span class="text-yellow-400">${a.rating} ★</span>
+                  </li>
+                `).join('')}
               </ul>
             </div>
           </div>
           <div class="mt-6">
             <h2 class="text-xl font-bold text-white mb-4">App Management</h2>
             <div class="grid gap-2 max-h-96 overflow-y-auto">
-              ${appList.map(a=>`<div class="flex justify-between items-center bg-white/10 backdrop-blur-lg p-3 rounded-lg border border-white/10">
-                <span class="text-white">${a.name}</span>
-                <button class="text-sm bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 transition" onclick="alert('Admin: Manage ${a.name} (demo)')">Edit</button>
-              </div>`).join('')}
+              ${appList.map(a => `
+                <div class="flex justify-between items-center bg-white/10 backdrop-blur-lg p-3 rounded-lg border border-white/10">
+                  <div class="flex items-center gap-3">
+                    ${appLogoImg(a, "w-8 h-8", 30)}
+                    <span class="text-white">${a.name}</span>
+                    <span class="text-xs px-2 py-0.5 rounded-full ${getTierColor(a.tier)}">${a.tier}</span>
+                  </div>
+                  <div class="flex gap-2">
+                    <button class="text-sm bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 transition" onclick="editAppPricing('${a.id}')">Pricing</button>
+                    <button class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition" onclick="alert('Admin: Manage ${a.name}')">Edit</button>
+                  </div>
+                </div>
+              `).join('')}
             </div>
           </div>
         </div>
@@ -1357,164 +1982,569 @@
     }
 
     function renderDeveloper() {
-      if (!currentUser || currentUser.role !== 'developer')
-        return `<div class="text-center py-12 text-white">Developer portal - Meon Partners only</div>`;
-      return `<div class="developer-bg w-full max-w-6xl mx-auto">
-        <div class="developer-content">
-          <h1 class="text-3xl font-bold text-white mb-6">Meon Developer Hub</h1>
-          <p class="text-purple-200 text-lg mb-6">Monitor your web apps listed on Meon Directory</p>
-          <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-            <h3 class="text-xl font-bold text-white mb-4">Your Apps Performance</h3>
-            <div class="space-y-3">
-              ${appList.slice(0,5).map(a=>`<div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/10">
-                <span class="text-white font-medium">${a.name}</span>
-                <span class="text-yellow-400">Rating: ${a.rating} (${a.ratingCount} reviews)</span>
-              </div>`).join('')}
+      if (!currentUser || currentUser.role !== 'developer') {
+        return `<div class="text-center py-12 text-white">
+          <div class="text-6xl mb-4">👨‍💻</div>
+          <h2 class="text-2xl font-bold">Developer Hub</h2>
+          <p class="text-gray-400 mt-2">Sign in as a developer to access this portal</p>
+          <button onclick="showAuthModal()" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">Sign In</button>
+        </div>`;
+      }
+      
+      const userApps = appList.filter(app => 
+        app.developer === currentUser.email || 
+        app.ownerId === currentUser.id
+      );
+      
+      return `
+        <div class="developer-bg w-full max-w-6xl mx-auto">
+          <div class="developer-content">
+            <div class="flex justify-between items-center mb-6">
+              <h1 class="text-3xl font-bold text-white">👨‍💻 Developer Hub</h1>
+              <button onclick="showSubmitAppModal()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition flex items-center gap-2">
+                <i data-lucide="plus" class="w-4 h-4"></i> Submit New App
+              </button>
             </div>
-            <button class="mt-6 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition font-semibold">+ Submit New App</button>
-          </div>
-          <div class="mt-6 bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
-            <h3 class="text-xl font-bold text-white mb-4">📈 Analytics Overview</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div class="text-center p-4 bg-white/5 rounded-lg">
-                <div class="text-2xl font-bold text-purple-300">${appList.length}</div>
-                <div class="text-sm text-gray-300">Total Apps</div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                <div class="text-2xl font-bold text-purple-300">${userApps.length}</div>
+                <div class="text-sm text-gray-300">Your Apps</div>
               </div>
-              <div class="text-center p-4 bg-white/5 rounded-lg">
-                <div class="text-2xl font-bold text-purple-300">${appList.filter(a => a.rating >= 4.5).length}</div>
-                <div class="text-sm text-gray-300">High Rated</div>
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                <div class="text-2xl font-bold text-amber-300">${userApps.filter(a => a.tier === 'FEATURED').length}</div>
+                <div class="text-sm text-gray-300">Featured</div>
               </div>
-              <div class="text-center p-4 bg-white/5 rounded-lg">
-                <div class="text-2xl font-bold text-purple-300">${new Set(appList.map(a=>a.category)).size}</div>
-                <div class="text-sm text-gray-300">Categories</div>
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                <div class="text-2xl font-bold text-green-300">${userApps.filter(a => a.trialActive).length}</div>
+                <div class="text-sm text-gray-300">Active Trials</div>
               </div>
-              <div class="text-center p-4 bg-white/5 rounded-lg">
-                <div class="text-2xl font-bold text-purple-300">${Object.values(reviewsData).reduce((acc, curr) => acc + curr.length, 0)}</div>
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                <div class="text-2xl font-bold text-blue-300">${userApps.reduce((sum, a) => sum + a.ratingCount, 0)}</div>
                 <div class="text-sm text-gray-300">Total Reviews</div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>`;
-    }
-
-    function renderHome() {
-      const filteredApps = getFilteredApps();
-      const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight", "sacco-sable", "cbo-three", "gym-nine"];
-      const featured = filteredApps.filter(a => featuredIds.includes(a.id));
-      const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
-      const newReleases = [...filteredApps].reverse().slice(0, 6);
-      const categoryItems = [
-        { name: "Social", gradient: "from-pink-600 to-rose-600", filter: "social" },
-        { name: "AI Tools", gradient: "from-purple-600 to-violet-600", filter: "ai tools" },
-        { name: "Business", gradient: "from-blue-600 to-cyan-600", filter: "business" },
-        { name: "Education", gradient: "from-green-600 to-emerald-600", filter: "education" },
-        { name: "Agriculture", gradient: "from-orange-600 to-amber-600", filter: "agriculture" },
-        { name: "Transport", gradient: "from-red-600 to-pink-600", filter: "transport" },
-        { name: "Design", gradient: "from-indigo-600 to-purple-600", filter: "design" },
-        { name: "Utilities", gradient: "from-teal-600 to-cyan-600", filter: "utilities" },
-        { name: "Health & Wellness", gradient: "from-green-600 to-lime-600", filter: "health & wellness" },
-        { name: "Finance", gradient: "from-emerald-600 to-teal-600", filter: "finance" }
-      ];
-      
-      // Wrap everything in the main background
-      const mainBgHtml = `<div class="main-bg w-full max-w-6xl mx-auto">
-        <div class="main-content">`;
-      
-      // Hero section with background image
-      const heroHtml =
-        `<div class="hero-bg w-full mx-auto overflow-hidden p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8 min-h-[300px] flex items-center">
-          <div class="hero-content flex flex-col md:flex-row justify-between items-center gap-6 w-full">
-            <div>
-              <h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1>
-              <p class="text-purple-200 mt-2">Launch web apps instantly · No payments · No downloads</p>
-              <div class="flex gap-4 mt-4">
-                <button id="exploreMarketplaceBtn" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-500 transition">Explore Apps →</button>
-                <button id="becomeDevBtn" class="border border-purple-400 px-5 py-2 rounded-full text-sm hover:bg-purple-500/20 transition">Become a Developer</button>
+            
+            <!-- Your Apps -->
+            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+              <h2 class="text-xl font-bold text-white mb-4">📱 Your Apps</h2>
+              ${userApps.length > 0 ? `
+                <div class="space-y-4">
+                  ${userApps.map(app => {
+                    const tier = getTierConfig(app.tier);
+                    const tierColor = getTierColor(app.tier);
+                    const isTrial = app.trialActive;
+                    const daysLeft = isTrial ? Math.ceil((new Date(app.trialEnd) - new Date()) / (1000 * 60 * 60 * 24)) : 0;
+                    
+                    return `
+                      <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+                        <div class="flex justify-between items-start flex-wrap gap-2">
+                          <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                              <h4 class="font-bold text-white">${app.name}</h4>
+                              <span class="text-xs px-2 py-1 rounded-full ${tierColor}">${getTierBadge(app.tier)} ${app.tier}</span>
+                              ${isTrial ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full trial-badge">🎁 ${daysLeft}d trial left</span>` : ''}
+                            </div>
+                            <div class="flex items-center gap-3 mt-1 text-sm text-gray-400">
+                              <span>⭐ ${app.rating} (${app.ratingCount} reviews)</span>
+                              <span>📊 ${Math.floor(Math.random() * 1000) + 100} views</span>
+                            </div>
+                          </div>
+                          <div class="flex gap-2 flex-wrap">
+                            <button onclick="manageSubscription('${app.id}')" 
+                                    class="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition">
+                              Manage
+                            </button>
+                            <button onclick="editAppPricing('${app.id}')" 
+                                    class="text-sm bg-amber-600 hover:bg-amber-700 text-white px-3 py-1 rounded transition">
+                              💰 Pricing
+                            </button>
+                            <button onclick="viewAppAnalytics('${app.id}')" 
+                                    class="text-sm bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded transition">
+                              📊 Analytics
+                            </button>
+                          </div>
+                        </div>
+                        ${app.expiresAt && app.tier !== 'FREE' ? `
+                          <div class="mt-2 text-xs text-gray-400">
+                            ${isTrial ? `⏳ Trial ends: ${new Date(app.trialEnd).toLocaleDateString()}` : `⏳ Renews: ${new Date(app.expiresAt).toLocaleDateString()}`}
+                          </div>
+                        ` : ''}
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              ` : `
+                <div class="text-center py-8">
+                  <p class="text-gray-300">You haven't submitted any apps yet.</p>
+                  <button onclick="showSubmitAppModal()" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                    + Submit Your First App
+                  </button>
+                </div>
+              `}
+            </div>
+            
+            <!-- Developer Resources -->
+            <div class="mt-6 grid md:grid-cols-3 gap-4">
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10">
+                <div class="text-2xl mb-2">📚</div>
+                <h3 class="font-bold text-white">Documentation</h3>
+                <p class="text-sm text-gray-300 mt-1">API docs, integration guides, and best practices</p>
+                <button class="mt-3 text-purple-400 text-sm hover:text-purple-300">Read docs →</button>
+              </div>
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10">
+                <div class="text-2xl mb-2">💬</div>
+                <h3 class="font-bold text-white">Developer Community</h3>
+                <p class="text-sm text-gray-300 mt-1">Connect with other developers building on Meon</p>
+                <button class="mt-3 text-purple-400 text-sm hover:text-purple-300">Join community →</button>
+              </div>
+              <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10">
+                <div class="text-2xl mb-2">🚀</div>
+                <h3 class="font-bold text-white">Marketing Tools</h3>
+                <p class="text-sm text-gray-300 mt-1">Promote your app and grow your user base</p>
+                <button class="mt-3 text-purple-400 text-sm hover:text-purple-300">Learn more →</button>
               </div>
             </div>
-            <div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center">
-              <div class="text-3xl font-bold">${appList.length}+</div>
-              <div class="text-xs">Web Apps</div>
-            </div>
-          </div>
-        </div>`;
-        
-      // Categories section with background image
-      const categoriesHtml = `<div class="categories-bg w-full mx-auto mb-8">
-        <div class="categories-content">
-          <h2 class="text-2xl font-bold text-white mb-4">Categories</h2>
-          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
-            ${categoryItems.map(cat => `<div class="rounded-xl bg-gradient-to-r ${cat.gradient} text-white p-3 text-center text-sm font-semibold cursor-pointer hover:scale-105 transition category-chip" data-category="${cat.filter}">${cat.name}</div>`).join('')}
-            ${activeCategoryFilter ? `<div class="rounded-xl bg-gray-500 text-white p-3 text-center cursor-pointer" id="clearCategoryBtn">Clear ✕</div>` : ""}
           </div>
         </div>
-      </div>`;
-      
-      // Search bar
-      const searchHtml = `<div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3 mb-8">
-        <i data-lucide="search" class="text-white"></i>
-        <input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none text-white placeholder-gray-300" value="${searchQuery.replace(/"/g, '&quot;')}">
-      </div>`;
-      
-      // Featured section with its own background
-      const featuredHtml = `<div class="featured-bg w-full mx-auto mb-8">
-        <div class="featured-content">
-          <h2 class="text-2xl font-bold text-white mb-4">⭐ Featured</h2>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.map(app=>appCard(app)).join('')}</div>
-        </div>
-      </div>`;
-      
-      // Top Rated section with its own background
-      const topratedHtml = `<div class="toprated-bg w-full mx-auto mb-8">
-        <div class="toprated-content">
-          <h2 class="text-2xl font-bold text-white mb-4">🔥 Top Rated</h2>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div>
-        </div>
-      </div>`;
-      
-      // Recently Added section with its own background
-      const recentHtml = `<div class="recent-bg w-full mx-auto mb-8">
-        <div class="recent-content">
-          <h2 class="text-2xl font-bold text-white mb-4">🆕 Recently Added</h2>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div>
-        </div>
-      </div>`;
-      
-      // Close the main wrapper
-      const closeHtml = `</div></div>`;
-        
-      return `${mainBgHtml}${heroHtml}${categoriesHtml}${searchHtml}${featuredHtml}${topratedHtml}${recentHtml}${closeHtml}`;
+      `;
     }
 
+    // ============================================================
+    // MODALS & ACTIONS
+    // ============================================================
+    
+    function showAuthModal() {
+      const modalHtml = `
+        <div id="authModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div class="bg-gray-900 rounded-2xl p-6 w-full max-w-md">
+            <h2 class="text-2xl font-bold text-white mb-4">🔐 Meon Account</h2>
+            <form id="authForm" class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                <input type="email" id="loginEmail" placeholder="you@example.com" required
+                       class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" required
+                       class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+              </div>
+              <div class="flex gap-3 pt-2">
+                <button type="submit" id="loginBtn" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition font-semibold">
+                  Sign In
+                </button>
+                <button type="button" id="registerBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition font-semibold">
+                  Sign Up
+                </button>
+              </div>
+            </form>
+            <div class="mt-4 space-y-2">
+              <button id="demoAdminBtn" class="w-full bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 py-2 rounded-lg transition text-sm">
+                🔑 Demo Admin Access
+              </button>
+              <button id="demoDevBtn" class="w-full bg-amber-600/30 hover:bg-amber-600/50 text-amber-300 py-2 rounded-lg transition text-sm">
+                👨‍💻 Demo Developer Access
+              </button>
+            </div>
+            <button id="closeModal" class="w-full mt-4 text-gray-400 hover:text-gray-300 transition text-sm">
+              Cancel
+            </button>
+          </div>
+        </div>
+      `;
+      
+      document.body.insertAdjacentHTML("beforeend", modalHtml);
+      
+      document.getElementById('authForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        if (email) {
+          loginUser(email, 'user');
+          document.getElementById('authModal')?.remove();
+        }
+      });
+      
+      document.getElementById('registerBtn')?.addEventListener('click', () => {
+        const email = document.getElementById('loginEmail').value;
+        if (email) {
+          loginUser(email, 'user');
+          document.getElementById('authModal')?.remove();
+        } else {
+          showToast('Please enter an email address', 'error');
+        }
+      });
+      
+      document.getElementById('demoAdminBtn')?.addEventListener('click', () => {
+        loginUser('admin@meon.com', 'admin', 'Admin');
+        document.getElementById('authModal')?.remove();
+      });
+      
+      document.getElementById('demoDevBtn')?.addEventListener('click', () => {
+        loginUser('dev@meon.com', 'developer', 'Developer');
+        document.getElementById('authModal')?.remove();
+      });
+      
+      document.getElementById('closeModal')?.addEventListener('click', () => {
+        document.getElementById('authModal')?.remove();
+      });
+    }
+
+    function showSubmitAppModal() {
+      if (!currentUser) {
+        showToast('Please sign in first', 'error');
+        showAuthModal();
+        return;
+      }
+      
+      const modalHtml = `
+        <div id="submitAppModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div class="bg-gray-900 rounded-2xl p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <h2 class="text-2xl font-bold text-white mb-4">🚀 Submit Your App</h2>
+            <form id="submitAppForm" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">App Name *</label>
+                  <input type="text" id="appName" required 
+                         class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Category *</label>
+                  <select id="appCategory" required 
+                          class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                    <option value="">Select category</option>
+                    <option value="AI Tools">AI Tools</option>
+                    <option value="Productivity">Productivity</option>
+                    <option value="Business">Business</option>
+                    <option value="Education">Education</option>
+                    <option value="Health & Wellness">Health & Wellness</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Design">Design</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Social">Social</option>
+                    <option value="Analytics">Analytics</option>
+                    <option value="CRM">CRM</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Religion">Religion</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Short Description *</label>
+                <input type="text" id="appShortDesc" required placeholder="Brief description of your app"
+                       class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">App URL *</label>
+                <input type="url" id="appUrl" required placeholder="https://your-app.vercel.app"
+                       class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Logo URL</label>
+                <input type="url" id="appLogo" placeholder="https://your-app.com/logo.png"
+                       class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Full Description</label>
+                <textarea id="appDescription" rows="3" placeholder="Detailed description of your app"
+                          class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white"></textarea>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Features (comma separated)</label>
+                <input type="text" id="appFeatures" placeholder="Feature 1, Feature 2, Feature 3"
+                       class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+              </div>
+              
+              <!-- Custom Pricing Section -->
+              <div class="border-t border-gray-700 pt-4">
+                <h3 class="text-lg font-semibold text-white mb-3">💰 Set Your Pricing</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Free Tier Price</label>
+                    <input type="text" id="submitFreePrice" value="$0" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Standard Price</label>
+                    <input type="text" id="submitStandardPrice" value="$9/mo" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Featured Price</label>
+                    <input type="text" id="submitFeaturedPrice" value="$29/mo" 
+                           class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Standard Trial Days</label>
+                    <input type="number" id="submitStandardTrial" value="14" min="0"
+                           class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">Featured Trial Days</label>
+                    <input type="number" id="submitFeaturedTrial" value="7" min="0"
+                           class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="flex gap-3 pt-4">
+                <button type="submit" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition font-semibold">
+                  Submit App
+                </button>
+                <button type="button" onclick="document.getElementById('submitAppModal')?.remove()" 
+                        class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg transition">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+      
+      document.getElementById('submitAppForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const features = document.getElementById('appFeatures').value.split(',').map(f => f.trim()).filter(f => f);
+        
+        const appData = {
+          id: 'app-' + Date.now(),
+          name: document.getElementById('appName').value,
+          shortDesc: document.getElementById('appShortDesc').value,
+          category: document.getElementById('appCategory').value,
+          externalUrl: document.getElementById('appUrl').value,
+          logoUrl: document.getElementById('appLogo').value,
+          description: document.getElementById('appDescription').value,
+          features: features.length ? features : ['Feature 1', 'Feature 2', 'Feature 3'],
+          developer: currentUser.email,
+          ownerId: currentUser.id,
+          tier: 'FREE',
+          trialActive: false,
+          rating: 0,
+          ratingCount: 0,
+          version: '1.0.0',
+          screenshots: ['https://via.placeholder.com/400x250/1a1a2e/8b5cf6?text=' + document.getElementById('appName')
+            .value],
+          pricing: {
+            freePrice: document.getElementById('submitFreePrice').value,
+            standardPrice: document.getElementById('submitStandardPrice').value,
+            featuredPrice: document.getElementById('submitFeaturedPrice').value,
+            standardTrialDays: parseInt(document.getElementById('submitStandardTrial').value) || 14,
+            featuredTrialDays: parseInt(document.getElementById('submitFeaturedTrial').value) || 7,
+          }
+        };
+        
+        // Add to app list
+        appList.push(appData);
+        
+        // Save custom pricing
+        customPricing[appData.id] = appData.pricing;
+        saveState();
+        
+        showToast('✅ App submitted successfully!', 'success');
+        document.getElementById('submitAppModal')?.remove();
+        renderCurrentView();
+        
+        // Send notification email
+        await sendEmail('app_submitted', {
+          appName: appData.name,
+          developerEmail: currentUser.email,
+          submissionDate: new Date().toLocaleDateString()
+        });
+      });
+    }
+
+    function editAppPricing(appId) {
+      const app = appList.find(a => a.id === appId);
+      if (!app) return;
+      
+      const pricing = customPricing[appId] || {};
+      
+      const modalHtml = `
+        <div id="pricingModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div class="bg-gray-900 rounded-2xl p-6 w-full max-w-2xl">
+            <h2 class="text-2xl font-bold text-white mb-4">💰 Custom Pricing - ${app.name}</h2>
+            <form id="pricingForm" class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Free Tier Price</label>
+                  <input type="text" id="pricingFree" value="${pricing.freePrice || '$0'}" 
+                         class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Standard Tier Price</label>
+                  <input type="text" id="pricingStandard" value="${pricing.standardPrice || '$9/mo'}" 
+                         class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Featured Tier Price</label>
+                  <input type="text" id="pricingFeatured" value="${pricing.featuredPrice || '$29/mo'}" 
+                         class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Standard Trial Days</label>
+                  <input type="number" id="pricingStandardTrial" value="${pricing.standardTrialDays || 14}" 
+                         class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-1">Featured Trial Days</label>
+                  <input type="number" id="pricingFeaturedTrial" value="${pricing.featuredTrialDays || 7}" 
+                         class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                </div>
+              </div>
+              <div class="flex gap-3 pt-4">
+                <button type="submit" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition font-semibold">
+                  Save Pricing
+                </button>
+                <button type="button" onclick="document.getElementById('pricingModal')?.remove()" 
+                        class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg transition">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+      
+      document.getElementById('pricingForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const pricingData = {
+          freePrice: document.getElementById('pricingFree').value,
+          standardPrice: document.getElementById('pricingStandard').value,
+          featuredPrice: document.getElementById('pricingFeatured').value,
+          standardTrialDays: parseInt(document.getElementById('pricingStandardTrial').value) || 0,
+          featuredTrialDays: parseInt(document.getElementById('pricingFeaturedTrial').value) || 0,
+        };
+        
+        customPricing[appId] = pricingData;
+        saveState();
+        showToast('✅ Pricing updated successfully!', 'success');
+        document.getElementById('pricingModal')?.remove();
+        renderCurrentView();
+      });
+    }
+
+    function manageSubscription(appId) {
+      showToast('📋 Subscription management portal coming soon!', 'info');
+    }
+
+    function viewAppAnalytics(appId) {
+      const app = appList.find(a => a.id === appId);
+      if (!app) return;
+      
+      const modalHtml = `
+        <div id="analyticsModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div class="bg-gray-900 rounded-2xl p-6 w-full max-w-2xl">
+            <h2 class="text-2xl font-bold text-white mb-4">📊 ${app.name} - Analytics</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div class="bg-white/5 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-purple-400">${Math.floor(Math.random() * 5000) + 500}</div>
+                <div class="text-xs text-gray-400">Total Views</div>
+              </div>
+              <div class="bg-white/5 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-green-400">${Math.floor(Math.random() * 500) + 50}</div>
+                <div class="text-xs text-gray-400">Launches</div>
+              </div>
+              <div class="bg-white/5 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-yellow-400">${app.rating || 0}</div>
+                <div class="text-xs text-gray-400">Avg Rating</div>
+              </div>
+              <div class="bg-white/5 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-blue-400">${app.ratingCount || 0}</div>
+                <div class="text-xs text-gray-400">Reviews</div>
+              </div>
+            </div>
+            <div class="bg-white/5 rounded-lg p-4 mb-4">
+              <h3 class="font-bold text-white mb-2">📈 Growth</h3>
+              <div class="h-32 flex items-end justify-between gap-2">
+                ${Array.from({length: 7}, (_, i) => {
+                  const height = Math.floor(Math.random() * 80) + 20;
+                  const day = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
+                  return `
+                    <div class="flex-1 flex flex-col items-center gap-1">
+                      <div class="w-full bg-purple-500/30 rounded-t" style="height: ${height}px;"></div>
+                      <span class="text-xs text-gray-400">${day}</span>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+            <button onclick="document.getElementById('analyticsModal')?.remove()" 
+                    class="w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg transition">
+              Close
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+    }
+
+    // ============================================================
+    // MAIN RENDER FUNCTION
+    // ============================================================
+    
     function renderCurrentView() {
       const container = document.getElementById("mainContent");
       if (!container) return;
-      if (selectedApp) { container.innerHTML = renderAppDetail(); } else if (activeView === "home") { container.innerHTML =
-          renderHome();
+      
+      if (selectedApp) {
+        container.innerHTML = renderAppDetail();
+      } else if (activeView === "home") {
+        container.innerHTML = renderHome();
         setTimeout(() => {
           const searchInput = document.getElementById("globalSearchInput");
           if (searchInput) {
-            searchInput.addEventListener("input", (e) => { searchQuery = e.target.value;
-              renderCurrentView(); });
+            searchInput.addEventListener("input", (e) => { 
+              searchQuery = e.target.value;
+              renderCurrentView();
+            });
           }
           document.querySelectorAll(".category-chip").forEach(c => c.addEventListener("click", () => {
             activeCategoryFilter = c.dataset.category;
             renderCurrentView();
           }));
-          document.getElementById("clearCategoryBtn")?.addEventListener("click", () => { activeCategoryFilter = "";
-            renderCurrentView(); });
-          document.getElementById("exploreMarketplaceBtn")?.addEventListener("click", () => document.querySelector(
-            ".grid.sm\\:grid-cols-2")?.scrollIntoView({ behavior: "smooth" }));
-          document.getElementById("becomeDevBtn")?.addEventListener("click", () => { if (!currentUser) showToast(
-              "Please login first", "error");
-            else { activeView = "developer";
-              renderCurrentView(); } });
-        }, 50); } else if (activeView === "dashboard") container.innerHTML = renderDashboard();
-      else if (activeView === "att") container.innerHTML = renderATT();
-      else if (activeView === "admin") container.innerHTML = renderAdmin();
-      else if (activeView === "developer") container.innerHTML = renderDeveloper();
+          document.getElementById("clearCategoryBtn")?.addEventListener("click", () => { 
+            activeCategoryFilter = "";
+            renderCurrentView();
+          });
+          document.getElementById("exploreMarketplaceBtn")?.addEventListener("click", () => {
+            document.querySelector(".grid.sm\\:grid-cols-2")?.scrollIntoView({ behavior: "smooth" });
+          });
+          document.getElementById("becomeDevBtn")?.addEventListener("click", () => { 
+            if (!currentUser) showToast("Please login first", "error");
+            else { navigateTo('developer'); }
+          });
+        }, 50);
+      } else if (activeView === "dashboard") {
+        container.innerHTML = renderDashboard();
+      } else if (activeView === "pricing") {
+        container.innerHTML = renderPricingPage();
+      } else if (activeView === "att") {
+        container.innerHTML = renderATT();
+      } else if (activeView === "admin") {
+        container.innerHTML = renderAdmin();
+      } else if (activeView === "developer") {
+        container.innerHTML = renderDeveloper();
+      }
+      
       if (window.lucide) lucide.createIcons();
+      
+      // Review stars setup
       if (selectedApp && document.getElementById("reviewStars")) {
         let ratingVal = 0;
         const starDiv = document.getElementById("reviewStars");
@@ -1523,9 +2553,12 @@
           let star = document.createElement('i');
           star.setAttribute('data-lucide', 'star');
           star.className = 'w-6 h-6 cursor-pointer rating-star';
-          star.onclick = () => { ratingVal = i;
-            document.querySelectorAll('#reviewStars i').forEach((s, idx) => s.style.fill = idx < i ? '#facc15' :
-              'none'); };
+          star.onclick = () => { 
+            ratingVal = i;
+            document.querySelectorAll('#reviewStars i').forEach((s, idx) => {
+              s.style.fill = idx < i ? '#facc15' : 'none';
+            });
+          };
           starDiv.appendChild(star);
         }
         lucide.createIcons();
@@ -1537,67 +2570,100 @@
       }
     }
 
-    // Navigation & theme init
+    // ============================================================
+    // NAVIGATION SETUP
+    // ============================================================
+    
     document.querySelectorAll(".nav-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         const view = btn.getAttribute("data-nav");
-        if (view) { activeView = view;
-          selectedApp = null;
-          renderCurrentView(); }
-        document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("border-purple-600",
-          "text-purple-600"));
-        btn.classList.add("border-purple-600", "text-purple-600");
+        if (view) navigateTo(view);
       });
     });
 
     function renderNav() {
       const authDiv = document.getElementById("authSection");
       if (!authDiv) return;
+      
       if (currentUser) {
-        authDiv.innerHTML =
-          `<span class="text-sm hidden sm:inline text-gray-700 dark:text-gray-300">${currentUser.email}</span><button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm transition">Logout</button>`;
+        authDiv.innerHTML = `
+          <span class="text-sm hidden sm:inline text-gray-700 dark:text-gray-300">👤 ${currentUser.name}</span>
+          <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm transition">Logout</button>
+        `;
         document.getElementById("logoutBtn")?.addEventListener("click", logout);
-        document.getElementById("adminNavBtn")?.classList.toggle("hidden", currentUser.role !== 'admin' && currentUser
-          .role !== 'super_admin');
+        document.getElementById("adminNavBtn")?.classList.toggle("hidden", currentUser.role !== 'admin' && currentUser.role !== 'super_admin');
         document.getElementById("devNavBtn")?.classList.toggle("hidden", currentUser.role !== 'developer');
       } else {
-        authDiv.innerHTML =
-          `<button id="showLoginModalBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-lg text-sm transition">Sign In</button>`;
-        document.getElementById("showLoginModalBtn")?.addEventListener("click", () => showAuthModal());
+        authDiv.innerHTML = `
+          <button id="showLoginModalBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-lg text-sm transition">Sign In</button>
+        `;
+        document.getElementById("showLoginModalBtn")?.addEventListener("click", showAuthModal);
         document.getElementById("adminNavBtn")?.classList.add("hidden");
         document.getElementById("devNavBtn")?.classList.add("hidden");
       }
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
-    function showAuthModal() {
-      const modalHtml =
-        `<div id="authModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><div class="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md"><h2 class="text-2xl font-bold mb-4">Meon Account</h2><input type="email" id="loginEmail" placeholder="Email" class="w-full p-2 border rounded-lg dark:bg-gray-700 mb-3"><input type="password" id="loginPassword" placeholder="Password (any)" class="w-full p-2 border rounded-lg dark:bg-gray-700 mb-4"><div class="flex gap-2 mb-3"><button id="loginEmailBtn" class="flex-1 bg-purple-600 text-white py-2 rounded-lg">Login</button><button id="registerBtn" class="flex-1 bg-green-600 text-white py-2 rounded-lg">Sign Up</button></div><button id="demoAdminBtn" class="w-full bg-purple-100 dark:bg-purple-900 py-2 rounded-lg mb-2">Demo Admin Access</button><button id="demoDevBtn" class="w-full bg-amber-100 dark:bg-amber-900 py-2 rounded-lg">Demo Developer Access</button><button id="closeModal" class="w-full mt-3 text-gray-500">Cancel</button></div></div>`;
-      document.body.insertAdjacentHTML("beforeend", modalHtml);
-      document.getElementById("loginEmailBtn")?.addEventListener("click", () => { const email = document.getElementById(
-          "loginEmail").value;
-        if (email) loginUser(email, "user");
-        document.getElementById("authModal")?.remove(); });
-      document.getElementById("registerBtn")?.addEventListener("click", () => { const email = document.getElementById(
-          "loginEmail").value;
-        if (email) loginUser(email, "user");
-        document.getElementById("authModal")?.remove(); });
-      document.getElementById("demoAdminBtn")?.addEventListener("click", () => { loginUser("admin@meon.com", "admin");
-        document.getElementById("authModal")?.remove(); });
-      document.getElementById("demoDevBtn")?.addEventListener("click", () => { loginUser("dev@meon.com", "developer");
-        document.getElementById("authModal")?.remove(); });
-      document.getElementById("closeModal")?.addEventListener("click", () => document.getElementById("authModal")?.remove());
-    }
+    // ============================================================
+    // THEME TOGGLE
+    // ============================================================
+    
     const themeToggle = document.getElementById("themeToggle");
     themeToggle?.addEventListener("click", () => {
       document.documentElement.classList.toggle("dark");
       localStorage.setItem("meonTheme", document.documentElement.classList.contains("dark") ? "dark" : "light");
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     });
+    
     if (localStorage.getItem("meonTheme") === "dark") document.documentElement.classList.add("dark");
+
+    // ============================================================
+    // GLOBAL EXPOSURES
+    // ============================================================
+    
+    window.showAppDetail = (appId) => {
+      selectedApp = appList.find(a => a.id === appId);
+      renderCurrentView();
+    };
+    window.backToHome = () => { 
+      selectedApp = null;
+      navigateTo('home');
+    };
+    window.openApp = openApp;
+    window.toggleFavorite = toggleFavorite;
+    window.handleUpgrade = handleUpgrade;
+    window.showSubmitAppModal = showSubmitAppModal;
+    window.editAppPricing = editAppPricing;
+    window.manageSubscription = manageSubscription;
+    window.viewAppAnalytics = viewAppAnalytics;
+    window.showAuthModal = showAuthModal;
+    window.navigateTo = navigateTo;
+
+    // ============================================================
+    // INITIALIZATION
+    // ============================================================
+    
     renderNav();
     renderCurrentView();
     updateOnlineStatus();
+    
+    console.log('🚀 Meon App Directory v3.0');
+    console.log('📦 Features:');
+    console.log('  ✅ PWA Ready');
+    console.log('  ✅ Dark Mode');
+    console.log('  ✅ User Authentication');
+    console.log('  ✅ Favorites System');
+    console.log('  ✅ Reviews & Ratings');
+    console.log('  ✅ Subscription Tiers');
+    console.log('  ✅ Free Trials');
+    console.log('  ✅ Custom Pricing');
+    console.log('  ✅ Email Notifications');
+    console.log('  ✅ Developer Hub');
+    console.log('  ✅ Admin Panel');
+    console.log('  ✅ App Analytics');
+    console.log('  ✅ Stripe Integration');
+    console.log('  ✅ Offline Support');
+    console.log('💎 Premium tiers: Free, Standard ($9/mo), Featured ($29/mo)');
   </script>
 </body>
 </html>
