@@ -2,646 +2,215 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meon - Premium Plans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Meon | Intelligence · Innovation · Inspiration</title>
+    <meta name="description" content="Meon App Directory – Launch web apps instantly with M-Pesa payments">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Meon">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Meon Directory">
+    <meta name="msapplication-TileColor" content="#0f172a">
+    <meta name="msapplication-starturl" content="/">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+
+    <!-- PWA Icon -->
+    <link rel="icon" type="image/png" sizes="192x192" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png">
+
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest">
+    </script>
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        body {
-            background: #0f172a;
-            color: #e2e8f0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            padding: 40px 20px;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #a78bfa, #8b5cf6, #6d28d9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 12px;
-        }
-
-        .header p {
-            color: #94a3b8;
-            font-size: 1.1rem;
-        }
-
-        /* Pricing Grid */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        /* Pricing Card */
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 40px 30px;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: default;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(139, 92, 246, 0.3);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        .pricing-card.popular {
-            border: 2px solid #8b5cf6;
-            background: rgba(139, 92, 246, 0.08);
-            box-shadow: 0 0 60px rgba(139, 92, 246, 0.1);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -14px;
-            right: 30px;
-            background: #8b5cf6;
-            color: white;
-            padding: 6px 20px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Plan Icon */
-        .plan-icon {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-        }
-
-        .plan-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 8px;
-        }
-
-        .plan-price {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #a78bfa;
-            margin-bottom: 4px;
-        }
-
-        .plan-price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #94a3b8;
-        }
-
-        .trial-badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.15);
-            color: #34d399;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        /* Features */
-        .features {
-            list-style: none;
-            margin: 24px 0 30px;
-            padding: 0;
-        }
-
-        .features li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #cbd5e1;
-            font-size: 0.95rem;
-        }
-
-        .features li:last-child {
-            border-bottom: none;
-        }
-
-        .features li .check {
-            color: #34d399;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .features li .muted {
-            color: #64748b;
-        }
-
-        /* Buttons */
-        .btn-get-started {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-get-started.free {
-            background: rgba(255, 255, 255, 0.08);
-            color: #e2e8f0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-get-started.free:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-get-started.standard {
-            background: linear-gradient(135deg, #7c3aed, #6d28d9);
-            color: white;
-        }
-
-        .btn-get-started.standard:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
-        }
-
-        .btn-get-started.featured {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-        }
-
-        .btn-get-started.featured:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
-        }
-
-        .btn-get-started:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .btn-get-started .spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            display: none;
-        }
-
-        .btn-get-started.loading .spinner {
-            display: inline-block;
-        }
-
-        .btn-get-started.loading .btn-text {
-            display: none;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .mpesa-note {
-            text-align: center;
-            margin-top: 12px;
-            font-size: 0.8rem;
-            color: #64748b;
-        }
-
-        .mpesa-note span {
-            color: #34d399;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            margin-top: 20px;
-        }
-
-        .footer p {
-            color: #64748b;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .footer a {
-            color: #a78bfa;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer a:hover {
-            color: #8b5cf6;
-        }
-
-        /* Toast Notification */
-        .toast-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .toast {
-            padding: 16px 24px;
-            border-radius: 14px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            animation: slideUp 0.4s ease;
-            max-width: 400px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .toast.success {
-            background: rgba(16, 185, 129, 0.2);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #34d399;
-        }
-
-        .toast.error {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #f87171;
-        }
-
-        .toast.info {
-            background: rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #60a5fa;
-        }
-
-        .toast .toast-icon {
-            font-size: 1.4rem;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            z-index: 10000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            background: #1e293b;
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 480px;
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            animation: modalIn 0.3s ease;
-        }
-
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .modal-header .icon {
-            font-size: 3.5rem;
-            margin-bottom: 12px;
-        }
-
-        .modal-header h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #f8fafc;
-        }
-
-        .modal-header p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            margin-top: 4px;
-        }
-
-        .modal-body {
-            margin-bottom: 24px;
-        }
-
-        .modal-body .price-display {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #a78bfa;
-            margin-bottom: 20px;
-        }
-
-        .modal-body .price-display small {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: #94a3b8;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #94a3b8;
-            margin-bottom: 6px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #f8fafc;
-            font-size: 1rem;
-            transition: all 0.3s;
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: #8b5cf6;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
-        }
-
-        .form-group input::placeholder {
-            color: #64748b;
-        }
-
-        .form-group .hint {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 4px;
-        }
-
-        .modal-footer {
-            display: flex;
-            gap: 12px;
-        }
-
-        .modal-footer button {
-            flex: 1;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
-            color: #94a3b8;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .pricing-card {
-                padding: 30px 20px;
-            }
-
-            .plan-price {
-                font-size: 2.2rem;
-            }
-
-            .modal {
-                padding: 30px 20px;
-            }
-        }
-
-        /* Status indicator */
-        .status-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .status-indicator.online {
-            background: #34d399;
-        }
-
-        .status-indicator.offline {
-            background: #ef4444;
-        }
-
-        /* Payment progress */
-        .payment-progress {
-            margin: 20px 0;
-            display: none;
-        }
-
-        .payment-progress.active {
-            display: block;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 8px;
-        }
-
-        .progress-bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, #8b5cf6, #a78bfa);
-            border-radius: 4px;
-            transition: width 0.5s ease;
-            width: 0%;
-        }
-
-        .progress-text {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            margin-top: 4px;
-        }
+        * { font-family: 'Inter', sans-serif; }
+        body { transition: background-color 0.3s, color 0.3s; }
+        .dark { background-color: #0f172a; color: #e2e8f0; }
+        
+        .rating-star { cursor: pointer; transition: transform 0.1s; }
+        .rating-star:hover { transform: scale(1.1); }
+        .modal-transition { transition: opacity 0.2s ease, visibility 0.2s; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        
+        .card-hover { transition: all 0.2s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.3); }
+        
+        .meon-logo-bg { background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%); border-radius: 14px; box-shadow: 0 6px 12px -6px rgba(0,0,0,0.3); border: 1px solid rgba(139,92,246,0.3); }
+        
+        .toast { position: fixed; bottom: 20px; right: 20px; z-index: 9999; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        img.app-logo { background: #1e293b; object-fit: cover; }
+        
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        .animate-spin-reverse { animation: spin-slow 30s linear infinite reverse; }
+        
+        @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .trial-badge { animation: pulse-glow 2s ease-in-out infinite; }
+        
+        @keyframes payment-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); } 50% { box-shadow: 0 0 0 15px rgba(16,185,129,0); } }
+        .payment-btn { animation: payment-pulse 2s infinite; }
+        
+        .spinner { border: 3px solid rgba(255,255,255,0.1); border-radius: 50%; border-top: 3px solid #fff; width: 24px; height: 24px; animation: spin 1s linear infinite; display: inline-block; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Backgrounds */
+        .main-bg { background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; min-height: 100vh; padding: 1rem; border-radius: 1.5rem; }
+        .main-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.92) 0%, rgba(5,5,55,0.88) 50%, rgba(10,0,92,0.92) 100%); border-radius: 1.5rem; }
+        .main-content { position: relative; z-index: 1; }
+        
+        .hero-bg { background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; }
+        .hero-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.85) 0%, rgba(5,5,55,0.8) 50%, rgba(10,0,92,0.85) 100%); border-radius: 1.5rem; }
+        .hero-content { position: relative; z-index: 1; }
+        
+        .categories-bg { background-image: url('https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; }
+        .categories-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.88) 0%, rgba(5,5,55,0.82) 50%, rgba(10,0,92,0.88) 100%); border-radius: 1.5rem; }
+        .categories-content { position: relative; z-index: 1; }
+        
+        .featured-bg { background-image: url('https://i.ibb.co/n8LTRbLg/16dbce0c640116ad6a21751b15d0396e.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; }
+        .featured-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
+        .featured-content { position: relative; z-index: 1; }
+        
+        .toprated-bg { background-image: url('https://i.ibb.co/bMQhQB0P/fd8980ac75d8617208bdb4e65b549f04.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; }
+        .toprated-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.92) 0%, rgba(5,5,55,0.87) 50%, rgba(10,0,92,0.92) 100%); border-radius: 1.5rem; }
+        .toprated-content { position: relative; z-index: 1; }
+        
+        .recent-bg { background-image: url('https://i.ibb.co/4ZKz5tDD/669db1c2e2ee4ac1f1328ca814ccc930.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; }
+        .recent-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.88) 0%, rgba(5,5,55,0.83) 50%, rgba(10,0,92,0.88) 100%); border-radius: 1.5rem; }
+        .recent-content { position: relative; z-index: 1; }
+        
+        .dashboard-bg { background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
+        .dashboard-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
+        .dashboard-content { position: relative; z-index: 1; }
+        
+        .admin-bg { background-image: url('https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
+        .admin-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.92) 0%, rgba(5,5,55,0.88) 50%, rgba(10,0,92,0.92) 100%); border-radius: 1.5rem; }
+        .admin-content { position: relative; z-index: 1; }
+        
+        .developer-bg { background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
+        .developer-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.88) 0%, rgba(5,5,55,0.82) 50%, rgba(10,0,92,0.88) 100%); border-radius: 1.5rem; }
+        .developer-content { position: relative; z-index: 1; }
+        
+        .att-bg { background-image: url('https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
+        .att-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
+        .att-content { position: relative; z-index: 1; }
+        
+        .pricing-bg { background-image: url('https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
+        .pricing-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
+        .pricing-content { position: relative; z-index: 1; }
+        
+        .tier-card { transition: all 0.3s ease; }
+        .tier-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .tier-card.popular { border: 2px solid #8b5cf6; box-shadow: 0 0 30px rgba(139,92,246,0.2); }
+        .tier-badge { position: absolute; top: -12px; right: 20px; background: #8b5cf6; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+
+        #pwaInstallBanner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9998; background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%); color: white; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 2px solid rgba(139,92,246,0.5); transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 -8px 32px rgba(0,0,0,0.4); }
+        #pwaInstallBanner.show { transform: translateY(0); }
+        #pwaInstallBanner .install-btn { background: #8b5cf6; color: white; border: none; padding: 10px 20px; border-radius: 25px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+        #pwaInstallBanner .install-btn:hover { background: #7c3aed; }
+        #pwaInstallBanner .dismiss-btn { background: transparent; color: #cbd5e1; border: 1px solid #475569; padding: 8px 14px; border-radius: 25px; cursor: pointer; white-space: nowrap; font-size: 0.85rem; transition: all 0.2s; }
+        #pwaInstallBanner .dismiss-btn:hover { color: white; border-color: #94a3b8; }
+
+        #offlineIndicator { position: fixed; top: 0; left: 0; right: 0; z-index: 10000; background: #ef4444; color: white; text-align: center; padding: 6px; font-size: 0.8rem; font-weight: 600; transform: translateY(-100%); transition: transform 0.3s ease; }
+        #offlineIndicator.show { transform: translateY(0); }
+
+        /* Modal enhancements */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: #1e293b; border-radius: 24px; padding: 40px; max-width: 480px; width: 100%; border: 1px solid rgba(255,255,255,0.08); animation: modalIn 0.3s ease; }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-header { text-align: center; margin-bottom: 30px; }
+        .modal-header .icon { font-size: 3.5rem; margin-bottom: 12px; }
+        .modal-header h2 { font-size: 1.5rem; font-weight: 700; color: #f8fafc; }
+        .modal-header p { color: #94a3b8; font-size: 0.95rem; margin-top: 4px; }
+        .modal-body { margin-bottom: 24px; }
+        .modal-body .price-display { text-align: center; font-size: 2.2rem; font-weight: 800; color: #a78bfa; margin-bottom: 20px; }
+        .modal-body .price-display small { font-size: 0.9rem; font-weight: 400; color: #94a3b8; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: #94a3b8; margin-bottom: 6px; }
+        .form-group input { width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #f8fafc; font-size: 1rem; transition: all 0.3s; outline: none; }
+        .form-group input:focus { border-color: #8b5cf6; box-shadow: 0 0 0 3px rgba(139,92,246,0.2); }
+        .form-group input::placeholder { color: #64748b; }
+        .form-group .hint { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+        .modal-footer { display: flex; gap: 12px; }
+        .modal-footer button { flex: 1; padding: 14px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .btn-primary { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; }
+        .btn-primary:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(139,92,246,0.3); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+        .btn-secondary { background: rgba(255,255,255,0.06); color: #94a3b8; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+        .progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+        .progress-bar .fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #a78bfa); border-radius: 4px; transition: width 0.5s ease; width: 0%; }
+        .progress-text { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
+        .payment-progress { margin: 20px 0; display: none; }
+        .payment-progress.active { display: block; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>💎 Choose Your Plan</h1>
-            <p>Start with a free trial and upgrade when you're ready</p>
-        </div>
+    <div id="offlineIndicator">⚠️ You are offline — some features may be limited</div>
 
-        <!-- Pricing Grid -->
-        <div class="pricing-grid" id="pricingGrid">
-            <!-- Free Plan -->
-            <div class="pricing-card" data-plan="free">
-                <div class="plan-icon">💎</div>
-                <div class="plan-name">Free</div>
-                <div class="plan-price">KES 0</div>
-                <ul class="features">
-                    <li><span class="check">✓</span> Basic listing</li>
-                    <li><span class="check">✓</span> Standard visibility</li>
-                    <li><span class="check">✓</span> 1 screenshot</li>
-                    <li><span class="check">✓</span> Community support</li>
-                </ul>
-                <button class="btn-get-started free" data-plan="free">
-                    <span class="btn-text">🚀 Get Started</span>
-                    <span class="spinner"></span>
-                </button>
-                <div class="mpesa-note">💳 Pay with M-Pesa</div>
-            </div>
-
-            <!-- Standard Plan -->
-            <div class="pricing-card popular" data-plan="standard">
-                <div class="popular-badge">🔥 MOST POPULAR</div>
-                <div class="plan-icon">⭐</div>
-                <div class="plan-name">Standard</div>
-                <div class="plan-price">KES 500 <span>/mo</span></div>
-                <div class="trial-badge">🎁 14-day free trial</div>
-                <ul class="features">
-                    <li><span class="check">✓</span> Enhanced listing</li>
-                    <li><span class="check">✓</span> Priority visibility</li>
-                    <li><span class="check">✓</span> 5 screenshots</li>
-                    <li><span class="check">✓</span> Basic analytics</li>
-                    <li><span class="check">✓</span> Email support</li>
-                </ul>
-                <button class="btn-get-started standard" data-plan="standard">
-                    <span class="btn-text">⭐ Get Started</span>
-                    <span class="spinner"></span>
-                </button>
-                <div class="mpesa-note">💳 Pay with M-Pesa</div>
-            </div>
-
-            <!-- Featured Plan -->
-            <div class="pricing-card" data-plan="featured">
-                <div class="plan-icon">🏆</div>
-                <div class="plan-name">Featured</div>
-                <div class="plan-price">KES 1,500 <span>/mo</span></div>
-                <div class="trial-badge">🎁 7-day free trial</div>
-                <ul class="features">
-                    <li><span class="check">✓</span> Premium listing</li>
-                    <li><span class="check">✓</span> Top placement</li>
-                    <li><span class="check">✓</span> Unlimited screenshots</li>
-                    <li><span class="check">✓</span> Advanced analytics</li>
-                    <li><span class="check">✓</span> Featured badge</li>
-                    <li><span class="check">✓</span> Priority support</li>
-                    <li><span class="check">✓</span> Marketing boost</li>
-                </ul>
-                <button class="btn-get-started featured" data-plan="featured">
-                    <span class="btn-text">🏆 Get Started</span>
-                    <span class="spinner"></span>
-                </button>
-                <div class="mpesa-note">💳 Pay with M-Pesa</div>
+    <div id="pwaInstallBanner">
+        <div class="flex items-center gap-3">
+            <img src="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png" alt="Meon" class="w-10 h-10 rounded-xl shadow" style="object-fit:cover;">
+            <div>
+                <div class="font-bold text-sm">Meon Directory</div>
+                <div class="text-xs text-purple-200">Install for quick access</div>
             </div>
         </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>
-                🔒 All plans include secure M-Pesa payments, cancel anytime<br>
-                💳 Developers: Set custom pricing for your apps in the <a href="#">Developer Hub</a>
-            </p>
+        <div class="flex items-center gap-2">
+            <button class="dismiss-btn" id="pwaDismissBtn">Not now</button>
+            <button class="install-btn" id="pwaInstallBtn">📲 Install App</button>
         </div>
     </div>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
+    <div id="app" class="min-h-screen flex flex-col">
+        <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
+            <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="meon-logo-bg px-4 py-2 flex flex-col items-start leading-tight cursor-pointer" onclick="navigateTo('home')">
+                        <span class="text-white font-extrabold text-2xl tracking-wide">meon</span>
+                        <span class="text-[10px] font-medium text-purple-200 tracking-wider uppercase">INTELLIGENCE·INNOVATION·INSPIRATION</span>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight hidden sm:inline-block">Meon Directory</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button id="headerInstallBtn" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition hidden" title="Install App">
+                        <i data-lucide="download" class="w-5 h-5"></i>
+                    </button>
+                    <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                        <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:inline"></i>
+                    </button>
+                    <div id="authSection" class="flex items-center gap-2"></div>
+                </div>
+            </div>
+            <div class="container mx-auto px-4">
+                <div class="flex gap-6 overflow-x-auto pb-2 scrollbar-hide">
+                    <button data-nav="home" class="nav-btn font-semibold py-2 border-b-2 border-purple-600 text-purple-600">Home</button>
+                    <button data-nav="dashboard" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">My Dashboard</button>
+                    <button data-nav="att" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">ATT</button>
+                    <button data-nav="admin" id="adminNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Admin Panel</button>
+                    <button data-nav="developer" id="devNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Developer Hub</button>
+                    <button data-nav="pricing" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">💎 Pricing</button>
+                </div>
+            </div>
+        </header>
+
+        <main id="mainContent" class="flex-1 container mx-auto px-4 py-8"></main>
+        <div id="toastContainer"></div>
+    </div>
 
     <!-- Payment Modal -->
     <div class="modal-overlay" id="paymentModal">
@@ -653,7 +222,7 @@
             </div>
             <div class="modal-body">
                 <div class="price-display" id="modalPrice">KES 500 <small>/mo</small></div>
-                <div class="form-group">
+                <div class="form-group" id="phoneGroup">
                     <label>📱 M-Pesa Phone Number</label>
                     <input type="tel" id="phoneInput" placeholder="0712345678" maxlength="10">
                     <div class="hint">Enter the M-Pesa number you want to pay from</div>
@@ -674,10 +243,9 @@
 
     <script>
         // ============================================================
-        // ULTRA PRO PAYMENT LOGIC
+        // CONFIGURATION
         // ============================================================
-
-        // Configuration
+        
         const CONFIG = {
             MPESA: {
                 CONSUMER_KEY: 'VpH0nHGpoWhgoAjl9KsLgwRbXiPa3wh43YIx1sMGMNjzNXo7',
@@ -689,51 +257,624 @@
             }
         };
 
-        // State
-        let state = {
-            currentPlan: null,
-            isProcessing: false,
-            transactions: JSON.parse(localStorage.getItem('meonTransactions')) || [],
-            user: JSON.parse(localStorage.getItem('meonUser')) || null
-        };
-
         // ============================================================
-        // TOAST SYSTEM
+        // PWA SETUP
         // ============================================================
-
-        function showToast(message, type = 'info', duration = 4000) {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            
-            const icons = {
-                success: '✅',
-                error: '❌',
-                info: 'ℹ️'
+        
+        (function setupPwaManifest() {
+            const iconUrl = 'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png';
+            const manifest = {
+                name: 'Meon Directory',
+                short_name: 'Meon',
+                description: 'Meon App Directory – Launch web apps instantly with M-Pesa payments',
+                start_url: location.href.split('?')[0],
+                display: 'standalone',
+                orientation: 'any',
+                background_color: '#0f172a',
+                theme_color: '#0f172a',
+                categories: ['productivity', 'utilities', 'developer tools', 'finance'],
+                icons: [
+                    { src: iconUrl, sizes: '72x72', type: 'image/png' },
+                    { src: iconUrl, sizes: '96x96', type: 'image/png' },
+                    { src: iconUrl, sizes: '128x128', type: 'image/png' },
+                    { src: iconUrl, sizes: '144x144', type: 'image/png' },
+                    { src: iconUrl, sizes: '152x152', type: 'image/png' },
+                    { src: iconUrl, sizes: '180x180', type: 'image/png' },
+                    { src: iconUrl, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+                    { src: iconUrl, sizes: '384x384', type: 'image/png' },
+                    { src: iconUrl, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+                ],
+                shortcuts: [
+                    { name: 'Explore Apps', url: '/?nav=home', description: 'Browse all web apps' },
+                    { name: 'Favorites', url: '/?nav=dashboard', description: 'Your favorite apps' },
+                    { name: 'Developer Hub', url: '/?nav=developer', description: 'Manage your apps' }
+                ],
+                scope: '/'
             };
-            
-            toast.innerHTML = `
-                <span class="toast-icon">${icons[type] || 'ℹ️'}</span>
-                <span>${message}</span>
+
+            const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+            const manifestUrl = URL.createObjectURL(manifestBlob);
+
+            const linkEl = document.createElement('link');
+            linkEl.rel = 'manifest';
+            linkEl.href = manifestUrl;
+            document.head.appendChild(linkEl);
+
+            window._pwaManifestUrl = manifestUrl;
+            window._pwaManifest = manifest;
+        })();
+
+        // ============================================================
+        // SERVICE WORKER
+        // ============================================================
+        
+        (function registerServiceWorker() {
+            if (!('serviceWorker' in navigator)) {
+                console.log('[PWA] Service workers not supported');
+                return;
+            }
+
+            const CACHE_NAME = 'meon-directory-v7';
+            const urlsToCache = [
+                location.href.split('?')[0],
+                'https://cdn.tailwindcss.com',
+                'https://unpkg.com/lucide@latest',
+                'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap',
+                'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
+                'https://i.ibb.co/4gsK0C8V/431586a4d03a5dc68632c2c349f7b64d.jpg',
+                'https://i.ibb.co/cSLDqztC/4f72acf66a08d9dd83601fc69a6dd8c3.jpg',
+                'https://i.ibb.co/n8LTRbLg/16dbce0c640116ad6a21751b15d0396e.jpg',
+                'https://i.ibb.co/bMQhQB0P/fd8980ac75d8617208bdb4e65b549f04.jpg',
+                'https://i.ibb.co/4ZKz5tDD/669db1c2e2ee4ac1f1328ca814ccc930.jpg',
+                'https://i.ibb.co/vvBFj1MW/63c08e3fb6ae3a25f24a4016bd106725.jpg'
+            ];
+
+            const swCode = `
+                const CACHE_NAME = '${CACHE_NAME}';
+                const urlsToCache = ${JSON.stringify(urlsToCache)};
+
+                self.addEventListener('install', (event) => {
+                    console.log('[SW] Installing...');
+                    event.waitUntil(
+                        caches.open(CACHE_NAME).then((cache) => {
+                            console.log('[SW] Caching app shell');
+                            return cache.addAll(urlsToCache).catch((err) => {
+                                console.warn('[SW] Some assets failed to cache:', err);
+                            });
+                        }).then(() => {
+                            return self.skipWaiting();
+                        })
+                    );
+                });
+
+                self.addEventListener('activate', (event) => {
+                    console.log('[SW] Activating...');
+                    event.waitUntil(
+                        caches.keys().then((cacheNames) => {
+                            return Promise.all(
+                                cacheNames.map((cache) => {
+                                    if (cache !== CACHE_NAME) {
+                                        console.log('[SW] Deleting old cache:', cache);
+                                        return caches.delete(cache);
+                                    }
+                                })
+                            );
+                        }).then(() => {
+                            return self.clients.claim();
+                        })
+                    );
+                });
+
+                self.addEventListener('fetch', (event) => {
+                    if (event.request.method !== 'GET') return;
+                    if (event.request.url.startsWith('chrome-extension://')) return;
+
+                    event.respondWith(
+                        fetch(event.request)
+                            .then((networkResponse) => {
+                                if (networkResponse && networkResponse.status === 200) {
+                                    const responseClone = networkResponse.clone();
+                                    caches.open(CACHE_NAME).then((cache) => {
+                                        try { cache.put(event.request, responseClone); } catch (e) {}
+                                    });
+                                }
+                                return networkResponse;
+                            })
+                            .catch(() => {
+                                return caches.match(event.request).then((cachedResponse) => {
+                                    if (cachedResponse) return cachedResponse;
+                                    if (event.request.mode === 'navigate') {
+                                        return caches.match(urlsToCache[0]);
+                                    }
+                                    return new Response('Offline – resource not cached', {
+                                        status: 503,
+                                        statusText: 'Service Unavailable'
+                                    });
+                                });
+                            })
+                    );
+                });
+
+                self.addEventListener('push', (event) => {
+                    const options = {
+                        body: event.data ? event.data.text() : 'New update from Meon Directory',
+                        icon: 'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
+                        badge: 'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
+                        vibrate: [200, 100, 200],
+                        data: { url: self.location.origin }
+                    };
+                    event.waitUntil(
+                        self.registration.showNotification('Meon Directory', options)
+                    );
+                });
+
+                self.addEventListener('notificationclick', (event) => {
+                    event.notification.close();
+                    event.waitUntil(
+                        clients.openWindow(event.notification.data.url || self.location.origin)
+                    );
+                });
             `;
-            
-            container.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(30px)';
-                setTimeout(() => toast.remove(), 300);
-            }, duration);
+
+            const swBlob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(swBlob);
+
+            navigator.serviceWorker.register(swUrl, { scope: '/' })
+                .then((registration) => {
+                    console.log('[PWA] Service Worker registered with scope:', registration.scope);
+                    window._pwaSwRegistration = registration;
+                    window._pwaSwUrl = swUrl;
+                })
+                .catch((err) => {
+                    console.warn('[PWA] Service Worker registration failed:', err);
+                });
+        })();
+
+        // ============================================================
+        // PWA INSTALL PROMPT
+        // ============================================================
+        
+        let deferredPrompt = null;
+        let pwaBannerDismissed = false;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('[PWA] Install prompt available');
+
+            const dismissTime = localStorage.getItem('meonPwaBannerDismissTime');
+            if (dismissTime) {
+                const hoursSince = (Date.now() - parseInt(dismissTime)) / (1000 * 60 * 60);
+                if (hoursSince < 48) {
+                    pwaBannerDismissed = true;
+                } else {
+                    localStorage.removeItem('meonPwaBannerDismissTime');
+                    pwaBannerDismissed = false;
+                }
+            }
+
+            if (!pwaBannerDismissed) {
+                setTimeout(() => {
+                    document.getElementById('pwaInstallBanner')?.classList.add('show');
+                }, 1500);
+            }
+
+            document.getElementById('headerInstallBtn')?.classList.remove('hidden');
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('[PWA] App installed successfully!');
+            deferredPrompt = null;
+            document.getElementById('pwaInstallBanner')?.classList.remove('show');
+            document.getElementById('headerInstallBtn')?.classList.add('hidden');
+            showToast('🎉 Meon installed! Launch from your home screen.', 'success');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const installBannerBtn = document.getElementById('pwaInstallBtn');
+            const dismissBannerBtn = document.getElementById('pwaDismissBtn');
+            const headerInstallBtn = document.getElementById('headerInstallBtn');
+
+            function triggerInstall() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('[PWA] User accepted install');
+                        } else {
+                            console.log('[PWA] User dismissed install');
+                        }
+                        deferredPrompt = null;
+                        document.getElementById('pwaInstallBanner')?.classList.remove('show');
+                        if (headerInstallBtn) headerInstallBtn.classList.add('hidden');
+                    });
+                } else {
+                    showToast('Install option not available right now. Try refreshing.', 'info');
+                }
+            }
+
+            if (installBannerBtn) {
+                installBannerBtn.addEventListener('click', triggerInstall);
+            }
+
+            if (dismissBannerBtn) {
+                dismissBannerBtn.addEventListener('click', () => {
+                    document.getElementById('pwaInstallBanner')?.classList.remove('show');
+                    pwaBannerDismissed = true;
+                    localStorage.setItem('meonPwaBannerDismissTime', Date.now().toString());
+                    if (headerInstallBtn && deferredPrompt) {
+                        headerInstallBtn.classList.remove('hidden');
+                    }
+                    showToast('You can install later from the header 📲', 'info');
+                });
+            }
+
+            if (headerInstallBtn) {
+                headerInstallBtn.addEventListener('click', triggerInstall);
+            }
+        });
+
+        // ============================================================
+        // ONLINE/OFFLINE STATUS
+        // ============================================================
+        
+        function updateOnlineStatus() {
+            const indicator = document.getElementById('offlineIndicator');
+            if (!navigator.onLine) {
+                indicator?.classList.add('show');
+            } else {
+                indicator?.classList.remove('show');
+            }
+        }
+
+        window.addEventListener('online', () => {
+            updateOnlineStatus();
+            showToast('🌐 Back online!', 'success');
+        });
+        window.addEventListener('offline', () => {
+            updateOnlineStatus();
+            showToast('⚠️ You are offline. Cached apps still work.', 'info');
+        });
+
+        if (!navigator.onLine) {
+            setTimeout(() => updateOnlineStatus(), 500);
         }
 
         // ============================================================
-        // M-PESA CLIENT
+        // LOGO MAPPING
         // ============================================================
+        
+        const logoMapping = {
+            "maji-gas": "https://i.ibb.co/sJwP77mq/file-000000002a7c724698774712139656f9.png",
+            "deep-focus": "https://i.ibb.co/204QYyVF/file-00000000c6707243af95f3105457c8b5.png",
+            "data-vision": "https://i.ibb.co/NfCgDtT/file-00000000b57072438b98c6777ee7804e.png",
+            "insight": "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",
+            "rider-app": "https://i.ibb.co/Myk5kQFw/file-00000000888871f482a587c6a8d8847e.png",
+            "guard-ai": "https://i.ibb.co/GQWZnykb/file-00000000379c71f4a01216ae10901877.png",
+            "clients-hub": "https://i.ibb.co/Wp3tKrJp/IMG-20260611-WA0007.jpg",
+            "cv-maker": "https://i.ibb.co/cSvLqcLX/file-00000000d5e071f4ba22a75f0817c803.png",
+            "smart-duka": "https://i.ibb.co/nMBpS9WF/file-00000000826c71f48191fe3abb47a9d3.png",
+            "agriculture": "https://i.ibb.co/xqM1JCWG/file-000000004a8071f480fdac11e406f891.png",
+            "luminor-studio": "https://i.ibb.co/3959zVpj/file-000000008d8c71f49373b77a647572d6.png",
+            "matatu-booking": "https://i.ibb.co/392pGZq9/file-0000000093b871f4b17cbccefe4d7bc7.png",
+            "home-search": "https://i.ibb.co/N6jb2762/file-000000004c4871f49ca1cb9d0d2c1de4.png",
+            "school-360": "https://i.ibb.co/rK4xNYFs/file-000000001ee871f4b8169a28703091b7.png",
+            "kanisa-launcher": "https://i.ibb.co/7NrfmcHn/file-0000000081ac72468a2293c64472a4fc.png",
+            "spark-connect": "https://i.ibb.co/ST5wWMn/file-00000000b6f871f4879ce38381ddcffe.png",
+            "meal-planner-pro": "https://i.ibb.co/gLXWj0Tn/c8a71cc8d8bc8e067883b4c4f4d184b0.jpg",
+            "finance-eight": "https://i.ibb.co/B5VkzwB7/1782584384508.png",
+            "sacco-sable": "https://i.ibb.co/Psfr94nb/1782588375093.png",
+            "cbo-three": "https://i.ibb.co/BH83mCK9/1782590354801.png",
+            "gym-nine": "https://i.ibb.co/GD2WMcJ/1782594191864.png"
+        };
 
+        const screenshotUrls = [
+            "https://i.ibb.co/JPVGw2p/Screenshot-20260611-024707-Chrome.jpg",
+            "https://i.ibb.co/8D8qyBGg/Screenshot-20260611-024637-Chrome.jpg",
+            "https://i.ibb.co/4RBfvvjm/Screenshot-20260611-024610-Chrome.jpg",
+            "https://i.ibb.co/4g42CZRx/Screenshot-20260611-024506-Chrome.jpg",
+            "https://i.ibb.co/cSpb60gC/Screenshot-20260611-024412-Chrome.jpg",
+            "https://i.ibb.co/cXsqXjsx/Screenshot-20260611-024344-Chrome.jpg",
+            "https://i.ibb.co/Wp3tKrJp/IMG-20260611-WA0007.jpg",
+            "https://i.ibb.co/XxkBRrJ9/Screenshot-20260611-024111-Chrome.jpg",
+            "https://i.ibb.co/rWr1ZWW/Screenshot-20260611-024047-Chrome.jpg",
+            "https://i.ibb.co/B5wFG9Yh/Screenshot-20260611-023951-Chrome.jpg",
+            "https://i.ibb.co/RkcNfHh6/Screenshot-20260611-023843-Chrome.jpg",
+            "https://i.ibb.co/vF5TLKP/Screenshot-20260611-023556-Chrome.jpg",
+            "https://i.ibb.co/R4TPbxsB/Screenshot-20260611-023537-Chrome.jpg",
+            "https://i.ibb.co/PGT1M64C/Screenshot-20260611-023518-Chrome.jpg"
+        ];
+
+        // ============================================================
+        // TIER CONFIGURATION
+        // ============================================================
+        
+        const DEFAULT_TIERS = {
+            FREE: {
+                name: 'Free',
+                price: 'KES 0',
+                priceId: null,
+                features: ['Basic listing', 'Standard visibility', '1 screenshot', 'Community support'],
+                color: 'gray',
+                trialDays: 0,
+                icon: '💎'
+            },
+            STANDARD: {
+                name: 'Standard',
+                price: 'KES 500/mo',
+                priceId: 'price_standard_monthly_id',
+                features: ['Enhanced listing', 'Priority visibility', '5 screenshots', 'Basic analytics', 'Email support'],
+                color: 'purple',
+                trialDays: 14,
+                icon: '⭐'
+            },
+            FEATURED: {
+                name: 'Featured',
+                price: 'KES 1,500/mo',
+                priceId: 'price_featured_monthly_id',
+                features: ['Premium listing', 'Top placement', 'Unlimited screenshots', 'Advanced analytics', 
+                          'Featured badge', 'Priority support', 'Marketing boost'],
+                color: 'amber',
+                trialDays: 7,
+                icon: '🏆'
+            }
+        };
+
+        // ============================================================
+        // APP DATA
+        // ============================================================
+        
+        const appList = [
+            { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand", category: "Utilities", rating: 4.6, ratingCount: 234, version: "2.1.0", features: ["Real-time tracking", "Scheduled deliveries", "Multiple payments", "Loyalty rewards"], description: "Fast, reliable LPG and water delivery service with live order tracking.", externalUrl: "https://maji-gasdelivery.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "deep-focus", name: "Deep Focus", slug: "deep-focus", shortDesc: "Pomodoro timer & distraction blocker", category: "Productivity", rating: 4.8, ratingCount: 1890, version: "3.0.2", features: ["Pomodoro timer", "Website blocker", "Focus music", "Analytics"], description: "Boost productivity with science-backed focus tools.", externalUrl: "https://deepfocus-roan.vercel.app/", tier: "STANDARD", trialActive: false, developer: "meon" },
+            { id: "guard-ai", name: "Guard AI", slug: "guard-ai", shortDesc: "AI cybersecurity protection", category: "AI Tools", rating: 4.9, ratingCount: 523, version: "1.5.0", features: ["Threat detection", "VPN", "Password manager", "Dark web monitoring"], description: "Next-gen AI shield for digital security.", externalUrl: "https://guard-ai-six.vercel.app/", tier: "FEATURED", trialActive: false, developer: "meon" },
+            { id: "data-vision", name: "Data Vision", slug: "data-vision", shortDesc: "AI business intelligence", category: "Analytics", rating: 4.7, ratingCount: 312, version: "4.2.1", features: ["Dashboards", "AI predictions", "Data connectors", "Reports"], description: "Turn data into insights with AI.", externalUrl: "https://datavision-beta.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "rider-app", name: "Rider App", slug: "rider-app", shortDesc: "Logistics & delivery platform", category: "Transport", rating: 4.5, ratingCount: 892, version: "2.3.0", features: ["Route optimization", "Live tracking", "Earnings dashboard", "Proof of delivery"], description: "Complete solution for riders and fleets.", externalUrl: "https://rider-app-psi.vercel.app/", tier: "STANDARD", trialActive: true, trialEnd: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(), developer: "meon" },
+            { id: "insight", name: "Insight", slug: "insight", shortDesc: "Customer analytics platform", category: "Analytics", rating: 4.6, ratingCount: 178, version: "1.8.0", features: ["Segmentation", "Behavioral analytics", "Predictive models", "APIs"], description: "Deep customer behavior intelligence.", externalUrl: "https://insight-eta-lime.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "clients-hub", name: "Clients Hub", slug: "clients-hub", shortDesc: "CRM for modern business", category: "CRM", rating: 4.4, ratingCount: 421, version: "3.1.0", features: ["Contact mgmt", "Deal tracking", "Email sync", "Forecasting"], description: "Grow relationships with powerful CRM.", externalUrl: "https://clients-hub.vercel.app/", tier: "STANDARD", trialActive: false, developer: "meon" },
+            { id: "smart-duka", name: "Smart Duka", slug: "smart-duka", shortDesc: "Retail management system", category: "Business", rating: 4.7, ratingCount: 563, version: "2.0.0", features: ["Inventory", "POS", "Sales reports", "Supplier mgmt"], description: "Modern POS for small shops.", externalUrl: "https://smartduka-rho.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "agriculture", name: "Agriculture", slug: "agriculture", shortDesc: "Smart farming solution", category: "Agriculture", rating: 4.3, ratingCount: 197, version: "1.4.0", features: ["Crop monitor", "Weather", "Market prices", "Expert advice"], description: "Empower farmers with digital tools.", externalUrl: "https://agriculture-puce-eta.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "luminor-studio", name: "Luminor Studio", slug: "luminor-studio", shortDesc: "AI photo & video editing", category: "Design", rating: 4.9, ratingCount: 734, version: "5.0.1", features: ["AI enhancement", "Layer editing", "Filters", "4K export"], description: "Creative suite for professionals.", externalUrl: "https://luminor-studio.vercel.app/", tier: "FEATURED", trialActive: false, developer: "meon" },
+            { id: "cv-maker", name: "CV Maker", slug: "cv-maker", shortDesc: "Professional resume builder", category: "Productivity", rating: 4.6, ratingCount: 1280, version: "1.9.0", features: ["Templates", "PDF export", "LinkedIn import", "Cover letter"], description: "Create job-winning resumes instantly.", externalUrl: "https://cv-maker-five-mu.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "matatu-booking", name: "Matatu Booking", slug: "matatu-booking", shortDesc: "Public transport booking", category: "Transport", rating: 4.5, ratingCount: 567, version: "2.2.0", features: ["Real-time tracking", "Digital tickets", "Route planning", "Fare calc"], description: "Book matatus and track in real-time.", externalUrl: "https://matatu-booking.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "home-search", name: "Home Search", slug: "home-search", shortDesc: "Real estate marketplace", category: "Real Estate", rating: 4.4, ratingCount: 398, version: "3.3.0", features: ["Property search", "Virtual tours", "Mortgage calc", "Agent contact"], description: "Find dream home or rental.", externalUrl: "https://home-search-j529.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "school-360", name: "School 360", slug: "school-360", shortDesc: "School management system", category: "Education", rating: 4.8, ratingCount: 245, version: "4.1.0", features: ["Student records", "Fee mgmt", "Parent portal", "CBC support"], description: "Complete school ERP with CBC.", externalUrl: "https://school-360-one.vercel.app/", tier: "STANDARD", trialActive: false, developer: "meon" },
+            { id: "kanisa-launcher", name: "Kanisa Launcher", slug: "kanisa-launcher", shortDesc: "Church management & engagement", category: "Religion", rating: 4.7, ratingCount: 156, version: "1.2.0", features: ["Events", "Giving platform", "Member directory", "Live stream"], description: "Digital tools for modern ministry.", externalUrl: "https://kanisa-launcher.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "spark-connect", name: "Spark Connect", slug: "spark-connect", shortDesc: "Authentic dating & meaningful connections", category: "Social", rating: 4.8, ratingCount: 342, version: "2.0.0", features: ["Smart matching", "Video calls", "Verified profiles", "Interest-based groups", "Safety tools"], description: "Find genuine relationships with AI-powered matching.", externalUrl: "https://dating-app-six-pi.vercel.app/", tier: "FEATURED", trialActive: true, trialEnd: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), developer: "meon" },
+            { id: "meal-planner-pro", name: "Meal Planner PRO", slug: "meal-planner-pro", shortDesc: "AI-powered weekly meal planning & grocery lists", category: "Health & Wellness", rating: 4.7, ratingCount: 312, version: "1.0.0", features: ["7-day meal plans", "AI recommendations", "Grocery lists", "Dietary preferences", "Budget tracking"], description: "Meal Planner PRO designs daily meal plans tailored to your dietary goals.", externalUrl: "https://diet-snowy-five.vercel.app/", tier: "STANDARD", trialActive: false, developer: "meon" },
+            { id: "finance-eight", name: "Finance Eight", slug: "finance-eight", shortDesc: "Smart personal finance & budgeting tool", category: "Finance", rating: 4.6, ratingCount: 198, version: "1.0.0", features: ["Budget tracking", "Expense categorization", "Savings goals", "Financial insights", "Multi-currency"], description: "Take control of your finances with smart budgeting tools.", externalUrl: "https://finance-eight-fawn.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "sacco-sable", name: "Sacco Sable", slug: "sacco-sable", shortDesc: "Digital savings & investment platform", category: "Finance", rating: 4.5, ratingCount: 156, version: "1.0.0", features: ["Savings goals", "Investment tracking", "Dividend management", "Member contributions"], description: "Sacco Sable helps you manage your savings and grow your wealth.", externalUrl: "https://sacco-sable.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "cbo-three", name: "CBO Three", slug: "cbo-three", shortDesc: "Community Based Organization management platform", category: "Business", rating: 4.4, ratingCount: 89, version: "1.0.0", features: ["Member management", "Contribution tracking", "Project monitoring", "Financial reporting"], description: "CBO Three is a comprehensive management platform for Community Based Organizations.", externalUrl: "https://c-b-o-three.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" },
+            { id: "gym-nine", name: "Gym Nine", slug: "gym-nine", shortDesc: "Fitness tracker & workout planner", category: "Health & Wellness", rating: 4.7, ratingCount: 124, version: "1.0.0", features: ["Workout tracking", "Progress monitoring", "Exercise library", "Goal setting", "Workout plans"], description: "Gym Nine is your ultimate fitness companion.", externalUrl: "https://gym-nine-sepia.vercel.app/", tier: "FREE", trialActive: false, developer: "meon" }
+        ];
+
+        appList.forEach((app, idx) => {
+            app.logoUrl = logoMapping[app.id];
+            app.developer = { name: "Meon", verified: true };
+            const screenshotIdx = idx % screenshotUrls.length;
+            app.screenshots = [screenshotUrls[screenshotIdx], screenshotUrls[screenshotIdx]];
+            app.versions = [{ version: app.version, changelog: "Latest stable release", createdAt: new Date().toISOString() }];
+            if (!app.ratingCount) app.ratingCount = Math.floor(Math.random() * 800) + 50;
+            if (!app.tier) app.tier = "FREE";
+        });
+
+        // ============================================================
+        // UTILITY FUNCTIONS
+        // ============================================================
+        
+        function generateFallbackSVG(appId, size = 80) {
+            const colorMap = {
+                "maji-gas": { primary: "#2563EB", secondary: "#F97316", letter: "M" },
+                "deep-focus": { primary: "#4F46E5", secondary: "#7C3AED", letter: "D" },
+                "guard-ai": { primary: "#3B82F6", secondary: "#94A3B8", letter: "G" },
+                "data-vision": { primary: "#10B981", secondary: "#3B82F6", letter: "D" },
+                "rider-app": { primary: "#EA580C", secondary: "#111827", letter: "R" },
+                "insight": { primary: "#A855F7", secondary: "#06B6D4", letter: "I" },
+                "clients-hub": { primary: "#1E3A8A", secondary: "#3B82F6", letter: "C" },
+                "smart-duka": { primary: "#10B981", secondary: "#F59E0B", letter: "S" },
+                "agriculture": { primary: "#059669", secondary: "#78350F", letter: "A" },
+                "luminor-studio": { primary: "#D97706", secondary: "#111827", letter: "L" },
+                "cv-maker": { primary: "#2563EB", secondary: "#FFFFFF", letter: "C" },
+                "matatu-booking": { primary: "#EAB308", secondary: "#111827", letter: "M" },
+                "home-search": { primary: "#0D9488", secondary: "#3B82F6", letter: "H" },
+                "school-360": { primary: "#2563EB", secondary: "#10B981", letter: "S" },
+                "kanisa-launcher": { primary: "#9333EA", secondary: "#D97706", letter: "K" },
+                "spark-connect": { primary: "#EC4899", secondary: "#F43F5E", letter: "S" },
+                "meal-planner-pro": { primary: "#22C55E", secondary: "#16A34A", letter: "M" },
+                "finance-eight": { primary: "#0D9488", secondary: "#14B8A6", letter: "F" },
+                "sacco-sable": { primary: "#1E40AF", secondary: "#3B82F6", letter: "S" },
+                "cbo-three": { primary: "#0D9488", secondary: "#0F766E", letter: "C" },
+                "gym-nine": { primary: "#DC2626", secondary: "#991B1B", letter: "G" }
+            };
+            const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "A" };
+            const svgString =
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="${size}" height="${size}">
+                    <rect width="512" height="512" rx="96" fill="${c.primary}"/>
+                    <circle cx="256" cy="256" r="140" fill="${c.secondary}" opacity="0.9"/>
+                    <text x="256" y="340" text-anchor="middle" fill="white" font-size="180" font-weight="bold" font-family="Inter, sans-serif">${c.letter}</text>
+                </svg>`;
+            return `data:image/svg+xml,${encodeURIComponent(svgString)}`;
+        }
+
+        function appLogoImg(app, sizeClass = "w-16 h-16", pixelSize = 60) {
+            const externalUrl = app.logoUrl;
+            const fallbackSvg = generateFallbackSVG(app.id, pixelSize);
+            if (!externalUrl) {
+                return `<img src="${fallbackSvg}" class="${sizeClass} rounded-xl shadow object-cover" alt="${app.name}">`;
+            }
+            return `<img src="${externalUrl}" class="${sizeClass} rounded-xl shadow object-cover" alt="${app.name}" 
+                onerror="this.onerror=null; this.src='${fallbackSvg}';">`;
+        }
+
+        function getTierConfig(tierKey) {
+            return DEFAULT_TIERS[tierKey] || DEFAULT_TIERS.FREE;
+        }
+
+        function getTierColor(tierKey) {
+            const tier = getTierConfig(tierKey);
+            const colors = {
+                gray: 'bg-gray-500/20 text-gray-300',
+                purple: 'bg-purple-500/20 text-purple-300',
+                amber: 'bg-amber-500/20 text-amber-300'
+            };
+            return colors[tier.color] || colors.gray;
+        }
+
+        function getTierBadge(tierKey) {
+            const tier = getTierConfig(tierKey);
+            return tier.icon || '💎';
+        }
+
+        function showToast(msg, type = "success") {
+            const container = document.getElementById("toastContainer");
+            const toast = document.createElement("div");
+            const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+            toast.className =
+                `toast bg-white dark:bg-gray-800 shadow-lg rounded-xl px-4 py-3 border-l-4 ${type === "success" ? "border-green-500" : type === "error" ? "border-red-500" : "border-blue-500"} flex items-center gap-2`;
+            toast.innerHTML =
+                `<span class="toast-icon">${icons[type] || 'ℹ️'}</span><span>${msg}</span>`;
+            container.appendChild(toast);
+            if (window.lucide) lucide.createIcons();
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        // ============================================================
+        // STATE MANAGEMENT
+        // ============================================================
+        
+        let currentUser = JSON.parse(localStorage.getItem("meonUser")) || null;
+        let activeView = "home";
+        let selectedApp = null;
+        let userFavorites = JSON.parse(localStorage.getItem("meonFavorites")) || [];
+        let reviewsData = JSON.parse(localStorage.getItem("meonReviews")) || {};
+        let searchQuery = "";
+        let activeCategoryFilter = "";
+        let customPricing = JSON.parse(localStorage.getItem("meonCustomPricing")) || {};
+        let mpesaTransactions = JSON.parse(localStorage.getItem("meonMpesaTransactions")) || {};
+        let paymentProcessing = false;
+        let currentPlan = null;
+
+        function saveState() {
+            if (currentUser) localStorage.setItem("meonUser", JSON.stringify(currentUser));
+            else localStorage.removeItem("meonUser");
+            localStorage.setItem("meonFavorites", JSON.stringify(userFavorites));
+            localStorage.setItem("meonReviews", JSON.stringify(reviewsData));
+            localStorage.setItem("meonCustomPricing", JSON.stringify(customPricing));
+            localStorage.setItem("meonMpesaTransactions", JSON.stringify(mpesaTransactions));
+        }
+
+        function loginUser(email, role = "user", name = null) {
+            currentUser = { 
+                id: Date.now(), 
+                email, 
+                name: name || email.split('@')[0], 
+                role: role,
+                phone: null,
+                subscription: null,
+                createdAt: new Date().toISOString()
+            };
+            saveState();
+            renderNav();
+            renderCurrentView();
+            showToast(`Welcome to Meon, ${currentUser.name}! 🚀`, "success");
+        }
+
+        function logout() {
+            currentUser = null;
+            userFavorites = [];
+            saveState();
+            renderNav();
+            renderCurrentView();
+            showToast("Logged out successfully", "success");
+        }
+
+        function toggleFavorite(appId) {
+            if (!currentUser) { showToast("Sign in to save favorites", "error"); return false; }
+            const idx = userFavorites.indexOf(appId);
+            if (idx === -1) { 
+                userFavorites.push(appId);
+                showToast("Added to favorites ❤️", "success"); 
+            } else { 
+                userFavorites.splice(idx, 1);
+                showToast("Removed from favorites", "success"); 
+            }
+            saveState();
+            renderCurrentView();
+            return true;
+        }
+
+        function openApp(app) {
+            if (app.externalUrl) {
+                window.open(app.externalUrl, '_blank');
+                showToast(`Launching ${app.name}... 🚀`, "info");
+            } else {
+                showToast("No web link available for this app", "error");
+            }
+        }
+
+        function submitReview(appId, rating, content) {
+            if (!currentUser) { showToast("Login to review", "error"); return false; }
+            if (!reviewsData[appId]) reviewsData[appId] = [];
+            reviewsData[appId].push({ 
+                userId: currentUser.id, 
+                user: currentUser.name, 
+                rating, 
+                content,
+                date: new Date().toISOString() 
+            });
+            const allRatings = reviewsData[appId].map(r => r.rating);
+            const avg = allRatings.reduce((a, b) => a + b, 0) / allRatings.length;
+            const appObj = appList.find(a => a.id === appId);
+            if (appObj) { 
+                appObj.rating = parseFloat(avg.toFixed(1));
+                appObj.ratingCount = allRatings.length; 
+            }
+            saveState();
+            showToast("Review submitted ✅", "success");
+            renderCurrentView();
+            return true;
+        }
+
+        function getFilteredApps() {
+            let filtered = [...appList];
+            if (searchQuery) {
+                const q = searchQuery.toLowerCase();
+                filtered = filtered.filter(app => 
+                    app.name.toLowerCase().includes(q) || 
+                    app.shortDesc.toLowerCase().includes(q) ||
+                    app.category.toLowerCase().includes(q)
+                );
+            }
+            if (activeCategoryFilter) {
+                filtered = filtered.filter(app => 
+                    app.category.toLowerCase() === activeCategoryFilter.toLowerCase()
+                );
+            }
+            return filtered;
+        }
+
+        function navigateTo(view) {
+            activeView = view;
+            selectedApp = null;
+            renderCurrentView();
+            document.querySelectorAll(".nav-btn").forEach(b => {
+                b.classList.remove("border-purple-600", "text-purple-600");
+                if (b.dataset.nav === view) {
+                    b.classList.add("border-purple-600", "text-purple-600");
+                }
+            });
+        }
+
+        // ============================================================
+        // M-PESA INTEGRATION
+        // ============================================================
+        
         class MpesaClient {
             constructor() {
                 this.accessToken = null;
                 this.tokenExpiry = null;
+                this.retryCount = 0;
+                this.maxRetries = 3;
             }
 
             async getAccessToken() {
@@ -747,7 +888,7 @@
                         {
                             method: 'GET',
                             headers: {
-                                'Authorization': `Basic ${btoa(`${CONFIG.MPESA.CONSUMER_KEY}:${CONFIG.MPESA.CONSUMER_SECRET}`)}`
+                                'Authorization': `Basic ${btoa(`${CONFIG.MPESA.CONSUMER_KEY}:${CONFIG.MPESA.CONSUMER_SECRET}`)}`,
                             }
                         }
                     );
@@ -757,11 +898,18 @@
                     if (data.access_token) {
                         this.accessToken = data.access_token;
                         this.tokenExpiry = Date.now() + (data.expires_in || 3600) * 1000 - 60000;
+                        this.retryCount = 0;
                         return this.accessToken;
+                    } else {
+                        throw new Error('Failed to get access token');
                     }
-                    throw new Error('Failed to get access token');
                 } catch (error) {
                     console.error('M-Pesa Token Error:', error);
+                    if (this.retryCount < this.maxRetries) {
+                        this.retryCount++;
+                        await new Promise(resolve => setTimeout(resolve, 2000 * this.retryCount));
+                        return this.getAccessToken();
+                    }
                     return 'demo_token';
                 }
             }
@@ -906,7 +1054,7 @@
         // ============================================================
         // PAYMENT HANDLER
         // ============================================================
-
+        
         class PaymentHandler {
             constructor() {
                 this.mpesa = new MpesaClient();
@@ -931,19 +1079,16 @@
                     return;
                 }
 
-                // Free plan - no payment needed
                 if (plan === 'free') {
                     this.activateFreePlan();
                     return;
                 }
 
-                // Validate phone
                 if (!this.mpesa.validatePhoneNumber(phoneNumber)) {
                     showToast('Please enter a valid phone number (e.g., 0712345678)', 'error');
                     return;
                 }
 
-                // Check for trial
                 if (planData.trialDays > 0) {
                     const useTrial = confirm(`🎁 Start ${planData.trialDays}-day free trial for ${planData.name} plan?`);
                     if (useTrial) {
@@ -957,7 +1102,6 @@
                 const accountReference = `MEON-${plan.toUpperCase()}-${Date.now().toString().slice(-6)}`;
 
                 try {
-                    // Show processing
                     this.updateProgress(10, '📱 Sending STK Push...');
                     
                     const response = await this.mpesa.stkPush(
@@ -979,13 +1123,10 @@
                             createdAt: new Date().toISOString()
                         };
 
-                        // Save transaction
-                        state.transactions.push(transaction);
-                        localStorage.setItem('meonTransactions', JSON.stringify(state.transactions));
+                        mpesaTransactions[checkoutId] = transaction;
+                        saveState();
 
                         showToast('📱 STK Push sent! Check your phone and enter PIN.', 'info');
-                        
-                        // Poll for status
                         this.pollStatus(checkoutId, plan, planData);
                     } else {
                         showToast(`❌ Payment failed: ${response.ResponseDescription || 'Unknown error'}`, 'error');
@@ -995,7 +1136,6 @@
                     showToast('❌ Payment failed. Please try again.', 'error');
                 } finally {
                     this.isProcessing = false;
-                    this.updateProgress(100, '');
                 }
             }
 
@@ -1005,10 +1145,10 @@
 
                 const poll = async () => {
                     if (attempts >= maxAttempts) {
-                        const transaction = state.transactions.find(t => t.id === checkoutRequestId);
+                        const transaction = mpesaTransactions[checkoutRequestId];
                         if (transaction && transaction.status === 'pending') {
                             transaction.status = 'timeout';
-                            localStorage.setItem('meonTransactions', JSON.stringify(state.transactions));
+                            saveState();
                             showToast('⏰ Payment timed out. Please try again.', 'error');
                             this.updateProgress(100, '');
                         }
@@ -1021,37 +1161,34 @@
 
                     try {
                         const status = await this.mpesa.queryStatus(checkoutRequestId);
-                        const transaction = state.transactions.find(t => t.id === checkoutRequestId);
+                        const transaction = mpesaTransactions[checkoutRequestId];
 
                         if (status.ResultCode === '0') {
-                            // Success
                             transaction.status = 'completed';
                             transaction.completedAt = new Date().toISOString();
                             transaction.mpesaReceipt = status.MPesaReceiptNumber || 'RECEIPT-' + Date.now();
-                            localStorage.setItem('meonTransactions', JSON.stringify(state.transactions));
+                            saveState();
                             
                             this.activatePlan(plan);
                             showToast(`✅ Payment successful! Receipt: ${transaction.mpesaReceipt}`, 'success');
                             this.updateProgress(100, '✅ Payment complete!');
+                            renderCurrentView();
                             return;
                         } else if (status.ResultCode === '1032') {
-                            // Cancelled
                             transaction.status = 'cancelled';
-                            localStorage.setItem('meonTransactions', JSON.stringify(state.transactions));
+                            saveState();
                             showToast('❌ Payment cancelled by user', 'error');
                             this.updateProgress(100, '');
                             return;
                         } else if (status.ResultCode && status.ResultCode !== '200001') {
-                            // Error
                             transaction.status = 'failed';
                             transaction.error = status.ResultDesc || 'Unknown error';
-                            localStorage.setItem('meonTransactions', JSON.stringify(state.transactions));
+                            saveState();
                             showToast(`❌ Payment failed: ${transaction.error}`, 'error');
                             this.updateProgress(100, '');
                             return;
                         }
 
-                        // Still pending - continue polling
                         poll();
                     } catch (error) {
                         console.error('Polling error:', error);
@@ -1063,31 +1200,27 @@
             }
 
             activatePlan(plan) {
-                const user = state.user;
-                if (user) {
-                    user.subscription = {
+                if (currentUser) {
+                    currentUser.subscription = {
                         plan: plan,
                         activatedAt: new Date().toISOString(),
                         expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
                     };
-                    localStorage.setItem('meonUser', JSON.stringify(user));
-                    state.user = user;
+                    saveState();
                 }
                 showToast(`🎉 ${plan.charAt(0).toUpperCase() + plan.slice(1)} plan activated!`, 'success');
             }
 
             startTrial(plan, trialDays) {
-                const user = state.user;
-                if (user) {
-                    user.subscription = {
+                if (currentUser) {
+                    currentUser.subscription = {
                         plan: plan,
                         trial: true,
                         trialDays: trialDays,
                         activatedAt: new Date().toISOString(),
                         trialEndsAt: new Date(Date.now() + trialDays * 24 * 60 * 60 * 1000).toISOString()
                     };
-                    localStorage.setItem('meonUser', JSON.stringify(user));
-                    state.user = user;
+                    saveState();
                 }
                 showToast(`🎁 ${trialDays}-day free trial started for ${plan.charAt(0).toUpperCase() + plan.slice(1)} plan!`, 'success');
             }
@@ -1101,15 +1234,9 @@
                 const fill = document.getElementById('progressFill');
                 const textEl = document.getElementById('progressText');
                 
-                if (progress) {
-                    progress.classList.add('active');
-                }
-                if (fill) {
-                    fill.style.width = percentage + '%';
-                }
-                if (textEl) {
-                    textEl.textContent = text || '⏳ Processing...';
-                }
+                if (progress) progress.classList.add('active');
+                if (fill) fill.style.width = percentage + '%';
+                if (textEl) textEl.textContent = text || '⏳ Processing...';
                 if (percentage >= 100) {
                     setTimeout(() => {
                         if (progress) progress.classList.remove('active');
@@ -1127,184 +1254,1111 @@
         }
 
         // ============================================================
-        // UI CONTROLLER
+        // PAYMENT UI FUNCTIONS
         // ============================================================
+        
+        function openPaymentModal(plan) {
+            const plans = {
+                free: { name: 'Free', price: 'KES 0', icon: '💎', trial: '' },
+                standard: { name: 'Standard', price: 'KES 500', icon: '⭐', trial: '14-day free trial' },
+                featured: { name: 'Featured', price: 'KES 1,500', icon: '🏆', trial: '7-day free trial' }
+            };
 
-        class UIController {
-            constructor() {
-                this.paymentHandler = new PaymentHandler();
-                this.setupEventListeners();
-                this.loadTransactions();
+            const planData = plans[plan];
+            if (!planData) return;
+
+            currentPlan = plan;
+
+            document.getElementById('modalIcon').textContent = planData.icon;
+            document.getElementById('modalTitle').textContent = `${planData.name} Plan`;
+            document.getElementById('modalSubtitle').textContent = planData.trial || 'Complete your subscription payment';
+            document.getElementById('modalPrice').innerHTML = `${planData.price} <small>/mo</small>`;
+            document.getElementById('phoneInput').value = '';
+            
+            const handler = new PaymentHandler();
+            handler.resetProgress();
+
+            if (plan === 'free') {
+                document.getElementById('modalSubtitle').textContent = 'Activate your free plan';
+                document.getElementById('confirmPayment').textContent = '🚀 Activate Free Plan';
+                document.getElementById('phoneGroup').style.display = 'none';
+            } else {
+                document.getElementById('confirmPayment').textContent = '💳 Pay with M-Pesa';
+                document.getElementById('phoneGroup').style.display = 'block';
             }
 
-            setupEventListeners() {
-                // Get Started buttons
-                document.querySelectorAll('.btn-get-started').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const plan = btn.dataset.plan;
-                        this.openPaymentModal(plan);
-                    });
-                });
+            document.getElementById('confirmPayment').disabled = false;
+            document.getElementById('paymentModal').classList.add('active');
+        }
 
-                // Modal controls
-                document.getElementById('confirmPayment').addEventListener('click', () => {
-                    this.processPayment();
-                });
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+            const handler = new PaymentHandler();
+            handler.resetProgress();
+            currentPlan = null;
+        }
 
-                document.getElementById('cancelPayment').addEventListener('click', () => {
-                    this.closePaymentModal();
-                });
+        async function processPayment() {
+            const plan = currentPlan;
+            if (!plan) return;
 
-                // Close modal on overlay click
-                document.getElementById('paymentModal').addEventListener('click', (e) => {
-                    if (e.target === e.currentTarget) {
-                        this.closePaymentModal();
-                    }
-                });
-
-                // Enter key in phone input
-                document.getElementById('phoneInput').addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        this.processPayment();
-                    }
-                });
-
-                // Phone input formatting
-                document.getElementById('phoneInput').addEventListener('input', (e) => {
-                    let value = e.target.value.replace(/[^0-9]/g, '');
-                    if (value.length > 10) value = value.slice(0, 10);
-                    e.target.value = value;
-                });
+            if (plan === 'free') {
+                const handler = new PaymentHandler();
+                handler.activateFreePlan();
+                closePaymentModal();
+                renderCurrentView();
+                return;
             }
 
-            openPaymentModal(plan) {
-                const plans = {
-                    free: { name: 'Free', price: 'KES 0', icon: '💎', trial: '' },
-                    standard: { name: 'Standard', price: 'KES 500', icon: '⭐', trial: '14-day free trial' },
-                    featured: { name: 'Featured', price: 'KES 1,500', icon: '🏆', trial: '7-day free trial' }
-                };
+            const phoneInput = document.getElementById('phoneInput');
+            const phone = phoneInput.value.trim();
 
-                const planData = plans[plan];
-                if (!planData) return;
-
-                state.currentPlan = plan;
-
-                document.getElementById('modalIcon').textContent = planData.icon;
-                document.getElementById('modalTitle').textContent = `${planData.name} Plan`;
-                document.getElementById('modalSubtitle').textContent = planData.trial || 'Complete your subscription payment';
-                document.getElementById('modalPrice').innerHTML = `${planData.price} <small>/mo</small>`;
-                document.getElementById('phoneInput').value = '';
-                this.paymentHandler.resetProgress();
-
-                // If free plan, show different modal
-                if (plan === 'free') {
-                    document.getElementById('modalSubtitle').textContent = 'Activate your free plan';
-                    document.getElementById('confirmPayment').textContent = '🚀 Activate Free Plan';
-                    document.getElementById('phoneInput').parentElement.style.display = 'none';
-                } else {
-                    document.getElementById('confirmPayment').textContent = '💳 Pay with M-Pesa';
-                    document.getElementById('phoneInput').parentElement.style.display = 'block';
-                }
-
-                document.getElementById('paymentModal').classList.add('active');
+            if (!phone) {
+                showToast('Please enter your M-Pesa phone number', 'error');
+                phoneInput.focus();
+                return;
             }
 
-            closePaymentModal() {
-                document.getElementById('paymentModal').classList.remove('active');
-                this.paymentHandler.resetProgress();
-                state.currentPlan = null;
-            }
+            const handler = new PaymentHandler();
+            document.getElementById('confirmPayment').disabled = true;
+            document.getElementById('confirmPayment').textContent = '⏳ Processing...';
 
-            async processPayment() {
-                const plan = state.currentPlan;
-                if (!plan) return;
+            await handler.initiatePayment(plan, phone);
 
-                if (plan === 'free') {
-                    this.paymentHandler.activateFreePlan();
-                    this.closePaymentModal();
-                    return;
-                }
+            setTimeout(() => {
+                document.getElementById('confirmPayment').disabled = false;
+                document.getElementById('confirmPayment').textContent = '💳 Pay with M-Pesa';
+            }, 30000);
 
-                const phoneInput = document.getElementById('phoneInput');
-                const phone = phoneInput.value.trim();
+            // Don't close modal immediately - show progress
+        }
 
-                if (!phone) {
-                    showToast('Please enter your M-Pesa phone number', 'error');
-                    phoneInput.focus();
-                    return;
-                }
+        // ============================================================
+        // UI COMPONENTS
+        // ============================================================
+        
+        function appCard(app) {
+            const isFav = currentUser && userFavorites.includes(app.id);
+            const tierColor = getTierColor(app.tier);
+            const isTrial = app.trialActive;
+            const appJson = JSON.stringify(app).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            
+            return `<div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-md p-4 card-hover cursor-pointer border border-white/20" onclick="window.showAppDetail('${app.id}')">
+                <div class="flex gap-3">
+                    ${appLogoImg(app, "w-16 h-16", 60)}
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h3 class="font-bold text-gray-900 dark:text-white">${app.name}</h3>
+                            <span class="text-xs px-2 py-0.5 rounded-full ${tierColor}">${getTierBadge(app.tier)} ${app.tier}</span>
+                            ${isTrial ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full trial-badge">🎁 Trial</span>` : ''}
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">${app.shortDesc}</p>
+                        <div class="flex items-center gap-1 mt-1">
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            <span class="text-gray-900 dark:text-white">${app.rating}</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 ml-1">(${app.ratingCount})</span>
+                        </div>
+                    </div>
+                    <button class="text-red-500" onclick="event.stopPropagation(); toggleFavorite('${app.id}')">
+                        <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500' : ''}"></i>
+                    </button>
+                </div>
+                <div class="mt-3 flex justify-between items-center">
+                    <span class="text-xs bg-purple-600/20 dark:bg-purple-600/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded-full">${app.category}</span>
+                    <button onclick="event.stopPropagation(); window.openApp(${appJson})" 
+                            class="bg-purple-600 text-white px-4 py-1 rounded-lg text-sm hover:bg-purple-700 transition">
+                        Open App →
+                    </button>
+                </div>
+            </div>`;
+        }
 
-                await this.paymentHandler.initiatePayment(plan, phone);
+        // ============================================================
+        // RENDER VIEWS
+        // ============================================================
+        
+        function renderHome() {
+            const filteredApps = getFilteredApps();
+            const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub", "meal-planner-pro", "finance-eight", "sacco-sable", "cbo-three", "gym-nine"];
+            const featured = filteredApps.filter(a => featuredIds.includes(a.id));
+            const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
+            const newReleases = [...filteredApps].reverse().slice(0, 6);
+            
+            const categoryItems = [
+                { name: "Social", gradient: "from-pink-600 to-rose-600", filter: "social" },
+                { name: "AI Tools", gradient: "from-purple-600 to-violet-600", filter: "ai tools" },
+                { name: "Business", gradient: "from-blue-600 to-cyan-600", filter: "business" },
+                { name: "Education", gradient: "from-green-600 to-emerald-600", filter: "education" },
+                { name: "Agriculture", gradient: "from-orange-600 to-amber-600", filter: "agriculture" },
+                { name: "Transport", gradient: "from-red-600 to-pink-600", filter: "transport" },
+                { name: "Design", gradient: "from-indigo-600 to-purple-600", filter: "design" },
+                { name: "Utilities", gradient: "from-teal-600 to-cyan-600", filter: "utilities" },
+                { name: "Health & Wellness", gradient: "from-green-600 to-lime-600", filter: "health & wellness" },
+                { name: "Finance", gradient: "from-emerald-600 to-teal-600", filter: "finance" }
+            ];
+            
+            const mainBgHtml = `<div class="main-bg w-full max-w-6xl mx-auto">
+                <div class="main-content">`;
+            
+            const heroHtml =
+                `<div class="hero-bg w-full mx-auto overflow-hidden p-6 md:p-8 rounded-3xl border border-purple-900/40 text-white shadow-xl mb-8 min-h-[300px] flex items-center">
+                    <div class="hero-content flex flex-col md:flex-row justify-between items-center gap-6 w-full">
+                        <div>
+                            <h1 class="text-4xl md:text-5xl font-extrabold">Meon Directory</h1>
+                            <p class="text-purple-200 mt-2">Launch web apps instantly · M-Pesa payments</p>
+                            <div class="flex flex-wrap gap-4 mt-4">
+                                <button id="exploreMarketplaceBtn" class="bg-purple-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-purple-500 transition">Explore Apps →</button>
+                                <button id="becomeDevBtn" class="border border-purple-400 px-5 py-2 rounded-full text-sm hover:bg-purple-500/20 transition">Become a Developer</button>
+                                <button onclick="navigateTo('pricing')" class="bg-amber-600 px-5 py-2 rounded-full text-sm font-semibold hover:bg-amber-500 transition">💎 View Pricing</button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center">
+                                <div class="text-3xl font-bold">${appList.length}+</div>
+                                <div class="text-xs">Web Apps</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur rounded-2xl p-4 text-center">
+                                <div class="text-3xl font-bold">${appList.filter(a => a.tier !== 'FREE').length}</div>
+                                <div class="text-xs">Premium</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
                 
-                // Don't close modal - show progress
-                document.getElementById('confirmPayment').disabled = true;
-                document.getElementById('confirmPayment').textContent = '⏳ Processing...';
+            const categoriesHtml = `<div class="categories-bg w-full mx-auto mb-8">
+                <div class="categories-content">
+                    <h2 class="text-2xl font-bold text-white mb-4">📂 Categories</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+                        ${categoryItems.map(cat => `<div class="rounded-xl bg-gradient-to-r ${cat.gradient} text-white p-3 text-center text-sm font-semibold cursor-pointer hover:scale-105 transition category-chip" data-category="${cat.filter}">${cat.name}</div>`).join('')}
+                        ${activeCategoryFilter ? `<div class="rounded-xl bg-gray-500 text-white p-3 text-center cursor-pointer" id="clearCategoryBtn">Clear ✕</div>` : ""}
+                    </div>
+                </div>
+            </div>`;
+            
+            const searchHtml = `<div class="bg-white/10 dark:bg-gray-800/50 rounded-2xl p-4 flex items-center gap-3 mb-8">
+                <i data-lucide="search" class="text-white"></i>
+                <input type="text" id="globalSearchInput" placeholder="Search apps by name, category..." class="w-full bg-transparent outline-none text-white placeholder-gray-300" value="${searchQuery.replace(/"/g, '&quot;')}">
+            </div>`;
+            
+            const featuredHtml = `<div class="featured-bg w-full mx-auto mb-8">
+                <div class="featured-content">
+                    <h2 class="text-2xl font-bold text-white mb-4">⭐ Featured</h2>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.length ? featured.map(app=>appCard(app)).join('') : '<p class="text-gray-400 col-span-3 text-center py-8">No featured apps found</p>'}</div>
+                </div>
+            </div>`;
+            
+            const topratedHtml = `<div class="toprated-bg w-full mx-auto mb-8">
+                <div class="toprated-content">
+                    <h2 class="text-2xl font-bold text-white mb-4">🔥 Top Rated</h2>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div>
+                </div>
+            </div>`;
+            
+            const recentHtml = `<div class="recent-bg w-full mx-auto mb-8">
+                <div class="recent-content">
+                    <h2 class="text-2xl font-bold text-white mb-4">🆕 Recently Added</h2>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div>
+                </div>
+            </div>`;
+            
+            const closeHtml = `</div></div>`;
+                
+            return `${mainBgHtml}${heroHtml}${categoriesHtml}${searchHtml}${featuredHtml}${topratedHtml}${recentHtml}${closeHtml}`;
+        }
 
-                // Re-enable after some time or on completion
-                setTimeout(() => {
-                    document.getElementById('confirmPayment').disabled = false;
-                    document.getElementById('confirmPayment').textContent = '💳 Pay with M-Pesa';
-                }, 30000);
-            }
+        function renderAppDetail() {
+            if (!selectedApp) return renderHome();
+            
+            const app = selectedApp;
+            const appReviews = reviewsData[app.id] || [];
+            const screenshotHtml = app.screenshots.map(url =>
+                `<img src="${url}" class="rounded-xl border border-gray-200 dark:border-gray-700 w-64 h-40 object-cover" alt="screenshot">`
+            ).join('');
+            const appJson = JSON.stringify(app).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            const tierColor = getTierColor(app.tier);
+            const isTrial = app.trialActive;
+            
+            return `<div class="max-w-4xl mx-auto">
+                <button onclick="window.backToHome()" class="flex items-center gap-1 text-purple-600 mb-4">&larr; Back to Store</button>
+                <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
+                    <div class="flex gap-5 flex-wrap">
+                        ${appLogoImg(app, "w-24 h-24", 100)}
+                        <div>
+                            <div class="flex items-center gap-3 flex-wrap">
+                                <h1 class="text-3xl font-bold">${app.name}</h1>
+                                <span class="text-xs px-3 py-1 rounded-full ${tierColor}">${getTierBadge(app.tier)} ${app.tier}</span>
+                                ${isTrial ? `<span class="text-xs bg-green-500/20 text-green-300 px-3 py-1 rounded-full trial-badge">🎁 Trial: ${Math.ceil((new Date(app.trialEnd) - new Date()) / (1000 * 60 * 60 * 24))}d left</span>` : ''}
+                            </div>
+                            <p class="text-gray-500">${app.shortDesc}</p>
+                            <div class="flex gap-3 mt-2">
+                                <div class="flex items-center"><i data-lucide="star" class="fill-yellow-400 text-yellow-400"></i> ${app.rating} (${app.ratingCount})</div>
+                            </div>
+                            <div class="flex gap-3 mt-4 flex-wrap">
+                                <button onclick="window.openApp(${appJson})" class="bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition">Open Web App →</button>
+                                <button onclick="window.toggleFavorite('${app.id}')" class="border px-4 py-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">❤️ Favorite</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h2 class="text-xl font-semibold">Description</h2>
+                        <p>${app.description}</p>
+                        <h3 class="font-semibold mt-4">Key Features</h3>
+                        <ul class="list-disc pl-5">${app.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h2 class="text-xl font-semibold">Screenshots</h2>
+                        <div class="flex gap-3 overflow-x-auto pb-2">${screenshotHtml}</div>
+                    </div>
+                    
+                    ${renderSubscriptionOptions(app)}
+                    
+                    <div class="mt-8">
+                        <h2 class="text-xl font-semibold">Rate & Review</h2>
+                        <div id="reviewStars" class="flex gap-1 my-2"></div>
+                        <textarea id="reviewText" class="w-full border rounded p-2 dark:bg-gray-700" rows="2" placeholder="Write your review..."></textarea>
+                        <button id="submitReviewBtn" class="mt-2 bg-purple-600 text-white px-4 py-1 rounded hover:bg-purple-700 transition">Submit Review</button>
+                        <div class="mt-6 space-y-3">
+                            ${appReviews.map(r => `
+                                <div class="border-b pb-2">
+                                    <div class="font-semibold">${r.user}</div>
+                                    <div class="flex text-yellow-400">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+                                    <p>${r.content}</p>
+                                    <small>${new Date(r.date).toLocaleDateString()}</small>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
 
-            loadTransactions() {
-                const saved = localStorage.getItem('meonTransactions');
-                if (saved) {
-                    state.transactions = JSON.parse(saved);
-                }
-                this.updateTransactionBadge();
-            }
+        function renderSubscriptionOptions(app) {
+            const currentTier = app.tier || 'FREE';
+            const isTrial = app.trialActive;
+            const custom = customPricing[app.id] || {};
+            
+            return `
+                <div class="mt-6 border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <h3 class="text-lg font-bold text-white mb-4">💎 Premium Tier Upgrade</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        ${Object.entries(DEFAULT_TIERS).map(([key, tier]) => {
+                            const isCurrent = currentTier === key;
+                            const hasTrial = (custom[`${key.toLowerCase()}TrialDays`] || tier.trialDays) > 0;
+                            const price = custom[`${key.toLowerCase()}Price`] || tier.price;
+                            const trialDays = custom[`${key.toLowerCase()}TrialDays`] || tier.trialDays;
+                            const isDisabled = isCurrent && !isTrial;
+                            
+                            return `
+                                <div class="tier-card bg-white/5 backdrop-blur-lg rounded-xl p-4 border ${isCurrent && !isTrial ? 'border-purple-500 ring-2 ring-purple-500/50' : 'border-white/10'} relative ${key === 'FEATURED' ? 'popular' : ''}">
+                                    ${key === 'FEATURED' ? '<div class="tier-badge">🔥 POPULAR</div>' : ''}
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-bold text-white">${tier.icon} ${tier.name}</h4>
+                                        ${isCurrent && !isTrial ? '<span class="text-xs bg-purple-600 px-2 py-1 rounded-full">Current</span>' : ''}
+                                        ${isTrial && isCurrent ? '<span class="text-xs bg-green-600 px-2 py-1 rounded-full trial-badge">🎁 Trial</span>' : ''}
+                                        ${hasTrial && !isCurrent ? `<span class="text-xs bg-green-600 px-2 py-1 rounded-full">${trialDays}-day trial</span>` : ''}
+                                    </div>
+                                    <div class="text-2xl font-bold text-white mb-3">${price}</div>
+                                    <ul class="text-sm text-gray-300 space-y-1 mb-4">
+                                        ${tier.features.map(f => `<li class="flex items-center gap-1"><span class="text-green-400">✓</span> ${f}</li>`).join('')}
+                                    </ul>
+                                    ${hasTrial && !isCurrent ? `<div class="text-xs text-green-400 mb-3">🎁 Try free for ${trialDays} days</div>` : ''}
+                                    
+                                    ${!isDisabled ? `
+                                        <button onclick="handleUpgrade('${app.id}', '${key}')" 
+                                                class="w-full ${key === 'FEATURED' ? 'bg-amber-600 hover:bg-amber-700' : key === 'STANDARD' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-600 hover:bg-gray-700'} text-white py-2 rounded-lg transition text-sm font-semibold payment-btn">
+                                            ${hasTrial && !isCurrent ? 'Start Free Trial' : isCurrent && isTrial ? 'Subscribe Now' : `Upgrade to ${tier.name}`}
+                                        </button>
+                                    ` : `
+                                        <button class="w-full bg-gray-600 text-white py-2 rounded-lg text-sm font-semibold cursor-not-allowed opacity-50" disabled>
+                                            Current Plan
+                                        </button>
+                                    `}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="mt-4 text-xs text-gray-400 text-center">
+                        💳 Pay with M-Pesa • 🔒 Secure transactions
+                        ${isTrial ? `<div class="mt-1 text-green-400">⏳ Trial ends: ${new Date(app.trialEnd).toLocaleDateString()}</div>` : ''}
+                    </div>
+                    ${!currentUser ? `
+                        <div class="mt-3 text-center text-sm text-gray-400">
+                            <button onclick="showAuthModal()" class="text-purple-400 hover:text-purple-300 transition">Sign in</button> to upgrade your apps
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
 
-            updateTransactionBadge() {
-                const pending = state.transactions.filter(t => t.status === 'pending').length;
-                // Could add a badge if needed
+        function renderDashboard() {
+            if (!currentUser) {
+                return `<div class="text-center py-12">
+                    <div class="text-6xl mb-4">🔐</div>
+                    <h2 class="text-2xl font-bold text-white">Sign in to access your dashboard</h2>
+                    <p class="text-gray-400 mt-2">Manage your apps, subscriptions, and more</p>
+                    <button onclick="showAuthModal()" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">Sign In</button>
+                </div>`;
             }
+            
+            const userApps = appList.filter(app => app.developer === currentUser.email || app.ownerId === currentUser.id);
+            const favApps = appList.filter(a => userFavorites.includes(a.id));
+            const transactions = Object.values(mpesaTransactions);
+            
+            return `
+                <div class="dashboard-bg w-full max-w-6xl mx-auto">
+                    <div class="dashboard-content">
+                        <div class="flex justify-between items-center mb-6">
+                            <h1 class="text-3xl font-bold text-white">My Meon Workspace</h1>
+                            <button onclick="showSubmitAppModal()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition flex items-center gap-2">
+                                <i data-lucide="plus" class="w-4 h-4"></i> Submit App
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                                <div class="text-2xl font-bold text-purple-300">${userApps.length}</div>
+                                <div class="text-sm text-gray-300">Your Apps</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                                <div class="text-2xl font-bold text-amber-300">${userApps.filter(a => a.tier === 'FEATURED').length}</div>
+                                <div class="text-sm text-gray-300">Featured</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                                <div class="text-2xl font-bold text-purple-300">${userApps.filter(a => a.tier === 'STANDARD').length}</div>
+                                <div class="text-sm text-gray-300">Standard</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                                <div class="text-2xl font-bold text-green-300">${userApps.filter(a => a.trialActive).length}</div>
+                                <div class="text-sm text-gray-300">Active Trials</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 mb-6">
+                            <h2 class="text-xl font-bold text-white mb-4">❤️ Favorite Apps</h2>
+                            <div class="grid gap-3">
+                                ${favApps.map(a => `
+                                    <div class="flex gap-3 items-center p-3 bg-white/5 backdrop-blur rounded-lg border border-white/10">
+                                        ${appLogoImg(a, "w-10 h-10", 40)}
+                                        <span class="flex-1 font-medium text-white">${a.name}</span>
+                                        <span class="text-xs px-2 py-1 rounded-full ${getTierColor(a.tier)}">${getTierBadge(a.tier)} ${a.tier}</span>
+                                        <button onclick="window.openApp(${JSON.stringify(a).replace(/"/g, '&quot;').replace(/'/g, '&#39;')})" 
+                                                class="bg-purple-600 text-white px-3 py-1 rounded text-sm hover:bg-purple-700 transition">
+                                            Open
+                                        </button>
+                                    </div>
+                                `).join('') || "<p class='text-gray-300'>No favorites yet. ❤️ apps to see them here.</p>"}
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+                            <h2 class="text-xl font-bold text-white mb-4">📱 Your Apps</h2>
+                            ${userApps.length > 0 ? `
+                                <div class="space-y-3">
+                                    ${userApps.map(app => `
+                                        <div class="bg-white/5 rounded-lg p-4 border border-white/10 flex justify-between items-center">
+                                            <div>
+                                                <div class="flex items-center gap-2">
+                                                    <span class="font-bold text-white">${app.name}</span>
+                                                    <span class="text-xs px-2 py-1 rounded-full ${getTierColor(app.tier)}">${getTierBadge(app.tier)} ${app.tier}</span>
+                                                    ${app.trialActive ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full trial-badge">🎁 Trial</span>` : ''}
+                                                </div>
+                                                <div class="text-sm text-gray-400">${getTierConfig(app.tier).price}</div>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <button onclick="editAppPricing('${app.id}')" class="text-sm bg-amber-600 hover:bg-amber-700 text-white px-3 py-1 rounded transition">💰 Pricing</button>
+                                                <button onclick="viewAppAnalytics('${app.id}')" class="text-sm bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded transition">📊</button>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : `
+                                <div class="text-center py-8">
+                                    <p class="text-gray-300">You haven't submitted any apps yet.</p>
+                                    <button onclick="showSubmitAppModal()" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                                        + Submit Your First App
+                                    </button>
+                                </div>
+                            `}
+                        </div>
+                        
+                        ${transactions.length > 0 ? `
+                            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 mt-6">
+                                <h2 class="text-xl font-bold text-white mb-4">💰 M-Pesa Transactions</h2>
+                                <div class="space-y-3 max-h-64 overflow-y-auto">
+                                    ${transactions.slice(-5).reverse().map(t => {
+                                        const statusColors = {
+                                            pending: 'bg-yellow-500/20 text-yellow-300',
+                                            completed: 'bg-green-500/20 text-green-300',
+                                            cancelled: 'bg-red-500/20 text-red-300',
+                                            failed: 'bg-red-500/20 text-red-300',
+                                            timeout: 'bg-gray-500/20 text-gray-300',
+                                        };
+                                        const statusColor = statusColors[t.status] || 'bg-gray-500/20 text-gray-300';
+                                        const statusIcons = {
+                                            pending: '⏳',
+                                            completed: '✅',
+                                            cancelled: '❌',
+                                            failed: '❌',
+                                            timeout: '⏰',
+                                        };
+
+                                        return `
+                                            <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+                                                <div class="flex justify-between items-center">
+                                                    <div>
+                                                        <div class="flex items-center gap-2">
+                                                            <span class="font-medium text-white">${t.plan.charAt(0).toUpperCase() + t.plan.slice(1)} Plan</span>
+                                                            <span class="text-xs px-2 py-0.5 rounded-full ${statusColor}">${statusIcons[t.status] || ''} ${t.status}</span>
+                                                        </div>
+                                                        <div class="text-xs text-gray-400">KES ${t.amount}</div>
+                                                        ${t.mpesaReceipt ? `<div class="text-xs text-green-400">Receipt: ${t.mpesaReceipt}</div>` : ''}
+                                                    </div>
+                                                    <div class="text-xs text-gray-500">${new Date(t.createdAt).toLocaleDateString()}</div>
+                                                </div>
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPricingPage() {
+            return `
+                <div class="pricing-bg w-full max-w-6xl mx-auto">
+                    <div class="pricing-content">
+                        <h1 class="text-3xl font-bold text-white mb-4 text-center">💎 Choose Your Plan</h1>
+                        <p class="text-gray-300 text-center mb-8">Start with a free trial and upgrade when you're ready</p>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            ${Object.entries(DEFAULT_TIERS).map(([key, tier]) => {
+                                const isPopular = key === 'FEATURED';
+                                const hasTrial = tier.trialDays > 0;
+                                return `
+                                    <div class="tier-card bg-white/10 backdrop-blur-lg rounded-2xl p-6 border ${isPopular ? 'border-amber-500/50 ring-2 ring-amber-500/30' : 'border-white/10'} relative">
+                                        ${isPopular ? '<div class="tier-badge">🔥 MOST POPULAR</div>' : ''}
+                                        <div class="text-4xl mb-3">${tier.icon}</div>
+                                        <h3 class="text-2xl font-bold text-white">${tier.name}</h3>
+                                        <div class="text-4xl font-bold text-white mt-2">${tier.price}</div>
+                                        ${hasTrial ? `<div class="text-green-400 text-sm mt-1">🎁 ${tier.trialDays}-day free trial</div>` : ''}
+                                        <ul class="mt-6 space-y-2">
+                                            ${tier.features.map(f => `
+                                                <li class="flex items-center gap-2 text-gray-300"><span class="text-green-400">✓</span> ${f}</li>
+                                            `).join('')}
+                                        </ul>
+                                        <button onclick="openPaymentModal('${key.toLowerCase()}')" 
+                                                class="w-full mt-6 ${isPopular ? 'bg-amber-600 hover:bg-amber-700' : 'bg-purple-600 hover:bg-purple-700'} text-white py-3 rounded-xl font-semibold transition payment-btn">
+                                            Get Started
+                                        </button>
+                                        <div class="text-xs text-gray-400 text-center mt-2">💳 Pay with M-Pesa</div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        <div class="mt-8 text-center text-gray-400 text-sm">
+                            <p>🔒 All plans include secure M-Pesa payments, cancel anytime</p>
+                            <p class="mt-1">💳 Developers: Set custom pricing for your apps in the Developer Hub</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderATT() {
+            return `<div class="att-bg w-full max-w-6xl mx-auto">
+                <div class="att-content">
+                    <h1 class="text-3xl font-bold text-white mb-6">🚀 ATT - Advanced Technology Tools</h1>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+                            <div class="text-4xl mb-3">🤖</div>
+                            <h3 class="text-xl font-bold text-white">AI Analytics</h3>
+                            <p class="text-gray-300 mt-2">Real-time data insights powered by artificial intelligence</p>
+                            <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+                            <div class="text-4xl mb-3">🔒</div>
+                            <h3 class="text-xl font-bold text-white">Security Suite</h3>
+                            <p class="text-gray-300 mt-2">Enterprise-grade security tools and monitoring</p>
+                            <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+                            <div class="text-4xl mb-3">☁️</div>
+                            <h3 class="text-xl font-bold text-white">Cloud Solutions</h3>
+                            <p class="text-gray-300 mt-2">Scalable cloud infrastructure and deployment tools</p>
+                            <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+                            <div class="text-4xl mb-3">📊</div>
+                            <h3 class="text-xl font-bold text-white">Data Visualization</h3>
+                            <p class="text-gray-300 mt-2">Interactive dashboards and reporting tools</p>
+                            <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+                            <div class="text-4xl mb-3">⚡</div>
+                            <h3 class="text-xl font-bold text-white">Automation Engine</h3>
+                            <p class="text-gray-300 mt-2">Intelligent process automation and workflow management</p>
+                            <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:bg-white/20 transition">
+                            <div class="text-4xl mb-3">🌐</div>
+                            <h3 class="text-xl font-bold text-white">Global Connectivity</h3>
+                            <p class="text-gray-300 mt-2">Edge computing and distributed network solutions</p>
+                            <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderAdmin() {
+            if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin')) {
+                return `<div class="text-center py-12 text-white">
+                    <div class="text-6xl mb-4">🔒</div>
+                    <h2 class="text-2xl font-bold">Restricted to Meon Admin</h2>
+                    <p class="text-gray-400 mt-2">Please sign in with admin credentials</p>
+                </div>`;
+            }
+            
+            const transactions = Object.values(mpesaTransactions);
+            const totalRevenue = transactions.filter(t => t.status === 'completed').reduce((sum, t) => sum + t.amount, 0);
+            
+            return `<div class="admin-bg w-full max-w-6xl mx-auto">
+                <div class="admin-content">
+                    <h1 class="text-3xl font-bold text-white mb-6">🛠️ Meon Admin Console</h1>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+                            <h2 class="text-xl font-bold text-white">📊 Directory Stats</h2>
+                            <div class="mt-4 space-y-2 text-white">
+                                <p class="text-lg">Total apps: <span class="font-bold text-purple-300">${appList.length}</span></p>
+                                <p class="text-lg">Categories: <span class="font-bold text-purple-300">${new Set(appList.map(a=>a.category)).size}</span></p>
+                                <p class="text-lg">Premium apps: <span class="font-bold text-amber-300">${appList.filter(a => a.tier !== 'FREE').length}</span></p>
+                                <p class="text-lg">Active trials: <span class="font-bold text-green-300">${appList.filter(a => a.trialActive).length}</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+                            <h2 class="text-xl font-bold text-white">💰 Revenue</h2>
+                            <div class="mt-4 space-y-2 text-white">
+                                <p class="text-lg">Total Revenue: <span class="font-bold text-green-300">KES ${totalRevenue.toLocaleString()}</span></p>
+                                <p class="text-lg">Transactions: <span class="font-bold text-purple-300">${transactions.length}</span></p>
+                                <p class="text-lg">Completed: <span class="font-bold text-green-300">${transactions.filter(t => t.status === 'completed').length}</span></p>
+                                <p class="text-lg">Failed: <span class="font-bold text-red-300">${transactions.filter(t => t.status === 'failed' || t.status === 'cancelled').length}</span></p>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+                            <h2 class="text-xl font-bold text-white">⭐ Top Rated</h2>
+                            <ul class="mt-4 space-y-2 text-white">
+                                ${appList.sort((a,b)=>b.rating-a.rating).slice(0,5).map(a => `
+                                    <li class="flex justify-between items-center p-2 bg-white/5 rounded">
+                                        <span>${a.name}</span>
+                                        <span class="text-yellow-400">${a.rating} ★</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h2 class="text-xl font-bold text-white mb-4">App Management</h2>
+                        <div class="grid gap-2 max-h-96 overflow-y-auto">
+                            ${appList.map(a => `
+                                <div class="flex justify-between items-center bg-white/10 backdrop-blur-lg p-3 rounded-lg border border-white/10">
+                                    <div class="flex items-center gap-3">
+                                        ${appLogoImg(a, "w-8 h-8", 30)}
+                                        <span class="text-white">${a.name}</span>
+                                        <span class="text-xs px-2 py-0.5 rounded-full ${getTierColor(a.tier)}">${a.tier}</span>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button class="text-sm bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 transition" onclick="editAppPricing('${a.id}')">Pricing</button>
+                                        <button class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition" onclick="alert('Admin: Manage ${a.name}')">Edit</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function renderDeveloper() {
+            if (!currentUser || currentUser.role !== 'developer') {
+                return `<div class="text-center py-12 text-white">
+                    <div class="text-6xl mb-4">👨‍💻</div>
+                    <h2 class="text-2xl font-bold">Developer Hub</h2>
+                    <p class="text-gray-400 mt-2">Sign in as a developer to access this portal</p>
+                    <button onclick="showAuthModal()" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">Sign In</button>
+                </div>`;
+            }
+            
+            const userApps = appList.filter(app => app.developer === currentUser.email || app.ownerId === currentUser.id);
+            
+            return `
+                <div class="developer-bg w-full max-w-6xl mx-auto">
+                    <div class="developer-content">
+                        <div class="flex justify-between items-center mb-6">
+                            <h1 class="text-3xl font-bold text-white">👨‍💻 Developer Hub</h1>
+                            <button onclick="showSubmitAppModal()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition flex items-center gap-2">
+                                <i data-lucide="plus" class="w-4 h-4"></i> Submit New App
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                                <div class="text-2xl font-bold text-purple-300">${userApps.length}</div>
+                                <div class="text-sm text-gray-300">Your Apps</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                                <div class="text-2xl font-bold text-amber-300">${userApps.filter(a => a.tier === 'FEATURED').length}</div>
+                                <div class="text-sm text-gray-300">Featured</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                                <div class="text-2xl font-bold text-green-300">${userApps.filter(a => a.trialActive).length}</div>
+                                <div class="text-sm text-gray-300">Active Trials</div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-center border border-white/10">
+                                <div class="text-2xl font-bold text-blue-300">${userApps.reduce((sum, a) => sum + a.ratingCount, 0)}</div>
+                                <div class="text-sm text-gray-300">Total Reviews</div>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+                            <h2 class="text-xl font-bold text-white mb-4">📱 Your Apps</h2>
+                            ${userApps.length > 0 ? `
+                                <div class="space-y-3">
+                                    ${userApps.map(app => `
+                                        <div class="bg-white/5 rounded-lg p-4 border border-white/10 flex justify-between items-center">
+                                            <div>
+                                                <div class="flex items-center gap-2">
+                                                    <span class="font-bold text-white">${app.name}</span>
+                                                    <span class="text-xs px-2 py-1 rounded-full ${getTierColor(app.tier)}">${getTierBadge(app.tier)} ${app.tier}</span>
+                                                    ${app.trialActive ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full trial-badge">🎁 Trial</span>` : ''}
+                                                </div>
+                                                <div class="text-sm text-gray-400">⭐ ${app.rating} (${app.ratingCount} reviews)</div>
+                                            </div>
+                                            <div class="flex gap-2">
+                                                <button onclick="editAppPricing('${app.id}')" class="text-sm bg-amber-600 hover:bg-amber-700 text-white px-3 py-1 rounded transition">💰 Pricing</button>
+                                                <button onclick="viewAppAnalytics('${app.id}')" class="text-sm bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded transition">📊 Analytics</button>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : `
+                                <div class="text-center py-8">
+                                    <p class="text-gray-300">You haven't submitted any apps yet.</p>
+                                    <button onclick="showSubmitAppModal()" class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                                        + Submit Your First App
+                                    </button>
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         // ============================================================
-        // USER AUTH (Simplified for Demo)
+        // MODALS & ACTIONS
         // ============================================================
+        
+        function showAuthModal() {
+            const modalHtml = `
+                <div id="authModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                    <div class="bg-gray-900 rounded-2xl p-6 w-full max-w-md">
+                        <h2 class="text-2xl font-bold text-white mb-4">🔐 Meon Account</h2>
+                        <form id="authForm" class="space-y-4">
+                            <div><label class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                                <input type="email" id="loginEmail" placeholder="you@example.com" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+                            <div><label class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                                <input type="password" id="loginPassword" placeholder="••••••••" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+                            <div class="flex gap-3 pt-2">
+                                <button type="submit" id="loginBtn" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition font-semibold">Sign In</button>
+                                <button type="button" id="registerBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition font-semibold">Sign Up</button>
+                            </div>
+                        </form>
+                        <div class="mt-4 space-y-2">
+                            <button id="demoAdminBtn" class="w-full bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 py-2 rounded-lg transition text-sm">🔑 Demo Admin Access</button>
+                            <button id="demoDevBtn" class="w-full bg-amber-600/30 hover:bg-amber-600/50 text-amber-300 py-2 rounded-lg transition text-sm">👨‍💻 Demo Developer Access</button>
+                        </div>
+                        <button id="closeModal" class="w-full mt-4 text-gray-400 hover:text-gray-300 transition text-sm">Cancel</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML("beforeend", modalHtml);
+            
+            document.getElementById('authForm')?.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                if (email) { loginUser(email, 'user'); document.getElementById('authModal')?.remove(); }
+            });
+            document.getElementById('registerBtn')?.addEventListener('click', () => {
+                const email = document.getElementById('loginEmail').value;
+                if (email) { loginUser(email, 'user'); document.getElementById('authModal')?.remove(); } else { showToast('Please enter an email address', 'error'); }
+            });
+            document.getElementById('demoAdminBtn')?.addEventListener('click', () => { loginUser('admin@meon.com', 'admin', 'Admin'); document.getElementById('authModal')?.remove(); });
+            document.getElementById('demoDevBtn')?.addEventListener('click', () => { loginUser('dev@meon.com', 'developer', 'Developer'); document.getElementById('authModal')?.remove(); });
+            document.getElementById('closeModal')?.addEventListener('click', () => { document.getElementById('authModal')?.remove(); });
+        }
 
-        function initUser() {
-            if (!state.user) {
-                state.user = {
-                    id: 'user-' + Date.now(),
-                    email: 'demo@meon.com',
-                    name: 'Demo User',
-                    subscription: null
+        function showSubmitAppModal() {
+            if (!currentUser) { showToast('Please sign in first', 'error'); showAuthModal(); return; }
+            
+            const modalHtml = `
+                <div id="submitAppModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                    <div class="bg-gray-900 rounded-2xl p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+                        <h2 class="text-2xl font-bold text-white mb-4">🚀 Submit Your App</h2>
+                        <form id="submitAppForm" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div><label class="block text-sm font-medium text-gray-300 mb-1">App Name *</label>
+                                    <input type="text" id="appName" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                                </div>
+                                <div><label class="block text-sm font-medium text-gray-300 mb-1">Category *</label>
+                                    <select id="appCategory" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                                        <option value="">Select category</option>
+                                        <option value="AI Tools">AI Tools</option>
+                                        <option value="Productivity">Productivity</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Health & Wellness">Health & Wellness</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Transport">Transport</option>
+                                        <option value="Design">Design</option>
+                                        <option value="Utilities">Utilities</option>
+                                        <option value="Social">Social</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div><label class="block text-sm font-medium text-gray-300 mb-1">Short Description *</label>
+                                <input type="text" id="appShortDesc" required placeholder="Brief description of your app" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                            </div>
+                            <div><label class="block text-sm font-medium text-gray-300 mb-1">App URL *</label>
+                                <input type="url" id="appUrl" required placeholder="https://your-app.vercel.app" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                            </div>
+                            <div><label class="block text-sm font-medium text-gray-300 mb-1">Logo URL</label>
+                                <input type="url" id="appLogo" placeholder="https://your-app.com/logo.png" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                            </div>
+                            <div><label class="block text-sm font-medium text-gray-300 mb-1">Full Description</label>
+                                <textarea id="appDescription" rows="3" placeholder="Detailed description of your app" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white"></textarea>
+                            </div>
+                            <div><label class="block text-sm font-medium text-gray-300 mb-1">Features (comma separated)</label>
+                                <input type="text" id="appFeatures" placeholder="Feature 1, Feature 2, Feature 3" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white">
+                            </div>
+                            <div class="border-t border-gray-700 pt-4">
+                                <h3 class="text-lg font-semibold text-white mb-3">💰 Set Your Pricing (KES)</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div><label class="block text-sm font-medium text-gray-300 mb-1">Free Tier Price</label>
+                                        <input type="text" id="submitFreePrice" value="KES 0" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                    </div>
+                                    <div><label class="block text-sm font-medium text-gray-300 mb-1">Standard Price</label>
+                                        <input type="text" id="submitStandardPrice" value="KES 500/mo" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                    </div>
+                                    <div><label class="block text-sm font-medium text-gray-300 mb-1">Featured Price</label>
+                                        <input type="text" id="submitFeaturedPrice" value="KES 1,500/mo" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                                    <div><label class="block text-sm font-medium text-gray-300 mb-1">Standard Trial Days</label>
+                                        <input type="number" id="submitStandardTrial" value="14" min="0" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                    </div>
+                                    <div><label class="block text-sm font-medium text-gray-300 mb-1">Featured Trial Days</label>
+                                        <input type="number" id="submitFeaturedTrial" value="7" min="0" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 pt-4">
+                                <button type="submit" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition font-semibold">Submit App</button>
+                                <button type="button" onclick="document.getElementById('submitAppModal')?.remove()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg transition">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            document.getElementById('submitAppForm')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const features = document.getElementById('appFeatures').value.split(',').map(f => f.trim()).filter(f => f);
+                const appData = {
+                    id: 'app-' + Date.now(),
+                    name: document.getElementById('appName').value,
+                    shortDesc: document.getElementById('appShortDesc').value,
+                    category: document.getElementById('appCategory').value,
+                    externalUrl: document.getElementById('appUrl').value,
+                    logoUrl: document.getElementById('appLogo').value,
+                    description: document.getElementById('appDescription').value,
+                    features: features.length ? features : ['Feature 1', 'Feature 2', 'Feature 3'],
+                    developer: currentUser.email,
+                    ownerId: currentUser.id,
+                    tier: 'FREE',
+                    trialActive: false,
+                    rating: 0,
+                    ratingCount: 0,
+                    version: '1.0.0',
+                    screenshots: ['https://via.placeholder.com/400x250/1a1a2e/8b5cf6?text=' + document.getElementById('appName').value],
+                    pricing: {
+                        freePrice: document.getElementById('submitFreePrice').value,
+                        standardPrice: document.getElementById('submitStandardPrice').value,
+                        featuredPrice: document.getElementById('submitFeaturedPrice').value,
+                        standardTrialDays: parseInt(document.getElementById('submitStandardTrial').value) || 14,
+                        featuredTrialDays: parseInt(document.getElementById('submitFeaturedTrial').value) || 7,
+                    }
                 };
-                localStorage.setItem('meonUser', JSON.stringify(state.user));
+                appList.push(appData);
+                customPricing[appData.id] = appData.pricing;
+                saveState();
+                showToast('✅ App submitted successfully!', 'success');
+                document.getElementById('submitAppModal')?.remove();
+                renderCurrentView();
+            });
+        }
+
+        function editAppPricing(appId) {
+            const app = appList.find(a => a.id === appId);
+            if (!app) return;
+            const pricing = customPricing[appId] || {};
+            
+            const modalHtml = `
+                <div id="pricingModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+                    <div class="bg-gray-900 rounded-2xl p-6 w-full max-w-2xl">
+                        <h2 class="text-2xl font-bold text-white mb-4">💰 Custom Pricing - ${app.name}</h2>
+                        <form id="pricingForm" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div><label class="block text-sm font-medium text-gray-300 mb-1">Free Tier Price</label>
+                                    <input type="text" id="pricingFree" value="${pricing.freePrice || 'KES 0'}" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                </div>
+                                <div><label class="block text-sm font-medium text-gray-300 mb-1">Standard Tier Price</label>
+                                    <input type="text" id="pricingStandard" value="${pricing.standardPrice || 'KES 500/mo'}" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                </div>
+                                <div><label class="block text-sm font-medium text-gray-300 mb-1">Featured Tier Price</label>
+                                    <input type="text" id="pricingFeatured" value="${pricing.featuredPrice || 'KES 1,500/mo'}" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div><label class="block text-sm font-medium text-gray-300 mb-1">Standard Trial Days</label>
+                                    <input type="number" id="pricingStandardTrial" value="${pricing.standardTrialDays || 14}" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                </div>
+                                <div><label class="block text-sm font-medium text-gray-300 mb-1">Featured Trial Days</label>
+                                    <input type="number" id="pricingFeaturedTrial" value="${pricing.featuredTrialDays || 7}" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white">
+                                </div>
+                            </div>
+                            <div class="flex gap-3 pt-4">
+                                <button type="submit" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition font-semibold">Save Pricing</button>
+                                <button type="button" onclick="document.getElementById('pricingModal')?.remove()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg transition">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            document.getElementById('pricingForm')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const pricingData = {
+                    freePrice: document.getElementById('pricingFree').value,
+                    standardPrice: document.getElementById('pricingStandard').value,
+                    featuredPrice: document.getElementById('pricingFeatured').value,
+                    standardTrialDays: parseInt(document.getElementById('pricingStandardTrial').value) || 0,
+                    featuredTrialDays: parseInt(document.getElementById('pricingFeaturedTrial').value) || 0,
+                };
+                customPricing[appId] = pricingData;
+                saveState();
+                showToast('✅ Pricing updated successfully!', 'success');
+                document.getElementById('pricingModal')?.remove();
+                renderCurrentView();
+            });
+        }
+
+        function viewAppAnalytics(appId) {
+            showToast('📊 Analytics view coming soon!', 'info');
+        }
+
+        // ============================================================
+        // UPGRADE HANDLER
+        // ============================================================
+        
+        window.handleUpgrade = function(appId, tierKey) {
+            if (!currentUser) {
+                showToast('Please sign in to upgrade', 'error');
+                showAuthModal();
+                return;
+            }
+
+            const app = appList.find(a => a.id === appId);
+            if (!app) {
+                showToast('App not found', 'error');
+                return;
+            }
+
+            const tier = DEFAULT_TIERS[tierKey];
+            if (app.tier === tierKey && !app.trialActive) {
+                showToast(`Already on ${tier.name} tier`, 'info');
+                return;
+            }
+
+            openPaymentModal(tierKey.toLowerCase());
+        };
+
+        // ============================================================
+        // MAIN RENDER FUNCTION
+        // ============================================================
+        
+        function renderCurrentView() {
+            const container = document.getElementById("mainContent");
+            if (!container) return;
+            
+            if (selectedApp) {
+                container.innerHTML = renderAppDetail();
+            } else if (activeView === "home") {
+                container.innerHTML = renderHome();
+                setTimeout(() => {
+                    const searchInput = document.getElementById("globalSearchInput");
+                    if (searchInput) {
+                        searchInput.addEventListener("input", (e) => { searchQuery = e.target.value; renderCurrentView(); });
+                    }
+                    document.querySelectorAll(".category-chip").forEach(c => c.addEventListener("click", () => {
+                        activeCategoryFilter = c.dataset.category; renderCurrentView();
+                    }));
+                    document.getElementById("clearCategoryBtn")?.addEventListener("click", () => { activeCategoryFilter = ""; renderCurrentView(); });
+                    document.getElementById("exploreMarketplaceBtn")?.addEventListener("click", () => {
+                        document.querySelector(".grid.sm\\:grid-cols-2")?.scrollIntoView({ behavior: "smooth" });
+                    });
+                    document.getElementById("becomeDevBtn")?.addEventListener("click", () => { 
+                        if (!currentUser) showToast("Please login first", "error");
+                        else { navigateTo('developer'); }
+                    });
+                }, 50);
+            } else if (activeView === "dashboard") {
+                container.innerHTML = renderDashboard();
+            } else if (activeView === "pricing") {
+                container.innerHTML = renderPricingPage();
+            } else if (activeView === "att") {
+                container.innerHTML = renderATT();
+            } else if (activeView === "admin") {
+                container.innerHTML = renderAdmin();
+            } else if (activeView === "developer") {
+                container.innerHTML = renderDeveloper();
+            }
+            
+            if (window.lucide) lucide.createIcons();
+            
+            if (selectedApp && document.getElementById("reviewStars")) {
+                let ratingVal = 0;
+                const starDiv = document.getElementById("reviewStars");
+                starDiv.innerHTML = '';
+                for (let i = 1; i <= 5; i++) {
+                    let star = document.createElement('i');
+                    star.setAttribute('data-lucide', 'star');
+                    star.className = 'w-6 h-6 cursor-pointer rating-star';
+                    star.onclick = () => { ratingVal = i; document.querySelectorAll('#reviewStars i').forEach((s, idx) => { s.style.fill = idx < i ? '#facc15' : 'none'; }); };
+                    starDiv.appendChild(star);
+                }
+                lucide.createIcons();
+                document.getElementById("submitReviewBtn")?.addEventListener("click", () => {
+                    const txt = document.getElementById("reviewText").value;
+                    if (ratingVal && txt) submitReview(selectedApp.id, ratingVal, txt);
+                    else showToast("Please provide rating and comment", "error");
+                });
             }
         }
+
+        // ============================================================
+        // NAVIGATION SETUP
+        // ============================================================
+        
+        document.querySelectorAll(".nav-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const view = btn.getAttribute("data-nav");
+                if (view) navigateTo(view);
+            });
+        });
+
+        function renderNav() {
+            const authDiv = document.getElementById("authSection");
+            if (!authDiv) return;
+            
+            if (currentUser) {
+                authDiv.innerHTML = `
+                    <span class="text-sm hidden sm:inline text-gray-700 dark:text-gray-300">👤 ${currentUser.name}</span>
+                    <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm transition">Logout</button>
+                `;
+                document.getElementById("logoutBtn")?.addEventListener("click", logout);
+                document.getElementById("adminNavBtn")?.classList.toggle("hidden", currentUser.role !== 'admin' && currentUser.role !== 'super_admin');
+                document.getElementById("devNavBtn")?.classList.toggle("hidden", currentUser.role !== 'developer');
+            } else {
+                authDiv.innerHTML = `
+                    <button id="showLoginModalBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-lg text-sm transition">Sign In</button>
+                `;
+                document.getElementById("showLoginModalBtn")?.addEventListener("click", showAuthModal);
+                document.getElementById("adminNavBtn")?.classList.add("hidden");
+                document.getElementById("devNavBtn")?.classList.add("hidden");
+            }
+            if (window.lucide) lucide.createIcons();
+        }
+
+        // ============================================================
+        // THEME TOGGLE
+        // ============================================================
+        
+        const themeToggle = document.getElementById("themeToggle");
+        themeToggle?.addEventListener("click", () => {
+            document.documentElement.classList.toggle("dark");
+            localStorage.setItem("meonTheme", document.documentElement.classList.contains("dark") ? "dark" : "light");
+            if (window.lucide) lucide.createIcons();
+        });
+        
+        if (localStorage.getItem("meonTheme") === "dark") document.documentElement.classList.add("dark");
+
+        // ============================================================
+        // GLOBAL EXPOSURES
+        // ============================================================
+        
+        window.showAppDetail = (appId) => { selectedApp = appList.find(a => a.id === appId); renderCurrentView(); };
+        window.backToHome = () => { selectedApp = null; navigateTo('home'); };
+        window.openApp = openApp;
+        window.toggleFavorite = toggleFavorite;
+        window.handleUpgrade = window.handleUpgrade;
+        window.showSubmitAppModal = showSubmitAppModal;
+        window.editAppPricing = editAppPricing;
+        window.viewAppAnalytics = viewAppAnalytics;
+        window.showAuthModal = showAuthModal;
+        window.navigateTo = navigateTo;
+        window.openPaymentModal = openPaymentModal;
+        window.closePaymentModal = closePaymentModal;
+        window.processPayment = processPayment;
+
+        // Modal event listeners
+        document.getElementById('confirmPayment')?.addEventListener('click', processPayment);
+        document.getElementById('cancelPayment')?.addEventListener('click', closePaymentModal);
+        document.getElementById('paymentModal')?.addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closePaymentModal();
+        });
+        document.getElementById('phoneInput')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') processPayment();
+        });
+        document.getElementById('phoneInput')?.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/[^0-9]/g, '');
+            if (value.length > 10) value = value.slice(0, 10);
+            e.target.value = value;
+        });
 
         // ============================================================
         // INITIALIZATION
         // ============================================================
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initUser();
-            const app = new UIController();
-            
-            // Check for pending transactions on load
-            const pending = state.transactions.filter(t => t.status === 'pending');
-            if (pending.length > 0) {
-                showToast(`⏳ You have ${pending.length} pending payment(s)`, 'info');
-            }
-
-            console.log('🚀 Meon Payment System v2.0');
-            console.log('💳 M-Pesa Sandbox: Active');
-            console.log('📱 Plans: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
-            console.log('👤 User:', state.user.email);
-        });
-
-        // Expose for debugging
-        window.__meon = {
-            state,
-            showToast,
-            MpesaClient,
-            PaymentHandler
-        };
+        
+        renderNav();
+        renderCurrentView();
+        updateOnlineStatus();
+        
+        console.log('🚀 Meon App Directory v7.0 - Full Production');
+        console.log('📱 M-Pesa Sandbox: Active');
+        console.log('💳 Plans: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
+        console.log('👤 User:', currentUser?.email || 'Not logged in');
+        console.log('🔐 Demo Admin: admin@meon.com');
+        console.log('👨‍💻 Demo Developer: dev@meon.com');
     </script>
-
 </body>
 </html>
