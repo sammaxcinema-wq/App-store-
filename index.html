@@ -85,115 +85,106 @@
         .gradient-border { position: relative; background: rgba(255,255,255,0.03); border-radius: 16px; padding: 1px; }
         .gradient-border > * { background: rgba(15,23,42,0.9); border-radius: 16px; padding: 20px; }
 
-        /* MAIN BACKGROUND WITH CUSTOM IMAGE */
-        .main-bg { 
-            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
-            position: relative; 
-            min-height: 100vh; 
-            padding: 1rem; 
-            border-radius: 1.5rem; 
+        /* ============================================================
+           ULTRA PRO BACKGROUND SYSTEM
+           ============================================================ */
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: 
+                url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed;
+            transform: scale(1.02);
+            filter: brightness(0.85) saturate(1.1);
+            will-change: transform;
         }
-        .main-bg::before { 
-            content: ''; 
-            position: absolute; 
-            inset: 0; 
-            background: rgba(2,0,36,0.7); 
-            backdrop-filter: blur(2px);
-            border-radius: 1.5rem; 
+        .bg-layer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(59,130,246,0.10) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(2,0,36,0.70) 0%, rgba(5,5,55,0.75) 50%, rgba(10,0,92,0.80) 100%);
+            backdrop-filter: blur(1px);
         }
-        .main-content { position: relative; z-index: 1; }
-        
-        .dashboard-bg { 
-            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
-            position: relative; 
-            padding: 2rem; 
-            border-radius: 1.5rem; 
-            min-height: 400px; 
+        .bg-layer .accent-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
         }
-        .dashboard-bg::before { 
-            content: ''; 
-            position: absolute; 
-            inset: 0; 
-            background: rgba(2,0,36,0.8); 
-            backdrop-filter: blur(3px);
-            border-radius: 1.5rem; 
+        .bg-layer .accent-glow:nth-child(1) {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            background: rgba(139,92,246,0.08);
         }
-        .dashboard-content { position: relative; z-index: 1; }
-        
-        .admin-bg { 
-            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
-            position: relative; 
-            padding: 2rem; 
-            border-radius: 1.5rem; 
-            min-height: 400px; 
+        .bg-layer .accent-glow:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            bottom: -150px;
+            left: -100px;
+            background: rgba(59,130,246,0.06);
         }
-        .admin-bg::before { 
-            content: ''; 
-            position: absolute; 
-            inset: 0; 
-            background: rgba(2,0,36,0.85); 
-            backdrop-filter: blur(3px);
-            border-radius: 1.5rem; 
+        .bg-layer .accent-glow:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(139,92,246,0.04);
         }
-        .admin-content { position: relative; z-index: 1; }
-        
-        .developer-bg { 
-            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
-            position: relative; 
-            padding: 2rem; 
-            border-radius: 1.5rem; 
-            min-height: 400px; 
-        }
-        .developer-bg::before { 
-            content: ''; 
-            position: absolute; 
-            inset: 0; 
-            background: rgba(2,0,36,0.82); 
-            backdrop-filter: blur(3px);
-            border-radius: 1.5rem; 
-        }
-        .developer-content { position: relative; z-index: 1; }
-        
-        .att-bg { 
-            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
-            position: relative; 
-            padding: 2rem; 
-            border-radius: 1.5rem; 
-            min-height: 400px; 
-        }
-        .att-bg::before { 
-            content: ''; 
-            position: absolute; 
-            inset: 0; 
-            background: rgba(2,0,36,0.8); 
-            backdrop-filter: blur(3px);
-            border-radius: 1.5rem; 
-        }
-        .att-content { position: relative; z-index: 1; }
 
-        .pricing-bg { 
-            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
-            position: relative; 
-            padding: 2rem; 
-            border-radius: 1.5rem; 
-            min-height: 400px; 
+        /* All content containers sit above the background */
+        .main-bg, .dashboard-bg, .admin-bg, .developer-bg, .att-bg, .pricing-bg {
+            position: relative;
+            z-index: 1;
+            background: transparent !important;
+            min-height: 100vh;
+            padding: 1rem;
+            border-radius: 1.5rem;
         }
-        .pricing-bg::before { 
-            content: ''; 
-            position: absolute; 
-            inset: 0; 
-            background: rgba(2,0,36,0.8); 
-            backdrop-filter: blur(3px);
-            border-radius: 1.5rem; 
+        .main-bg::before, .dashboard-bg::before, .admin-bg::before, 
+        .developer-bg::before, .att-bg::before, .pricing-bg::before {
+            display: none;
         }
-        .pricing-content { position: relative; z-index: 1; }
+        .main-content, .dashboard-content, .admin-content, 
+        .developer-content, .att-content, .pricing-content {
+            position: relative;
+            z-index: 2;
+        }
 
-        .tier-card { transition: all 0.3s ease; background: rgba(255,255,255,0.08); backdrop-filter: blur(8px); }
-        .tier-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .tier-card.popular { border: 2px solid #8b5cf6; box-shadow: 0 0 30px rgba(139,92,246,0.2); }
+        /* Glass-morphism cards with ultra-pro styling */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px) saturate(1.2);
+            -webkit-backdrop-filter: blur(16px) saturate(1.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .dark .glass-card-light {
+            background: rgba(15, 23, 42, 0.70);
+        }
+
+        .tier-card { 
+            transition: all 0.3s ease; 
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(12px) saturate(1.2);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .tier-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .tier-card.popular { border: 2px solid #8b5cf6; box-shadow: 0 0 30px rgba(139,92,246,0.15); }
         .tier-badge { position: absolute; top: -12px; right: 20px; background: #8b5cf6; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
 
-        #pwaInstallBanner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9998; background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%); color: white; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 2px solid rgba(139,92,246,0.5); transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 -8px 32px rgba(0,0,0,0.4); }
+        #pwaInstallBanner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9998; background: rgba(15,23,42,0.92); backdrop-filter: blur(16px); color: white; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid rgba(139,92,246,0.3); transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 -8px 32px rgba(0,0,0,0.5); }
         #pwaInstallBanner.show { transform: translateY(0); }
         #pwaInstallBanner .install-btn { background: #8b5cf6; color: white; border: none; padding: 10px 20px; border-radius: 25px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
         #pwaInstallBanner .install-btn:hover { background: #7c3aed; }
@@ -205,7 +196,7 @@
 
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
-        .modal { background: #1e293b; border-radius: 24px; padding: 40px; max-width: 480px; width: 100%; border: 1px solid rgba(255,255,255,0.08); animation: modalIn 0.3s ease; }
+        .modal { background: rgba(30,41,59,0.95); backdrop-filter: blur(24px); border-radius: 24px; padding: 40px; max-width: 480px; width: 100%; border: 1px solid rgba(255,255,255,0.08); animation: modalIn 0.3s ease; }
         @keyframes modalIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         .modal-header { text-align: center; margin-bottom: 30px; }
         .modal-header .icon { font-size: 3.5rem; margin-bottom: 12px; }
@@ -253,14 +244,14 @@
         .star-filled { color: #f59e0b; }
         .star-empty { color: #475569; }
 
-        .featured-banner { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.1)); border: 1px solid rgba(139,92,246,0.2); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; backdrop-filter: blur(4px); }
-        .featured-banner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(139,92,246,0.1), transparent); border-radius: 50%; }
+        .featured-banner { background: rgba(139,92,246,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(139,92,246,0.15); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; }
+        .featured-banner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(139,92,246,0.08), transparent); border-radius: 50%; }
 
-        .stat-widget { background: rgba(255,255,255,0.05); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; transition: all 0.3s ease; }
-        .stat-widget:hover { background: rgba(255,255,255,0.08); border-color: rgba(139,92,246,0.2); }
+        .stat-widget { background: rgba(255,255,255,0.04); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; transition: all 0.3s ease; }
+        .stat-widget:hover { background: rgba(255,255,255,0.07); border-color: rgba(139,92,246,0.2); }
 
-        .att-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(255,255,255,0.05); backdrop-filter: blur(8px); }
-        .att-card:hover { transform: translateY(-6px); border-color: rgba(139,92,246,0.3); background: rgba(255,255,255,0.1); }
+        .att-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        .att-card:hover { transform: translateY(-6px); border-color: rgba(139,92,246,0.3); background: rgba(255,255,255,0.08); }
         .att-card .icon-wrapper { transition: transform 0.3s ease; }
         .att-card:hover .icon-wrapper { transform: scale(1.1) rotate(-3deg); }
         .att-card .cta-btn { transition: all 0.3s ease; position: relative; overflow: hidden; }
@@ -319,17 +310,37 @@
         .terms-content p, .terms-content li { color: #cbd5e1; line-height: 1.7; }
         .terms-content ul { padding-left: 1.5rem; list-style: disc; }
         .terms-content a { color: #8b5cf6; text-decoration: underline; }
-        .terms-acceptance { background: rgba(139,92,246,0.15); backdrop-filter: blur(4px); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; text-align: center; }
+        .terms-acceptance { background: rgba(139,92,246,0.08); backdrop-filter: blur(8px); border: 1px solid rgba(139,92,246,0.2); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; text-align: center; }
 
-        .bg-white\/95 { background: rgba(255,255,255,0.92); backdrop-filter: blur(6px); }
-        .dark .bg-white\/95 { background: rgba(15,23,42,0.92); }
-        .bg-white\/90 { background: rgba(255,255,255,0.88); backdrop-filter: blur(4px); }
-        .dark .bg-white\/90 { background: rgba(15,23,42,0.88); }
-        .bg-white\/10 { background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); }
-        .dark .bg-white\/10 { background: rgba(255,255,255,0.05); }
+        /* Enhanced glass for content cards */
+        .bg-white\/95 { background: rgba(15,23,42,0.85); backdrop-filter: blur(24px) saturate(1.4); border: 1px solid rgba(255,255,255,0.06); }
+        .dark .bg-white\/95 { background: rgba(15,23,42,0.88); }
+        .bg-white\/90 { background: rgba(15,23,42,0.80); backdrop-filter: blur(20px) saturate(1.3); border: 1px solid rgba(255,255,255,0.05); }
+        .dark .bg-white\/90 { background: rgba(15,23,42,0.85); }
+        .bg-white\/10 { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.04); }
+        .dark .bg-white\/10 { background: rgba(255,255,255,0.03); }
+        
+        /* Card background for app cards */
+        .bg-white\/90.dark\:bg-gray-800\/90 { background: rgba(15,23,42,0.80); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.06); }
+        
+        /* Hero section enhancement */
+        .hero-gradient {
+            background: radial-gradient(ellipse at top left, rgba(139,92,246,0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(59,130,246,0.10) 0%, transparent 50%),
+                        rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
+
+    <!-- ============================================================
+         ULTRA PRO BACKGROUND LAYER
+         ============================================================ -->
+    <div class="bg-layer" aria-hidden="true">
+        <div class="accent-glow"></div>
+        <div class="accent-glow"></div>
+        <div class="accent-glow"></div>
+    </div>
 
     <div id="offlineIndicator">⚠️ You are offline — some features may be limited</div>
 
@@ -356,7 +367,7 @@
         <span>Consultation</span>
     </a>
 
-    <div id="app" class="min-h-screen flex flex-col">
+    <div id="app" class="min-h-screen flex flex-col relative z-10">
         <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
             <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-center gap-3">
@@ -1618,7 +1629,7 @@
                 <div class="main-content">`;
             
             const heroHtml = `
-                <div class="relative overflow-hidden rounded-3xl mb-12 hero-gradient border border-purple-900/20">
+                <div class="relative overflow-hidden rounded-3xl mb-12 hero-gradient border border-purple-900/20 glass-card">
                     <div class="hero-particles">${particlesHTML}</div>
                     <div class="relative z-10 px-6 md:px-12 py-12 md:py-20">
                         <div class="max-w-4xl">
@@ -3037,7 +3048,7 @@
         renderCurrentView();
         updateOnlineStatus();
         
-        console.log('🚀 Meon App Directory v11.0 - Enterprise Edition with Terms, About, WhatsApp');
+        console.log('🚀 Meon App Directory v11.0 - Ultra Pro Background Edition');
         console.log('📱 M-Pesa Sandbox: Active');
         console.log('💳 Plans: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
         console.log('👤 User:', currentUser?.email || 'Not logged in');
@@ -3046,7 +3057,8 @@
         console.log('📞 Consultation: +254 758 639 923');
         console.log('📜 Terms & Conditions: Active');
         console.log('📋 Navigation order: Home → About Us → Terms → others');
-        console.log('🖼️ Background image applied to all sections');
+        console.log('🖼️ Ultra Pro Background: Fixed, layered, with blur and glow effects');
+        console.log('✨ Glass-morphism cards with backdrop-filter for premium look');
     </script>
 </body>
 </html>
