@@ -85,27 +85,110 @@
         .gradient-border { position: relative; background: rgba(255,255,255,0.03); border-radius: 16px; padding: 1px; }
         .gradient-border > * { background: rgba(15,23,42,0.9); border-radius: 16px; padding: 20px; }
 
-        .main-bg { background: #0f172a; position: relative; min-height: 100vh; padding: 1rem; border-radius: 1.5rem; }
-        .main-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.92) 0%, rgba(5,5,55,0.88) 50%, rgba(10,0,92,0.92) 100%); border-radius: 1.5rem; }
+        /* MAIN BACKGROUND WITH CUSTOM IMAGE */
+        .main-bg { 
+            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
+            position: relative; 
+            min-height: 100vh; 
+            padding: 1rem; 
+            border-radius: 1.5rem; 
+        }
+        .main-bg::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: rgba(2,0,36,0.7); 
+            backdrop-filter: blur(2px);
+            border-radius: 1.5rem; 
+        }
         .main-content { position: relative; z-index: 1; }
         
-        .dashboard-bg { background: #0f172a; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
-        .dashboard-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
+        .dashboard-bg { 
+            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
+            position: relative; 
+            padding: 2rem; 
+            border-radius: 1.5rem; 
+            min-height: 400px; 
+        }
+        .dashboard-bg::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: rgba(2,0,36,0.8); 
+            backdrop-filter: blur(3px);
+            border-radius: 1.5rem; 
+        }
         .dashboard-content { position: relative; z-index: 1; }
         
-        .admin-bg { background: #0f172a; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
-        .admin-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.92) 0%, rgba(5,5,55,0.88) 50%, rgba(10,0,92,0.92) 100%); border-radius: 1.5rem; }
+        .admin-bg { 
+            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
+            position: relative; 
+            padding: 2rem; 
+            border-radius: 1.5rem; 
+            min-height: 400px; 
+        }
+        .admin-bg::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: rgba(2,0,36,0.85); 
+            backdrop-filter: blur(3px);
+            border-radius: 1.5rem; 
+        }
         .admin-content { position: relative; z-index: 1; }
         
-        .developer-bg { background: #0f172a; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
-        .developer-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.88) 0%, rgba(5,5,55,0.82) 50%, rgba(10,0,92,0.88) 100%); border-radius: 1.5rem; }
+        .developer-bg { 
+            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
+            position: relative; 
+            padding: 2rem; 
+            border-radius: 1.5rem; 
+            min-height: 400px; 
+        }
+        .developer-bg::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: rgba(2,0,36,0.82); 
+            backdrop-filter: blur(3px);
+            border-radius: 1.5rem; 
+        }
         .developer-content { position: relative; z-index: 1; }
         
-        .att-bg { background: #0f172a; position: relative; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
-        .att-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2,0,36,0.9) 0%, rgba(5,5,55,0.85) 50%, rgba(10,0,92,0.9) 100%); border-radius: 1.5rem; }
+        .att-bg { 
+            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
+            position: relative; 
+            padding: 2rem; 
+            border-radius: 1.5rem; 
+            min-height: 400px; 
+        }
+        .att-bg::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: rgba(2,0,36,0.8); 
+            backdrop-filter: blur(3px);
+            border-radius: 1.5rem; 
+        }
         .att-content { position: relative; z-index: 1; }
 
-        .tier-card { transition: all 0.3s ease; }
+        .pricing-bg { 
+            background: url('https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg') center/cover no-repeat fixed; 
+            position: relative; 
+            padding: 2rem; 
+            border-radius: 1.5rem; 
+            min-height: 400px; 
+        }
+        .pricing-bg::before { 
+            content: ''; 
+            position: absolute; 
+            inset: 0; 
+            background: rgba(2,0,36,0.8); 
+            backdrop-filter: blur(3px);
+            border-radius: 1.5rem; 
+        }
+        .pricing-content { position: relative; z-index: 1; }
+
+        .tier-card { transition: all 0.3s ease; background: rgba(255,255,255,0.08); backdrop-filter: blur(8px); }
         .tier-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
         .tier-card.popular { border: 2px solid #8b5cf6; box-shadow: 0 0 30px rgba(139,92,246,0.2); }
         .tier-badge { position: absolute; top: -12px; right: 20px; background: #8b5cf6; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
@@ -170,15 +253,14 @@
         .star-filled { color: #f59e0b; }
         .star-empty { color: #475569; }
 
-        .featured-banner { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.1)); border: 1px solid rgba(139,92,246,0.2); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; }
+        .featured-banner { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.1)); border: 1px solid rgba(139,92,246,0.2); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; backdrop-filter: blur(4px); }
         .featured-banner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(139,92,246,0.1), transparent); border-radius: 50%; }
 
-        .stat-widget { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; transition: all 0.3s ease; }
-        .stat-widget:hover { background: rgba(255,255,255,0.06); border-color: rgba(139,92,246,0.2); }
+        .stat-widget { background: rgba(255,255,255,0.05); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; transition: all 0.3s ease; }
+        .stat-widget:hover { background: rgba(255,255,255,0.08); border-color: rgba(139,92,246,0.2); }
 
-        /* ATT Card styles */
-        .att-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .att-card:hover { transform: translateY(-6px); border-color: rgba(139,92,246,0.3); background: rgba(255,255,255,0.08); }
+        .att-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(255,255,255,0.05); backdrop-filter: blur(8px); }
+        .att-card:hover { transform: translateY(-6px); border-color: rgba(139,92,246,0.3); background: rgba(255,255,255,0.1); }
         .att-card .icon-wrapper { transition: transform 0.3s ease; }
         .att-card:hover .icon-wrapper { transform: scale(1.1) rotate(-3deg); }
         .att-card .cta-btn { transition: all 0.3s ease; position: relative; overflow: hidden; }
@@ -190,7 +272,6 @@
         .att-card .feature-tag { transition: all 0.3s ease; }
         .att-card:hover .feature-tag { background: rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.2); }
 
-        /* WhatsApp floating button */
         .whatsapp-float {
             position: fixed;
             bottom: 24px;
@@ -238,7 +319,14 @@
         .terms-content p, .terms-content li { color: #cbd5e1; line-height: 1.7; }
         .terms-content ul { padding-left: 1.5rem; list-style: disc; }
         .terms-content a { color: #8b5cf6; text-decoration: underline; }
-        .terms-acceptance { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; text-align: center; }
+        .terms-acceptance { background: rgba(139,92,246,0.15); backdrop-filter: blur(4px); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; text-align: center; }
+
+        .bg-white\/95 { background: rgba(255,255,255,0.92); backdrop-filter: blur(6px); }
+        .dark .bg-white\/95 { background: rgba(15,23,42,0.92); }
+        .bg-white\/90 { background: rgba(255,255,255,0.88); backdrop-filter: blur(4px); }
+        .dark .bg-white\/90 { background: rgba(15,23,42,0.88); }
+        .bg-white\/10 { background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); }
+        .dark .bg-white\/10 { background: rgba(255,255,255,0.05); }
     </style>
 </head>
 <body>
@@ -291,7 +379,6 @@
             </div>
             <div class="container mx-auto px-4">
                 <div class="flex gap-6 overflow-x-auto pb-2 scrollbar-hide">
-                    <!-- REARRANGED: Home first, then About Us, Terms, then others -->
                     <button data-nav="home" class="nav-btn font-semibold py-2 border-b-2 border-purple-600 text-purple-600">Home</button>
                     <button data-nav="about" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">About Us</button>
                     <button data-nav="terms" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">Terms</button>
@@ -2959,6 +3046,7 @@
         console.log('📞 Consultation: +254 758 639 923');
         console.log('📜 Terms & Conditions: Active');
         console.log('📋 Navigation order: Home → About Us → Terms → others');
+        console.log('🖼️ Background image applied to all sections');
     </script>
 </body>
 </html>
