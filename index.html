@@ -1102,6 +1102,37 @@
         }
 
         /* ============================================================
+           NAVIGATION - FIXED DUPLICATION
+           ============================================================ */
+        #desktopNav {
+            display: block;
+        }
+        #mobileNavMenu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            #desktopNav {
+                display: none !important;
+            }
+            #mobileNavMenu.open {
+                display: block;
+            }
+            #mobileNavToggle {
+                display: block !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            #mobileNavToggle {
+                display: none !important;
+            }
+            #mobileNavMenu {
+                display: none !important;
+            }
+        }
+
+        /* ============================================================
            RESPONSIVE TWEAKS
            ============================================================ */
         @media (max-width: 768px) {
@@ -1396,16 +1427,34 @@
 
         <!-- Mobile Nav Menu -->
         <div id="mobileNavMenu" class="container mx-auto px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-            <div class="flex flex-col gap-2">
-                <button data-nav="home" class="nav-btn text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">🏠 Home</button>
-                <button data-nav="about" class="nav-btn text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">ℹ️ About Us</button>
-                <button data-nav="terms" class="nav-btn text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">📜 Terms</button>
-                <button data-nav="dashboard" class="nav-btn text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">📊 My Dashboard</button>
-                <button data-nav="att" class="nav-btn text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">🧠 ATT</button>
-                <button data-nav="admin" id="adminNavBtnMobile" class="nav-btn hidden text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">🛠️ Admin Panel</button>
-                <button data-nav="developer" id="devNavBtnMobile" class="nav-btn hidden text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">👨‍💻 Developer Hub</button>
-                <button data-nav="pricing" class="nav-btn text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">💎 Pricing</button>
-                <button data-nav="settings" class="nav-btn text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">⚙️ Settings</button>
+            <div class="flex flex-col gap-1">
+                <button data-nav="home" class="nav-btn text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
+                    <span class="text-teal-400">🏠</span> Home
+                </button>
+                <button data-nav="about" class="nav-btn text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
+                    <span class="text-purple-400">ℹ️</span> About Us
+                </button>
+                <button data-nav="terms" class="nav-btn text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
+                    <span class="text-blue-400">📜</span> Terms
+                </button>
+                <button data-nav="dashboard" class="nav-btn text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
+                    <span class="text-amber-400">📊</span> My Dashboard
+                </button>
+                <button data-nav="att" class="nav-btn text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
+                    <span class="text-cyan-400">🧠</span> ATT
+                </button>
+                <button data-nav="admin" id="adminNavBtnMobile" class="nav-btn hidden text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
+                    <span class="text-red-400">🛠️</span> Admin Panel
+                </button>
+                <button data-nav="developer" id="devNavBtnMobile" class="nav-btn hidden text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
+                    <span class="text-green-400">👨‍💻</span> Developer Hub
+                </button>
+                <button data-nav="pricing" class="nav-btn text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
+                    <span class="text-amber-400">💎</span> Pricing
+                </button>
+                <button data-nav="settings" class="nav-btn text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
+                    <span class="text-gray-400">⚙️</span> Settings
+                </button>
             </div>
         </div>
     </header>
@@ -1665,13 +1714,20 @@
 
         const navToggle = document.getElementById('mobileNavToggle');
         const navMenu = document.getElementById('mobileNavMenu');
-        navToggle?.addEventListener('click', () => {
+        navToggle?.addEventListener('click', (e) => {
+            e.stopPropagation();
             navMenu.classList.toggle('open');
         });
         document.querySelectorAll('#mobileNavMenu .nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 navMenu.classList.remove('open');
             });
+        });
+        // Close mobile menu on outside click
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && e.target !== navToggle) {
+                navMenu.classList.remove('open');
+            }
         });
     });
 
@@ -4440,14 +4496,14 @@
     renderCurrentView();
     updateOnlineStatus();
 
-    console.log('🚀 Meon App Directory v18 - Enhanced CSS');
+    console.log('🚀 Meon App Directory v18 - Enhanced CSS + Nav Fix');
     console.log('✨ CSS improvements: glass-morphism, animations, modal design, pricing cards, app cards');
+    console.log('🔧 Navigation fix: Desktop and mobile menus now properly separated');
     console.log('📱 M-Pesa Sandbox: Active');
     console.log('💳 Plans: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
     console.log('👤 User:', currentUser?.email || 'Not logged in');
     console.log('🔐 Demo Admin: admin@meon.com');
     console.log('👨‍💻 Demo Developer: dev@meon.com');
-    console.log('🎨 Design: Teal (#00b2a9) primary + Advanced CSS animations');
 </script>
 </body>
 </html>
