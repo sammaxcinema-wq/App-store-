@@ -30,6 +30,9 @@
     <script src="https://unpkg.com/lucide@latest">
     </script>
 
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
     <style>
         /* ----- RESET & BASE ----- */
         * {
@@ -298,7 +301,6 @@
                 transform: scale(1);
             }
         }
-        /* Gradient modal header */
         .modal-gradient-header {
             background: linear-gradient(135deg, #bce61d, #a1be06);
             border-radius: 16px;
@@ -337,9 +339,6 @@
         }
         .rating-star:hover {
             transform: scale(1.1);
-        }
-        .modal-transition {
-            transition: opacity 0.2s ease, visibility 0.2s;
         }
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
@@ -832,6 +831,195 @@
             left: -40px;
             opacity: 0.1;
         }
+
+        /* ----- APP SPOTLIGHT CAROUSEL ----- */
+        .spotlight-swiper {
+            width: 100%;
+            height: 260px;
+            padding: 10px 0;
+        }
+        .spotlight-swiper .swiper-slide {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 16px;
+            text-align: center;
+            min-height: 240px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .spotlight-swiper .swiper-slide:hover {
+            transform: scale(1.04);
+            border-color: rgba(0, 178, 169, 0.3);
+        }
+        .spotlight-swiper .swiper-slide .app-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .spotlight-swiper .swiper-slide .app-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            margin-bottom: 2px;
+        }
+        .spotlight-swiper .swiper-slide .app-category {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .spotlight-swiper .swiper-slide .app-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: #fbbf24;
+        }
+        .spotlight-swiper .swiper-slide .app-rating span {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.75rem;
+            margin-left: 2px;
+        }
+        .spotlight-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(24px) saturate(1.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 20%, rgba(0, 178, 169, 0.08), transparent 60%);
+            pointer-events: none;
+        }
+        .spotlight-card .spotlight-text {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .spotlight-card .spotlight-text .highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        .spotlight-card .explore-btn {
+            background: #00b2a9;
+            color: white;
+            padding: 10px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 20px rgba(0, 178, 169, 0.3);
+        }
+        .spotlight-card .explore-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 6px 30px rgba(0, 178, 169, 0.5);
+            background: #009e96;
+        }
+        .spotlight-card .explore-btn:active {
+            transform: scale(0.96);
+        }
+        @media (max-width: 768px) {
+            .spotlight-swiper {
+                height: 220px;
+            }
+            .spotlight-swiper .swiper-slide {
+                min-height: 200px;
+                padding: 16px 12px;
+            }
+            .spotlight-swiper .swiper-slide .app-icon {
+                width: 56px;
+                height: 56px;
+            }
+            .spotlight-card {
+                padding: 20px;
+            }
+            .spotlight-card .spotlight-text {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* App spotlight modal */
+        .app-spotlight-modal .modal {
+            max-width: 420px;
+        }
+        .app-spotlight-modal .app-detail-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin: 0 auto 12px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            display: block;
+        }
+        .app-spotlight-modal .app-detail-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            text-align: center;
+        }
+        .app-spotlight-modal .app-detail-category {
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .app-spotlight-modal .app-detail-rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            color: #fbbf24;
+            font-size: 1.1rem;
+            margin: 8px 0 4px;
+        }
+        .app-spotlight-modal .app-detail-rating span {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+        .app-spotlight-modal .app-detail-desc {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            text-align: center;
+            line-height: 1.6;
+            margin: 8px 0 16px;
+        }
+        .app-spotlight-modal .app-detail-install-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #00b2a9;
+            color: white;
+        }
+        .app-spotlight-modal .app-detail-install-btn:hover {
+            background: #009e96;
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
@@ -991,7 +1179,32 @@
     </div>
 </div>
 
+<!-- ====== APP SPOTLIGHT DETAIL MODAL ====== -->
+<div class="modal-overlay app-spotlight-modal" id="appSpotlightModal">
+    <div class="modal">
+        <div class="modal-gradient-header">
+            <div class="icon">🚀</div>
+            <h2 id="spotlightModalTitle">App Spotlight</h2>
+            <p id="spotlightModalSubtitle">Discover amazing apps</p>
+        </div>
+        <div class="modal-body">
+            <img id="spotlightModalIcon" class="app-detail-icon" src="" alt="App Icon" />
+            <div class="app-detail-name" id="spotlightModalName">App Name</div>
+            <div class="app-detail-category" id="spotlightModalCategory">Category</div>
+            <div class="app-detail-rating" id="spotlightModalRating">★★★★★ <span>(0 reviews)</span></div>
+            <div class="app-detail-desc" id="spotlightModalDesc">App description goes here.</div>
+        </div>
+        <div class="modal-footer flex flex-col gap-3">
+            <button class="app-detail-install-btn" id="spotlightModalInstall">🚀 Install App</button>
+            <button class="btn-secondary w-full" id="spotlightModalClose">Close</button>
+        </div>
+    </div>
+</div>
+
 <!-- ====== SCRIPTS ====== -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js">
+</script>
+
 <script>
     // ============================================================
     // CONFIGURATION
@@ -1057,13 +1270,15 @@
     // ============================================================
     (function registerServiceWorker() {
         if (!('serviceWorker' in navigator)) return;
-        const CACHE_NAME = 'meon-directory-v14';
+        const CACHE_NAME = 'meon-directory-v16';
         const urlsToCache = [
             location.href.split('?')[0],
             'https://cdn.tailwindcss.com',
             'https://unpkg.com/lucide@latest',
             'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap',
-            'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png'
+            'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
+            'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css',
+            'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js'
         ];
         const swCode = `
                 const CACHE_NAME = '${CACHE_NAME}';
@@ -1404,6 +1619,9 @@
         if (!app.tier) app.tier = "FREE";
         if (!app.downloads) app.downloads = Math.floor(Math.random() * 50000) + 1000;
     });
+
+    // Featured app IDs for spotlight
+    const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio"];
 
     // ============================================================
     // UTILITY FUNCTIONS
@@ -2349,7 +2567,7 @@
                         </div>
 
                         <div class="mt-4 text-center text-xs text-gray-500">
-                            Meon Directory v14.0 · Built with ❤️ in Nairobi, Kenya
+                            Meon Directory v16.0 · Built with ❤️ in Nairobi, Kenya
                         </div>
                     </div>
                 </div>
@@ -2482,14 +2700,65 @@
     }
 
     // ============================================================
+    // APP SPOTLIGHT FUNCTIONS
+    // ============================================================
+    function openAppSpotlight(appId) {
+        const app = appList.find(a => a.id === appId);
+        if (!app) return;
+
+        const modal = document.getElementById('appSpotlightModal');
+        const nameEl = document.getElementById('spotlightModalName');
+        const categoryEl = document.getElementById('spotlightModalCategory');
+        const ratingEl = document.getElementById('spotlightModalRating');
+        const descEl = document.getElementById('spotlightModalDesc');
+        const iconEl = document.getElementById('spotlightModalIcon');
+        const installBtn = document.getElementById('spotlightModalInstall');
+        const titleEl = document.getElementById('spotlightModalTitle');
+        const subtitleEl = document.getElementById('spotlightModalSubtitle');
+
+        // Set the icon
+        const logoUrl = app.logoUrl || generateFallbackSVG(app.id, 80);
+        iconEl.src = logoUrl;
+        iconEl.alt = app.name;
+
+        nameEl.textContent = app.name;
+        categoryEl.textContent = app.category;
+        descEl.textContent = app.description || app.shortDesc;
+
+        // Rating stars
+        const full = Math.floor(app.rating);
+        const half = app.rating % 1 >= 0.5 ? 1 : 0;
+        const empty = 5 - full - half;
+        let stars = '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+        ratingEl.innerHTML = `${stars} <span>(${app.ratingCount} reviews)</span>`;
+
+        titleEl.textContent = `🚀 ${app.name}`;
+        subtitleEl.textContent = `Discover ${app.name}`;
+
+        // Install button
+        installBtn.onclick = () => {
+            if (app.externalUrl) {
+                window.open(app.externalUrl, '_blank');
+                showToast(`🚀 Launching ${app.name}...`, 'info');
+                modal.classList.remove('active');
+            } else {
+                showToast('No web link available for this app', 'error');
+            }
+        };
+
+        modal.classList.add('active');
+    }
+
+    function closeAppSpotlight() {
+        document.getElementById('appSpotlightModal').classList.remove('active');
+    }
+
+    // ============================================================
     // RENDER VIEWS
     // ============================================================
     function renderHome() {
         const filteredApps = getFilteredApps();
-        const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio", "maji-gas", "clients-hub",
-            "meal-planner-pro", "finance-eight", "sacco-sable", "cbo-three", "gym-nine"
-        ];
-        const featured = filteredApps.filter(a => featuredIds.includes(a.id));
+        const featured = appList.filter(a => featuredIds.includes(a.id));
         const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
         const newReleases = [...filteredApps].reverse().slice(0, 6);
         const categories = [...new Set(appList.map(a => a.category))];
@@ -2503,6 +2772,21 @@
             particlesHTML +=
                 `<span style="width:${size}px;height:${size}px;left:${left}%;animation-delay:${delay}s;animation-duration:${duration}s;"></span>`;
         }
+
+        // Build app spotlight slides
+        let spotlightSlides = '';
+        featured.forEach(app => {
+            const logoUrl = app.logoUrl || generateFallbackSVG(app.id, 72);
+            const stars = '★'.repeat(Math.floor(app.rating)) + '☆'.repeat(5 - Math.floor(app.rating));
+            spotlightSlides += `
+                    <div class="swiper-slide" onclick="openAppSpotlight('${app.id}')">
+                        <img src="${logoUrl}" class="app-icon" alt="${app.name}" onerror="this.src='${generateFallbackSVG(app.id, 72)}'">
+                        <div class="app-name">${app.name}</div>
+                        <div class="app-category">${app.category}</div>
+                        <div class="app-rating">${stars} <span>${app.rating}</span></div>
+                    </div>
+                `;
+        });
 
         const mainBgHtml = `<div class="main-bg w-full max-w-7xl mx-auto"><div class="main-content">`;
 
@@ -2538,6 +2822,42 @@
                                 <div><div class="text-2xl font-bold text-teal-300">${appList.filter(a => a.tier !== 'FREE').length}</div><div class="text-sm text-gray-400">Premium Apps</div></div>
                                 <div><div class="text-2xl font-bold text-amber-300">${appList.reduce((sum, a) => sum + a.downloads, 0).toLocaleString()}</div><div class="text-sm text-gray-400">Total Downloads</div></div>
                                 <div><div class="text-2xl font-bold text-green-300">${appList.filter(a => a.trialActive).length}</div><div class="text-sm text-gray-400">Active Trials</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        // App Spotlight Card
+        const spotlightHtml = `
+                <div class="spotlight-card mb-12 fade-in">
+                    <div class="grid md:grid-cols-3 gap-6 relative z-10">
+                        <!-- Left: Info -->
+                        <div class="md:col-span-2 flex flex-col justify-between">
+                            <div>
+                                <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1 text-amber-300 text-xs mb-3">
+                                    <span class="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse"></span>
+                                    🌟 App Spotlight
+                                </div>
+                                <h2 class="text-2xl md:text-3xl font-extrabold text-white">Discover <span class="text-amber-400">featured apps</span></h2>
+                                <p class="spotlight-text mt-3">
+                                    Handpicked by our editors, these apps represent the best of what Meon has to offer. 
+                                    From productivity tools to AI-powered solutions, find your next favorite app today.
+                                </p>
+                            </div>
+                            <div class="mt-4">
+                                <button class="explore-btn" id="spotlightExploreBtn">
+                                    🚀 Explore All
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Right: Swiper -->
+                        <div class="relative">
+                            <div class="swiper spotlight-swiper mySpotlightSwiper">
+                                <div class="swiper-wrapper">
+                                    ${spotlightSlides}
+                                </div>
+                                <div class="swiper-pagination !static mt-2"></div>
                             </div>
                         </div>
                     </div>
@@ -2591,7 +2911,8 @@
         const recentHtml = `<div><div class="flex items-center justify-between mb-4"><h2 class="text-2xl font-bold text-white">🆕 Recently Added</h2><span class="text-sm text-green-400">New releases</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div>`;
 
         const closeHtml = `</div></div>`;
-        return `${mainBgHtml}${heroHtml}${searchHtml}${featuredBannerHtml}${featuredHtml}${topratedHtml}${recentHtml}${closeHtml}`;
+
+        return `${mainBgHtml}${heroHtml}${spotlightHtml}${searchHtml}${featuredBannerHtml}${featuredHtml}${topratedHtml}${recentHtml}${closeHtml}`;
     }
 
     function renderAppDetail() {
@@ -3484,6 +3805,41 @@
         } else if (activeView === "home") {
             container.innerHTML = renderHome();
             setTimeout(() => {
+                if (typeof Swiper !== 'undefined') {
+                    const swiperEl = document.querySelector('.mySpotlightSwiper');
+                    if (swiperEl && !swiperEl.swiper) {
+                        new Swiper('.mySpotlightSwiper', {
+                            slidesPerView: 1.2,
+                            spaceBetween: 16,
+                            centeredSlides: false,
+                            loop: true,
+                            autoplay: {
+                                delay: 3500,
+                                disableOnInteraction: false,
+                            },
+                            breakpoints: {
+                                640: {
+                                    slidesPerView: 1.5,
+                                    spaceBetween: 20,
+                                },
+                                768: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 24,
+                                },
+                                1024: {
+                                    slidesPerView: 2.5,
+                                    spaceBetween: 28,
+                                },
+                            },
+                            pagination: {
+                                el: '.swiper-pagination',
+                                clickable: true,
+                                dynamicBullets: true,
+                            },
+                        });
+                    }
+                }
+
                 const searchInput = document.getElementById("globalSearchInput");
                 if (searchInput) {
                     searchInput.addEventListener("input", (e) => { searchQuery = e.target.value;
@@ -3503,7 +3859,12 @@
                     if (!currentUser) showToast("Please login first", "error");
                     else { navigateTo('developer'); }
                 });
-            }, 50);
+
+                document.getElementById("spotlightExploreBtn")?.addEventListener("click", () => {
+                    // Scroll to featured section
+                    document.querySelector(".featured-banner")?.scrollIntoView({ behavior: "smooth" });
+                });
+            }, 100);
         } else if (activeView === "dashboard") {
             container.innerHTML = renderDashboard();
         } else if (activeView === "pricing") {
@@ -3680,6 +4041,8 @@
     window.handleLogout = handleLogout;
     window.handleDeleteAccount = handleDeleteAccount;
     window.openSettingsEdit = openSettingsEdit;
+    window.openAppSpotlight = openAppSpotlight;
+    window.closeAppSpotlight = closeAppSpotlight;
 
     // Modal event listeners
     document.getElementById('confirmPayment')?.addEventListener('click', processPayment);
@@ -3696,6 +4059,12 @@
         e.target.value = value;
     });
 
+    // App spotlight modal close
+    document.getElementById('spotlightModalClose')?.addEventListener('click', closeAppSpotlight);
+    document.getElementById('appSpotlightModal')?.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeAppSpotlight();
+    });
+
     // ============================================================
     // INIT
     // ============================================================
@@ -3706,15 +4075,14 @@
     renderCurrentView();
     updateOnlineStatus();
 
-    console.log('🚀 Meon App Directory v14 - Design Upgrade with Teal & Gradient Accents');
+    console.log('🚀 Meon App Directory v16 - App Spotlight Feature');
+    console.log('🌟 App Spotlight: Showcasing featured apps with Swiper carousel');
     console.log('📱 M-Pesa Sandbox: Active');
     console.log('💳 Plans: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
     console.log('👤 User:', currentUser?.email || 'Not logged in');
     console.log('🔐 Demo Admin: admin@meon.com');
     console.log('👨‍💻 Demo Developer: dev@meon.com');
-    console.log('📞 Consultation: +254 758 639 923');
-    console.log('🎨 Design: Teal (#00b2a9) primary + Lime gradient accents + Ripple effects');
-    console.log('📋 Navigation: Home → About Us → Terms → Dashboard → ATT → Admin/Dev → Pricing → Settings');
+    console.log('🎨 Design: Teal (#00b2a9) primary + App Spotlight with real app data');
 </script>
 </body>
 </html>
