@@ -112,7 +112,8 @@
         .admin-bg,
         .developer-bg,
         .att-bg,
-        .pricing-bg {
+        .pricing-bg,
+        .settings-bg {
             position: relative;
             z-index: 1;
             background: transparent !important;
@@ -125,7 +126,8 @@
         .admin-content,
         .developer-content,
         .att-content,
-        .pricing-content {
+        .pricing-content,
+        .settings-content {
             position: relative;
             z-index: 2;
         }
@@ -635,6 +637,76 @@
         .dark .bg-white\/10 {
             background: rgba(255, 255, 255, 0.03);
         }
+
+        /* settings toggle switch */
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            background: #475569;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+        .toggle-switch.active {
+            background: #8b5cf6;
+        }
+        .toggle-switch .toggle-knob {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .toggle-switch.active .toggle-knob {
+            transform: translateX(22px);
+        }
+
+        .settings-section {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 1.25rem 0;
+        }
+        .settings-section:last-child {
+            border-bottom: none;
+        }
+        .settings-section .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .settings-section .section-icon.purple {
+            background: rgba(139, 92, 246, 0.15);
+            color: #a78bfa;
+        }
+        .settings-section .section-icon.blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+        }
+        .settings-section .section-icon.green {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+        }
+        .settings-section .section-icon.amber {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+        .settings-section .section-icon.red {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+        }
+        .settings-section .section-icon.gray {
+            background: rgba(255, 255, 255, 0.06);
+            color: #94a3b8;
+        }
     </style>
 </head>
 <body>
@@ -716,6 +788,7 @@
                 <button data-nav="admin" id="adminNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Admin Panel</button>
                 <button data-nav="developer" id="devNavBtn" class="nav-btn hidden font-semibold py-2 border-b-2 border-transparent">Developer Hub</button>
                 <button data-nav="pricing" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">💎 Pricing</button>
+                <button data-nav="settings" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">⚙️ Settings</button>
             </div>
         </div>
 
@@ -730,6 +803,7 @@
                 <button data-nav="admin" id="adminNavBtnMobile" class="nav-btn hidden text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">🛠️ Admin Panel</button>
                 <button data-nav="developer" id="devNavBtnMobile" class="nav-btn hidden text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">👨‍💻 Developer Hub</button>
                 <button data-nav="pricing" class="nav-btn text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">💎 Pricing</button>
+                <button data-nav="settings" class="nav-btn text-left px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">⚙️ Settings</button>
             </div>
         </div>
     </header>
@@ -834,7 +908,7 @@
     // ============================================================
     (function registerServiceWorker() {
         if (!('serviceWorker' in navigator)) return;
-        const CACHE_NAME = 'meon-directory-v12';
+        const CACHE_NAME = 'meon-directory-v13';
         const urlsToCache = [
             location.href.split('?')[0],
             'https://cdn.tailwindcss.com',
@@ -942,7 +1016,6 @@
         navToggle?.addEventListener('click', () => {
             navMenu.classList.toggle('open');
         });
-        // close nav when clicking a nav item
         document.querySelectorAll('#mobileNavMenu .nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 navMenu.classList.remove('open');
@@ -1277,6 +1350,18 @@
     let currentPlan = null;
     let termsAccepted = localStorage.getItem("meonTermsAccepted") === "true";
 
+    // Settings state
+    let settings = JSON.parse(localStorage.getItem("meonSettings")) || {
+        theme: localStorage.getItem("meonTheme") || "dark",
+        notifications: true,
+        language: "en",
+        defaultView: "home",
+        sortOrder: "rating",
+        showTrialBadges: true,
+        autoLaunch: false,
+        dataSharing: false,
+    };
+
     function saveState() {
         if (currentUser) localStorage.setItem("meonUser", JSON.stringify(currentUser));
         else localStorage.removeItem("meonUser");
@@ -1285,6 +1370,10 @@
         localStorage.setItem("meonCustomPricing", JSON.stringify(customPricing));
         localStorage.setItem("meonMpesaTransactions", JSON.stringify(mpesaTransactions));
         localStorage.setItem("meonTermsAccepted", String(termsAccepted));
+        localStorage.setItem("meonSettings", JSON.stringify(settings));
+        localStorage.setItem("meonTheme", settings.theme);
+        if (settings.theme === "dark") document.documentElement.classList.add("dark");
+        else document.documentElement.classList.remove("dark");
     }
 
     function loginUser(email, role = "user", name = null) {
@@ -1379,24 +1468,30 @@
                 app.category.toLowerCase() === activeCategoryFilter.toLowerCase()
             );
         }
+        // Sort
+        if (settings.sortOrder === "rating") {
+            filtered.sort((a, b) => b.rating - a.rating);
+        } else if (settings.sortOrder === "downloads") {
+            filtered.sort((a, b) => b.downloads - a.downloads);
+        } else if (settings.sortOrder === "newest") {
+            filtered.sort((a, b) => b.versions?.[0]?.createdAt?.localeCompare(a.versions?.[0]?.createdAt) || 0);
+        } else if (settings.sortOrder === "name") {
+            filtered.sort((a, b) => a.name.localeCompare(b.name));
+        }
         return filtered;
     }
 
     function navigateTo(view) {
-        if (view === 'terms' && !termsAccepted) {
-            // show terms page
-        }
+        if (view === 'terms' && !termsAccepted) {}
         activeView = view;
         selectedApp = null;
         renderCurrentView();
-        // update nav buttons
         document.querySelectorAll(".nav-btn").forEach(b => {
             b.classList.remove("border-purple-600", "text-purple-600");
             if (b.dataset.nav === view) {
                 b.classList.add("border-purple-600", "text-purple-600");
             }
         });
-        // close mobile menu
         document.getElementById('mobileNavMenu')?.classList.remove('open');
     }
 
@@ -1792,7 +1887,7 @@
     }
 
     // ============================================================
-    // UI COMPONENTS - APP CARD (enhanced)
+    // UI COMPONENTS - APP CARD
     // ============================================================
     function appCard(app) {
         const isFav = currentUser && userFavorites.includes(app.id);
@@ -1816,7 +1911,7 @@
                 <div class="flex gap-4">
                     <div class="relative">
                         ${appLogoImg(app, "w-20 h-20", 80)}
-                        ${isTrial ? `<span class="absolute -top-1 -right-1 text-xs bg-green-500/20 text-green-300 px-1.5 py-0.5 rounded-full trial-badge">🎁</span>` : ''}
+                        ${isTrial && settings.showTrialBadges ? `<span class="absolute -top-1 -right-1 text-xs bg-green-500/20 text-green-300 px-1.5 py-0.5 rounded-full trial-badge">🎁</span>` : ''}
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex items-start justify-between">
@@ -1939,6 +2034,15 @@
                         `).join('')}
                         ${activeCategoryFilter ? `<button id="clearCategoryBtn" class="text-xs px-3 py-1.5 rounded-full border border-red-500/30 text-red-400 hover:bg-red-500/10 transition">✕ Clear</button>` : ''}
                     </div>
+                    <div class="flex items-center gap-2 text-xs text-gray-400">
+                        <span>Sort:</span>
+                        <select id="sortSelect" class="bg-transparent border border-white/10 rounded-lg px-2 py-1 text-gray-300 text-xs outline-none">
+                            <option value="rating" ${settings.sortOrder === 'rating' ? 'selected' : ''}>⭐ Rating</option>
+                            <option value="downloads" ${settings.sortOrder === 'downloads' ? 'selected' : ''}>📥 Downloads</option>
+                            <option value="newest" ${settings.sortOrder === 'newest' ? 'selected' : ''}>🆕 Newest</option>
+                            <option value="name" ${settings.sortOrder === 'name' ? 'selected' : ''}>🔤 Name</option>
+                        </select>
+                    </div>
                 </div>
             `;
 
@@ -2004,7 +2108,7 @@
                             <div class="flex items-center gap-3 flex-wrap">
                                 <h1 class="text-4xl font-bold">${app.name}</h1>
                                 <span class="text-xs px-3 py-1 rounded-full ${tierColor}">${getTierBadge(app.tier)} ${app.tier}</span>
-                                ${isTrial ? `<span class="text-xs bg-green-500/20 text-green-300 px-3 py-1 rounded-full trial-badge">🎁 Trial: ${Math.ceil((new Date(app.trialEnd) - new Date()) / (1000 * 60 * 60 * 24))}d left</span>` : ''}
+                                ${isTrial && settings.showTrialBadges ? `<span class="text-xs bg-green-500/20 text-green-300 px-3 py-1 rounded-full trial-badge">🎁 Trial: ${Math.ceil((new Date(app.trialEnd) - new Date()) / (1000 * 60 * 60 * 24))}d left</span>` : ''}
                             </div>
                             <p class="text-gray-400 text-lg mt-1">${app.shortDesc}</p>
                             <div class="flex flex-wrap items-center gap-4 mt-3 text-sm">
@@ -2184,7 +2288,7 @@
                                                 <div class="flex items-center gap-2">
                                                     <span class="font-bold text-white">${app.name}</span>
                                                     <span class="text-xs px-2 py-1 rounded-full ${getTierColor(app.tier)}">${getTierBadge(app.tier)} ${app.tier}</span>
-                                                    ${app.trialActive ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full trial-badge">🎁 Trial</span>` : ''}
+                                                    ${app.trialActive && settings.showTrialBadges ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full trial-badge">🎁 Trial</span>` : ''}
                                                 </div>
                                                 <div class="text-sm text-gray-400">${getTierConfig(app.tier).price}</div>
                                             </div>
@@ -2562,7 +2666,7 @@
                                                 <div class="flex items-center gap-2">
                                                     <span class="font-bold text-white">${app.name}</span>
                                                     <span class="text-xs px-2 py-1 rounded-full ${getTierColor(app.tier)}">${getTierBadge(app.tier)} ${app.tier}</span>
-                                                    ${app.trialActive ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full trial-badge">🎁 Trial</span>` : ''}
+                                                    ${app.trialActive && settings.showTrialBadges ? `<span class="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-full trial-badge">🎁 Trial</span>` : ''}
                                                 </div>
                                                 <div class="text-sm text-gray-400">⭐ ${app.rating} (${app.ratingCount} reviews) • ${app.downloads.toLocaleString()} downloads</div>
                                             </div>
@@ -2585,6 +2689,297 @@
                     </div>
                 </div>
             `;
+    }
+
+    // ============================================================
+    // SETTINGS PANEL
+    // ============================================================
+    function renderSettings() {
+        // Sync settings from localStorage
+        settings = JSON.parse(localStorage.getItem("meonSettings")) || {
+            theme: localStorage.getItem("meonTheme") || "dark",
+            notifications: true,
+            language: "en",
+            defaultView: "home",
+            sortOrder: "rating",
+            showTrialBadges: true,
+            autoLaunch: false,
+            dataSharing: false,
+        };
+
+        const isDark = settings.theme === "dark";
+        const currentUserEmail = currentUser?.email || "Not signed in";
+
+        return `
+                <div class="settings-bg w-full max-w-4xl mx-auto">
+                    <div class="settings-content fade-in">
+                        <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border border-white/20">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="p-2 bg-purple-500/20 rounded-xl">
+                                    <i data-lucide="settings" class="w-6 h-6 text-purple-400"></i>
+                                </div>
+                                <h1 class="text-3xl font-bold text-white">⚙️ Settings</h1>
+                            </div>
+
+                            <!-- Appearance -->
+                            <div class="settings-section">
+                                <div class="flex items-start gap-4">
+                                    <div class="section-icon purple">
+                                        <i data-lucide="palette" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-white font-semibold">Appearance</h3>
+                                                <p class="text-gray-400 text-sm">Switch between light and dark mode</p>
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <span class="text-xs text-gray-400">${isDark ? '🌙 Dark' : '☀️ Light'}</span>
+                                                <div class="toggle-switch ${isDark ? 'active' : ''}" onclick="toggleSetting('theme')">
+                                                    <div class="toggle-knob"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notifications -->
+                            <div class="settings-section">
+                                <div class="flex items-start gap-4">
+                                    <div class="section-icon blue">
+                                        <i data-lucide="bell" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-white font-semibold">Notifications</h3>
+                                                <p class="text-gray-400 text-sm">Receive updates about apps and promotions</p>
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <span class="text-xs text-gray-400">${settings.notifications ? 'On' : 'Off'}</span>
+                                                <div class="toggle-switch ${settings.notifications ? 'active' : ''}" onclick="toggleSetting('notifications')">
+                                                    <div class="toggle-knob"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Language -->
+                            <div class="settings-section">
+                                <div class="flex items-start gap-4">
+                                    <div class="section-icon green">
+                                        <i data-lucide="languages" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-white font-semibold">Language</h3>
+                                                <p class="text-gray-400 text-sm">Choose your preferred language</p>
+                                            </div>
+                                            <select id="langSelect" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-white text-sm outline-none focus:ring-2 focus:ring-purple-500" onchange="changeLanguage(this.value)">
+                                                <option value="en" ${settings.language === 'en' ? 'selected' : ''}>🇬🇧 English</option>
+                                                <option value="sw" ${settings.language === 'sw' ? 'selected' : ''}>🇰🇪 Kiswahili</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Default View -->
+                            <div class="settings-section">
+                                <div class="flex items-start gap-4">
+                                    <div class="section-icon amber">
+                                        <i data-lucide="home" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-white font-semibold">Default View</h3>
+                                                <p class="text-gray-400 text-sm">Page to show when you open the app</p>
+                                            </div>
+                                            <select id="defaultViewSelect" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-white text-sm outline-none focus:ring-2 focus:ring-purple-500" onchange="changeDefaultView(this.value)">
+                                                <option value="home" ${settings.defaultView === 'home' ? 'selected' : ''}>🏠 Home</option>
+                                                <option value="dashboard" ${settings.defaultView === 'dashboard' ? 'selected' : ''}>📊 Dashboard</option>
+                                                <option value="pricing" ${settings.defaultView === 'pricing' ? 'selected' : ''}>💎 Pricing</option>
+                                                <option value="att" ${settings.defaultView === 'att' ? 'selected' : ''}>🧠 ATT</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sort Order -->
+                            <div class="settings-section">
+                                <div class="flex items-start gap-4">
+                                    <div class="section-icon gray">
+                                        <i data-lucide="arrow-up-down" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-white font-semibold">Sort Order</h3>
+                                                <p class="text-gray-400 text-sm">Default sorting for app listings</p>
+                                            </div>
+                                            <select id="sortOrderSelect" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-white text-sm outline-none focus:ring-2 focus:ring-purple-500" onchange="changeSortOrder(this.value)">
+                                                <option value="rating" ${settings.sortOrder === 'rating' ? 'selected' : ''}>⭐ Rating</option>
+                                                <option value="downloads" ${settings.sortOrder === 'downloads' ? 'selected' : ''}>📥 Downloads</option>
+                                                <option value="newest" ${settings.sortOrder === 'newest' ? 'selected' : ''}>🆕 Newest</option>
+                                                <option value="name" ${settings.sortOrder === 'name' ? 'selected' : ''}>🔤 Name</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Trial Badges -->
+                            <div class="settings-section">
+                                <div class="flex items-start gap-4">
+                                    <div class="section-icon green">
+                                        <i data-lucide="badge" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-white font-semibold">Show Trial Badges</h3>
+                                                <p class="text-gray-400 text-sm">Display trial badges on app cards</p>
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <span class="text-xs text-gray-400">${settings.showTrialBadges ? 'On' : 'Off'}</span>
+                                                <div class="toggle-switch ${settings.showTrialBadges ? 'active' : ''}" onclick="toggleSetting('showTrialBadges')">
+                                                    <div class="toggle-knob"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Auto Launch -->
+                            <div class="settings-section">
+                                <div class="flex items-start gap-4">
+                                    <div class="section-icon blue">
+                                        <i data-lucide="rocket" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-white font-semibold">Auto-Launch Apps</h3>
+                                                <p class="text-gray-400 text-sm">Automatically open apps after installation</p>
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <span class="text-xs text-gray-400">${settings.autoLaunch ? 'On' : 'Off'}</span>
+                                                <div class="toggle-switch ${settings.autoLaunch ? 'active' : ''}" onclick="toggleSetting('autoLaunch')">
+                                                    <div class="toggle-knob"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Data Sharing -->
+                            <div class="settings-section">
+                                <div class="flex items-start gap-4">
+                                    <div class="section-icon red">
+                                        <i data-lucide="shield" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <h3 class="text-white font-semibold">Data Sharing</h3>
+                                                <p class="text-gray-400 text-sm">Allow anonymous usage data to improve the platform</p>
+                                            </div>
+                                            <div class="flex items-center gap-3">
+                                                <span class="text-xs text-gray-400">${settings.dataSharing ? 'On' : 'Off'}</span>
+                                                <div class="toggle-switch ${settings.dataSharing ? 'active' : ''}" onclick="toggleSetting('dataSharing')">
+                                                    <div class="toggle-knob"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Account -->
+                            <div class="settings-section border-b-0">
+                                <div class="flex items-start gap-4">
+                                    <div class="section-icon purple">
+                                        <i data-lucide="user" class="w-5 h-5"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-white font-semibold">Account</h3>
+                                        <p class="text-gray-400 text-sm">Signed in as <span class="text-purple-300">${currentUserEmail}</span></p>
+                                        <div class="flex flex-wrap gap-3 mt-3">
+                                            ${currentUser ? `
+                                                <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition">🚪 Sign Out</button>
+                                                <button onclick="showToast('📧 Profile settings coming soon!', 'info')" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm transition">👤 Edit Profile</button>
+                                            ` : `
+                                                <button onclick="showAuthModal()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm transition">🔐 Sign In</button>
+                                            `}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Version -->
+                            <div class="mt-6 pt-4 border-t border-white/10 text-center">
+                                <p class="text-xs text-gray-500">Meon Directory v13.0 • Made with ❤️ in Kenya</p>
+                                <p class="text-xs text-gray-600 mt-1">💳 M-Pesa Payments • 🔒 Secure • 🌍 Global</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+    }
+
+    // ============================================================
+    // SETTINGS CONTROLS
+    // ============================================================
+    function toggleSetting(key) {
+        settings[key] = !settings[key];
+        saveState();
+        // If theme changed, update the DOM
+        if (key === 'theme') {
+            if (settings.theme === 'dark') document.documentElement.classList.add('dark');
+            else document.documentElement.classList.remove('dark');
+            // Update the header theme toggle icon
+            if (window.lucide) lucide.createIcons();
+        }
+        renderSettings();
+        // Re-render current view if needed
+        if (key === 'sortOrder' || key === 'showTrialBadges') {
+            renderCurrentView();
+        }
+        showToast(`✅ ${key.replace(/([A-Z])/g, ' $1').trim()} updated!`, 'success');
+    }
+
+    function changeLanguage(value) {
+        settings.language = value;
+        saveState();
+        renderSettings();
+        const msgs = {
+            en: '🌍 Language updated to English',
+            sw: '🌍 Lugha imebadilishwa hadi Kiswahili'
+        };
+        showToast(msgs[value] || 'Language updated!', 'success');
+    }
+
+    function changeDefaultView(value) {
+        settings.defaultView = value;
+        saveState();
+        renderSettings();
+        showToast(`🏠 Default view set to ${value}`, 'success');
+    }
+
+    function changeSortOrder(value) {
+        settings.sortOrder = value;
+        saveState();
+        renderSettings();
+        renderCurrentView();
+        showToast(`📊 Sort order updated to ${value}`, 'success');
     }
 
     // ============================================================
@@ -2849,6 +3244,11 @@
                 document.getElementById("clearCategoryBtn")?.addEventListener("click", () => { activeCategoryFilter =
                         "";
                     renderCurrentView(); });
+                document.getElementById("sortSelect")?.addEventListener("change", (e) => {
+                    settings.sortOrder = e.target.value;
+                    saveState();
+                    renderCurrentView();
+                });
                 document.getElementById("exploreMarketplaceBtn")?.addEventListener("click", () => {
                     document.querySelector(".grid.sm\\:grid-cols-2")?.scrollIntoView({ behavior: "smooth" });
                 });
@@ -2877,6 +3277,8 @@
             });
         } else if (activeView === "about") {
             container.innerHTML = renderAbout();
+        } else if (activeView === "settings") {
+            container.innerHTML = renderSettings();
         }
         if (window.lucide) lucide.createIcons();
         if (selectedApp && document.getElementById("reviewStars")) {
@@ -2944,9 +3346,12 @@
     // ============================================================
     const themeToggle = document.getElementById("themeToggle");
     themeToggle?.addEventListener("click", () => {
-        document.documentElement.classList.toggle("dark");
-        localStorage.setItem("meonTheme", document.documentElement.classList.contains("dark") ? "dark" : "light");
+        const isDark = document.documentElement.classList.toggle("dark");
+        settings.theme = isDark ? "dark" : "light";
+        localStorage.setItem("meonTheme", settings.theme);
+        localStorage.setItem("meonSettings", JSON.stringify(settings));
         if (window.lucide) lucide.createIcons();
+        showToast(isDark ? '🌙 Dark mode enabled' : '☀️ Light mode enabled', 'success');
     });
     if (localStorage.getItem("meonTheme") === "dark") document.documentElement.classList.add("dark");
 
@@ -2968,6 +3373,10 @@
     window.openPaymentModal = openPaymentModal;
     window.closePaymentModal = closePaymentModal;
     window.processPayment = processPayment;
+    window.toggleSetting = toggleSetting;
+    window.changeLanguage = changeLanguage;
+    window.changeDefaultView = changeDefaultView;
+    window.changeSortOrder = changeSortOrder;
 
     // Modal event listeners
     document.getElementById('confirmPayment')?.addEventListener('click', processPayment);
@@ -2987,6 +3396,7 @@
     // ============================================================
     // INIT
     // ============================================================
+    // If terms not accepted, navigate to terms
     if (!termsAccepted && activeView !== 'terms') {
         navigateTo('terms');
     }
@@ -2994,15 +3404,15 @@
     renderCurrentView();
     updateOnlineStatus();
 
-    console.log('🚀 Meon App Directory v12 - Ultra Pro UI/UX Enhanced');
+    console.log('🚀 Meon App Directory v13 - Settings Panel Added');
     console.log('📱 M-Pesa Sandbox: Active');
     console.log('💳 Plans: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
     console.log('👤 User:', currentUser?.email || 'Not logged in');
     console.log('🔐 Demo Admin: admin@meon.com');
     console.log('👨‍💻 Demo Developer: dev@meon.com');
     console.log('📞 Consultation: +254 758 639 923');
-    console.log('📜 Terms & Conditions: Active');
-    console.log('📋 Navigation: Home → About Us → Terms → Dashboard → ATT → Admin/Dev → Pricing');
+    console.log('⚙️ Settings: Theme, Notifications, Language, Default View, Sort Order, Trial Badges, Auto-Launch, Data Sharing');
+    console.log('📋 Navigation: Home → About Us → Terms → Dashboard → ATT → Admin/Dev → Pricing → Settings');
     console.log('🎨 Mobile-first responsive design with enhanced glass-morphism');
 </script>
 </body>
