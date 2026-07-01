@@ -1020,6 +1020,134 @@
             background: #009e96;
             transform: scale(1.02);
         }
+
+        /* About page timeline */
+        .timeline-item {
+            position: relative;
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .timeline-item:last-child {
+            border-right: none;
+        }
+        .timeline-item .year {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #00b2a9;
+        }
+        .timeline-item .label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        .timeline-item .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00b2a9;
+            margin: 8px auto 0;
+            box-shadow: 0 0 20px rgba(0, 178, 169, 0.3);
+        }
+        @media (max-width: 768px) {
+            .timeline-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+                padding: 0.75rem;
+            }
+            .timeline-item:last-child {
+                border-bottom: none;
+            }
+            .timeline-item .year {
+                font-size: 1.2rem;
+            }
+        }
+
+        .about-stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .about-stat-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(0, 178, 169, 0.2);
+            transform: translateY(-4px);
+        }
+        .about-stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #00b2a9;
+            line-height: 1.2;
+        }
+        .about-stat-card .label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        @media (max-width: 640px) {
+            .about-stat-card .number {
+                font-size: 2rem;
+            }
+        }
+
+        .about-mission-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+        }
+        .about-mission-card:hover {
+            border-color: rgba(0, 178, 169, 0.3);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-4px);
+        }
+        .about-mission-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        .about-mission-card p {
+            color: #94a3b8;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .about-value-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .about-value-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(0, 178, 169, 0.3);
+            transform: translateY(-4px);
+        }
+        .about-value-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .about-value-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+        }
+        .about-value-card p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -1270,7 +1398,7 @@
     // ============================================================
     (function registerServiceWorker() {
         if (!('serviceWorker' in navigator)) return;
-        const CACHE_NAME = 'meon-directory-v16';
+        const CACHE_NAME = 'meon-directory-v17';
         const urlsToCache = [
             location.href.split('?')[0],
             'https://cdn.tailwindcss.com',
@@ -2567,7 +2695,7 @@
                         </div>
 
                         <div class="mt-4 text-center text-xs text-gray-500">
-                            Meon Directory v16.0 · Built with ❤️ in Nairobi, Kenya
+                            Meon Directory v17.0 · Built with ❤️ in Nairobi, Kenya
                         </div>
                     </div>
                 </div>
@@ -2716,7 +2844,6 @@
         const titleEl = document.getElementById('spotlightModalTitle');
         const subtitleEl = document.getElementById('spotlightModalSubtitle');
 
-        // Set the icon
         const logoUrl = app.logoUrl || generateFallbackSVG(app.id, 80);
         iconEl.src = logoUrl;
         iconEl.alt = app.name;
@@ -2725,7 +2852,6 @@
         categoryEl.textContent = app.category;
         descEl.textContent = app.description || app.shortDesc;
 
-        // Rating stars
         const full = Math.floor(app.rating);
         const half = app.rating % 1 >= 0.5 ? 1 : 0;
         const empty = 5 - full - half;
@@ -2735,7 +2861,6 @@
         titleEl.textContent = `🚀 ${app.name}`;
         subtitleEl.textContent = `Discover ${app.name}`;
 
-        // Install button
         installBtn.onclick = () => {
             if (app.externalUrl) {
                 window.open(app.externalUrl, '_blank');
@@ -2756,79 +2881,6 @@
     // ============================================================
     // RENDER VIEWS
     // ============================================================
-
-    // ----- UPGRADED ABOUT US PAGE -----
-    function renderAbout() {
-        return `
-                <div class="main-bg w-full max-w-7xl mx-auto">
-                    <div class="main-content fade-in space-y-12">
-                        <!-- Hero -->
-                        <div class="text-center space-y-4">
-                            <h1 class="text-4xl md:text-6xl font-extrabold text-white glow-text">🌟 About <span class="bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent">Meon</span></h1>
-                            <p class="text-gray-400 text-lg max-w-2xl mx-auto">We are building the future of app discovery and monetization in Africa.</p>
-                        </div>
-
-                        <!-- Stats -->
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/10 hover:bg-white/10 transition"> <div class="text-3xl font-black text-teal-400">50+</div> <div class="text-sm text-gray-400">Apps</div> </div>
-                            <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/10 hover:bg-white/10 transition"> <div class="text-3xl font-black text-teal-400">20+</div> <div class="text-sm text-gray-400">Developers</div> </div>
-                            <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/10 hover:bg-white/10 transition"> <div class="text-3xl font-black text-teal-400">10k+</div> <div class="text-sm text-gray-400">Users</div> </div>
-                            <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/10 hover:bg-white/10 transition"> <div class="text-3xl font-black text-teal-400">5</div> <div class="text-sm text-gray-400">Countries</div> </div>
-                        </div>
-
-                        <!-- Mission & Vision -->
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 hover:border-teal-500/30 transition"> <h2 class="text-2xl font-bold text-white mb-3">🎯 Our Mission</h2> <p class="text-gray-400 leading-relaxed">To empower developers and businesses across Africa by providing a seamless platform for discovering, launching, and scaling innovative web applications.</p> </div>
-                            <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 hover:border-teal-500/30 transition"> <h2 class="text-2xl font-bold text-white mb-3">👁️ Our Vision</h2> <p class="text-gray-400 leading-relaxed">To become the leading digital marketplace in Africa, fostering innovation and economic growth through accessible technology.</p> </div>
-                        </div>
-
-                        <!-- Story / Timeline -->
-                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
-                            <h2 class="text-2xl font-bold text-white mb-6 text-center">📖 Our Journey</h2>
-                            <div class="flex flex-col md:flex-row gap-4 justify-between">
-                                <div class="flex-1 text-center p-4 border-r border-white/10 last:border-0"> <div class="text-teal-400 font-bold">2024</div> <div class="text-gray-300 text-sm">Founded in Nairobi</div> </div>
-                                <div class="flex-1 text-center p-4 border-r border-white/10 last:border-0"> <div class="text-teal-400 font-bold">2025</div> <div class="text-gray-300 text-sm">Launched V1 Platform</div> </div>
-                                <div class="flex-1 text-center p-4 border-r border-white/10 last:border-0"> <div class="text-teal-400 font-bold">2026</div> <div class="text-gray-300 text-sm">100+ Apps & Growing</div> </div>
-                                <div class="flex-1 text-center p-4"> <div class="text-teal-400 font-bold">Future</div> <div class="text-gray-300 text-sm">Pan-African Expansion</div> </div>
-                            </div>
-                        </div>
-
-                        <!-- Why Meon? (Enhanced) -->
-                        <div>
-                            <h2 class="text-2xl font-bold text-white mb-6 text-center">💡 Why Meon?</h2>
-                            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                <div class="group bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:bg-white/10 hover:border-teal-500/30 transition-all hover:-translate-y-1"> <div class="text-4xl mb-4">🛡️</div> <h3 class="text-white font-semibold text-lg">Trust & Security</h3> <p class="text-gray-400 text-sm mt-2">All apps vetted for quality and security.</p> </div>
-                                <div class="group bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:bg-white/10 hover:border-teal-500/30 transition-all hover:-translate-y-1"> <div class="text-4xl mb-4">📈</div> <h3 class="text-white font-semibold text-lg">Growth Tools</h3> <p class="text-gray-400 text-sm mt-2">Analytics, marketing, and optimization tools.</p> </div>
-                                <div class="group bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:bg-white/10 hover:border-teal-500/30 transition-all hover:-translate-y-1"> <div class="text-4xl mb-4">🤝</div> <h3 class="text-white font-semibold text-lg">Community</h3> <p class="text-gray-400 text-sm mt-2">Connect with developers and users.</p> </div>
-                            </div>
-                        </div>
-
-                        <!-- Contact / Team -->
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-gradient-to-br from-teal-500/10 to-amber-500/10 rounded-2xl p-8 border border-white/10">
-                                <h2 class="text-2xl font-bold text-white mb-4">📞 Get in Touch</h2>
-                                <div class="space-y-4">
-                                    <div><div class="text-sm text-gray-400">Consultation & Support</div><a href="tel:+254758639923" class="text-white text-lg font-semibold hover:text-teal-300 transition flex items-center gap-2"><i data-lucide="phone" class="w-5 h-5 text-teal-400"></i> +254 758 639 923</a></div>
-                                    <div><div class="text-sm text-gray-400">WhatsApp</div><a href="https://wa.me/254758639923?text=Hello%20Meon%20Team%2C%20I%20need%20consultation" target="_blank" class="text-white text-lg font-semibold hover:text-green-300 transition flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5 text-green-400"></i> Chat on WhatsApp</a></div>
-                                    <div><div class="text-sm text-gray-400">Email</div><a href="mailto:support@meon.app" class="text-white text-lg font-semibold hover:text-blue-300 transition flex items-center gap-2"><i data-lucide="mail" class="w-5 h-5 text-blue-400"></i> support@meon.app</a></div>
-                                </div>
-                            </div>
-                            <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
-                                <h2 class="text-2xl font-bold text-white mb-4">📍 Location</h2>
-                                <p class="text-gray-300 text-lg">Nairobi, Kenya</p>
-                                <p class="text-gray-400 text-sm mt-2">Serving innovators across Africa.</p>
-                                <div class="mt-4 bg-gray-800/50 rounded-xl h-32 flex items-center justify-center border border-white/5">
-                                    <span class="text-gray-500 text-sm">🌍 Map coming soon</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            `;
-    }
-
-    // ----- HOME -----
     function renderHome() {
         const filteredApps = getFilteredApps();
         const featured = appList.filter(a => featuredIds.includes(a.id));
@@ -2846,7 +2898,6 @@
                 `<span style="width:${size}px;height:${size}px;left:${left}%;animation-delay:${delay}s;animation-duration:${duration}s;"></span>`;
         }
 
-        // Build app spotlight slides
         let spotlightSlides = '';
         featured.forEach(app => {
             const logoUrl = app.logoUrl || generateFallbackSVG(app.id, 72);
@@ -2901,11 +2952,9 @@
                 </div>
             `;
 
-        // App Spotlight Card
         const spotlightHtml = `
                 <div class="spotlight-card mb-12 fade-in">
                     <div class="grid md:grid-cols-3 gap-6 relative z-10">
-                        <!-- Left: Info -->
                         <div class="md:col-span-2 flex flex-col justify-between">
                             <div>
                                 <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1 text-amber-300 text-xs mb-3">
@@ -2914,7 +2963,7 @@
                                 </div>
                                 <h2 class="text-2xl md:text-3xl font-extrabold text-white">Discover <span class="text-amber-400">featured apps</span></h2>
                                 <p class="spotlight-text mt-3">
-                                    Handpicked by our editors, these apps represent the best of what Meon has to offer. 
+                                    Handpicked by our editors, these apps represent the best of what Meon has to offer.
                                     From productivity tools to AI-powered solutions, find your next favorite app today.
                                 </p>
                             </div>
@@ -2924,7 +2973,6 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- Right: Swiper -->
                         <div class="relative">
                             <div class="swiper spotlight-swiper mySpotlightSwiper">
                                 <div class="swiper-wrapper">
@@ -2986,6 +3034,125 @@
         const closeHtml = `</div></div>`;
 
         return `${mainBgHtml}${heroHtml}${spotlightHtml}${searchHtml}${featuredBannerHtml}${featuredHtml}${topratedHtml}${recentHtml}${closeHtml}`;
+    }
+
+    // ============================================================
+    // RENDER ABOUT - UPGRADED
+    // ============================================================
+    function renderAbout() {
+        return `
+            <div class="main-bg w-full max-w-7xl mx-auto">
+                <div class="main-content fade-in space-y-12">
+                    <!-- Hero -->
+                    <div class="text-center space-y-4">
+                        <h1 class="text-4xl md:text-6xl font-extrabold text-white glow-text">🌟 About <span class="bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent">Meon</span></h1>
+                        <p class="text-gray-400 text-lg max-w-2xl mx-auto">We are building the future of app discovery and monetization in Africa.</p>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="about-stat-card">
+                            <div class="number">50+</div>
+                            <div class="label">Apps</div>
+                        </div>
+                        <div class="about-stat-card">
+                            <div class="number">20+</div>
+                            <div class="label">Developers</div>
+                        </div>
+                        <div class="about-stat-card">
+                            <div class="number">10k+</div>
+                            <div class="label">Users</div>
+                        </div>
+                        <div class="about-stat-card">
+                            <div class="number">5</div>
+                            <div class="label">Countries</div>
+                        </div>
+                    </div>
+
+                    <!-- Mission & Vision -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="about-mission-card">
+                            <h3>🎯 Our Mission</h3>
+                            <p>To empower developers and businesses across Africa by providing a seamless platform for discovering, launching, and scaling innovative web applications.</p>
+                        </div>
+                        <div class="about-mission-card">
+                            <h3>👁️ Our Vision</h3>
+                            <p>To become the leading digital marketplace in Africa, fostering innovation and economic growth through accessible technology.</p>
+                        </div>
+                    </div>
+
+                    <!-- Journey Timeline -->
+                    <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+                        <h2 class="text-2xl font-bold text-white mb-6 text-center">📖 Our Journey</h2>
+                        <div class="flex flex-col md:flex-row">
+                            <div class="timeline-item">
+                                <div class="year">2024</div>
+                                <div class="label">Founded in Nairobi</div>
+                                <div class="dot"></div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="year">2025</div>
+                                <div class="label">Launched V1 Platform</div>
+                                <div class="dot"></div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="year">2026</div>
+                                <div class="label">100+ Apps & Growing</div>
+                                <div class="dot"></div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="year">Future</div>
+                                <div class="label">Pan-African Expansion</div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Why Meon? -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-6 text-center">💡 Why Meon?</h2>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="about-value-card">
+                                <div class="icon">🛡️</div>
+                                <h4>Trust & Security</h4>
+                                <p>All apps vetted for quality and security.</p>
+                            </div>
+                            <div class="about-value-card">
+                                <div class="icon">📈</div>
+                                <h4>Growth Tools</h4>
+                                <p>Analytics, marketing, and optimization tools.</p>
+                            </div>
+                            <div class="about-value-card">
+                                <div class="icon">🤝</div>
+                                <h4>Community</h4>
+                                <p>Connect with developers and users.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact & Location -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-teal-500/10 to-amber-500/10 rounded-2xl p-8 border border-white/10">
+                            <h2 class="text-2xl font-bold text-white mb-4">📞 Get in Touch</h2>
+                            <div class="space-y-4">
+                                <div><div class="text-sm text-gray-400">Consultation & Support</div><a href="tel:+254758639923" class="text-white text-lg font-semibold hover:text-teal-300 transition flex items-center gap-2"><i data-lucide="phone" class="w-5 h-5 text-teal-400"></i> +254 758 639 923</a></div>
+                                <div><div class="text-sm text-gray-400">WhatsApp</div><a href="https://wa.me/254758639923?text=Hello%20Meon%20Team%2C%20I%20need%20consultation" target="_blank" class="text-white text-lg font-semibold hover:text-green-300 transition flex items-center gap-2"><i data-lucide="message-circle" class="w-5 h-5 text-green-400"></i> Chat on WhatsApp</a></div>
+                                <div><div class="text-sm text-gray-400">Email</div><a href="mailto:support@meon.app" class="text-white text-lg font-semibold hover:text-blue-300 transition flex items-center gap-2"><i data-lucide="mail" class="w-5 h-5 text-blue-400"></i> support@meon.app</a></div>
+                            </div>
+                        </div>
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+                            <h2 class="text-2xl font-bold text-white mb-4">📍 Location</h2>
+                            <p class="text-gray-300 text-lg">Nairobi, Kenya</p>
+                            <p class="text-gray-400 text-sm mt-2">Serving innovators across Africa.</p>
+                            <div class="mt-4 bg-gray-800/50 rounded-xl h-32 flex items-center justify-center border border-white/5">
+                                <span class="text-gray-500 text-sm">🌍 Map coming soon</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        `;
     }
 
     function renderAppDetail() {
@@ -3390,7 +3557,6 @@
             `;
     }
 
-    // ----- ATT -----
     function renderATT() {
         return `
                 <div class="att-bg w-full max-w-7xl mx-auto">
@@ -3897,6 +4063,8 @@
                     document.querySelector(".featured-banner")?.scrollIntoView({ behavior: "smooth" });
                 });
             }, 100);
+        } else if (activeView === "about") {
+            container.innerHTML = renderAbout();
         } else if (activeView === "dashboard") {
             container.innerHTML = renderDashboard();
         } else if (activeView === "pricing") {
@@ -3915,8 +4083,6 @@
                 showToast('✅ Terms accepted!', 'success');
                 navigateTo('home');
             });
-        } else if (activeView === "about") {
-            container.innerHTML = renderAbout();
         } else if (activeView === "settings") {
             container.innerHTML = renderSettings();
             setTimeout(() => {
@@ -4107,12 +4273,14 @@
     renderCurrentView();
     updateOnlineStatus();
 
-    console.log('🚀 Meon App Directory v16 - Upgraded About Us Page');
-    console.log('🌟 About Us: Stats, Mission, Vision, Timeline, enhanced cards');
+    console.log('🚀 Meon App Directory v17 - Upgraded About Us Page');
+    console.log('🌟 About Us: Stats, Mission, Vision, Timeline, Values, Contact');
     console.log('📱 M-Pesa Sandbox: Active');
     console.log('💳 Plans: Free, Standard (KES 500/mo), Featured (KES 1,500/mo)');
     console.log('👤 User:', currentUser?.email || 'Not logged in');
-    console.log('🎨 Design: Teal (#00b2a9) primary + Glass-morphism + modern layout');
+    console.log('🔐 Demo Admin: admin@meon.com');
+    console.log('👨‍💻 Demo Developer: dev@meon.com');
+    console.log('🎨 Design: Teal (#00b2a9) primary + Glass-morphism cards');
 </script>
 </body>
 </html>
