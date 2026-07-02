@@ -1339,6 +1339,389 @@
         }
 
         /* ============================================================
+           SETTINGS - PREMIUM GLASS DESIGN
+           ============================================================ */
+        .settings-wrapper {
+            padding: 1.5rem 0.5rem;
+        }
+
+        .settings-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Settings Header */
+        .settings-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding: 0 0.5rem;
+        }
+
+        .settings-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .dark .settings-header h1 {
+            background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .settings-close-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dark .settings-close-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.04);
+            color: #64748b;
+        }
+
+        .settings-close-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #e2e8f0;
+            transform: scale(1.03);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .dark .settings-close-btn:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: #f1f5f9;
+        }
+
+        /* Main Settings Card */
+        .settings-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px) saturate(1.8);
+            -webkit-backdrop-filter: blur(24px) saturate(1.8);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 32px;
+            padding: 2rem 1.75rem;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .dark .settings-card {
+            background: rgba(15, 23, 42, 0.70);
+            border-color: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+        }
+
+        .settings-card:hover {
+            border-color: rgba(0, 178, 169, 0.10);
+            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark .settings-card:hover {
+            border-color: rgba(0, 178, 169, 0.08);
+            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Section Titles */
+        .settings-section-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .dark .settings-section-title {
+            color: #64748b;
+            border-bottom-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .settings-section-title i {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Settings Items */
+        .settings-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 0.5rem;
+            border-radius: 14px;
+            transition: all 0.2s ease;
+            cursor: default;
+            margin: 0 -0.5rem;
+        }
+
+        .settings-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .dark .settings-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .settings-item .left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .settings-item .icon-wrapper {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: rgba(0, 178, 169, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00b2a9;
+            flex-shrink: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .settings-item:hover .icon-wrapper {
+            background: rgba(0, 178, 169, 0.12);
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .settings-item .icon-wrapper .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .settings-item .info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .settings-item .label {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+        }
+
+        .dark .settings-item .label {
+            color: #f1f5f9;
+        }
+
+        .settings-item .desc {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dark .settings-item .desc {
+            color: #64748b;
+        }
+
+        .settings-item .right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        /* Action Buttons - Premium */
+        .action-btn {
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            white-space: nowrap;
+        }
+
+        .dark .action-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: rgba(255, 255, 255, 0.04);
+            color: #94a3b8;
+        }
+
+        .action-btn:hover {
+            background: rgba(0, 178, 169, 0.08);
+            border-color: rgba(0, 178, 169, 0.15);
+            color: #e2e8f0;
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, #00b2a9, #008b84);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 2px 12px rgba(0, 178, 169, 0.15);
+        }
+
+        .action-btn.primary:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 4px 24px rgba(0, 178, 169, 0.25);
+            background: linear-gradient(135deg, #00c4bb, #009e96);
+        }
+
+        .action-btn.danger {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: rgba(239, 68, 68, 0.10);
+            color: #f87171;
+        }
+
+        .action-btn.danger:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.20);
+            color: #fca5a5;
+            transform: translateY(-1px);
+        }
+
+        .action-btn.success {
+            background: rgba(52, 211, 153, 0.08);
+            border-color: rgba(52, 211, 153, 0.10);
+            color: #34d399;
+        }
+
+        .action-btn.success:hover {
+            background: rgba(52, 211, 153, 0.15);
+            border-color: rgba(52, 211, 153, 0.20);
+            color: #6ee7b7;
+            transform: translateY(-1px);
+        }
+
+        /* Toggle Switch - Premium */
+        .toggle-switch {
+            position: relative;
+            width: 52px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: #334155;
+            border-radius: 28px;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark .toggle-slider {
+            background: #1e293b;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .toggle-switch input:checked+.toggle-slider {
+            background: linear-gradient(135deg, #00b2a9, #008b84);
+        }
+
+        .toggle-switch input:checked+.toggle-slider::before {
+            transform: translateX(24px);
+        }
+
+        /* Verified Badge */
+        .verified-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.12);
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            border: 1px solid rgba(52, 211, 153, 0.10);
+        }
+
+        /* Settings Footer */
+        .settings-footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #64748b;
+            letter-spacing: 0.02em;
+            padding: 0 0.5rem;
+        }
+
+        .dark .settings-footer {
+            color: #475569;
+        }
+
+        .settings-footer span {
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .settings-card {
+                padding: 1.25rem 1rem;
+                border-radius: 24px;
+            }
+            .settings-header h1 {
+                font-size: 1.5rem;
+            }
+            .settings-close-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+            .settings-item .desc {
+                white-space: normal;
+            }
+            .settings-item {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .settings-item .right {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        /* ============================================================
            ABOUT US - ADVANCED CSS
            ============================================================ */
         .about-hero-gradient {
@@ -2890,7 +3273,7 @@
     }
 
     // ============================================================
-    // SETTINGS PANEL - UPGRADED CSS
+    // SETTINGS PANEL - PREMIUM DESIGN
     // ============================================================
     function renderSettings() {
         const isLoggedIn = !!currentUser;
@@ -2898,11 +3281,11 @@
         const planDisplay = userPlan.charAt(0).toUpperCase() + userPlan.slice(1);
 
         return `
-                <div class="settings-bg w-full max-w-7xl mx-auto">
-                    <div class="settings-content fade-in">
+                <div class="settings-wrapper">
+                    <div class="settings-container fade-in">
                         <div class="settings-header">
-                            <h1 class="text-2xl md:text-4xl font-bold flex items-center gap-3">
-                                <i data-lucide="settings" class="w-8 h-8 text-teal-400"></i>
+                            <h1>
+                                <i data-lucide="settings" class="w-8 h-8 text-teal-400 inline-block mr-2"></i>
                                 Settings
                             </h1>
                             <button onclick="navigateTo('home')" class="settings-close-btn">
@@ -2919,7 +3302,9 @@
                                 ${isLoggedIn ? `
                                     <div class="settings-item">
                                         <div class="left">
-                                            <div class="icon"><i data-lucide="user" class="w-5 h-5"></i></div>
+                                            <div class="icon-wrapper">
+                                                <i data-lucide="user" class="icon"></i>
+                                            </div>
                                             <div class="info">
                                                 <div class="label">Display Name</div>
                                                 <div class="desc">${currentUser.name || 'Not set'}</div>
@@ -2931,19 +3316,23 @@
                                     </div>
                                     <div class="settings-item">
                                         <div class="left">
-                                            <div class="icon"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                                            <div class="icon-wrapper">
+                                                <i data-lucide="mail" class="icon"></i>
+                                            </div>
                                             <div class="info">
                                                 <div class="label">Email Address</div>
                                                 <div class="desc">${currentUser.email}</div>
                                             </div>
                                         </div>
                                         <div class="right">
-                                            <span class="text-xs text-green-400 font-semibold">Verified</span>
+                                            <span class="verified-badge">✓ Verified</span>
                                         </div>
                                     </div>
                                     <div class="settings-item">
                                         <div class="left">
-                                            <div class="icon"><i data-lucide="phone" class="w-5 h-5"></i></div>
+                                            <div class="icon-wrapper">
+                                                <i data-lucide="phone" class="icon"></i>
+                                            </div>
                                             <div class="info">
                                                 <div class="label">Phone Number</div>
                                                 <div class="desc">${currentUser.phone || 'Not set'}</div>
@@ -2968,7 +3357,9 @@
                                 </div>
                                 <div class="settings-item">
                                     <div class="left">
-                                        <div class="icon"><i data-lucide="moon" class="w-5 h-5"></i></div>
+                                        <div class="icon-wrapper">
+                                            <i data-lucide="moon" class="icon"></i>
+                                        </div>
                                         <div class="info">
                                             <div class="label">Dark Mode</div>
                                             <div class="desc">Switch between light and dark theme</div>
@@ -2983,7 +3374,9 @@
                                 </div>
                                 <div class="settings-item">
                                     <div class="left">
-                                        <div class="icon"><i data-lucide="type" class="w-5 h-5"></i></div>
+                                        <div class="icon-wrapper">
+                                            <i data-lucide="type" class="icon"></i>
+                                        </div>
                                         <div class="info">
                                             <div class="label">Font Size</div>
                                             <div class="desc">${userSettings.fontSize === 'small' ? 'Small' : userSettings.fontSize === 'large' ? 'Large' : 'Medium'}</div>
@@ -3002,7 +3395,9 @@
                                 </div>
                                 <div class="settings-item">
                                     <div class="left">
-                                        <div class="icon"><i data-lucide="bell" class="w-5 h-5"></i></div>
+                                        <div class="icon-wrapper">
+                                            <i data-lucide="bell" class="icon"></i>
+                                        </div>
                                         <div class="info">
                                             <div class="label">Push Notifications</div>
                                             <div class="desc">Receive updates about your apps and subscriptions</div>
@@ -3017,7 +3412,9 @@
                                 </div>
                                 <div class="settings-item">
                                     <div class="left">
-                                        <div class="icon"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                                        <div class="icon-wrapper">
+                                            <i data-lucide="mail" class="icon"></i>
+                                        </div>
                                         <div class="info">
                                             <div class="label">Email Updates</div>
                                             <div class="desc">Receive newsletters and product updates</div>
@@ -3032,7 +3429,9 @@
                                 </div>
                                 <div class="settings-item">
                                     <div class="left">
-                                        <div class="icon"><i data-lucide="megaphone" class="w-5 h-5"></i></div>
+                                        <div class="icon-wrapper">
+                                            <i data-lucide="megaphone" class="icon"></i>
+                                        </div>
                                         <div class="info">
                                             <div class="label">Marketing Emails</div>
                                             <div class="desc">Promotional offers and special announcements</div>
@@ -3054,7 +3453,9 @@
                                 </div>
                                 <div class="settings-item">
                                     <div class="left">
-                                        <div class="icon"><i data-lucide="bar-chart" class="w-5 h-5"></i></div>
+                                        <div class="icon-wrapper">
+                                            <i data-lucide="bar-chart" class="icon"></i>
+                                        </div>
                                         <div class="info">
                                             <div class="label">Analytics</div>
                                             <div class="desc">Help improve Meon by sharing anonymous usage data</div>
@@ -3069,7 +3470,9 @@
                                 </div>
                                 <div class="settings-item">
                                     <div class="left">
-                                        <div class="icon"><i data-lucide="share-2" class="w-5 h-5"></i></div>
+                                        <div class="icon-wrapper">
+                                            <i data-lucide="share-2" class="icon"></i>
+                                        </div>
                                         <div class="info">
                                             <div class="label">Data Sharing</div>
                                             <div class="desc">Allow Meon to share data with trusted partners</div>
@@ -3092,7 +3495,9 @@
                                 ${isLoggedIn ? `
                                     <div class="settings-item">
                                         <div class="left">
-                                            <div class="icon"><i data-lucide="crown" class="w-5 h-5 text-amber-400"></i></div>
+                                            <div class="icon-wrapper" style="background: rgba(251, 191, 36, 0.10); color: #fbbf24;">
+                                                <i data-lucide="crown" class="icon"></i>
+                                            </div>
                                             <div class="info">
                                                 <div class="label">Current Plan</div>
                                                 <div class="desc">${planDisplay} ${currentUser.subscription?.trial ? '· Trial' : ''}</div>
@@ -3104,7 +3509,9 @@
                                     </div>
                                     <div class="settings-item">
                                         <div class="left">
-                                            <div class="icon"><i data-lucide="credit-card" class="w-5 h-5 text-green-400"></i></div>
+                                            <div class="icon-wrapper" style="background: rgba(52, 211, 153, 0.10); color: #34d399;">
+                                                <i data-lucide="credit-card" class="icon"></i>
+                                            </div>
                                             <div class="info">
                                                 <div class="label">Payment History</div>
                                                 <div class="desc">View your M-Pesa transactions</div>
@@ -3116,7 +3523,9 @@
                                     </div>
                                     <div class="settings-item">
                                         <div class="left">
-                                            <div class="icon"><i data-lucide="log-out" class="w-5 h-5 text-red-400"></i></div>
+                                            <div class="icon-wrapper" style="background: rgba(239, 68, 68, 0.08); color: #ef4444;">
+                                                <i data-lucide="log-out" class="icon"></i>
+                                            </div>
                                             <div class="info">
                                                 <div class="label">Sign Out</div>
                                                 <div class="desc">Log out of your Meon account</div>
@@ -3128,7 +3537,9 @@
                                     </div>
                                     <div class="settings-item">
                                         <div class="left">
-                                            <div class="icon"><i data-lucide="trash-2" class="w-5 h-5 text-red-400"></i></div>
+                                            <div class="icon-wrapper" style="background: rgba(239, 68, 68, 0.08); color: #ef4444;">
+                                                <i data-lucide="trash-2" class="icon"></i>
+                                            </div>
                                             <div class="info">
                                                 <div class="label text-red-400">Delete Account</div>
                                                 <div class="desc text-red-400/70">Permanently remove your account and data</div>
@@ -3148,7 +3559,7 @@
                         </div>
 
                         <div class="settings-footer">
-                            Meon Directory v18.0 · Built with ❤️ in Nairobi, Kenya
+                            <span>Meon Directory v18.0 · Built with ❤️ in Nairobi, Kenya</span>
                         </div>
                     </div>
                 </div>
