@@ -6,6 +6,10 @@
     <title>Meon | Intelligence · Innovation · Inspiration</title>
     <meta name="description" content="Meon App Directory – Launch web apps instantly with M-Pesa payments" />
 
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5512023350779761"
+     crossorigin="anonymous"></script>
+
     <!-- PWA Meta -->
     <meta name="theme-color" content="#0f172a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1955,6 +1959,66 @@
             border-color: rgba(0, 178, 169, 0.15);
             color: #64748b;
         }
+
+        /* ============================================================
+           AD SECTIONS - NEW
+           ============================================================ */
+        .ad-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ad-container:hover {
+            border-color: rgba(0, 178, 169, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .ad-container .ad-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            background: rgba(0,0,0,0.3);
+            padding: 1px 8px;
+            border-radius: 10px;
+        }
+        .ad-container .ad-content {
+            padding: 12px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            position: relative;
+            width: 100%;
+        }
+        .ad-container.leaderboard {
+            min-height: 90px;
+        }
+        .ad-container.sidebar {
+            min-height: 250px;
+        }
+        .ad-container.inline {
+            min-height: 120px;
+        }
+        .ad-container .ad-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #475569;
+            font-size: 0.75rem;
+        }
+        .ad-container .ad-placeholder .ad-icon {
+            font-size: 1.8rem;
+            opacity: 0.3;
+        }
     </style>
 </head>
 <body>
@@ -3205,6 +3269,61 @@
     }
 
     // ============================================================
+    // AD RENDER HELPERS
+    // ============================================================
+    function renderAd(placement = 'leaderboard', className = '') {
+        // Check if AdSense is loaded
+        if (typeof adsbygoogle === 'undefined') {
+            return `
+                <div class="ad-container ${placement} ${className} relative">
+                    <div class="ad-content">
+                        <span class="ad-label">Ad</span>
+                        <div class="ad-placeholder">
+                            <span class="ad-icon">📢</span>
+                            <span>Ad space available</span>
+                            <span class="text-xs opacity-50">Support Meon by enabling ads</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        const adStyles = {
+            leaderboard: 'display:block; width:100%; height:90px;',
+            sidebar: 'display:block; width:100%; height:250px;',
+            inline: 'display:block; width:100%; height:120px;',
+            banner: 'display:block; width:100%; height:60px;'
+        };
+
+        const style = adStyles[placement] || adStyles.leaderboard;
+        
+        return `
+            <div class="ad-container ${placement} ${className} relative">
+                <div class="ad-content">
+                    <span class="ad-label">Ad</span>
+                    <ins class="adsbygoogle"
+                         style="${style}"
+                         data-ad-client="ca-pub-5512023350779761"
+                         data-ad-slot="${placement === 'leaderboard' ? '1234567890' : placement === 'sidebar' ? '0987654321' : '1122334455'}"
+                         data-ad-format="${placement === 'sidebar' ? 'rectangle' : 'auto'}"
+                         data-full-width-responsive="true">
+                    </ins>
+                </div>
+            </div>
+        `;
+    }
+
+    function initAds() {
+        if (typeof (adsbygoogle) !== 'undefined') {
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                console.log('Ad initialization warning:', e);
+            }
+        }
+    }
+
+    // ============================================================
     // UI COMPONENTS - APP CARD
     // ============================================================
     function appCard(app) {
@@ -3747,7 +3866,7 @@
     // ============================================================
     function renderHome() {
         const filteredApps = getFilteredApps();
-        const featured = appList.filter(a => featuredIds.includes(a.id));
+        const featured = appList.filter(a => featuredIds.includes(a));
         const trending = [...filteredApps].sort((a, b) => b.rating - a.rating).slice(0, 6);
         const newReleases = [...filteredApps].reverse().slice(0, 6);
         const categories = [...new Set(appList.map(a => a.category))];
@@ -3891,13 +4010,34 @@
                 </div>
             `;
 
+        // Ad placements
+        const topAd = renderAd('leaderboard', 'mb-8');
+        const inlineAd = renderAd('inline', 'my-8');
+        const bottomAd = renderAd('leaderboard', 'mt-8');
+
         const featuredHtml = `<div class="mb-8"><div class="flex items-center justify-between mb-4"><h2 class="text-2xl font-bold text-white">⭐ Featured</h2><span class="text-sm text-teal-400">${featured.length} apps</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${featured.length ? featured.map(app=>appCard(app)).join('') : '<p class="text-gray-400 col-span-3 text-center py-8">No featured apps found</p>'}</div></div>`;
         const topratedHtml = `<div class="mb-8"><div class="flex items-center justify-between mb-4"><h2 class="text-2xl font-bold text-white">🔥 Top Rated</h2><span class="text-sm text-amber-400">Highest rated</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${trending.map(app=>appCard(app)).join('')}</div></div>`;
         const recentHtml = `<div><div class="flex items-center justify-between mb-4"><h2 class="text-2xl font-bold text-white">🆕 Recently Added</h2><span class="text-sm text-green-400">New releases</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">${newReleases.map(app=>appCard(app)).join('')}</div></div>`;
 
+        // Insert ads between sections
         const closeHtml = `</div></div>`;
 
-        return `${mainBgHtml}${heroHtml}${spotlightHtml}${searchHtml}${featuredBannerHtml}${featuredHtml}${topratedHtml}${recentHtml}${closeHtml}`;
+        // Only show ads if AdSense is loaded
+        const adContent = typeof adsbygoogle !== 'undefined' ? `
+            ${topAd}
+            ${featuredHtml}
+            ${inlineAd}
+            ${topratedHtml}
+            ${bottomAd}
+        ` : `
+            ${featuredHtml}
+            ${topratedHtml}
+            <div class="text-center text-gray-500 text-sm py-4 border-t border-white/5">
+                <span>📢 Support Meon by enabling ads</span>
+            </div>
+        `;
+
+        return `${mainBgHtml}${heroHtml}${spotlightHtml}${searchHtml}${featuredBannerHtml}${adContent}${recentHtml}${closeHtml}`;
     }
 
     // ============================================================
@@ -3926,6 +4066,9 @@
                             <span class="bg-white/5 border border-white/5 rounded-full px-4 py-1.5 text-sm text-gray-400">🌍 5 Countries</span>
                         </div>
                     </div>
+
+                    <!-- Ad -->
+                    ${renderAd('inline', 'mb-6')}
 
                     <!-- Stats -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -4063,6 +4206,9 @@
                             <p class="text-gray-300 text-lg max-w-2xl mx-auto">Start with a free trial and upgrade when you're ready. All plans include secure M-Pesa payments.</p>
                         </div>
 
+                        <!-- Ad -->
+                        ${renderAd('banner', 'mb-8')}
+
                         <div class="grid md:grid-cols-3 gap-6 items-stretch">
                             ${Object.entries(DEFAULT_TIERS).map(([key, tier]) => {
                                 const isPopular = key === 'FEATURED';
@@ -4101,6 +4247,8 @@
                                 </p>
                             </div>
                         </div>
+
+                        ${renderAd('leaderboard', 'mt-8')}
                     </div>
                 </div>
             `;
@@ -4131,6 +4279,9 @@
         };
         return `<div class="max-w-5xl mx-auto fade-in">
                 <button onclick="window.backToHome()" class="flex items-center gap-1 text-teal-400 hover:text-teal-300 mb-4 transition">&larr; Back to Store</button>
+                
+                ${renderAd('banner', 'mb-6')}
+                
                 <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
                     <div class="flex gap-6 flex-wrap">
                         ${appLogoImg(app, "w-28 h-28", 120)}
@@ -4165,6 +4316,9 @@
                             </div>
                         </div>
                     </div>
+                    
+                    ${renderAd('inline', 'my-6')}
+                    
                     <div class="mt-8 grid md:grid-cols-3 gap-6">
                         <div class="md:col-span-2">
                             <h2 class="text-xl font-semibold">Description</h2>
@@ -4184,6 +4338,9 @@
                             </div>
                         </div>
                     </div>
+                    
+                    ${renderAd('banner', 'my-6')}
+                    
                     <div class="mt-6">
                         <h2 class="text-xl font-semibold">Screenshots</h2>
                         <div class="flex gap-3 overflow-x-auto pb-2 mt-3">${screenshotHtml}</div>
@@ -4295,12 +4452,16 @@
                                 <i data-lucide="plus" class="w-4 h-4"></i> Submit App
                             </button>
                         </div>
+                        
+                        ${renderAd('banner', 'mb-6')}
+                        
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                             <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-teal-500/20 rounded-lg"><i data-lucide="app-window" class="w-5 h-5 text-teal-400"></i></div><div><div class="text-2xl font-bold text-white">${userApps.length}</div><div class="text-sm text-gray-400">Your Apps</div></div></div></div>
                             <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-amber-500/20 rounded-lg"><i data-lucide="crown" class="w-5 h-5 text-amber-400"></i></div><div><div class="text-2xl font-bold text-amber-300">${userApps.filter(a => a.tier === 'FEATURED').length}</div><div class="text-sm text-gray-400">Featured</div></div></div></div>
                             <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-green-500/20 rounded-lg"><i data-lucide="clock" class="w-5 h-5 text-green-400"></i></div><div><div class="text-2xl font-bold text-green-300">${userApps.filter(a => a.trialActive).length}</div><div class="text-sm text-gray-400">Active Trials</div></div></div></div>
                             <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-blue-500/20 rounded-lg"><i data-lucide="download" class="w-5 h-5 text-blue-400"></i></div><div><div class="text-2xl font-bold text-blue-300">${userApps.reduce((sum, a) => sum + a.downloads, 0).toLocaleString()}</div><div class="text-sm text-gray-400">Total Downloads</div></div></div></div>
                         </div>
+                        
                         <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10 mb-6">
                             <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="heart" class="w-5 h-5 text-red-400"></i> Favorite Apps</h2>
                             <div class="grid gap-3">
@@ -4317,6 +4478,9 @@
                                 `).join('') || "<p class='text-gray-300'>No favorites yet. ❤️ apps to see them here.</p>"}
                             </div>
                         </div>
+                        
+                        ${renderAd('inline', 'my-6')}
+                        
                         <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
                             <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="app-window" class="w-5 h-5 text-teal-400"></i> Your Apps</h2>
                             ${userApps.length > 0 ? `
@@ -4380,6 +4544,8 @@
                                 </div>
                             </div>
                         ` : ''}
+                        
+                        ${renderAd('leaderboard', 'mt-6')}
                     </div>
                 </div>
             `;
@@ -4393,6 +4559,9 @@
                         <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20">
                             <h1 class="text-3xl md:text-4xl font-extrabold text-white glow-text mb-6">📜 Terms and Conditions</h1>
                             <p class="text-gray-400 text-sm mb-6">Effective Date: June 29, 2026</p>
+                            
+                            ${renderAd('banner', 'mb-6')}
+                            
                             <div class="terms-content">
                                 <p class="text-gray-300 mb-4">By accessing or using this website, downloading applications, or using any services provided through this platform, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these Terms, you should discontinue use of the platform immediately.</p>
                                 <h2>1. Right to Review and Amend These Terms</h2>
@@ -4469,6 +4638,9 @@
                             <h1 class="text-4xl md:text-5xl font-extrabold text-white glow-text">ATT - <span class="bg-gradient-to-r from-teal-400 via-teal-300 to-amber-400 bg-clip-text text-transparent">Advanced Technology Tools</span></h1>
                             <p class="text-gray-300 text-lg md:text-xl mt-4 max-w-3xl mx-auto">Enterprise-grade solutions for AI, security, cloud, automation, and global connectivity — built for scale.</p>
                         </div>
+                        
+                        ${renderAd('leaderboard', 'mb-8')}
+                        
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                             <div class="att-card bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-teal-500/30 group">
                                 <div class="flex items-start justify-between mb-4">
@@ -4540,6 +4712,9 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        ${renderAd('inline', 'my-8')}
+                        
                         <div class="mt-12 text-center">
                             <div class="bg-gradient-to-r from-teal-500/10 via-blue-500/10 to-cyan-500/10 rounded-2xl p-8 border border-white/5 max-w-4xl mx-auto">
                                 <h3 class="text-2xl font-bold text-white mb-2">Ready to transform your business?</h3>
@@ -4571,6 +4746,9 @@
         return `<div class="admin-bg w-full max-w-7xl mx-auto">
                 <div class="admin-content fade-in">
                     <h1 class="text-3xl font-bold text-white mb-6">🛠️ Meon Admin Console</h1>
+                    
+                    ${renderAd('leaderboard', 'mb-6')}
+                    
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                         <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-teal-500/20 rounded-lg"><i data-lucide="app-window" class="w-5 h-5 text-teal-400"></i></div><div><div class="text-2xl font-bold text-white">${appList.length}</div><div class="text-sm text-gray-400">Total Apps</div></div></div></div>
                         <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-green-500/20 rounded-lg"><i data-lucide="download" class="w-5 h-5 text-green-400"></i></div><div><div class="text-2xl font-bold text-green-300">${totalDownloads.toLocaleString()}</div><div class="text-sm text-gray-400">Total Downloads</div></div></div></div>
@@ -4581,7 +4759,12 @@
                         <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10"><h2 class="text-xl font-bold text-white mb-4">📊 Directory Stats</h2><div class="mt-4 space-y-2 text-white"><p class="text-lg">Total apps: <span class="font-bold text-teal-300">${appList.length}</span></p><p class="text-lg">Categories: <span class="font-bold text-teal-300">${new Set(appList.map(a=>a.category)).size}</span></p><p class="text-lg">Premium apps: <span class="font-bold text-amber-300">${appList.filter(a => a.tier !== 'FREE').length}</span></p><p class="text-lg">Active trials: <span class="font-bold text-green-300">${appList.filter(a => a.trialActive).length}</span></p><p class="text-lg">Transactions: <span class="font-bold text-blue-300">${transactions.length}</span></p></div></div>
                         <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10"><h2 class="text-xl font-bold text-white">⭐ Top Rated</h2><ul class="mt-4 space-y-2 text-white">${appList.sort((a,b)=>b.rating-a.rating).slice(0,5).map(a => `<li class="flex justify-between items-center p-2 bg-white/5 rounded"><span>${a.name}</span><span class="text-yellow-400">${a.rating} ★</span></li>`).join('')}</ul></div>
                     </div>
+                    
+                    ${renderAd('inline', 'my-6')}
+                    
                     <div class="mt-6"><h2 class="text-xl font-bold text-white mb-4">App Management</h2><div class="grid gap-2 max-h-96 overflow-y-auto">${appList.map(a => `<div class="flex justify-between items-center bg-white/10 backdrop-blur-lg p-3 rounded-lg border border-white/10"><div class="flex items-center gap-3">${appLogoImg(a, "w-8 h-8", 30)}<span class="text-white">${a.name}</span><span class="text-xs px-2 py-0.5 rounded-full ${getTierColor(a.tier)}">${a.tier}</span><span class="text-xs text-gray-400">${a.downloads.toLocaleString()} downloads</span></div><div class="flex gap-2"><button class="text-sm btn-teal px-3 py-1 rounded transition" onclick="editAppPricing('${a.id}')">Pricing</button><button class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition" onclick="alert('Admin: Manage ${a.name}')">Edit</button></div></div>`).join('')}</div></div>
+                    
+                    ${renderAd('leaderboard', 'mt-6')}
                 </div>
             </div>`;
     }
@@ -4606,12 +4789,16 @@
                                 <i data-lucide="plus" class="w-4 h-4"></i> Submit New App
                             </button>
                         </div>
+                        
+                        ${renderAd('banner', 'mb-6')}
+                        
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                             <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-teal-500/20 rounded-lg"><i data-lucide="app-window" class="w-5 h-5 text-teal-400"></i></div><div><div class="text-2xl font-bold text-teal-300">${userApps.length}</div><div class="text-sm text-gray-400">Your Apps</div></div></div></div>
                             <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-amber-500/20 rounded-lg"><i data-lucide="crown" class="w-5 h-5 text-amber-400"></i></div><div><div class="text-2xl font-bold text-amber-300">${userApps.filter(a => a.tier === 'FEATURED').length}</div><div class="text-sm text-gray-400">Featured</div></div></div></div>
                             <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-green-500/20 rounded-lg"><i data-lucide="download" class="w-5 h-5 text-green-400"></i></div><div><div class="text-2xl font-bold text-green-300">${totalDownloads.toLocaleString()}</div><div class="text-sm text-gray-400">Total Downloads</div></div></div></div>
                             <div class="stat-widget"><div class="flex items-center gap-3"><div class="p-2 bg-blue-500/20 rounded-lg"><i data-lucide="star" class="w-5 h-5 text-blue-400"></i></div><div><div class="text-2xl font-bold text-blue-300">${userApps.reduce((sum, a) => sum + a.ratingCount, 0)}</div><div class="text-sm text-gray-400">Total Reviews</div></div></div></div>
                         </div>
+                        
                         <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/10">
                             <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="app-window" class="w-5 h-5 text-teal-400"></i> Your Apps</h2>
                             ${userApps.length > 0 ? `
@@ -4642,6 +4829,8 @@
                                 </div>
                             `}
                         </div>
+                        
+                        ${renderAd('leaderboard', 'mt-6')}
                     </div>
                 </div>
             `;
@@ -4901,9 +5090,12 @@
 
         if (selectedApp) {
             container.innerHTML = renderAppDetail();
+            // Initialize ads in the detail view
+            setTimeout(() => initAds(), 100);
         } else if (activeView === "home") {
             container.innerHTML = renderHome();
             setTimeout(() => {
+                // Initialize Swiper
                 if (typeof Swiper !== 'undefined') {
                     const swiperEl = document.querySelector('.mySpotlightSwiper');
                     if (swiperEl && !swiperEl.swiper) {
@@ -4939,6 +5131,9 @@
                     }
                 }
 
+                // Initialize ads after render
+                initAds();
+
                 const searchInput = document.getElementById("globalSearchInput");
                 if (searchInput) {
                     searchInput.addEventListener("input", (e) => { searchQuery = e.target.value;
@@ -4965,17 +5160,25 @@
             }, 100);
         } else if (activeView === "about") {
             container.innerHTML = renderAbout();
+            setTimeout(() => initAds(), 100);
         } else if (activeView === "pricing") {
             container.innerHTML = renderPricingPage();
-            setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 50);
+            setTimeout(() => {
+                initAds();
+                if (window.lucide) lucide.createIcons();
+            }, 50);
         } else if (activeView === "dashboard") {
             container.innerHTML = renderDashboard();
+            setTimeout(() => initAds(), 100);
         } else if (activeView === "att") {
             container.innerHTML = renderATT();
+            setTimeout(() => initAds(), 100);
         } else if (activeView === "admin") {
             container.innerHTML = renderAdmin();
+            setTimeout(() => initAds(), 100);
         } else if (activeView === "developer") {
             container.innerHTML = renderDeveloper();
+            setTimeout(() => initAds(), 100);
         } else if (activeView === "terms") {
             container.innerHTML = renderTerms();
             document.getElementById('acceptTermsBtn')?.addEventListener('click', () => {
@@ -4984,6 +5187,7 @@
                 showToast('✅ Terms accepted!', 'success');
                 navigateTo('home');
             });
+            setTimeout(() => initAds(), 100);
         } else if (activeView === "settings") {
             container.innerHTML = renderSettings();
             setTimeout(() => {
@@ -5174,7 +5378,7 @@
     renderCurrentView();
     updateOnlineStatus();
 
-    console.log('🚀 Meon App Directory v18 - Enhanced CSS + Nav Fix');
+    console.log('🚀 Meon App Directory v18 - Enhanced CSS + Nav Fix + AdSense');
     console.log('✨ CSS improvements: glass-morphism, animations, modal design, pricing cards, app cards');
     console.log('🔧 Navigation fix: Desktop and mobile menus now properly separated');
     console.log('📱 M-Pesa Sandbox: Active');
@@ -5182,6 +5386,7 @@
     console.log('👤 User:', currentUser?.email || 'Not logged in');
     console.log('🔐 Demo Admin: admin@meon.com');
     console.log('👨‍💻 Demo Developer: dev@meon.com');
+    console.log('📢 Google AdSense: Integrated with ca-pub-5512023350779761');
 </script>
 </body>
 </html>
