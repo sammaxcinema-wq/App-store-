@@ -6,12 +6,9 @@
     <title>Meon | Intelligence · Innovation · Inspiration</title>
     <meta name="description" content="Meon App Directory – Discover, review, and launch web apps instantly with M-Pesa payments" />
 
-    <!-- Google AdSense -->
+    <!-- ✅ Google AdSense - Real Client ID -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5512023350779761"
      crossorigin="anonymous"></script>
-
-    <!-- ads.txt - Critical for AdSense -->
-    <link rel="ads.txt" href="data:text/plain;base64,Z29vZ2xlLmNvbSwgcHViLTU1MTIwMjMzNTA3Nzk3NjEsIERJUkVDVCwgZjA4YzQ3ZmVjMDk0MmZhMA==" />
 
     <!-- PWA Meta -->
     <meta name="theme-color" content="#0f172a" />
@@ -159,6 +156,62 @@
             background: rgba(15, 23, 42, 0.85);
             border-color: rgba(139, 92, 246, 0.15);
             box-shadow: 0 12px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        /* ============================================================
+           AD CONTAINERS - IMPROVED FOR BETTER VISIBILITY
+           ============================================================ */
+        .ad-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 16px 0;
+        }
+        .ad-container:hover {
+            border-color: rgba(0, 178, 169, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .ad-container .ad-label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255, 255, 255, 0.3);
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            background: rgba(0,0,0,0.3);
+            padding: 1px 8px;
+            border-radius: 10px;
+        }
+        .ad-container.leaderboard {
+            min-height: 90px;
+            max-height: 100px;
+        }
+        .ad-container.sidebar {
+            min-height: 250px;
+            max-height: 280px;
+        }
+        .ad-container.inline {
+            min-height: 90px;
+            max-height: 100px;
+        }
+        .ad-container.banner {
+            min-height: 60px;
+            max-height: 70px;
+        }
+        .ad-container .ad-content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
         /* ============================================================
@@ -1773,66 +1826,6 @@
         }
 
         /* ============================================================
-           AD SECTIONS
-           ============================================================ */
-        .ad-container {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .ad-container:hover {
-            border-color: rgba(0, 178, 169, 0.15);
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .ad-container .ad-label {
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: rgba(255, 255, 255, 0.2);
-            position: absolute;
-            top: 4px;
-            right: 8px;
-            background: rgba(0,0,0,0.3);
-            padding: 1px 8px;
-            border-radius: 10px;
-        }
-        .ad-container .ad-content {
-            padding: 10px;
-            text-align: center;
-            color: #94a3b8;
-            font-size: 0.8rem;
-            position: relative;
-            width: 100%;
-        }
-        .ad-container.leaderboard {
-            min-height: 80px;
-        }
-        .ad-container.sidebar {
-            min-height: 220px;
-        }
-        .ad-container.inline {
-            min-height: 100px;
-        }
-        .ad-container .ad-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            color: #475569;
-            font-size: 0.7rem;
-        }
-        .ad-container .ad-placeholder .ad-icon {
-            font-size: 1.5rem;
-            opacity: 0.3;
-        }
-
-        /* ============================================================
            BLOG & REVIEWS
            ============================================================ */
         .blog-card {
@@ -2154,7 +2147,6 @@
                     <i data-lucide="sun" class="w-5 h-5 hidden dark:inline"></i>
                 </button>
                 <div id="authSection" class="flex items-center gap-2"></div>
-                <!-- Mobile nav toggle -->
                 <button id="mobileNavToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition md:hidden">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
@@ -2350,6 +2342,72 @@
             TRANSACTION_DESC: 'Meon App Subscription'
         }
     };
+
+    // ============================================================
+    // ✅ AD RENDER WITH REAL AD UNITS
+    // ============================================================
+    const AD_UNITS = {
+        leaderboard: 'YOUR_LEADERBOARD_AD_UNIT_ID',  // ← REPLACE THIS
+        sidebar: 'YOUR_SIDEBAR_AD_UNIT_ID',          // ← REPLACE THIS
+        inline: 'YOUR_INLINE_AD_UNIT_ID',            // ← REPLACE THIS
+        banner: 'YOUR_BANNER_AD_UNIT_ID'             // ← REPLACE THIS
+    };
+
+    function renderAd(placement = 'leaderboard', className = '') {
+        const isAdSenseLoaded = typeof adsbygoogle !== 'undefined';
+        
+        if (!isAdSenseLoaded) {
+            return `
+                <div class="ad-container ${placement} ${className} relative">
+                    <div class="ad-content">
+                        <span class="ad-label">Ad</span>
+                        <div class="ad-placeholder">
+                            <span class="ad-icon">📢</span>
+                            <span class="text-gray-400 text-xs">Ad loading...</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        const slotId = AD_UNITS[placement] || AD_UNITS.leaderboard;
+        const styles = {
+            leaderboard: 'display:block; width:100%; height:90px;',
+            sidebar: 'display:block; width:100%; height:250px;',
+            inline: 'display:block; width:100%; height:90px;',
+            banner: 'display:block; width:100%; height:60px;'
+        };
+        const adFormat = placement === 'sidebar' ? 'rectangle' : 'auto';
+
+        return `
+            <div class="ad-container ${placement} ${className} relative">
+                <div class="ad-content">
+                    <span class="ad-label">Sponsored</span>
+                    <ins class="adsbygoogle"
+                         style="${styles[placement]}"
+                         data-ad-client="ca-pub-5512023350779761"
+                         data-ad-slot="${slotId}"
+                         data-ad-format="${adFormat}"
+                         data-full-width-responsive="true">
+                    </ins>
+                </div>
+            </div>
+        `;
+    }
+
+    function initAds() {
+        try {
+            if (typeof adsbygoogle !== 'undefined') {
+                const adSlots = document.querySelectorAll('.adsbygoogle');
+                if (adSlots.length > 0) {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    console.log(`✅ ${adSlots.length} ads initialized`);
+                }
+            }
+        } catch (error) {
+            console.warn('Ad initialization:', error.message);
+        }
+    }
 
     // ============================================================
     // PWA SETUP
@@ -3507,60 +3565,6 @@
             document.getElementById('confirmPayment').disabled = false;
             document.getElementById('confirmPayment').textContent = '💳 Pay with M-Pesa';
         }, 30000);
-    }
-
-    // ============================================================
-    // AD RENDER HELPERS
-    // ============================================================
-    function renderAd(placement = 'leaderboard', className = '') {
-        if (typeof adsbygoogle === 'undefined') {
-            return `
-                <div class="ad-container ${placement} ${className} relative">
-                    <div class="ad-content">
-                        <span class="ad-label">Ad</span>
-                        <div class="ad-placeholder">
-                            <span class="ad-icon">📢</span>
-                            <span>Ad space available</span>
-                            <span class="text-xs opacity-50">Support Meon by enabling ads</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        const adStyles = {
-            leaderboard: 'display:block; width:100%; height:80px;',
-            sidebar: 'display:block; width:100%; height:220px;',
-            inline: 'display:block; width:100%; height:100px;',
-            banner: 'display:block; width:100%; height:60px;'
-        };
-
-        const style = adStyles[placement] || adStyles.leaderboard;
-
-        return `
-            <div class="ad-container ${placement} ${className} relative">
-                <div class="ad-content">
-                    <span class="ad-label">Ad</span>
-                    <ins class="adsbygoogle"
-                         style="${style}"
-                         data-ad-client="ca-pub-5512023350779761"
-                         data-ad-slot="${placement === 'leaderboard' ? '1234567890' : placement === 'sidebar' ? '0987654321' : '1122334455'}"
-                         data-ad-format="${placement === 'sidebar' ? 'rectangle' : 'auto'}"
-                         data-full-width-responsive="true">
-                    </ins>
-                </div>
-            </div>
-        `;
-    }
-
-    function initAds() {
-        if (typeof(adsbygoogle) !== 'undefined') {
-            try {
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            } catch (e) {
-                console.log('Ad initialization warning:', e);
-            }
-        }
     }
 
     // ============================================================
@@ -5812,7 +5816,7 @@
     console.log('📋 All Legal Pages: Privacy, Cookie, Terms');
     console.log('📝 6 Blog Articles with Original Content');
     console.log('📢 Google AdSense: Integrated');
-    console.log('✅ ads.txt: Embedded via data URI');
+    console.log('✅ ads.txt: Requires real file at domain root');
     console.log('📱 M-Pesa Sandbox: Active');
     console.log('💳 Plans: Free, Standard, Featured');
     console.log('👤 User:', currentUser?.email || 'Not logged in');
