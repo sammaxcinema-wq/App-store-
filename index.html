@@ -28,13 +28,13 @@
     <meta name="msapplication-TileColor" content="#0f172a" />
     <meta name="msapplication-starturl" content="/" />
 
-    <!-- Icons -->
-    <link rel="apple-touch-icon" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png" />
-    <link rel="apple-touch-icon" sizes="167x167" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png" />
-    <link rel="icon" type="image/png" sizes="512x512" href="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png" />
+    <!-- Icons - Sage OS Logo -->
+    <link rel="apple-touch-icon" href="https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg" />
+    <link rel="apple-touch-icon" sizes="152x152" href="https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg" />
+    <link rel="apple-touch-icon" sizes="167x167" href="https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg" />
+    <link rel="icon" type="image/png" sizes="512x512" href="https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg" />
 
     <script src="https://cdn.tailwindcss.com">
     </script>
@@ -79,16 +79,16 @@
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #2dd4bf, #14b8a6);
+            background: linear-gradient(180deg, #fbbf24, #d97706);
             border-radius: 10px;
             border: 2px solid rgba(255, 255, 255, 0.05);
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #14b8a6, #0d9488);
+            background: linear-gradient(180deg, #f59e0b, #b45309);
         }
 
         /* ============================================================
-           BACKGROUND LAYER - Sage OS deep green/teal
+           BACKGROUND LAYER - Sage OS gold/amber
            ============================================================ */
         .bg-layer {
             position: fixed;
@@ -104,9 +104,9 @@
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(ellipse at 20% 50%, rgba(20, 184, 166, 0.20) 0%, transparent 65%),
-                radial-gradient(ellipse at 80% 50%, rgba(45, 212, 191, 0.15) 0%, transparent 65%),
-                radial-gradient(ellipse at 50% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 50%, rgba(251, 191, 36, 0.20) 0%, transparent 65%),
+                radial-gradient(ellipse at 80% 50%, rgba(245, 158, 11, 0.15) 0%, transparent 65%),
+                radial-gradient(ellipse at 50% 20%, rgba(217, 119, 6, 0.08) 0%, transparent 50%),
                 linear-gradient(180deg, rgba(2, 0, 36, 0.90) 0%, rgba(5, 5, 55, 0.92) 50%, rgba(10, 0, 92, 0.95) 100%);
             backdrop-filter: blur(3px) saturate(1.2);
         }
@@ -122,7 +122,7 @@
             height: 700px;
             top: -250px;
             right: -150px;
-            background: rgba(20, 184, 166, 0.12);
+            background: rgba(251, 191, 36, 0.12);
             animation-delay: 0s;
         }
         .bg-layer .accent-glow:nth-child(2) {
@@ -130,7 +130,7 @@
             height: 600px;
             bottom: -200px;
             left: -150px;
-            background: rgba(45, 212, 191, 0.08);
+            background: rgba(245, 158, 11, 0.08);
             animation-delay: 2s;
         }
         .bg-layer .accent-glow:nth-child(3) {
@@ -139,7 +139,7 @@
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(16, 185, 129, 0.05);
+            background: rgba(217, 119, 6, 0.05);
             animation-delay: 4s;
         }
 
@@ -162,7 +162,7 @@
         }
         .glass-card:hover {
             background: rgba(15, 23, 42, 0.85);
-            border-color: rgba(20, 184, 166, 0.15);
+            border-color: rgba(251, 191, 36, 0.15);
             box-shadow: 0 12px 60px rgba(0, 0, 0, 0.7);
         }
 
@@ -183,7 +183,7 @@
             margin: 16px 0;
         }
         .ad-container:hover {
-            border-color: rgba(20, 184, 166, 0.15);
+            border-color: rgba(251, 191, 36, 0.15);
             background: rgba(255, 255, 255, 0.05);
         }
         .ad-container .ad-label {
@@ -239,7 +239,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            border-top: 1px solid rgba(20, 184, 166, 0.25);
+            border-top: 1px solid rgba(251, 191, 36, 0.25);
             transform: translateY(100%);
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.6);
@@ -248,8 +248,8 @@
             transform: translateY(0);
         }
         #pwaInstallBanner .install-btn {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
-            color: white;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #0f172a;
             border: none;
             padding: 12px 28px;
             border-radius: 50px;
@@ -257,11 +257,11 @@
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.3);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
         }
         #pwaInstallBanner .install-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 32px rgba(20, 184, 166, 0.5);
+            box-shadow: 0 6px 32px rgba(251, 191, 36, 0.5);
         }
         #pwaInstallBanner .install-btn:active {
             transform: scale(0.95);
@@ -350,7 +350,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 50% 0%, rgba(20, 184, 166, 0.06), transparent 60%);
+            background: radial-gradient(ellipse at 50% 0%, rgba(251, 191, 36, 0.06), transparent 60%);
             pointer-events: none;
         }
         @keyframes modalIn {
@@ -364,7 +364,7 @@
             }
         }
         .modal-gradient-header {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #fbbf24, #d97706);
             border-radius: 20px;
             padding: 24px 20px;
             text-align: center;
@@ -452,9 +452,9 @@
             outline: none;
         }
         .modal .form-group input:focus {
-            border-color: #14b8a6;
+            border-color: #fbbf24;
             background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.1);
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.1);
         }
         .modal .form-group input::placeholder {
             color: #64748b;
@@ -469,9 +469,9 @@
             display: none;
             margin: 16px 0 8px;
             padding: 12px 16px;
-            background: rgba(20, 184, 166, 0.06);
+            background: rgba(251, 191, 36, 0.06);
             border-radius: 12px;
-            border: 1px solid rgba(20, 184, 166, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.12);
         }
         .modal .payment-progress.active {
             display: block;
@@ -499,7 +499,7 @@
         }
         .modal .progress-bar .fill {
             height: 100%;
-            background: linear-gradient(90deg, #14b8a6, #34d399);
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
             border-radius: 10px;
             width: 0%;
             transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -534,17 +534,17 @@
             padding: 12px 24px;
             border-radius: 14px;
             font-weight: 700;
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #fbbf24, #d97706);
             border: none;
-            color: white;
+            color: #0f172a;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.95rem;
-            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.25);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.25);
         }
         .modal .modal-footer .btn-teal:hover:not(:disabled) {
             transform: scale(1.02);
-            box-shadow: 0 6px 32px rgba(20, 184, 166, 0.4);
+            box-shadow: 0 6px 32px rgba(251, 191, 36, 0.4);
         }
         .modal .modal-footer .btn-teal:active:not(:disabled) {
             transform: scale(0.97);
@@ -559,15 +559,15 @@
            BUTTONS
            ============================================================ */
         .btn-teal {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
-            color: white;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #0f172a;
             border: none;
             padding: 10px 24px;
             border-radius: 50px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.2);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -586,7 +586,7 @@
         }
         .btn-teal:hover:not(:disabled) {
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 32px rgba(20, 184, 166, 0.35);
+            box-shadow: 0 8px 32px rgba(251, 191, 36, 0.35);
         }
         .btn-teal:active:not(:disabled) {
             transform: scale(0.96);
@@ -617,14 +617,14 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 70% 20%, rgba(20, 184, 166, 0.04), transparent 60%);
+            background: radial-gradient(ellipse at 70% 20%, rgba(251, 191, 36, 0.04), transparent 60%);
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
         .app-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(20, 184, 166, 0.25);
+            border-color: rgba(251, 191, 36, 0.25);
             background: rgba(255, 255, 255, 0.08);
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
         }
@@ -673,7 +673,7 @@
             line-height: 1.3;
         }
         .app-card:hover .app-name {
-            color: #14b8a6;
+            color: #fbbf24;
         }
 
         .app-card .tier-badge {
@@ -681,9 +681,9 @@
             padding: 2px 10px;
             border-radius: 20px;
             font-weight: 600;
-            background: rgba(20, 184, 166, 0.15);
-            color: #2dd4bf;
-            border: 1px solid rgba(20, 184, 166, 0.10);
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.10);
         }
         .app-card .tier-badge.free {
             background: rgba(148, 163, 184, 0.15);
@@ -691,9 +691,9 @@
             border-color: rgba(148, 163, 184, 0.10);
         }
         .app-card .tier-badge.standard {
-            background: rgba(20, 184, 166, 0.15);
-            color: #2dd4bf;
-            border-color: rgba(20, 184, 166, 0.10);
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.10);
         }
         .app-card .tier-badge.featured {
             background: rgba(16, 185, 129, 0.15);
@@ -702,8 +702,8 @@
         }
 
         .app-card .install-btn-sm {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
-            color: white;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #0f172a;
             border: none;
             padding: 4px 14px;
             border-radius: 50px;
@@ -711,14 +711,14 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 12px rgba(20, 184, 166, 0.15);
+            box-shadow: 0 2px 12px rgba(251, 191, 36, 0.15);
             display: inline-flex;
             align-items: center;
             gap: 4px;
         }
         .app-card .install-btn-sm:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.3);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
         }
 
         .app-card .favorite-btn-sm {
@@ -770,40 +770,40 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 30% 20%, rgba(20, 184, 166, 0.04), transparent 60%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(251, 191, 36, 0.04), transparent 60%);
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.5s ease;
         }
         .pricing-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(20, 184, 166, 0.25);
+            border-color: rgba(251, 191, 36, 0.25);
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
         }
         .pricing-card:hover::before {
             opacity: 1;
         }
         .pricing-card.popular {
-            border: 2px solid #14b8a6;
-            background: rgba(20, 184, 166, 0.06);
-            box-shadow: 0 0 60px rgba(20, 184, 166, 0.06);
+            border: 2px solid #fbbf24;
+            background: rgba(251, 191, 36, 0.06);
+            box-shadow: 0 0 60px rgba(251, 191, 36, 0.06);
         }
         .pricing-card.popular:hover {
-            box-shadow: 0 24px 80px rgba(20, 184, 166, 0.12);
+            box-shadow: 0 24px 80px rgba(251, 191, 36, 0.12);
         }
         .pricing-card.popular .popular-badge {
             position: absolute;
             top: -1px;
             right: 24px;
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
-            color: white;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #0f172a;
             padding: 4px 20px;
             border-radius: 0 0 14px 14px;
             font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.3);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
         }
         .pricing-card .plan-icon {
             font-size: 2.5rem;
@@ -885,13 +885,13 @@
             transform: scale(1.02);
         }
         .pricing-card .pricing-cta.primary-cta {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
-            color: white;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #0f172a;
             border: none;
-            box-shadow: 0 4px 24px rgba(20, 184, 166, 0.25);
+            box-shadow: 0 4px 24px rgba(251, 191, 36, 0.25);
         }
         .pricing-card .pricing-cta.primary-cta:hover:not(:disabled) {
-            box-shadow: 0 8px 40px rgba(20, 184, 166, 0.35);
+            box-shadow: 0 8px 40px rgba(251, 191, 36, 0.35);
             transform: scale(1.03);
         }
         .pricing-card .pricing-cta:active:not(:disabled) {
@@ -903,13 +903,13 @@
             transform: none !important;
         }
         .pricing-card.popular .pricing-cta {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
-            color: white;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #0f172a;
             border: none;
-            box-shadow: 0 4px 24px rgba(20, 184, 166, 0.25);
+            box-shadow: 0 4px 24px rgba(251, 191, 36, 0.25);
         }
         .pricing-card.popular .pricing-cta:hover:not(:disabled) {
-            box-shadow: 0 8px 40px rgba(20, 184, 166, 0.35);
+            box-shadow: 0 8px 40px rgba(251, 191, 36, 0.35);
             transform: scale(1.03);
         }
 
@@ -941,14 +941,14 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 50% 0%, rgba(20, 184, 166, 0.06), transparent 60%);
+            background: radial-gradient(ellipse at 50% 0%, rgba(251, 191, 36, 0.06), transparent 60%);
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
         .spotlight-swiper .swiper-slide:hover {
             transform: translateY(-4px) scale(1.02);
-            border-color: rgba(20, 184, 166, 0.25);
+            border-color: rgba(251, 191, 36, 0.25);
             background: rgba(255, 255, 255, 0.08);
         }
         .spotlight-swiper .swiper-slide:hover::before {
@@ -1006,7 +1006,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 70% 20%, rgba(20, 184, 166, 0.06), transparent 60%);
+            background: radial-gradient(ellipse at 70% 20%, rgba(251, 191, 36, 0.06), transparent 60%);
             pointer-events: none;
         }
         .spotlight-card .spotlight-text {
@@ -1019,8 +1019,8 @@
             font-weight: 600;
         }
         .spotlight-card .explore-btn {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
-            color: white;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #0f172a;
             padding: 10px 28px;
             border-radius: 50px;
             font-weight: 700;
@@ -1028,11 +1028,11 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             font-size: 0.85rem;
-            box-shadow: 0 4px 24px rgba(20, 184, 166, 0.25);
+            box-shadow: 0 4px 24px rgba(251, 191, 36, 0.25);
         }
         .spotlight-card .explore-btn:hover {
             transform: scale(1.04);
-            box-shadow: 0 8px 40px rgba(20, 184, 166, 0.35);
+            box-shadow: 0 8px 40px rgba(251, 191, 36, 0.35);
         }
         .spotlight-card .explore-btn:active {
             transform: scale(0.96);
@@ -1235,8 +1235,8 @@
         .fade-in:nth-child(6) { animation-delay: 0.30s; }
 
         .glow-text {
-            text-shadow: 0 0 60px rgba(20, 184, 166, 0.15),
-                         0 0 120px rgba(20, 184, 166, 0.05);
+            text-shadow: 0 0 60px rgba(251, 191, 36, 0.15),
+                         0 0 120px rgba(251, 191, 36, 0.05);
         }
 
         .hero-particles {
@@ -1249,7 +1249,7 @@
             position: absolute;
             width: 3px;
             height: 3px;
-            background: rgba(20, 184, 166, 0.2);
+            background: rgba(251, 191, 36, 0.2);
             border-radius: 50%;
             animation: particleFloat 25s infinite linear;
         }
@@ -1270,14 +1270,43 @@
            HEADER
            ============================================================ */
         .sage-logo-bg {
-            background: linear-gradient(145deg, #0f172a 0%, #1a2e3a 100%);
+            background: linear-gradient(145deg, #0f172a 0%, #1a1a2e 100%);
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(20, 184, 166, 0.20);
+            border: 1px solid rgba(251, 191, 36, 0.20);
             transition: border-color 0.3s ease;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .sage-logo-bg:hover {
-            border-color: rgba(20, 184, 166, 0.40);
+            border-color: rgba(251, 191, 36, 0.40);
+        }
+        .sage-logo-bg img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .sage-logo-bg .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+        .sage-logo-bg .logo-text .brand {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fbbf24;
+            letter-spacing: 0.02em;
+        }
+        .sage-logo-bg .logo-text .tagline {
+            font-size: 0.45rem;
+            font-weight: 500;
+            color: rgba(251, 191, 36, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
         }
 
         header .nav-btn {
@@ -1292,14 +1321,14 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, #14b8a6, #34d399);
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
         header .nav-btn:hover::after {
             transform: scaleX(0.6);
         }
-        header .nav-btn.border-teal-500::after {
+        header .nav-btn.border-amber-500::after {
             transform: scaleX(1);
         }
 
@@ -1380,11 +1409,11 @@
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
         }
         .settings-card:hover {
-            border-color: rgba(20, 184, 166, 0.10);
+            border-color: rgba(251, 191, 36, 0.10);
             box-shadow: 0 16px 64px rgba(0, 0, 0, 0.2);
         }
         .dark .settings-card:hover {
-            border-color: rgba(20, 184, 166, 0.08);
+            border-color: rgba(251, 191, 36, 0.08);
             box-shadow: 0 16px 64px rgba(0, 0, 0, 0.6);
         }
         .settings-section-title {
@@ -1435,16 +1464,16 @@
             width: 36px;
             height: 36px;
             border-radius: 12px;
-            background: rgba(20, 184, 166, 0.06);
+            background: rgba(251, 191, 36, 0.06);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #14b8a6;
+            color: #fbbf24;
             flex-shrink: 0;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .settings-item:hover .icon-wrapper {
-            background: rgba(20, 184, 166, 0.12);
+            background: rgba(251, 191, 36, 0.12);
             transform: scale(1.05) rotate(-2deg);
         }
         .settings-item .icon-wrapper .icon {
@@ -1500,21 +1529,21 @@
             color: #94a3b8;
         }
         .action-btn:hover {
-            background: rgba(20, 184, 166, 0.08);
-            border-color: rgba(20, 184, 166, 0.15);
+            background: rgba(251, 191, 36, 0.08);
+            border-color: rgba(251, 191, 36, 0.15);
             color: #e2e8f0;
             transform: translateY(-1px) scale(1.02);
         }
         .action-btn.primary {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #fbbf24, #d97706);
             border-color: transparent;
-            color: white;
-            box-shadow: 0 2px 12px rgba(20, 184, 166, 0.15);
+            color: #0f172a;
+            box-shadow: 0 2px 12px rgba(251, 191, 36, 0.15);
         }
         .action-btn.primary:hover {
             transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 4px 24px rgba(20, 184, 166, 0.25);
-            background: linear-gradient(135deg, #1dd9c4, #0d9488);
+            box-shadow: 0 4px 24px rgba(251, 191, 36, 0.25);
+            background: linear-gradient(135deg, #fcd34d, #d97706);
         }
         .action-btn.danger {
             background: rgba(239, 68, 68, 0.08);
@@ -1574,7 +1603,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
         .toggle-switch input:checked+.toggle-slider {
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #fbbf24, #d97706);
         }
         .toggle-switch input:checked+.toggle-slider::before {
             transform: translateX(20px);
@@ -1632,8 +1661,8 @@
            ABOUT US
            ============================================================ */
         .about-hero-gradient {
-            background: radial-gradient(ellipse at 30% 20%, rgba(20, 184, 166, 0.08), transparent 60%),
-                radial-gradient(ellipse at 70% 80%, rgba(20, 184, 166, 0.06), transparent 50%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(251, 191, 36, 0.08), transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(251, 191, 36, 0.06), transparent 50%);
         }
         .about-stat-card {
             background: rgba(255, 255, 255, 0.03);
@@ -1648,14 +1677,14 @@
         }
         .about-stat-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(20, 184, 166, 0.20);
+            border-color: rgba(251, 191, 36, 0.20);
             background: rgba(255, 255, 255, 0.06);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
         }
         .about-stat-card .number {
             font-size: 2.2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #14b8a6, #34d399);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1678,7 +1707,7 @@
         }
         .about-mission-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(20, 184, 166, 0.15);
+            border-color: rgba(251, 191, 36, 0.15);
             background: rgba(255, 255, 255, 0.05);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
@@ -1705,7 +1734,7 @@
         }
         .about-value-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(20, 184, 166, 0.15);
+            border-color: rgba(251, 191, 36, 0.15);
             background: rgba(255, 255, 255, 0.04);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
@@ -1734,7 +1763,7 @@
         .timeline-item .year {
             font-size: 1.3rem;
             font-weight: 800;
-            color: #14b8a6;
+            color: #fbbf24;
             letter-spacing: -0.02em;
         }
         .timeline-item .label {
@@ -1746,10 +1775,10 @@
         .timeline-item .dot {
             width: 10px;
             height: 10px;
-            background: linear-gradient(135deg, #14b8a6, #34d399);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             border-radius: 50%;
             margin: 0.5rem auto 0;
-            box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
         }
         .timeline-item:not(:last-child)::after {
             content: '';
@@ -1758,7 +1787,7 @@
             left: calc(50% + 5px);
             width: calc(100% - 10px);
             height: 2px;
-            background: linear-gradient(90deg, rgba(20, 184, 166, 0.3), rgba(20, 184, 166, 0.1));
+            background: linear-gradient(90deg, rgba(251, 191, 36, 0.3), rgba(251, 191, 36, 0.1));
         }
         @media (max-width: 768px) {
             .timeline-item:not(:last-child)::after {
@@ -1769,7 +1798,7 @@
             }
         }
         .about-contact-card {
-            background: linear-gradient(145deg, rgba(20, 184, 166, 0.04), rgba(20, 184, 166, 0.04));
+            background: linear-gradient(145deg, rgba(251, 191, 36, 0.04), rgba(251, 191, 36, 0.04));
             backdrop-filter: blur(16px) saturate(1.4);
             -webkit-backdrop-filter: blur(16px) saturate(1.4);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -1778,7 +1807,7 @@
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .about-contact-card:hover {
-            border-color: rgba(20, 184, 166, 0.15);
+            border-color: rgba(251, 191, 36, 0.15);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
         .about-contact-card h2 {
@@ -1814,7 +1843,7 @@
             transition: color 0.2s ease;
         }
         .about-contact-card .contact-item .value a:hover {
-            color: #14b8a6;
+            color: #fbbf24;
         }
         .about-map-placeholder {
             background: rgba(255, 255, 255, 0.02);
@@ -1829,7 +1858,7 @@
             transition: all 0.3s ease;
         }
         .about-map-placeholder:hover {
-            border-color: rgba(20, 184, 166, 0.15);
+            border-color: rgba(251, 191, 36, 0.15);
             color: #64748b;
         }
 
@@ -1849,7 +1878,7 @@
         }
         .blog-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(20, 184, 166, 0.20);
+            border-color: rgba(251, 191, 36, 0.20);
             background: rgba(255, 255, 255, 0.06);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
         }
@@ -1864,7 +1893,7 @@
             font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: #14b8a6;
+            color: #fbbf24;
             font-weight: 600;
         }
         .blog-card .blog-title {
@@ -1942,8 +1971,8 @@
             margin-bottom: 1.5rem;
         }
         .legal-content .highlight-box {
-            background: rgba(20, 184, 166, 0.05);
-            border-left: 4px solid #14b8a6;
+            background: rgba(251, 191, 36, 0.05);
+            border-left: 4px solid #fbbf24;
             padding: 0.75rem 1.25rem;
             border-radius: 0 10px 10px 0;
             margin: 1.25rem 0;
@@ -1953,7 +1982,7 @@
             margin: 0;
         }
         .legal-content .highlight-box strong {
-            color: #14b8a6;
+            color: #fbbf24;
         }
 
         /* ============================================================
@@ -1984,12 +2013,12 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #14b8a6, #0d9488);
+            background: linear-gradient(135deg, #fbbf24, #d97706);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: white;
+            color: #0f172a;
             font-size: 0.8rem;
         }
         .review-item .review-user .name {
@@ -2106,10 +2135,10 @@
     <!-- ====== PWA INSTALL BANNER ====== -->
     <div id="pwaInstallBanner">
         <div class="flex items-center gap-4">
-            <img src="https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png" alt="Sage OS" class="w-12 h-12 rounded-xl shadow-lg" style="object-fit:cover;" />
+            <img src="https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg" alt="Sage OS" class="w-12 h-12 rounded-xl shadow-lg" style="object-fit:cover;" />
             <div>
                 <div class="font-bold text-base">Sage OS</div>
-                <div class="text-xs text-teal-300">Install for quick access</div>
+                <div class="text-xs text-amber-300">Install for quick access</div>
             </div>
         </div>
         <div class="flex items-center gap-3">
@@ -2135,11 +2164,14 @@
         <div class="container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
             <!-- Logo -->
             <div class="flex items-center gap-3">
-                <div class="sage-logo-bg px-4 py-2 flex flex-col items-start leading-tight cursor-pointer" onclick="navigateTo('home')">
-                    <span class="text-white font-extrabold text-2xl tracking-wide">sage</span>
-                    <span class="text-[10px] font-medium text-teal-200 tracking-wider uppercase hidden sm:block">INTELLIGENCE·INNOVATION·INSPIRATION</span>
+                <div class="sage-logo-bg cursor-pointer" onclick="navigateTo('home')">
+                    <img src="https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg" alt="Sage OS Logo" />
+                    <div class="logo-text">
+                        <span class="brand">Sage OS</span>
+                        <span class="tagline">Intelligence · Innovation · Inspiration</span>
+                    </div>
                 </div>
-                <span class="font-bold text-xl tracking-tight hidden sm:inline-block">Sage OS</span>
+                <span class="font-bold text-xl tracking-tight hidden sm:inline-block text-gray-300">Sage OS</span>
             </div>
 
             <!-- Right side -->
@@ -2164,7 +2196,7 @@
         <!-- Desktop Nav -->
         <div id="desktopNav" class="container mx-auto px-4">
             <div class="flex gap-5 overflow-x-auto pb-2 scrollbar-hide">
-                <button data-nav="home" class="nav-btn font-semibold py-2 border-b-2 border-teal-500 text-teal-400">Home</button>
+                <button data-nav="home" class="nav-btn font-semibold py-2 border-b-2 border-amber-500 text-amber-400">Home</button>
                 <button data-nav="blog" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">📝 Blog</button>
                 <button data-nav="about" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">About</button>
                 <button data-nav="privacy" class="nav-btn font-semibold py-2 border-b-2 border-transparent hover:text-gray-700">Privacy</button>
@@ -2183,7 +2215,7 @@
         <div id="mobileNavMenu" class="container mx-auto px-4 py-2 border-t border-gray-200 dark:border-gray-700">
             <div class="flex flex-col gap-1">
                 <button data-nav="home" class="nav-btn text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
-                    <span class="text-teal-400">🏠</span> Home
+                    <span class="text-amber-400">🏠</span> Home
                 </button>
                 <button data-nav="blog" class="nav-btn text-left px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 font-medium flex items-center gap-3">
                     <span class="text-amber-400">📝</span> Blog
@@ -2421,7 +2453,7 @@
     // PWA SETUP
     // ============================================================
     (function setupPwaManifest() {
-        const iconUrl = 'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png';
+        const iconUrl = 'https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg';
         const manifest = {
             name: 'Sage OS Directory',
             short_name: 'Sage OS',
@@ -2433,16 +2465,16 @@
             theme_color: '#0f172a',
             categories: ['productivity', 'utilities', 'developer tools', 'finance'],
             icons: [
-                { src: iconUrl, sizes: '72x72', type: 'image/png' },
-                { src: iconUrl, sizes: '96x96', type: 'image/png' },
-                { src: iconUrl, sizes: '128x128', type: 'image/png' },
-                { src: iconUrl, sizes: '144x144', type: 'image/png' },
-                { src: iconUrl, sizes: '152x152', type: 'image/png' },
-                { src: iconUrl, sizes: '167x167', type: 'image/png' },
-                { src: iconUrl, sizes: '180x180', type: 'image/png' },
-                { src: iconUrl, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
-                { src: iconUrl, sizes: '384x384', type: 'image/png' },
-                { src: iconUrl, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+                { src: iconUrl, sizes: '72x72', type: 'image/jpeg' },
+                { src: iconUrl, sizes: '96x96', type: 'image/jpeg' },
+                { src: iconUrl, sizes: '128x128', type: 'image/jpeg' },
+                { src: iconUrl, sizes: '144x144', type: 'image/jpeg' },
+                { src: iconUrl, sizes: '152x152', type: 'image/jpeg' },
+                { src: iconUrl, sizes: '167x167', type: 'image/jpeg' },
+                { src: iconUrl, sizes: '180x180', type: 'image/jpeg' },
+                { src: iconUrl, sizes: '192x192', type: 'image/jpeg', purpose: 'any maskable' },
+                { src: iconUrl, sizes: '384x384', type: 'image/jpeg' },
+                { src: iconUrl, sizes: '512x512', type: 'image/jpeg', purpose: 'any maskable' }
             ],
             shortcuts: [
                 { name: 'Explore Apps', url: '/?nav=home', description: 'Browse all web apps' },
@@ -2473,7 +2505,7 @@
             'https://cdn.tailwindcss.com',
             'https://unpkg.com/lucide@latest',
             'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap',
-            'https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png',
+            'https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg',
             'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css',
             'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js'
         ];
@@ -2835,7 +2867,7 @@
         excerpt: "Discover how web applications are revolutionizing the African business landscape, from small startups to large enterprises.",
         category: "Business",
         author: "Sage OS Team",
-        authorAvatar: "https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png",
+        authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
         date: "2026-06-20",
         readTime: "5 min",
         image: "https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg",
@@ -2855,7 +2887,7 @@
         excerpt: "How artificial intelligence is reshaping the way we work, learn, and collaborate in the digital age.",
         category: "AI & Technology",
         author: "Sage OS Team",
-        authorAvatar: "https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png",
+        authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
         date: "2026-06-15",
         readTime: "4 min",
         image: "https://i.ibb.co/204QYyVF/file-00000000c6707243af95f3105457c8b5.png",
@@ -2875,7 +2907,7 @@
         excerpt: "How mobile money is changing the financial landscape and enabling digital commerce across Kenya and beyond.",
         category: "Finance",
         author: "Sage OS Team",
-        authorAvatar: "https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png",
+        authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
         date: "2026-06-10",
         readTime: "6 min",
         image: "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",
@@ -2895,7 +2927,7 @@
         excerpt: "Understanding the security challenges and solutions for businesses adopting cloud infrastructure.",
         category: "Security",
         author: "Sage OS Team",
-        authorAvatar: "https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png",
+        authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
         date: "2026-06-05",
         readTime: "5 min",
         image: "https://i.ibb.co/GQWZnykb/file-00000000379c71f4a01216ae10901877.png",
@@ -2916,7 +2948,7 @@
         excerpt: "How multi-functional platforms are reshaping digital experiences in developing economies.",
         category: "Technology",
         author: "Sage OS Team",
-        authorAvatar: "https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png",
+        authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
         date: "2026-05-28",
         readTime: "4 min",
         image: "https://i.ibb.co/NfCgDtT/file-00000000b57072438b98c6777ee7804e.png",
@@ -2936,7 +2968,7 @@
         excerpt: "How developers can create environmentally friendly web apps with lower carbon footprints.",
         category: "Sustainability",
         author: "Sage OS Team",
-        authorAvatar: "https://i.ibb.co/VY0yR03N/file-00000000503c724692cbd3d68fec0056.png",
+        authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
         date: "2026-05-20",
         readTime: "5 min",
         image: "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",
@@ -3175,9 +3207,9 @@
         selectedBlogId = null;
         renderCurrentView();
         document.querySelectorAll(".nav-btn").forEach(b => {
-            b.classList.remove("border-teal-500", "text-teal-400");
+            b.classList.remove("border-amber-500", "text-amber-400");
             if (b.dataset.nav === view) {
-                b.classList.add("border-teal-500", "text-teal-400");
+                b.classList.add("border-amber-500", "text-amber-400");
             }
         });
         document.getElementById('mobileNavMenu')?.classList.remove('open');
@@ -3652,7 +3684,7 @@
                     <div class="settings-container fade-in">
                         <div class="settings-header">
                             <h1>
-                                <i data-lucide="settings" class="w-7 h-7 text-teal-400 inline-block mr-2"></i>
+                                <i data-lucide="settings" class="w-7 h-7 text-amber-400 inline-block mr-2"></i>
                                 Settings
                             </h1>
                             <button onclick="navigateTo('home')" class="settings-close-btn">
@@ -4120,12 +4152,12 @@
             return `
                 <div class="max-w-4xl mx-auto fade-in">
                     <button onclick="window.selectedBlogId = null; renderCurrentView();" 
-                            class="flex items-center gap-1 text-teal-400 hover:text-teal-300 mb-4 transition text-sm">
+                            class="flex items-center gap-1 text-amber-400 hover:text-amber-300 mb-4 transition text-sm">
                         ← Back to Blog
                     </button>
                     <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
                         <div class="mb-4">
-                            <span class="text-xs font-semibold text-teal-400 uppercase tracking-wider">${post.category}</span>
+                            <span class="text-xs font-semibold text-amber-400 uppercase tracking-wider">${post.category}</span>
                             <h1 class="text-2xl md:text-3xl font-bold text-white mt-2">${post.title}</h1>
                             <div class="flex items-center gap-3 mt-2 text-sm text-gray-400">
                                 <span class="flex items-center gap-2">
@@ -4165,12 +4197,12 @@
 
                 <div class="flex flex-wrap gap-2 mb-6 justify-center">
                     <button onclick="window.blogCategoryFilter = ''; renderCurrentView();" 
-                            class="text-xs px-3 py-1.5 rounded-full border ${!window.blogCategoryFilter ? 'border-teal-500 bg-teal-500/20 text-teal-300' : 'border-white/10 text-gray-400 hover:border-gray-400'} transition">
+                            class="text-xs px-3 py-1.5 rounded-full border ${!window.blogCategoryFilter ? 'border-amber-500 bg-amber-500/20 text-amber-300' : 'border-white/10 text-gray-400 hover:border-gray-400'} transition">
                         All
                     </button>
                     ${categories.map(cat => `
                         <button onclick="window.blogCategoryFilter = '${cat}'; renderCurrentView();" 
-                                class="text-xs px-3 py-1.5 rounded-full border ${window.blogCategoryFilter === cat ? 'border-teal-500 bg-teal-500/20 text-teal-300' : 'border-white/10 text-gray-400 hover:border-gray-400'} transition">
+                                class="text-xs px-3 py-1.5 rounded-full border ${window.blogCategoryFilter === cat ? 'border-amber-500 bg-amber-500/20 text-amber-300' : 'border-white/10 text-gray-400 hover:border-gray-400'} transition">
                             ${cat}
                         </button>
                     `).join('')}
@@ -4330,7 +4362,7 @@
                         <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20 legal-content">
                             <h1>📜 Terms and Conditions</h1>
                             <div class="last-updated">Last Updated: June 30, 2026</div>
-                            
+
                             <p>By accessing or using this website, downloading applications, or using any services provided through this platform, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these Terms, you should discontinue use of the platform immediately.</p>
 
                             <h2>1. Right to Review and Amend These Terms</h2>
@@ -4457,19 +4489,19 @@
                     <div class="hero-particles">${particlesHTML}</div>
                     <div class="relative z-10 px-6 md:px-10 py-10 md:py-14">
                         <div class="max-w-3xl">
-                            <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 rounded-full px-3 py-1 text-teal-300 text-xs mb-4">
+                            <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1 text-amber-300 text-xs mb-4">
                                 <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
                                 <span>🚀 ${appList.length}+ Apps Available</span>
                             </div>
                             <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white glow-text leading-tight">
                                 Discover the<br>
-                                <span class="bg-gradient-to-r from-teal-400 via-teal-300 to-amber-400 bg-clip-text text-transparent">Best Web Apps</span>
+                                <span class="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">Best Web Apps</span>
                             </h1>
                             <p class="text-gray-300 text-base md:text-lg mt-3 max-w-xl leading-relaxed">
                                 Launch web apps instantly with M-Pesa payments. Premium subscriptions and free trials.
                             </p>
                             <div class="flex flex-wrap gap-3 mt-5">
-                                <button id="exploreMarketplaceBtn" class="btn-teal px-6 py-2.5 rounded-full font-semibold transition flex items-center gap-2 shadow-lg shadow-teal-600/25 text-sm">
+                                <button id="exploreMarketplaceBtn" class="btn-teal px-6 py-2.5 rounded-full font-semibold transition flex items-center gap-2 shadow-lg shadow-amber-600/25 text-sm">
                                     <i data-lucide="rocket" class="w-4 h-4"></i> Explore
                                 </button>
                                 <button onclick="navigateTo('pricing')" class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2.5 rounded-full font-semibold transition flex items-center gap-2 shadow-lg shadow-amber-600/25 text-sm">
@@ -4481,7 +4513,7 @@
                             </div>
                             <div class="flex flex-wrap gap-6 mt-6 pt-5 border-t border-white/10">
                                 <div><div class="text-xl font-bold text-white">${appList.length}+</div><div class="text-xs text-gray-400">Web Apps</div></div>
-                                <div><div class="text-xl font-bold text-teal-300">${appList.filter(a => a.tier !== 'FREE').length}</div><div class="text-xs text-gray-400">Premium</div></div>
+                                <div><div class="text-xl font-bold text-amber-300">${appList.filter(a => a.tier !== 'FREE').length}</div><div class="text-xs text-gray-400">Premium</div></div>
                                 <div><div class="text-xl font-bold text-amber-300">${appList.reduce((sum, a) => sum + a.downloads, 0).toLocaleString()}</div><div class="text-xs text-gray-400">Downloads</div></div>
                                 <div><div class="text-xl font-bold text-purple-300">${blogPosts.length}</div><div class="text-xs text-gray-400">Articles</div></div>
                             </div>
@@ -4533,7 +4565,7 @@
                     <div class="flex flex-wrap gap-1.5">
                         <span class="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Categories:</span>
                         ${categories.slice(0, 6).map(cat => `
-                            <button class="category-chip text-[10px] px-2.5 py-1 rounded-full border ${activeCategoryFilter === cat.toLowerCase() ? 'border-teal-500 bg-teal-500/20 text-teal-300' : 'border-white/10 text-gray-400 hover:border-gray-400'} transition" data-category="${cat.toLowerCase()}">
+                            <button class="category-chip text-[10px] px-2.5 py-1 rounded-full border ${activeCategoryFilter === cat.toLowerCase() ? 'border-amber-500 bg-amber-500/20 text-amber-300' : 'border-white/10 text-gray-400 hover:border-gray-400'} transition" data-category="${cat.toLowerCase()}">
                                 ${cat}
                             </button>
                         `).join('')}
@@ -4574,14 +4606,14 @@
                 <div class="mb-6">
                     <div class="flex items-center justify-between mb-3">
                         <h2 class="text-xl font-bold text-white">📝 Latest from Blog</h2>
-                        <button onclick="navigateTo('blog')" class="text-xs text-teal-400 hover:text-teal-300 transition">View All →</button>
+                        <button onclick="navigateTo('blog')" class="text-xs text-amber-400 hover:text-amber-300 transition">View All →</button>
                     </div>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         ${blogPosts.slice(0, 3).map(post => `
-                            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5 cursor-pointer hover:border-teal-500/30 transition" 
+                            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5 cursor-pointer hover:border-amber-500/30 transition" 
                                  onclick="window.selectedBlogId = '${post.id}'; renderCurrentView();">
                                 <img src="${post.image}" class="w-full h-24 object-cover rounded-lg mb-2" alt="${post.title}">
-                                <span class="text-[10px] text-teal-400 font-semibold uppercase tracking-wider">${post.category}</span>
+                                <span class="text-[10px] text-amber-400 font-semibold uppercase tracking-wider">${post.category}</span>
                                 <h3 class="text-white font-bold text-xs mt-1 line-clamp-2">${post.title}</h3>
                                 <div class="flex items-center gap-2 mt-1.5 text-[10px] text-gray-500">
                                     <span>${post.author}</span>
@@ -4594,7 +4626,7 @@
                 </div>
             `;
 
-        const featuredHtml = `<div class="mb-6"><div class="flex items-center justify-between mb-3"><h2 class="text-xl font-bold text-white">⭐ Featured</h2><span class="text-xs text-teal-400">${featured.length} apps</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">${featured.length ? featured.map(app=>appCard(app)).join('') : '<p class="text-gray-400 col-span-3 text-center py-6 text-sm">No featured apps found</p>'}</div></div>`;
+        const featuredHtml = `<div class="mb-6"><div class="flex items-center justify-between mb-3"><h2 class="text-xl font-bold text-white">⭐ Featured</h2><span class="text-xs text-amber-400">${featured.length} apps</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">${featured.length ? featured.map(app=>appCard(app)).join('') : '<p class="text-gray-400 col-span-3 text-center py-6 text-sm">No featured apps found</p>'}</div></div>`;
         const topratedHtml = `<div class="mb-6"><div class="flex items-center justify-between mb-3"><h2 class="text-xl font-bold text-white">🔥 Top Rated</h2><span class="text-xs text-amber-400">Highest rated</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">${trending.map(app=>appCard(app)).join('')}</div></div>`;
         const recentHtml = `<div><div class="flex items-center justify-between mb-3"><h2 class="text-xl font-bold text-white">🆕 Recently Added</h2><span class="text-xs text-green-400">New releases</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">${newReleases.map(app=>appCard(app)).join('')}</div></div>`;
 
@@ -4626,15 +4658,15 @@
             <div class="main-bg w-full max-w-7xl mx-auto">
                 <div class="main-content fade-in space-y-8">
                     <div class="about-hero-gradient text-center space-y-4 py-6 px-4 rounded-2xl glass-card">
-                        <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 rounded-full px-3 py-1 text-teal-300 text-xs">
+                        <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1 text-amber-300 text-xs">
                             <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
                             <span>🌟 Welcome to Sage OS</span>
                         </div>
                         <h1 class="text-3xl md:text-5xl font-extrabold text-white glow-text leading-tight">
-                            About <span class="bg-gradient-to-r from-teal-400 via-cyan-400 to-amber-400 bg-clip-text text-transparent">Sage OS</span>
+                            About <span class="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">Sage OS</span>
                         </h1>
                         <p class="text-gray-300 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-                            We are building the future of app discovery and monetization in Africa — 
+                            We are building the future of app discovery and monetization in Africa —
                             one innovative web app at a time.
                         </p>
                         <div class="flex flex-wrap justify-center gap-2 pt-1">
@@ -4720,7 +4752,7 @@
                 <div class="pricing-bg w-full max-w-7xl mx-auto">
                     <div class="pricing-content fade-in">
                         <div class="text-center mb-8">
-                            <h1 class="text-3xl md:text-4xl font-extrabold text-white glow-text mb-2">💎 Choose Your <span class="bg-gradient-to-r from-teal-400 to-amber-400 bg-clip-text text-transparent">Plan</span></h1>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-white glow-text mb-2">💎 Choose Your <span class="bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent">Plan</span></h1>
                             <p class="text-gray-300 text-base max-w-2xl mx-auto">Start with a free trial and upgrade when you're ready. All plans include secure M-Pesa payments.</p>
                         </div>
 
@@ -4759,8 +4791,8 @@
                         <div class="mt-8 text-center">
                             <div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/5 max-w-2xl mx-auto">
                                 <p class="text-gray-400 text-xs">
-                                    🔒 All plans include secure M-Pesa payments • Cancel anytime • 
-                                    <span class="text-teal-400">Developers:</span> Set custom pricing in the Developer Hub
+                                    🔒 All plans include secure M-Pesa payments • Cancel anytime •
+                                    <span class="text-amber-400">Developers:</span> Set custom pricing in the Developer Hub
                                 </p>
                             </div>
                         </div>
@@ -4798,10 +4830,10 @@
             return num.toString();
         };
         return `<div class="max-w-5xl mx-auto fade-in">
-                <button onclick="window.backToHome()" class="flex items-center gap-1 text-teal-400 hover:text-teal-300 mb-4 transition text-sm">&larr; Back to Store</button>
-                
+                <button onclick="window.backToHome()" class="flex items-center gap-1 text-amber-400 hover:text-amber-300 mb-4 transition text-sm">&larr; Back to Store</button>
+
                 ${renderAd('banner', 'mb-5')}
-                
+
                 <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
                     <div class="flex gap-5 flex-wrap">
                         ${appLogoImg(app, "w-24 h-24", 100)}
@@ -4824,10 +4856,10 @@
                                 <span class="text-gray-400 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span> ${app.developer.name}</span>
                             </div>
                             <div class="flex gap-2 mt-3 flex-wrap">
-                                <button onclick="window.openApp(${appJson})" class="btn-teal px-5 py-2 rounded-full font-semibold transition flex items-center gap-2 shadow-lg shadow-teal-600/25 text-sm">
+                                <button onclick="window.openApp(${appJson})" class="btn-teal px-5 py-2 rounded-full font-semibold transition flex items-center gap-2 shadow-lg shadow-amber-600/25 text-sm">
                                     <i data-lucide="download" class="w-4 h-4"></i> Install App
                                 </button>
-                                <button onclick="window.toggleFavorite('${app.id}')" class="border border-gray-600 hover:border-teal-500 px-4 py-2 rounded-full transition flex items-center gap-2 text-sm">
+                                <button onclick="window.toggleFavorite('${app.id}')" class="border border-gray-600 hover:border-amber-500 px-4 py-2 rounded-full transition flex items-center gap-2 text-sm">
                                     <i data-lucide="heart" class="w-4 h-4"></i> Favorite
                                 </button>
                                 <button onclick="navigateTo('pricing')" class="border border-amber-600/50 hover:bg-amber-600/20 px-4 py-2 rounded-full transition flex items-center gap-2 text-amber-400 text-sm">
@@ -4836,9 +4868,9 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     ${renderAd('inline', 'my-5')}
-                    
+
                     <div class="mt-6 grid md:grid-cols-3 gap-5">
                         <div class="md:col-span-2">
                             <h2 class="text-lg font-semibold">Description</h2>
@@ -4858,9 +4890,9 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     ${renderAd('banner', 'my-5')}
-                    
+
                     <div class="mt-5">
                         <h2 class="text-lg font-semibold">Screenshots</h2>
                         <div class="flex gap-2 overflow-x-auto pb-2 mt-2">${screenshotHtml}</div>
@@ -4902,16 +4934,16 @@
                             const isDisabled = isCurrent && !isTrial;
                             const isFeatured = key === 'FEATURED';
                             return `
-                                <div class="tier-card bg-white/5 backdrop-blur-lg rounded-xl p-3 border ${isCurrent && !isTrial ? 'border-teal-500 ring-1 ring-teal-500/50' : 'border-white/10'} relative ${isFeatured ? 'popular' : ''}">
+                                <div class="tier-card bg-white/5 backdrop-blur-lg rounded-xl p-3 border ${isCurrent && !isTrial ? 'border-amber-500 ring-1 ring-amber-500/50' : 'border-white/10'} relative ${isFeatured ? 'popular' : ''}">
                                     ${isFeatured ? `
                                         <div class="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
-                                            <div class="absolute inset-0 bg-gradient-to-br from-[#bce61d] via-[#cbd819] to-[#a1be06] opacity-10"></div>
+                                            <div class="absolute inset-0 bg-gradient-to-br from-[#fbbf24] via-[#f59e0b] to-[#d97706] opacity-10"></div>
                                         </div>
                                     ` : ''}
                                     ${isFeatured ? '<div class="tier-badge text-[10px] font-bold text-amber-400">🔥 POPULAR</div>' : ''}
                                     <div class="flex justify-between items-start mb-1 relative z-10">
                                         <h4 class="font-bold text-white text-sm">${tier.icon} ${tier.name}</h4>
-                                        ${isCurrent && !isTrial ? '<span class="text-[10px] bg-teal-600 px-1.5 py-0.5 rounded-full">Current</span>' : ''}
+                                        ${isCurrent && !isTrial ? '<span class="text-[10px] bg-amber-600 px-1.5 py-0.5 rounded-full">Current</span>' : ''}
                                         ${isTrial && isCurrent ? '<span class="text-[10px] bg-green-600 px-1.5 py-0.5 rounded-full trial-badge">🎁 Trial</span>' : ''}
                                         ${hasTrial && !isCurrent ? `<span class="text-[10px] bg-green-600 px-1.5 py-0.5 rounded-full">${trialDays}d trial</span>` : ''}
                                     </div>
@@ -4939,7 +4971,7 @@
                     </div>
                     ${!currentUser ? `
                         <div class="mt-2 text-center text-xs text-gray-400">
-                            <button onclick="showAuthModal()" class="text-teal-400 hover:text-teal-300 transition">Sign in</button> to upgrade
+                            <button onclick="showAuthModal()" class="text-amber-400 hover:text-amber-300 transition">Sign in</button> to upgrade
                         </div>
                     ` : ''}
                 </div>
@@ -4971,16 +5003,16 @@
                                 <i data-lucide="plus" class="w-4 h-4"></i> Submit App
                             </button>
                         </div>
-                        
+
                         ${renderAd('banner', 'mb-5')}
-                        
+
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
-                            <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-teal-500/20 rounded-lg"><i data-lucide="app-window" class="w-4 h-4 text-teal-400"></i></div><div><div class="text-xl font-bold text-white">${userApps.length}</div><div class="text-xs text-gray-400">Your Apps</div></div></div></div>
+                            <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-amber-500/20 rounded-lg"><i data-lucide="app-window" class="w-4 h-4 text-amber-400"></i></div><div><div class="text-xl font-bold text-white">${userApps.length}</div><div class="text-xs text-gray-400">Your Apps</div></div></div></div>
                             <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-amber-500/20 rounded-lg"><i data-lucide="crown" class="w-4 h-4 text-amber-400"></i></div><div><div class="text-xl font-bold text-amber-300">${userApps.filter(a => a.tier === 'FEATURED').length}</div><div class="text-xs text-gray-400">Featured</div></div></div></div>
                             <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-green-500/20 rounded-lg"><i data-lucide="clock" class="w-4 h-4 text-green-400"></i></div><div><div class="text-xl font-bold text-green-300">${userApps.filter(a => a.trialActive).length}</div><div class="text-xs text-gray-400">Trials</div></div></div></div>
                             <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-blue-500/20 rounded-lg"><i data-lucide="download" class="w-4 h-4 text-blue-400"></i></div><div><div class="text-xl font-bold text-blue-300">${userApps.reduce((sum, a) => sum + a.downloads, 0).toLocaleString()}</div><div class="text-xs text-gray-400">Downloads</div></div></div></div>
                         </div>
-                        
+
                         <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10 mb-5">
                             <h2 class="text-base font-bold text-white mb-3 flex items-center gap-2"><i data-lucide="heart" class="w-4 h-4 text-red-400"></i> Favorite Apps</h2>
                             <div class="grid gap-2">
@@ -4997,11 +5029,11 @@
                                 `).join('') || "<p class='text-gray-300 text-sm'>No favorites yet. ❤️ apps to see them here.</p>"}
                             </div>
                         </div>
-                        
+
                         ${renderAd('inline', 'my-5')}
-                        
+
                         <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10">
-                            <h2 class="text-base font-bold text-white mb-3 flex items-center gap-2"><i data-lucide="app-window" class="w-4 h-4 text-teal-400"></i> Your Apps</h2>
+                            <h2 class="text-base font-bold text-white mb-3 flex items-center gap-2"><i data-lucide="app-window" class="w-4 h-4 text-amber-400"></i> Your Apps</h2>
                             ${userApps.length > 0 ? `
                                 <div class="space-y-2">
                                     ${userApps.map(app => `
@@ -5063,7 +5095,7 @@
                                 </div>
                             </div>
                         ` : ''}
-                        
+
                         ${renderAd('leaderboard', 'mt-5')}
                     </div>
                 </div>
@@ -5078,21 +5110,21 @@
                 <div class="att-bg w-full max-w-7xl mx-auto">
                     <div class="att-content fade-in">
                         <div class="text-center mb-8">
-                            <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 rounded-full px-3 py-1 text-teal-300 text-xs mb-3">
+                            <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1 text-amber-300 text-xs mb-3">
                                 <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
                                 <span>🚀 Enterprise Solutions</span>
                             </div>
-                            <h1 class="text-3xl md:text-4xl font-extrabold text-white glow-text">ATT - <span class="bg-gradient-to-r from-teal-400 via-teal-300 to-amber-400 bg-clip-text text-transparent">Advanced Technology Tools</span></h1>
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-white glow-text">ATT - <span class="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">Advanced Technology Tools</span></h1>
                             <p class="text-gray-300 text-base md:text-lg mt-2 max-w-3xl mx-auto">Enterprise-grade solutions for AI, security, cloud, automation, and global connectivity — built for scale.</p>
                         </div>
-                        
+
                         ${renderAd('leaderboard', 'mb-6')}
-                        
+
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                            <div class="att-card bg-white/5 backdrop-blur-lg rounded-2xl p-5 border border-white/10 hover:border-teal-500/30 group">
+                            <div class="att-card bg-white/5 backdrop-blur-lg rounded-2xl p-5 border border-white/10 hover:border-amber-500/30 group">
                                 <div class="flex items-start justify-between mb-3">
-                                    <div class="icon-wrapper w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500/20 to-teal-600/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🤖</div>
-                                    <span class="feature-tag text-[10px] bg-teal-500/20 text-teal-300 px-2 py-0.5 rounded-full border border-teal-500/10">AI-Powered</span>
+                                    <div class="icon-wrapper w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🤖</div>
+                                    <span class="feature-tag text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/10">AI-Powered</span>
                                 </div>
                                 <h3 class="text-lg font-bold text-white mb-1.5">AI Analytics</h3>
                                 <p class="text-gray-400 text-sm leading-relaxed mb-3">Transform raw business data into actionable insights using artificial intelligence and machine learning.</p>
@@ -5141,14 +5173,14 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         ${renderAd('inline', 'my-6')}
-                        
+
                         <div class="mt-8 text-center">
-                            <div class="bg-gradient-to-r from-teal-500/10 via-blue-500/10 to-cyan-500/10 rounded-2xl p-6 border border-white/5 max-w-3xl mx-auto">
+                            <div class="bg-gradient-to-r from-amber-500/10 via-blue-500/10 to-cyan-500/10 rounded-2xl p-6 border border-white/5 max-w-3xl mx-auto">
                                 <h3 class="text-xl font-bold text-white mb-1">Ready to transform your business?</h3>
                                 <p class="text-gray-400 text-sm mb-4">Contact our enterprise team for a custom solution tailored to your needs.</p>
-                                <button onclick="showToast('📞 Connecting to Sales Team...', 'success')" class="btn-teal px-6 py-2 rounded-xl font-semibold transition flex items-center gap-2 mx-auto shadow-lg shadow-teal-600/25 text-sm">
+                                <button onclick="showToast('📞 Connecting to Sales Team...', 'success')" class="btn-teal px-6 py-2 rounded-xl font-semibold transition flex items-center gap-2 mx-auto shadow-lg shadow-amber-600/25 text-sm">
                                     <i data-lucide="phone" class="w-4 h-4"></i> Talk to Sales
                                 </button>
                             </div>
@@ -5178,25 +5210,25 @@
         return `<div class="admin-bg w-full max-w-7xl mx-auto">
                 <div class="admin-content fade-in">
                     <h1 class="text-2xl font-bold text-white mb-5">🛠️ Sage OS Admin Console</h1>
-                    
+
                     ${renderAd('leaderboard', 'mb-5')}
-                    
+
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
-                        <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-teal-500/20 rounded-lg"><i data-lucide="app-window" class="w-4 h-4 text-teal-400"></i></div><div><div class="text-xl font-bold text-white">${appList.length}</div><div class="text-xs text-gray-400">Total Apps</div></div></div></div>
+                        <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-amber-500/20 rounded-lg"><i data-lucide="app-window" class="w-4 h-4 text-amber-400"></i></div><div><div class="text-xl font-bold text-white">${appList.length}</div><div class="text-xs text-gray-400">Total Apps</div></div></div></div>
                         <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-green-500/20 rounded-lg"><i data-lucide="download" class="w-4 h-4 text-green-400"></i></div><div><div class="text-xl font-bold text-green-300">${totalDownloads.toLocaleString()}</div><div class="text-xs text-gray-400">Downloads</div></div></div></div>
                         <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-amber-500/20 rounded-lg"><i data-lucide="crown" class="w-4 h-4 text-amber-400"></i></div><div><div class="text-xl font-bold text-amber-300">${appList.filter(a => a.tier !== 'FREE').length}</div><div class="text-xs text-gray-400">Premium</div></div></div></div>
                         <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-blue-500/20 rounded-lg"><i data-lucide="credit-card" class="w-4 h-4 text-blue-400"></i></div><div><div class="text-xl font-bold text-blue-300">KES ${totalRevenue.toLocaleString()}</div><div class="text-xs text-gray-400">Revenue</div></div></div></div>
                     </div>
-                    
+
                     <div class="grid md:grid-cols-2 gap-4 mb-5">
-                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10"><h2 class="text-base font-bold text-white mb-2">📊 Directory Stats</h2><div class="mt-2 space-y-1 text-sm text-white"><p>Total apps: <span class="font-bold text-teal-300">${appList.length}</span></p><p>Categories: <span class="font-bold text-teal-300">${new Set(appList.map(a=>a.category)).size}</span></p><p>Premium apps: <span class="font-bold text-amber-300">${appList.filter(a => a.tier !== 'FREE').length}</span></p><p>Active trials: <span class="font-bold text-green-300">${appList.filter(a => a.trialActive).length}</span></p><p>Transactions: <span class="font-bold text-blue-300">${transactions.length}</span></p><p>Blog posts: <span class="font-bold text-purple-300">${blogPosts.length}</span></p></div></div>
+                        <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10"><h2 class="text-base font-bold text-white mb-2">📊 Directory Stats</h2><div class="mt-2 space-y-1 text-sm text-white"><p>Total apps: <span class="font-bold text-amber-300">${appList.length}</span></p><p>Categories: <span class="font-bold text-amber-300">${new Set(appList.map(a=>a.category)).size}</span></p><p>Premium apps: <span class="font-bold text-amber-300">${appList.filter(a => a.tier !== 'FREE').length}</span></p><p>Active trials: <span class="font-bold text-green-300">${appList.filter(a => a.trialActive).length}</span></p><p>Transactions: <span class="font-bold text-blue-300">${transactions.length}</span></p><p>Blog posts: <span class="font-bold text-purple-300">${blogPosts.length}</span></p></div></div>
                         <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10"><h2 class="text-base font-bold text-white">⭐ Top Rated</h2><ul class="mt-2 space-y-1 text-sm text-white">${appList.sort((a,b)=>b.rating-a.rating).slice(0,5).map(a => `<li class="flex justify-between items-center p-1.5 bg-white/5 rounded"><span>${a.name}</span><span class="text-yellow-400">${a.rating} ★</span></li>`).join('')}</ul></div>
                     </div>
-                    
+
                     ${renderAd('inline', 'my-5')}
-                    
+
                     <div class="mt-4"><h2 class="text-base font-bold text-white mb-3">App Management</h2><div class="grid gap-1.5 max-h-80 overflow-y-auto">${appList.map(a => `<div class="flex justify-between items-center bg-white/10 backdrop-blur-lg p-2 rounded-lg border border-white/10"><div class="flex items-center gap-2">${appLogoImg(a, "w-6 h-6", 24)}<span class="text-white text-sm">${a.name}</span><span class="text-[10px] px-1.5 py-0.5 rounded-full ${getTierColor(a.tier)}">${a.tier}</span><span class="text-[10px] text-gray-400">${a.downloads.toLocaleString()}</span></div><div class="flex gap-1.5"><button class="text-xs btn-teal px-2 py-0.5 rounded transition" onclick="editAppPricing('${a.id}')">💰</button><button class="text-xs bg-blue-600 text-white px-2 py-0.5 rounded hover:bg-blue-700 transition" onclick="alert('Admin: Manage ${a.name}')">✏️</button></div></div>`).join('')}</div></div>
-                    
+
                     ${renderAd('leaderboard', 'mt-5')}
                 </div>
             </div>`;
@@ -5225,18 +5257,18 @@
                                 <i data-lucide="plus" class="w-4 h-4"></i> New App
                             </button>
                         </div>
-                        
+
                         ${renderAd('banner', 'mb-5')}
-                        
+
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
-                            <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-teal-500/20 rounded-lg"><i data-lucide="app-window" class="w-4 h-4 text-teal-400"></i></div><div><div class="text-xl font-bold text-teal-300">${userApps.length}</div><div class="text-xs text-gray-400">Your Apps</div></div></div></div>
+                            <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-amber-500/20 rounded-lg"><i data-lucide="app-window" class="w-4 h-4 text-amber-400"></i></div><div><div class="text-xl font-bold text-amber-300">${userApps.length}</div><div class="text-xs text-gray-400">Your Apps</div></div></div></div>
                             <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-amber-500/20 rounded-lg"><i data-lucide="crown" class="w-4 h-4 text-amber-400"></i></div><div><div class="text-xl font-bold text-amber-300">${userApps.filter(a => a.tier === 'FEATURED').length}</div><div class="text-xs text-gray-400">Featured</div></div></div></div>
                             <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-green-500/20 rounded-lg"><i data-lucide="download" class="w-4 h-4 text-green-400"></i></div><div><div class="text-xl font-bold text-green-300">${totalDownloads.toLocaleString()}</div><div class="text-xs text-gray-400">Downloads</div></div></div></div>
                             <div class="stat-widget bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/5"><div class="flex items-center gap-2"><div class="p-1.5 bg-blue-500/20 rounded-lg"><i data-lucide="star" class="w-4 h-4 text-blue-400"></i></div><div><div class="text-xl font-bold text-blue-300">${userApps.reduce((sum, a) => sum + a.ratingCount, 0)}</div><div class="text-xs text-gray-400">Reviews</div></div></div></div>
                         </div>
-                        
+
                         <div class="bg-white/10 backdrop-blur-lg rounded-xl p-4 border border-white/10">
-                            <h2 class="text-base font-bold text-white mb-3 flex items-center gap-2"><i data-lucide="app-window" class="w-4 h-4 text-teal-400"></i> Your Apps</h2>
+                            <h2 class="text-base font-bold text-white mb-3 flex items-center gap-2"><i data-lucide="app-window" class="w-4 h-4 text-amber-400"></i> Your Apps</h2>
                             ${userApps.length > 0 ? `
                                 <div class="space-y-2">
                                     ${userApps.map(app => `
@@ -5265,7 +5297,7 @@
                                 </div>
                             `}
                         </div>
-                        
+
                         ${renderAd('leaderboard', 'mt-5')}
                     </div>
                 </div>
@@ -5284,10 +5316,10 @@
                         <h2 class="text-xl font-bold text-white mb-3">🔐 Sage OS Account</h2>
                         <form id="authForm" class="space-y-3">
                             <div><label class="block text-xs font-medium text-gray-300 mb-0.5">Email</label>
-                                <input type="email" id="loginEmail" placeholder="you@example.com" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm">
+                                <input type="email" id="loginEmail" placeholder="you@example.com" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm">
                             </div>
                             <div><label class="block text-xs font-medium text-gray-300 mb-0.5">Password</label>
-                                <input type="password" id="loginPassword" placeholder="••••••••" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm">
+                                <input type="password" id="loginPassword" placeholder="••••••••" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm">
                             </div>
                             <div class="flex gap-2 pt-1">
                                 <button type="submit" id="loginBtn" class="flex-1 btn-teal py-1.5 rounded-lg transition font-semibold text-sm">Sign In</button>
