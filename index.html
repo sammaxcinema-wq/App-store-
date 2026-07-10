@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Sage OS | Intelligence · Innovation · Inspiration</title>
-    <meta name="description" content="Sage OS App Directory – Discover, review, and launch web apps instantly" />
+    <meta name="description" content="Sage OS App Directory – Discover, review, and launch web apps instantly with Google Play subscriptions" />
 
     <!-- ✅ Google AdSense - Real Client ID -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5512023350779761"
@@ -39,7 +39,7 @@
 
     <style>
         /* ============================================================
-           RESET & BASE - KEEP ORIGINAL STYLES
+           RESET & BASE
            ============================================================ */
         * {
             font-family: 'Inter', sans-serif;
@@ -80,7 +80,7 @@
         }
 
         /* ============================================================
-           BACKGROUND LAYER - KEEP ORIGINAL
+           BACKGROUND LAYER
            ============================================================ */
         .bg-layer {
             position: fixed;
@@ -141,7 +141,7 @@
         }
 
         /* ============================================================
-           GLASS CARDS - KEEP ORIGINAL
+           GLASS CARDS
            ============================================================ */
         .glass-card {
             background: rgba(15, 23, 42, 0.78);
@@ -159,7 +159,7 @@
         }
 
         /* ============================================================
-           AD CONTAINERS - KEEP ORIGINAL
+           AD CONTAINERS
            ============================================================ */
         .ad-container {
             background: rgba(255, 255, 255, 0.03);
@@ -215,7 +215,7 @@
         }
 
         /* ============================================================
-           PWA INSTALL BANNER - KEEP ORIGINAL
+           PWA INSTALL BANNER
            ============================================================ */
         #pwaInstallBanner {
             position: fixed;
@@ -277,7 +277,7 @@
         }
 
         /* ============================================================
-           OFFLINE INDICATOR - KEEP ORIGINAL
+           OFFLINE INDICATOR
            ============================================================ */
         #offlineIndicator {
             position: fixed;
@@ -300,7 +300,262 @@
         }
 
         /* ============================================================
-           MODALS - KEEP ORIGINAL + PLAY BILLING
+           GDPR CONSENT BANNER - ENHANCED
+           ============================================================ */
+        #gdprConsent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10001;
+            background: rgba(10, 14, 26, 0.98);
+            backdrop-filter: blur(24px) saturate(1.8);
+            padding: 24px 28px;
+            border-top: 3px solid rgba(0, 178, 169, 0.4);
+            display: none;
+            box-shadow: 0 -12px 60px rgba(0, 0, 0, 0.6);
+            animation: gdprSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #gdprConsent.show {
+            display: block;
+        }
+        @keyframes gdprSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        #gdprConsent .gdpr-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        #gdprConsent .gdpr-text {
+            flex: 1;
+            min-width: 220px;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        #gdprConsent .gdpr-text .gdpr-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        #gdprConsent .gdpr-text .gdpr-title .icon {
+            font-size: 1.3rem;
+        }
+        #gdprConsent .gdpr-text a {
+            color: #00b2a9;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        #gdprConsent .gdpr-text a:hover {
+            color: #34d399;
+        }
+        #gdprConsent .gdpr-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        #gdprConsent .gdpr-actions button {
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: none;
+            white-space: nowrap;
+        }
+        #gdprConsent .gdpr-actions .accept-all-btn {
+            background: linear-gradient(135deg, #00b2a9, #008b84);
+            color: white;
+            box-shadow: 0 4px 24px rgba(0, 178, 169, 0.35);
+            font-weight: 700;
+        }
+        #gdprConsent .gdpr-actions .accept-all-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 36px rgba(0, 178, 169, 0.5);
+        }
+        #gdprConsent .gdpr-actions .accept-essential-btn {
+            background: rgba(255, 255, 255, 0.06);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        #gdprConsent .gdpr-actions .accept-essential-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            transform: scale(1.03);
+        }
+        #gdprConsent .gdpr-actions .settings-btn {
+            background: rgba(139, 92, 246, 0.1);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+        #gdprConsent .gdpr-actions .settings-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+            transform: scale(1.03);
+        }
+        #gdprConsent .gdpr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.1);
+            padding: 2px 12px;
+            border-radius: 50px;
+            border: 1px solid rgba(52, 211, 153, 0.15);
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            #gdprConsent {
+                padding: 18px 16px;
+            }
+            #gdprConsent .gdpr-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+            }
+            #gdprConsent .gdpr-text {
+                font-size: 0.82rem;
+            }
+            #gdprConsent .gdpr-actions {
+                justify-content: center;
+                gap: 8px;
+            }
+            #gdprConsent .gdpr-actions button {
+                padding: 8px 16px;
+                font-size: 0.78rem;
+                flex: 1;
+                min-width: 80px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #gdprConsent .gdpr-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            #gdprConsent .gdpr-actions button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* ============================================================
+           GDPR SETTINGS MODAL - ENHANCED
+           ============================================================ */
+        .gdpr-settings-section {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 14px 0;
+        }
+        .gdpr-settings-section:last-child {
+            border-bottom: none;
+        }
+        .gdpr-settings-section .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .gdpr-settings-section .section-header h3 {
+            font-weight: 600;
+            color: white;
+            font-size: 0.95rem;
+        }
+        .gdpr-settings-section .section-header .badge {
+            font-size: 0.6rem;
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        .gdpr-settings-section .section-header .badge.essential {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+        }
+        .gdpr-settings-section .section-header .badge.optional {
+            background: rgba(148, 163, 184, 0.15);
+            color: #94a3b8;
+        }
+        .gdpr-settings-section p {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+        .gdpr-settings-section .toggle-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 6px;
+        }
+        .gdpr-settings-section .toggle-row .toggle-label {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+        }
+        .gdpr-settings-section .toggle-row .toggle-switch-sm {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+        .gdpr-settings-section .toggle-row .toggle-switch-sm input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .gdpr-settings-section .toggle-row .toggle-switch-sm .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: #334155;
+            border-radius: 22px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .gdpr-settings-section .toggle-row .toggle-switch-sm .slider::before {
+            content: '';
+            position: absolute;
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+        .gdpr-settings-section .toggle-row .toggle-switch-sm input:checked+.slider {
+            background: linear-gradient(135deg, #00b2a9, #008b84);
+        }
+        .gdpr-settings-section .toggle-row .toggle-switch-sm input:checked+.slider::before {
+            transform: translateX(18px);
+        }
+        .gdpr-settings-section .toggle-row .toggle-switch-sm input:disabled+.slider {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ============================================================
+           MODALS
            ============================================================ */
         .modal-overlay {
             position: fixed;
@@ -330,13 +585,15 @@
             -webkit-backdrop-filter: blur(32px) saturate(1.6);
             border-radius: 28px;
             padding: 40px;
-            max-width: 480px;
+            max-width: 520px;
             width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
             animation: modalIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         .modal::before {
             content: '';
@@ -371,16 +628,9 @@
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.20), transparent 70%);
             pointer-events: none;
         }
-        .modal-gradient-header::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 21px);
-            pointer-events: none;
-        }
         .modal-gradient-header .icon {
-            font-size: 3.5rem;
-            margin-bottom: 6px;
+            font-size: 3rem;
+            margin-bottom: 4px;
             display: block;
             animation: iconFloat 3s ease-in-out infinite;
         }
@@ -389,7 +639,7 @@
             50% { transform: translateY(-6px) scale(1.05); }
         }
         .modal-gradient-header h2 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: #0f172a;
             position: relative;
@@ -397,7 +647,7 @@
         }
         .modal-gradient-header p {
             color: rgba(15, 23, 42, 0.80);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             position: relative;
             z-index: 1;
@@ -408,99 +658,10 @@
             z-index: 1;
         }
 
-        .modal .price-display {
-            font-size: 2.4rem;
-            font-weight: 800;
-            color: white;
-            text-align: center;
-            padding: 8px 0 4px;
-            letter-spacing: -0.02em;
-        }
-        .modal .price-display small {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #94a3b8;
-        }
-
-        .modal .form-group {
-            margin: 20px 0 16px;
-        }
-        .modal .form-group label {
-            display: block;
-            font-weight: 600;
-            color: #e2e8f0;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
-        }
-        .modal .form-group input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.10);
-            border-radius: 14px;
-            padding: 14px 18px;
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-        .modal .form-group input:focus {
-            border-color: #00b2a9;
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 4px rgba(0, 178, 169, 0.1);
-        }
-        .modal .form-group input::placeholder {
-            color: #64748b;
-        }
-        .modal .form-group .hint {
-            color: #94a3b8;
-            font-size: 0.75rem;
-            margin-top: 4px;
-        }
-
-        .modal .payment-progress {
-            display: none;
-            margin: 16px 0 8px;
-            padding: 12px 16px;
-            background: rgba(0, 178, 169, 0.06);
-            border-radius: 12px;
-            border: 1px solid rgba(0, 178, 169, 0.12);
-        }
-        .modal .payment-progress.active {
-            display: block;
-            animation: progressFade 0.4s ease;
-        }
-        @keyframes progressFade {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .modal .progress-text {
-            color: #e2e8f0;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .modal .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .modal .progress-bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, #00b2a9, #34d399);
-            border-radius: 10px;
-            width: 0%;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
         .modal .modal-footer {
             display: flex;
             gap: 12px;
-            margin-top: 20px;
+            margin-top: 24px;
             position: relative;
             z-index: 1;
         }
@@ -548,7 +709,7 @@
         }
 
         /* ============================================================
-           BUTTONS - KEEP ORIGINAL
+           BUTTONS
            ============================================================ */
         .btn-teal {
             background: linear-gradient(135deg, #00b2a9, #008b84);
@@ -590,7 +751,7 @@
         }
 
         /* ============================================================
-           APP CARDS - KEEP ORIGINAL
+           APP CARDS - COMPACT
            ============================================================ */
         .app-card {
             background: rgba(255, 255, 255, 0.04);
@@ -742,7 +903,7 @@
         }
 
         /* ============================================================
-           PRICING CARDS - KEEP ORIGINAL
+           PRICING CARDS
            ============================================================ */
         .pricing-card {
             background: rgba(255, 255, 255, 0.04);
@@ -906,7 +1067,7 @@
         }
 
         /* ============================================================
-           SPOTLIGHT CAROUSEL - KEEP ORIGINAL
+           SPOTLIGHT CAROUSEL
            ============================================================ */
         .spotlight-swiper {
             width: 100%;
@@ -1031,7 +1192,7 @@
         }
 
         /* ============================================================
-           WHATSAPP FLOAT - KEEP ORIGINAL
+           WHATSAPP FLOAT
            ============================================================ */
         .whatsapp-float {
             position: fixed;
@@ -1081,7 +1242,7 @@
         }
 
         /* ============================================================
-           TOAST - KEEP ORIGINAL
+           TOAST
            ============================================================ */
         .toast {
             position: fixed;
@@ -1130,7 +1291,7 @@
         }
 
         /* ============================================================
-           NAVIGATION - KEEP ORIGINAL
+           NAVIGATION
            ============================================================ */
         #desktopNav {
             display: block;
@@ -1161,7 +1322,7 @@
         }
 
         /* ============================================================
-           RESPONSIVE TWEAKS - KEEP ORIGINAL
+           RESPONSIVE TWEAKS
            ============================================================ */
         @media (max-width: 768px) {
             .modal {
@@ -1206,7 +1367,7 @@
         }
 
         /* ============================================================
-           UTILITY ANIMATIONS - KEEP ORIGINAL
+           UTILITY ANIMATIONS
            ============================================================ */
         .fade-in {
             opacity: 0;
@@ -1259,7 +1420,7 @@
         }
 
         /* ============================================================
-           HEADER - KEEP ORIGINAL
+           HEADER
            ============================================================ */
         .sage-logo-bg {
             background: linear-gradient(145deg, #0f172a 0%, #1e1b4b 100%);
@@ -1302,7 +1463,7 @@
         }
 
         /* ============================================================
-           SETTINGS - KEEP ORIGINAL
+           SETTINGS
            ============================================================ */
         .settings-wrapper {
             padding: 1.5rem 0.5rem;
@@ -1627,7 +1788,7 @@
         }
 
         /* ============================================================
-           ABOUT US - KEEP ORIGINAL
+           ABOUT US
            ============================================================ */
         .about-hero-gradient {
             background: radial-gradient(ellipse at 30% 20%, rgba(0, 178, 169, 0.08), transparent 60%),
@@ -1832,7 +1993,7 @@
         }
 
         /* ============================================================
-           BLOG & REVIEWS - KEEP ORIGINAL
+           BLOG & REVIEWS
            ============================================================ */
         .blog-card {
             background: rgba(255, 255, 255, 0.03);
@@ -1898,7 +2059,7 @@
         }
 
         /* ============================================================
-           LEGAL CONTENT - KEEP ORIGINAL
+           LEGAL CONTENT
            ============================================================ */
         .legal-content h1 {
             font-size: 2.2rem;
@@ -1955,7 +2116,7 @@
         }
 
         /* ============================================================
-           REVIEW ITEMS - KEEP ORIGINAL
+           REVIEW ITEMS
            ============================================================ */
         .review-item {
             background: rgba(255,255,255,0.02);
@@ -2036,7 +2197,7 @@
         }
 
         /* ============================================================
-           FOOTER - KEEP ORIGINAL
+           FOOTER
            ============================================================ */
         .site-footer {
             border-top: 1px solid rgba(255,255,255,0.05);
@@ -2087,114 +2248,6 @@
             transform: translateY(-2px);
             border-color: rgba(255,255,255,0.1);
         }
-
-        /* ============================================================
-           NEW: GDPR CONSENT BANNER
-           ============================================================ */
-        #gdprConsent {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 10001;
-            background: rgba(10, 14, 26, 0.98);
-            backdrop-filter: blur(20px);
-            padding: 20px 24px;
-            border-top: 2px solid rgba(0, 178, 169, 0.3);
-            display: none;
-            box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5);
-        }
-        #gdprConsent.show {
-            display: block;
-        }
-        #gdprConsent .gdpr-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-        #gdprConsent .gdpr-text {
-            flex: 1;
-            min-width: 200px;
-            color: #cbd5e1;
-            font-size: 0.85rem;
-            line-height: 1.6;
-        }
-        #gdprConsent .gdpr-text a {
-            color: #00b2a9;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        #gdprConsent .gdpr-text a:hover {
-            color: #34d399;
-        }
-        #gdprConsent .gdpr-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        #gdprConsent .gdpr-actions button {
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-        }
-        #gdprConsent .gdpr-actions .accept-btn {
-            background: linear-gradient(135deg, #00b2a9, #008b84);
-            color: white;
-            box-shadow: 0 4px 20px rgba(0, 178, 169, 0.3);
-        }
-        #gdprConsent .gdpr-actions .accept-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 32px rgba(0, 178, 169, 0.5);
-        }
-        #gdprConsent .gdpr-actions .settings-btn {
-            background: rgba(255, 255, 255, 0.06);
-            color: #94a3b8;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        #gdprConsent .gdpr-actions .settings-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: white;
-        }
-
-        @media (max-width: 640px) {
-            #gdprConsent .gdpr-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            #gdprConsent .gdpr-actions {
-                justify-content: center;
-            }
-            #gdprConsent .gdpr-actions button {
-                padding: 8px 18px;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* ============================================================
-           NEW: PERMISSION JUSTIFICATION
-           ============================================================ */
-        .permission-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.7rem;
-            padding: 4px 12px;
-            border-radius: 50px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.15);
-            color: #60a5fa;
-        }
-        .permission-badge .icon {
-            font-size: 0.8rem;
-        }
     </style>
 </head>
 <body>
@@ -2213,15 +2266,22 @@
     <div id="gdprConsent" role="dialog" aria-label="Cookie Consent">
         <div class="gdpr-content">
             <div class="gdpr-text">
-                🍪 <strong>We value your privacy</strong> — Sage OS uses cookies to enhance your experience, analyze usage, and personalize content. 
-                By clicking "Accept All", you consent to our use of cookies. 
-                <a href="#" onclick="navigateTo('privacy'); return false;">Read our Privacy Policy</a> 
-                or 
-                <a href="#" onclick="navigateTo('cookie'); return false;">Cookie Policy</a>.
+                <div class="gdpr-title">
+                    <span class="icon">🍪</span>
+                    We value your privacy
+                    <span class="gdpr-badge">🔒 GDPR Compliant</span>
+                </div>
+                <p style="margin-top: 4px;">
+                    Sage OS uses cookies and similar technologies to enhance your experience, analyze usage, and deliver personalized content. 
+                    You can choose which cookies you accept. 
+                    <a href="#" onclick="navigateTo('privacy'); return false;">Read our Privacy Policy</a> or 
+                    <a href="#" onclick="navigateTo('cookie'); return false;">Cookie Policy</a>.
+                </p>
             </div>
             <div class="gdpr-actions">
-                <button class="settings-btn" onclick="openGdprSettings()">⚙️ Settings</button>
-                <button class="accept-btn" onclick="acceptGdpr()">✅ Accept All</button>
+                <button class="accept-essential-btn" onclick="acceptEssentialGdpr()">Essential Only</button>
+                <button class="settings-btn" onclick="openGdprSettings()">⚙️ Customize</button>
+                <button class="accept-all-btn" onclick="acceptAllGdpr()">✅ Accept All</button>
             </div>
         </div>
     </div>
@@ -2266,8 +2326,8 @@
                     </div>
                 </div>
                 <span class="font-bold text-xl tracking-tight hidden sm:inline-block">Sage OS Directory</span>
-                <!-- Permission Badge - Shows we're transparent about data usage -->
-                <span class="permission-badge hidden md:inline-flex">
+                <!-- GDPR Badge -->
+                <span class="permission-badge hidden md:inline-flex" id="gdprHeaderBadge">
                     <span class="icon">🔒</span> GDPR Compliant
                 </span>
             </div>
@@ -2389,7 +2449,7 @@
     </footer>
 </div>
 
-<!-- ====== PAYMENT MODAL (UPDATED FOR PLAY BILLING) ====== -->
+<!-- ====== PAYMENT MODAL (UPDATED) ====== -->
 <div class="modal-overlay" id="paymentModal">
     <div class="modal">
         <div class="modal-gradient-header">
@@ -2412,7 +2472,6 @@
                 <div class="hint">Enter the M-Pesa number you want to pay from</div>
             </div>
 
-            <!-- Play Billing Button (replaces M-Pesa) -->
             <div class="flex justify-center my-4">
                 <button id="playBillingBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl transition flex items-center gap-3 shadow-lg shadow-blue-600/25 w-full justify-center">
                     <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -2488,38 +2547,58 @@
             <p>Choose which cookies you allow</p>
         </div>
         <div class="modal-body">
-            <div class="space-y-4">
-                <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/10">
-                    <div>
-                        <div class="font-semibold text-white text-sm">Essential Cookies</div>
-                        <div class="text-xs text-gray-400">Required for basic functionality</div>
-                    </div>
-                    <span class="text-xs bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full">Always Active</span>
+            <div class="gdpr-settings-section">
+                <div class="section-header">
+                    <h3>Essential Cookies</h3>
+                    <span class="badge essential">Always Active</span>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/10">
-                    <div>
-                        <div class="font-semibold text-white text-sm">Analytics Cookies</div>
-                        <div class="text-xs text-gray-400">Help us improve the platform</div>
-                    </div>
-                    <label class="toggle-switch">
+                <p>Required for basic functionality like authentication and security. These cannot be disabled.</p>
+                <div class="toggle-row">
+                    <span class="toggle-label text-gray-400">Status:</span>
+                    <span class="text-green-400 text-sm font-medium">✅ Always On</span>
+                </div>
+            </div>
+
+            <div class="gdpr-settings-section">
+                <div class="section-header">
+                    <h3>Analytics Cookies</h3>
+                    <span class="badge optional">Optional</span>
+                </div>
+                <p>Help us understand how you use Sage OS to improve performance and user experience.</p>
+                <div class="toggle-row">
+                    <span class="toggle-label">Enable Analytics</span>
+                    <label class="toggle-switch-sm">
                         <input type="checkbox" id="gdprAnalytics" checked>
-                        <span class="toggle-slider"></span>
+                        <span class="slider"></span>
                     </label>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/10">
-                    <div>
-                        <div class="font-semibold text-white text-sm">Marketing Cookies</div>
-                        <div class="text-xs text-gray-400">Personalized ads and promotions</div>
-                    </div>
-                    <label class="toggle-switch">
+            </div>
+
+            <div class="gdpr-settings-section" style="border-bottom: none;">
+                <div class="section-header">
+                    <h3>Marketing Cookies</h3>
+                    <span class="badge optional">Optional</span>
+                </div>
+                <p>Allow us to show you relevant advertisements and promotional content.</p>
+                <div class="toggle-row">
+                    <span class="toggle-label">Enable Marketing</span>
+                    <label class="toggle-switch-sm">
                         <input type="checkbox" id="gdprMarketing">
-                        <span class="toggle-slider"></span>
+                        <span class="slider"></span>
                     </label>
                 </div>
+            </div>
+
+            <div class="mt-3 p-3 bg-blue-500/10 rounded-xl border border-blue-500/20">
+                <p class="text-blue-300 text-xs flex items-center gap-2">
+                    <span>🔒</span> 
+                    Your preferences are stored locally and can be changed anytime in Settings.
+                </p>
             </div>
         </div>
         <div class="modal-footer">
             <button class="btn-secondary" onclick="closeGdprSettings()">Cancel</button>
+            <button class="btn-secondary" onclick="rejectAllGdpr()" style="flex:0.8;">Reject All</button>
             <button class="btn-teal" onclick="saveGdprSettings()">💾 Save Preferences</button>
         </div>
     </div>
@@ -2531,7 +2610,7 @@
 
 <script>
     // ============================================================
-    // GDPR CONSENT MANAGEMENT
+    // GDPR CONSENT MANAGEMENT - ENHANCED
     // ============================================================
     function getGdprConsent() {
         try {
@@ -2542,22 +2621,71 @@
     function setGdprConsent(consent) {
         localStorage.setItem('sageOsGdprConsent', JSON.stringify(consent));
         document.getElementById('gdprConsent')?.classList.remove('show');
+        updateGdprBadge();
+        // Update analytics based on consent
+        updateAnalyticsConsent(consent);
+        // Show confirmation
+        showToast('✅ Cookie preferences saved', 'success');
     }
 
-    function acceptGdpr() {
+    function updateAnalyticsConsent(consent) {
+        if (!consent) return;
+        // Simulate analytics consent update
+        if (typeof gtag !== 'undefined') {
+            gtag('consent', 'update', {
+                'analytics_storage': consent.analytics ? 'granted' : 'denied',
+                'ad_storage': consent.marketing ? 'granted' : 'denied'
+            });
+        }
+        // Store consent state for analytics scripts
+        localStorage.setItem('sageOsAnalyticsConsent', consent.analytics ? 'granted' : 'denied');
+        localStorage.setItem('sageOsMarketingConsent', consent.marketing ? 'granted' : 'denied');
+    }
+
+    function updateGdprBadge() {
+        const consent = getGdprConsent();
+        const badge = document.getElementById('gdprHeaderBadge');
+        if (badge) {
+            if (consent) {
+                badge.innerHTML = `<span class="icon">🔒</span> GDPR Compliant`;
+                badge.className = 'permission-badge hidden md:inline-flex text-green-400';
+            } else {
+                badge.innerHTML = `<span class="icon">🍪</span> Cookie Settings`;
+                badge.className = 'permission-badge hidden md:inline-flex cursor-pointer hover:border-teal-500/50';
+                badge.onclick = () => openGdprSettings();
+            }
+        }
+    }
+
+    function acceptAllGdpr() {
         setGdprConsent({
             analytics: true,
             marketing: true,
-            acceptedAt: new Date().toISOString()
+            acceptedAt: new Date().toISOString(),
+            type: 'all'
         });
-        showToast('✅ Cookie preferences saved', 'success');
-        // Initialize analytics if accepted
-        if (typeof gtag !== 'undefined') {
-            gtag('consent', 'update', {
-                'analytics_storage': 'granted',
-                'ad_storage': 'granted'
-            });
-        }
+        showToast('✅ All cookies accepted', 'success');
+    }
+
+    function acceptEssentialGdpr() {
+        setGdprConsent({
+            analytics: false,
+            marketing: false,
+            acceptedAt: new Date().toISOString(),
+            type: 'essential'
+        });
+        showToast('✅ Essential cookies only', 'info');
+    }
+
+    function rejectAllGdpr() {
+        setGdprConsent({
+            analytics: false,
+            marketing: false,
+            acceptedAt: new Date().toISOString(),
+            type: 'rejected'
+        });
+        closeGdprSettings();
+        showToast('❌ All optional cookies rejected', 'info');
     }
 
     function openGdprSettings() {
@@ -2576,18 +2704,12 @@
         const consent = {
             analytics: document.getElementById('gdprAnalytics').checked,
             marketing: document.getElementById('gdprMarketing').checked,
-            acceptedAt: new Date().toISOString()
+            acceptedAt: new Date().toISOString(),
+            type: 'custom'
         };
         setGdprConsent(consent);
         closeGdprSettings();
-        showToast('✅ Cookie preferences saved', 'success');
-        // Update analytics consent
-        if (typeof gtag !== 'undefined') {
-            gtag('consent', 'update', {
-                'analytics_storage': consent.analytics ? 'granted' : 'denied',
-                'ad_storage': consent.marketing ? 'granted' : 'denied'
-            });
-        }
+        renderCurrentView();
     }
 
     // Show GDPR banner if not consented
@@ -2596,18 +2718,13 @@
         if (!consent) {
             document.getElementById('gdprConsent')?.classList.add('show');
         } else {
-            // Apply saved preferences
-            if (typeof gtag !== 'undefined') {
-                gtag('consent', 'update', {
-                    'analytics_storage': consent.analytics ? 'granted' : 'denied',
-                    'ad_storage': consent.marketing ? 'granted' : 'denied'
-                });
-            }
+            updateAnalyticsConsent(consent);
         }
+        updateGdprBadge();
     }
 
     // ============================================================
-    // GOOGLE PLAY BILLING SIMULATION (for PWA/Web Demo)
+    // GOOGLE PLAY BILLING SIMULATION
     // ============================================================
     class PlayBillingClient {
         constructor() {
@@ -2633,7 +2750,6 @@
             this.purchases = JSON.parse(localStorage.getItem('sageOsPlayPurchases')) || [];
         }
 
-        // Simulate connection to Play Billing
         connect() {
             return new Promise((resolve) => {
                 setTimeout(() => {
@@ -2643,12 +2759,10 @@
             });
         }
 
-        // Get product details
         getProductDetails(productId) {
             return this.products[productId] || null;
         }
 
-        // Simulate purchasing a product
         purchaseProduct(productId) {
             return new Promise((resolve, reject) => {
                 if (!this.isReady) {
@@ -2661,7 +2775,6 @@
                     return;
                 }
 
-                // Simulate purchase flow
                 const purchase = {
                     purchaseToken: 'token_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8),
                     productId: productId,
@@ -2670,8 +2783,6 @@
                     acknowledged: false
                 };
 
-                // In a real app, this would trigger the Google Play Billing flow
-                // For demo, we simulate success after a short delay
                 setTimeout(() => {
                     this.purchases.push(purchase);
                     localStorage.setItem('sageOsPlayPurchases', JSON.stringify(this.purchases));
@@ -2680,7 +2791,6 @@
             });
         }
 
-        // Check if user has an active subscription
         getActiveSubscription(productId) {
             return this.purchases.find(p => 
                 p.productId === productId && 
@@ -2689,11 +2799,9 @@
             );
         }
 
-        // Simulate subscription expiry check
         checkSubscriptionStatus() {
             const now = Date.now();
             this.purchases = this.purchases.map(p => {
-                // Simulate expiry after 30 days for demo
                 if (p.purchaseTime && (now - p.purchaseTime) > 30 * 24 * 60 * 60 * 1000) {
                     p.expired = true;
                 }
@@ -2704,21 +2812,9 @@
     }
 
     // ============================================================
-    // CONFIGURATION - UPDATED
+    // CONFIGURATION
     // ============================================================
     const CONFIG = {
-        // M-Pesa kept for backward compatibility but disabled by default
-        MPESA: {
-            CONSUMER_KEY: 'VpH0nHGpoWhgoAjl9KsLgwRbXiPa3wh43YIx1sMGMNjzNXo7',
-            CONSUMER_SECRET: 'yAzAOBs49lN5yrzzNyap9h1bKqUDG1FluObamNEMrdXOZdaBZ0UjhuCx51HaGO4X',
-            SHORTCODE: '174379',
-            PASSKEY: 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
-            BASE_URL: 'https://sandbox.safaricom.co.ke',
-            CALLBACK_URL: 'https://webhook.site/fe92fd8e-1324-46b7-b730-fb89bc424a46',
-            ACCOUNT_REFERENCE: 'SageOSPayment',
-            TRANSACTION_DESC: 'Sage OS App Subscription'
-        },
-        // Play Billing config
         PLAY_BILLING: {
             ENABLED: true,
             PRODUCTS: {
@@ -2729,7 +2825,7 @@
     };
 
     // ============================================================
-    // ✅ AD RENDER WITH REAL AD UNITS - KEPT ORIGINAL
+    // AD RENDER
     // ============================================================
     const AD_UNITS = {
         leaderboard: 'YOUR_LEADERBOARD_AD_UNIT_ID',
@@ -2786,7 +2882,6 @@
                 const adSlots = document.querySelectorAll('.adsbygoogle');
                 if (adSlots.length > 0) {
                     (adsbygoogle = window.adsbygoogle || []).push({});
-                    console.log(`✅ ${adSlots.length} ads initialized`);
                 }
             }
         } catch (error) {
@@ -2795,7 +2890,7 @@
     }
 
     // ============================================================
-    // PWA SETUP - KEPT ORIGINAL
+    // PWA SETUP
     // ============================================================
     (function setupPwaManifest() {
         const iconUrl = 'https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg';
@@ -2840,7 +2935,7 @@
     })();
 
     // ============================================================
-    // SERVICE WORKER - KEPT ORIGINAL
+    // SERVICE WORKER
     // ============================================================
     (function registerServiceWorker() {
         if (!('serviceWorker' in navigator)) return;
@@ -2893,7 +2988,7 @@
     })();
 
     // ============================================================
-    // PWA INSTALL PROMPT - KEPT ORIGINAL
+    // PWA INSTALL PROMPT
     // ============================================================
     let deferredPrompt = null;
     let pwaBannerDismissed = false;
@@ -2972,7 +3067,7 @@
     });
 
     // ============================================================
-    // ONLINE/OFFLINE - KEPT ORIGINAL
+    // ONLINE/OFFLINE
     // ============================================================
     function updateOnlineStatus() {
         const indicator = document.getElementById('offlineIndicator');
@@ -2986,7 +3081,7 @@
     if (!navigator.onLine) setTimeout(updateOnlineStatus, 500);
 
     // ============================================================
-    // LOGO MAPPING - KEPT ORIGINAL
+    // LOGO MAPPING
     // ============================================================
     const logoMapping = {
         "maji-gas": "https://i.ibb.co/sJwP77mq/file-000000002a7c724698774712139656f9.png",
@@ -3029,7 +3124,7 @@
     ];
 
     // ============================================================
-    // TIER CONFIG - KEPT ORIGINAL
+    // TIER CONFIG
     // ============================================================
     const DEFAULT_TIERS = {
         FREE: {
@@ -3064,7 +3159,7 @@
     };
 
     // ============================================================
-    // APP DATA - KEPT ORIGINAL
+    // APP DATA
     // ============================================================
     const appList = [
         { id: "maji-gas", name: "Maji Gas Delivery", slug: "maji-gas-delivery", shortDesc: "Cooking gas & water delivery on demand",
@@ -3203,16 +3298,15 @@
         if (!app.downloads) app.downloads = Math.floor(Math.random() * 50000) + 1000;
     });
 
-    // Featured app IDs for spotlight
     const featuredIds = ["spark-connect", "guard-ai", "deep-focus", "luminor-studio"];
 
     // ============================================================
-    // BLOG DATA - KEPT ORIGINAL
+    // BLOG DATA
     // ============================================================
     const blogPosts = [{
         id: "1",
         title: "How Web Apps Are Transforming Business in Africa",
-        excerpt: "Discover how web applications are revolutionizing the African business landscape, from small startups to large enterprises.",
+        excerpt: "Discover how web applications are revolutionizing the African business landscape.",
         category: "Business",
         author: "Sage OS Team",
         authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
@@ -3220,19 +3314,11 @@
         readTime: "5 min",
         image: "https://i.ibb.co/DHhHbvrf/f43e9c779dbd7566b774d1ff487a66b4.jpg",
         tags: ["Africa", "Business", "Technology"],
-        content: `Web applications are becoming the backbone of African business innovation. With increasing internet penetration and mobile adoption, companies are leveraging web apps to reach customers, streamline operations, and scale faster than ever before.
-
-        Key trends include:
-        - E-commerce platforms enabling cross-border trade
-        - Financial technology apps expanding financial inclusion
-        - Agricultural tech improving food security
-        - Health tech bridging gaps in healthcare delivery
-
-        The future is bright for web apps in Africa.`
+        content: `Web applications are becoming the backbone of African business innovation...`
     }, {
         id: "2",
         title: "The Future of AI-Powered Productivity Tools",
-        excerpt: "How artificial intelligence is reshaping the way we work, learn, and collaborate in the digital age.",
+        excerpt: "How artificial intelligence is reshaping the way we work and collaborate.",
         category: "AI & Technology",
         author: "Sage OS Team",
         authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
@@ -3240,19 +3326,11 @@
         readTime: "4 min",
         image: "https://i.ibb.co/204QYyVF/file-00000000c6707243af95f3105457c8b5.png",
         tags: ["AI", "Productivity", "Technology"],
-        content: `Artificial intelligence is revolutionizing productivity tools. From intelligent assistants that schedule meetings to AI-powered analytics that provide business insights, the workplace is evolving rapidly.
-
-        AI tools are helping teams:
-        - Automate repetitive tasks
-        - Generate creative content
-        - Analyze data faster
-        - Improve decision making
-
-        The integration of AI into everyday tools is making work more efficient and creative.`
+        content: `Artificial intelligence is revolutionizing productivity tools...`
     }, {
         id: "3",
         title: "M-Pesa and the Rise of Digital Payments",
-        excerpt: "How mobile money is changing the financial landscape and enabling digital commerce across Kenya and beyond.",
+        excerpt: "How mobile money is changing the financial landscape across Kenya.",
         category: "Finance",
         author: "Sage OS Team",
         authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
@@ -3260,19 +3338,11 @@
         readTime: "6 min",
         image: "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",
         tags: ["Finance", "M-Pesa", "Kenya"],
-        content: `M-Pesa has transformed financial services in Kenya and beyond. Launched in 2007, this mobile money service now serves millions of users across East Africa.
-
-        Key impacts of M-Pesa:
-        - Financial inclusion for unbanked populations
-        - Enabling e-commerce and digital payments
-        - Supporting small business growth
-        - Reducing transaction costs
-
-        The success of M-Pesa is a model for digital payment systems globally.`
+        content: `M-Pesa has transformed financial services in Kenya and beyond...`
     }, {
         id: "4",
         title: "The Intersection of Cybersecurity and Cloud Computing",
-        excerpt: "Understanding the security challenges and solutions for businesses adopting cloud infrastructure.",
+        excerpt: "Security challenges and solutions for businesses adopting cloud infrastructure.",
         category: "Security",
         author: "Sage OS Team",
         authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
@@ -3280,20 +3350,11 @@
         readTime: "5 min",
         image: "https://i.ibb.co/GQWZnykb/file-00000000379c71f4a01216ae10901877.png",
         tags: ["Security", "Cloud", "Business"],
-        content: `As more businesses move to the cloud, security concerns have become paramount. A comprehensive cloud security strategy should include:
-
-        Essential cloud security practices:
-        - Multi-factor authentication
-        - Regular security audits
-        - Data encryption
-        - Access control policies
-        - Incident response planning
-
-        Protecting your cloud infrastructure is essential for business continuity.`
+        content: `As more businesses move to the cloud, security concerns have become paramount...`
     }, {
         id: "5",
         title: "The Rise of Super Apps in Emerging Markets",
-        excerpt: "How multi-functional platforms are reshaping digital experiences in developing economies.",
+        excerpt: "How multi-functional platforms are reshaping digital experiences.",
         category: "Technology",
         author: "Sage OS Team",
         authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
@@ -3301,19 +3362,11 @@
         readTime: "4 min",
         image: "https://i.ibb.co/NfCgDtT/file-00000000b57072438b98c6777ee7804e.png",
         tags: ["Technology", "Innovation", "Emerging Markets"],
-        content: `Super apps are becoming the dominant digital model in emerging markets. These all-in-one platforms combine messaging, payments, e-commerce, and more into a single experience.
-
-        Why super apps are thriving:
-        - Convenience of a single platform
-        - Integrated payment systems
-        - Localized experiences
-        - Growing mobile-first users
-
-        The super app model is reshaping how people interact with technology.`
+        content: `Super apps are becoming the dominant digital model in emerging markets...`
     }, {
         id: "6",
         title: "Sustainable Tech: Building Green Web Applications",
-        excerpt: "How developers can create environmentally friendly web apps with lower carbon footprints.",
+        excerpt: "How developers can create environmentally friendly web apps.",
         category: "Sustainability",
         author: "Sage OS Team",
         authorAvatar: "https://i.ibb.co/357d0D4m/IMG-20260709-WA0065.jpg",
@@ -3321,20 +3374,11 @@
         readTime: "5 min",
         image: "https://i.ibb.co/FR12Cbh/file-0000000003947246bfbd3e5ce474edd4.png",
         tags: ["Sustainability", "Green Tech", "Development"],
-        content: `As climate concerns grow, sustainable web development is becoming increasingly important. Here's how developers can reduce their carbon footprint.
-
-        Green web practices:
-        - Optimize images and assets
-        - Use efficient hosting providers
-        - Implement caching strategies
-        - Minimize unnecessary JavaScript
-        - Choose green hosting services
-
-        Building sustainable web applications is not just good for the planet—it's good for business.`
+        content: `As climate concerns grow, sustainable web development is becoming increasingly important...`
     }];
 
     // ============================================================
-    // UTILITY FUNCTIONS - KEPT ORIGINAL
+    // UTILITY FUNCTIONS
     // ============================================================
     function generateFallbackSVG(appId, size = 80) {
         const colorMap = {
@@ -3416,7 +3460,7 @@
     }
 
     // ============================================================
-    // STATE - KEPT ORIGINAL
+    // STATE
     // ============================================================
     let currentUser = JSON.parse(localStorage.getItem("sageOsUser")) || null;
     let activeView = "home";
@@ -3426,7 +3470,6 @@
     let searchQuery = "";
     let activeCategoryFilter = "";
     let customPricing = JSON.parse(localStorage.getItem("sageOsCustomPricing")) || {};
-    let mpesaTransactions = JSON.parse(localStorage.getItem("sageOsMpesaTransactions")) || {};
     let paymentProcessing = false;
     let currentPlan = null;
     let termsAccepted = localStorage.getItem("sageOsTermsAccepted") === "true";
@@ -3443,7 +3486,6 @@
         defaultView: "home"
     };
 
-    // Initialize Play Billing client
     const playBilling = new PlayBillingClient();
 
     function saveState() {
@@ -3452,7 +3494,6 @@
         localStorage.setItem("sageOsFavorites", JSON.stringify(userFavorites));
         localStorage.setItem("sageOsReviews", JSON.stringify(reviewsData));
         localStorage.setItem("sageOsCustomPricing", JSON.stringify(customPricing));
-        localStorage.setItem("sageOsMpesaTransactions", JSON.stringify(mpesaTransactions));
         localStorage.setItem("sageOsTermsAccepted", String(termsAccepted));
         localStorage.setItem("sageOsSettings", JSON.stringify(userSettings));
     }
@@ -3568,7 +3609,7 @@
     }
 
     // ============================================================
-    // PLAY BILLING INTEGRATION (UPDATED)
+    // PLAY BILLING INTEGRATION
     // ============================================================
     class PlayBillingHandler {
         constructor() {
@@ -3599,7 +3640,6 @@
                 return;
             }
 
-            // Check if already subscribed
             const existing = this.client.getActiveSubscription(planData.productId);
             if (existing) {
                 showToast(`You already have an active ${planData.name} subscription`, 'info');
@@ -3610,20 +3650,16 @@
             this.updateProgress(10, '🔄 Initializing Google Play...');
 
             try {
-                // Connect to billing service
                 await this.client.connect();
                 this.updateProgress(30, '📱 Opening Google Play...');
 
-                // Simulate purchase (in real app, this would use the Google Play Billing API)
                 const purchase = await this.client.purchaseProduct(planData.productId);
                 
                 if (purchase) {
                     this.updateProgress(80, '✅ Processing subscription...');
-                    // Acknowledge purchase (in real app)
                     purchase.acknowledged = true;
                     localStorage.setItem('sageOsPlayPurchases', JSON.stringify(this.client.purchases));
                     
-                    // Activate plan
                     this.activatePlan(plan);
                     this.updateProgress(100, '🎉 Subscription activated!');
                     showToast(`✅ ${planData.name} plan activated successfully!`, 'success');
@@ -3671,7 +3707,7 @@
     }
 
     // ============================================================
-    // PAYMENT UI (UPDATED)
+    // PAYMENT UI
     // ============================================================
     function openPaymentModal(plan) {
         const plans = {
@@ -3719,7 +3755,7 @@
     }
 
     // ============================================================
-    // UI COMPONENTS - APP CARD (KEPT ORIGINAL)
+    // APP CARD
     // ============================================================
     function appCard(app) {
         const isFav = currentUser && userFavorites.includes(app.id);
@@ -3783,7 +3819,7 @@
     }
 
     // ============================================================
-    // SETTINGS PANEL (KEPT ORIGINAL)
+    // SETTINGS
     // ============================================================
     function renderSettings() {
         const isLoggedIn = !!currentUser;
@@ -3817,7 +3853,7 @@
                                         </div>
                                         <div class="info">
                                             <div class="label">Cookie Preferences</div>
-                                            <div class="desc">${consent ? 'Cookies accepted' : 'Cookies not accepted'}</div>
+                                            <div class="desc">${consent ? 'Cookies accepted (' + (consent.type || 'custom') + ')' : 'Not accepted'}</div>
                                         </div>
                                     </div>
                                     <div class="right">
@@ -3836,6 +3872,20 @@
                                     </div>
                                     <div class="right">
                                         <button class="action-btn" onclick="navigateTo('privacy')">View</button>
+                                    </div>
+                                </div>
+                                <div class="settings-item">
+                                    <div class="left">
+                                        <div class="icon-wrapper">
+                                            <i data-lucide="file-text" class="icon"></i>
+                                        </div>
+                                        <div class="info">
+                                            <div class="label">Cookie Policy</div>
+                                            <div class="desc">How we use cookies</div>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <button class="action-btn" onclick="navigateTo('cookie')">View</button>
                                     </div>
                                 </div>
                             </div>
@@ -4113,7 +4163,7 @@
     }
 
     // ============================================================
-    // SETTINGS HELPERS - KEPT ORIGINAL
+    // SETTINGS HELPERS
     // ============================================================
     function openSettingsEdit(field, label, currentValue, options = null) {
         const modal = document.getElementById('settingsEditModal');
@@ -4238,7 +4288,7 @@
     }
 
     // ============================================================
-    // APP SPOTLIGHT FUNCTIONS - KEPT ORIGINAL
+    // APP SPOTLIGHT
     // ============================================================
     function openAppSpotlight(appId) {
         const app = appList.find(a => a.id === appId);
@@ -4289,7 +4339,7 @@
     }
 
     // ============================================================
-    // BLOG RENDER - KEPT ORIGINAL
+    // BLOG RENDER
     // ============================================================
     function renderBlog() {
         if (selectedBlogId) {
@@ -4384,7 +4434,7 @@
     }
 
     // ============================================================
-    // LEGAL PAGES RENDER - KEPT ORIGINAL
+    // LEGAL PAGES
     // ============================================================
     function renderPrivacyPolicy() {
         return `
@@ -4615,7 +4665,7 @@
     }
 
     // ============================================================
-    // RENDER HOME - KEPT ORIGINAL (with updated payment references)
+    // RENDER HOME - COMPACT & MODERN
     // ============================================================
     function renderHome() {
         const filteredApps = getFilteredApps();
@@ -4815,7 +4865,7 @@
     }
 
     // ============================================================
-    // RENDER ABOUT - KEPT ORIGINAL
+    // RENDER ABOUT
     // ============================================================
     function renderAbout() {
         return `
@@ -4909,7 +4959,7 @@
     }
 
     // ============================================================
-    // RENDER PRICING (UPDATED)
+    // RENDER PRICING
     // ============================================================
     function renderPricingPage() {
         return `
@@ -4969,7 +5019,7 @@
     }
 
     // ============================================================
-    // RENDER APP DETAIL (UPDATED)
+    // RENDER APP DETAIL
     // ============================================================
     function renderAppDetail() {
         if (!selectedApp) return renderHome();
@@ -5147,7 +5197,7 @@
     }
 
     // ============================================================
-    // RENDER DASHBOARD - KEPT ORIGINAL
+    // RENDER DASHBOARD
     // ============================================================
     function renderDashboard() {
         if (!currentUser) {
@@ -5160,8 +5210,6 @@
         }
         const userApps = appList.filter(app => app.developer === currentUser.email || app.ownerId === currentUser.id);
         const favApps = appList.filter(a => userFavorites.includes(a.id));
-        const transactions = Object.values(mpesaTransactions);
-        const totalRevenue = transactions.filter(t => t.status === 'completed').reduce((sum, t) => sum + t.amount, 0);
         const hasPlaySub = currentUser?.subscription?.provider === 'google_play';
         return `
                 <div class="dashboard-bg w-full max-w-7xl mx-auto">
@@ -5240,7 +5288,7 @@
     }
 
     // ============================================================
-    // RENDER ATT - KEPT ORIGINAL
+    // RENDER ATT
     // ============================================================
     function renderATT() {
         return `
@@ -5331,7 +5379,7 @@
     }
 
     // ============================================================
-    // RENDER ADMIN - KEPT ORIGINAL
+    // RENDER ADMIN
     // ============================================================
     function renderAdmin() {
         if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'super_admin')) {
@@ -5341,10 +5389,8 @@
                     <p class="text-gray-400 text-sm mt-1">Please sign in with admin credentials</p>
                 </div>`;
         }
-        const transactions = Object.values(mpesaTransactions);
-        const totalRevenue = transactions.filter(t => t.status === 'completed').reduce((sum, t) => sum + t.amount, 0);
-        const totalDownloads = appList.reduce((sum, a) => sum + a.downloads, 0);
         const playPurchases = JSON.parse(localStorage.getItem('sageOsPlayPurchases')) || [];
+        const totalDownloads = appList.reduce((sum, a) => sum + a.downloads, 0);
         return `<div class="admin-bg w-full max-w-7xl mx-auto">
                 <div class="admin-content fade-in">
                     <h1 class="text-2xl font-bold text-white mb-5">🛠️ Sage OS Admin Console</h1>
@@ -5373,7 +5419,7 @@
     }
 
     // ============================================================
-    // RENDER DEVELOPER - KEPT ORIGINAL
+    // RENDER DEVELOPER
     // ============================================================
     function renderDeveloper() {
         if (!currentUser || currentUser.role !== 'developer') {
@@ -5443,7 +5489,7 @@
     }
 
     // ============================================================
-    // MODALS & ACTIONS - KEPT ORIGINAL
+    // MODALS & ACTIONS
     // ============================================================
     function showAuthModal() {
         if (!termsAccepted) { showToast("⚠️ Please accept Terms & Conditions first", "error");
@@ -5861,7 +5907,7 @@
     }
 
     // ============================================================
-    // NAVIGATION SETUP - KEPT ORIGINAL
+    // NAVIGATION SETUP
     // ============================================================
     document.querySelectorAll(".nav-btn").forEach(btn => {
         btn.addEventListener("click", () => {
@@ -5899,7 +5945,7 @@
     }
 
     // ============================================================
-    // THEME - KEPT ORIGINAL
+    // THEME
     // ============================================================
     const themeToggle = document.getElementById("themeToggle");
     themeToggle?.addEventListener("click", () => {
@@ -5940,7 +5986,9 @@
     window.selectedBlogId = null;
     window.blogCategoryFilter = '';
     window.renderCurrentView = renderCurrentView;
-    window.acceptGdpr = acceptGdpr;
+    window.acceptAllGdpr = acceptAllGdpr;
+    window.acceptEssentialGdpr = acceptEssentialGdpr;
+    window.rejectAllGdpr = rejectAllGdpr;
     window.openGdprSettings = openGdprSettings;
     window.closeGdprSettings = closeGdprSettings;
     window.saveGdprSettings = saveGdprSettings;
@@ -5987,7 +6035,7 @@
     console.log('📋 All Legal Pages: Privacy, Cookie, Terms');
     console.log('📝 6 Blog Articles with Original Content');
     console.log('📢 Google AdSense: Integrated');
-    console.log('🔒 GDPR Consent: Active');
+    console.log('🔒 GDPR Consent: Active with full controls');
     console.log('💳 Google Play Billing: Integrated');
     console.log('📱 M-Pesa: Disabled (Google Play compliant)');
     console.log('💎 Plans: Free, Standard, Featured');
