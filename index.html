@@ -6,10 +6,7 @@
     <title>Sage OS | Intelligence · Innovation · Inspiration</title>
     <meta name="description" content="Sage OS App Directory – Discover, review, and launch web apps instantly with Google Play subscriptions" />
 
-    <!-- ✅ Google AdSense - Real Client ID -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5512023350779761"
-     crossorigin="anonymous"></script>
-
+    <!-- ✅ AdMob will be integrated natively – no AdSense script here -->
     <!-- PWA Meta -->
     <meta name="theme-color" content="#0f172a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -159,7 +156,7 @@
         }
 
         /* ============================================================
-           AD CONTAINERS
+           AD CONTAINERS – now just placeholders for native AdMob
            ============================================================ */
         .ad-container {
             background: rgba(255, 255, 255, 0.03);
@@ -172,7 +169,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            margin: 16px 0;
+            margin: 24px 0; /* increased margin for spacing */
         }
         .ad-container:hover {
             border-color: rgba(0, 178, 169, 0.15);
@@ -212,6 +209,12 @@
             justify-content: center;
             align-items: center;
             position: relative;
+        }
+        .ad-container .ad-placeholder {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            padding: 10px;
+            text-align: center;
         }
 
         /* ============================================================
@@ -254,9 +257,6 @@
         #pwaInstallBanner .install-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 32px rgba(0, 178, 169, 0.5);
-        }
-        #pwaInstallBanner .install-btn:active {
-            transform: scale(0.95);
         }
         #pwaInstallBanner .dismiss-btn {
             background: transparent;
@@ -2248,6 +2248,12 @@
             transform: translateY(-2px);
             border-color: rgba(255,255,255,0.1);
         }
+        .footer-ads-note {
+            font-size: 0.6rem;
+            color: #475569;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -2445,6 +2451,10 @@
         <div class="footer-copy">
             &copy; 2026 Sage OS Directory. Built with ❤️ in Nairobi, Kenya.
             <span class="block mt-1 text-[10px] text-gray-500">🔒 GDPR Compliant · Privacy First</span>
+            <span class="block mt-1 text-[10px] text-gray-600">📄 app-ads.txt verification required for Play Store</span>
+        </div>
+        <div class="footer-ads-note">
+            ⚡ AdMob integration required for Play Store – this is a placeholder.
         </div>
     </footer>
 </div>
@@ -2825,69 +2835,33 @@
     };
 
     // ============================================================
-    // AD RENDER
+    // AD RENDER – Now placeholder for native AdMob
     // ============================================================
+    // AdMob ad units – you must replace these with your own IDs
     const AD_UNITS = {
-        leaderboard: 'YOUR_LEADERBOARD_AD_UNIT_ID',
-        sidebar: 'YOUR_SIDEBAR_AD_UNIT_ID',
-        inline: 'YOUR_INLINE_AD_UNIT_ID',
-        banner: 'YOUR_BANNER_AD_UNIT_ID'
+        leaderboard: 'ca-app-pub-xxxxxxxxxxxxxxxx/yyyyyyyyyy',
+        sidebar: 'ca-app-pub-xxxxxxxxxxxxxxxx/yyyyyyyyyy',
+        inline: 'ca-app-pub-xxxxxxxxxxxxxxxx/yyyyyyyyyy',
+        banner: 'ca-app-pub-xxxxxxxxxxxxxxxx/yyyyyyyyyy'
     };
 
     function renderAd(placement = 'leaderboard', className = '') {
-        const isAdSenseLoaded = typeof adsbygoogle !== 'undefined';
-        
-        if (!isAdSenseLoaded) {
-            return `
-                <div class="ad-container ${placement} ${className} relative">
-                    <div class="ad-content">
-                        <span class="ad-label">Ad</span>
-                        <div class="ad-placeholder">
-                            <span class="ad-icon">📢</span>
-                            <span class="text-gray-400 text-xs">Ad loading...</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        const slotId = AD_UNITS[placement] || AD_UNITS.leaderboard;
-        const styles = {
-            leaderboard: 'display:block; width:100%; height:90px;',
-            sidebar: 'display:block; width:100%; height:250px;',
-            inline: 'display:block; width:100%; height:90px;',
-            banner: 'display:block; width:100%; height:60px;'
-        };
-        const adFormat = placement === 'sidebar' ? 'rectangle' : 'auto';
-
+        // In a native app, you would use the AdMob SDK to show ads.
+        // This is a placeholder for the web view.
         return `
             <div class="ad-container ${placement} ${className} relative">
                 <div class="ad-content">
                     <span class="ad-label">Sponsored</span>
-                    <ins class="adsbygoogle"
-                         style="${styles[placement]}"
-                         data-ad-client="ca-pub-5512023350779761"
-                         data-ad-slot="${slotId}"
-                         data-ad-format="${adFormat}"
-                         data-full-width-responsive="true">
-                    </ins>
+                    <div class="ad-placeholder">
+                        <span class="text-gray-400 text-xs">📢 AdMob Banner (${placement})</span>
+                        <span class="text-gray-500 text-[10px] block">Replace with native SDK</span>
+                    </div>
                 </div>
             </div>
         `;
     }
 
-    function initAds() {
-        try {
-            if (typeof adsbygoogle !== 'undefined') {
-                const adSlots = document.querySelectorAll('.adsbygoogle');
-                if (adSlots.length > 0) {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                }
-            }
-        } catch (error) {
-            console.warn('Ad initialization:', error.message);
-        }
-    }
+    // No AdSense initialization needed.
 
     // ============================================================
     // PWA SETUP
@@ -3888,6 +3862,21 @@
                                         <button class="action-btn" onclick="navigateTo('cookie')">View</button>
                                     </div>
                                 </div>
+                                <!-- Data Deletion Request -->
+                                <div class="settings-item">
+                                    <div class="left">
+                                        <div class="icon-wrapper" style="background: rgba(239, 68, 68, 0.08); color: #ef4444;">
+                                            <i data-lucide="trash-2" class="icon"></i>
+                                        </div>
+                                        <div class="info">
+                                            <div class="label text-red-400">Request Data Deletion</div>
+                                            <div class="desc text-red-400/70">Permanently delete your account and personal data</div>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <button class="action-btn danger" onclick="requestDataDeletion()">Request</button>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Profile Section -->
@@ -4287,6 +4276,18 @@
         }
     }
 
+    function requestDataDeletion() {
+        if (!currentUser) {
+            showToast('Please sign in to request data deletion.', 'error');
+            return;
+        }
+        const email = currentUser.email;
+        const subject = encodeURIComponent('Data Deletion Request');
+        const body = encodeURIComponent(`I, ${currentUser.name || 'User'}, request that all my personal data be deleted from Sage OS. My email is ${email}.`);
+        window.location.href = `mailto:support@sageos.app?subject=${subject}&body=${body}`;
+        showToast('📧 Opening email to request data deletion.', 'info');
+    }
+
     // ============================================================
     // APP SPOTLIGHT
     // ============================================================
@@ -4550,7 +4551,7 @@
                     <p>We may use third-party services that place cookies on your device. These include:</p>
                     <ul>
                         <li><strong>Google Analytics:</strong> For analyzing usage patterns</li>
-                        <li><strong>Google AdSense:</strong> For displaying relevant advertisements</li>
+                        <li><strong>Google AdSense (if applicable):</strong> For displaying relevant advertisements (only on web version)</li>
                     </ul>
 
                     <h2>5. Cookie Duration</h2>
@@ -4845,18 +4846,12 @@
         const topratedHtml = `<div class="mb-6"><div class="flex items-center justify-between mb-3"><h2 class="text-xl font-bold text-white">🔥 Top Rated</h2><span class="text-xs text-amber-400">Highest rated</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">${trending.map(app=>appCard(app)).join('')}</div></div>`;
         const recentHtml = `<div><div class="flex items-center justify-between mb-3"><h2 class="text-xl font-bold text-white">🆕 Recently Added</h2><span class="text-xs text-green-400">New releases</span></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">${newReleases.map(app=>appCard(app)).join('')}</div></div>`;
 
-        const adContent = typeof adsbygoogle !== 'undefined' ? `
+        const adContent = `
             ${topAd}
             ${featuredHtml}
             ${inlineAd}
             ${topratedHtml}
             ${bottomAd}
-        ` : `
-            ${featuredHtml}
-            ${topratedHtml}
-            <div class="text-center text-gray-500 text-xs py-3 border-t border-white/5">
-                <span>📢 Support Sage OS by enabling ads</span>
-            </div>
         `;
 
         const closeHtml = `</div></div>`;
@@ -5729,7 +5724,7 @@
 
         if (selectedApp) {
             container.innerHTML = renderAppDetail();
-            setTimeout(() => initAds(), 100);
+            // No ads to initialize in native SDK – placeholder only
         } else if (activeView === "home") {
             container.innerHTML = renderHome();
             setTimeout(() => {
@@ -5767,7 +5762,6 @@
                         });
                     }
                 }
-                initAds();
                 const searchInput = document.getElementById("globalSearchInput");
                 if (searchInput) {
                     searchInput.addEventListener("input", (e) => { searchQuery = e.target.value;
@@ -5789,34 +5783,23 @@
             }, 100);
         } else if (activeView === "blog") {
             container.innerHTML = renderBlog();
-            setTimeout(() => initAds(), 100);
         } else if (activeView === "about") {
             container.innerHTML = renderAbout();
-            setTimeout(() => initAds(), 100);
         } else if (activeView === "privacy") {
             container.innerHTML = renderPrivacyPolicy();
-            setTimeout(() => initAds(), 100);
         } else if (activeView === "cookie") {
             container.innerHTML = renderCookiePolicy();
-            setTimeout(() => initAds(), 100);
         } else if (activeView === "pricing") {
             container.innerHTML = renderPricingPage();
-            setTimeout(() => {
-                initAds();
-                if (window.lucide) lucide.createIcons();
-            }, 50);
+            setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 50);
         } else if (activeView === "dashboard") {
             container.innerHTML = renderDashboard();
-            setTimeout(() => initAds(), 100);
         } else if (activeView === "att") {
             container.innerHTML = renderATT();
-            setTimeout(() => initAds(), 100);
         } else if (activeView === "admin") {
             container.innerHTML = renderAdmin();
-            setTimeout(() => initAds(), 100);
         } else if (activeView === "developer") {
             container.innerHTML = renderDeveloper();
-            setTimeout(() => initAds(), 100);
         } else if (activeView === "terms") {
             container.innerHTML = renderTerms();
             document.getElementById('acceptTermsBtn')?.addEventListener('click', () => {
@@ -5825,7 +5808,6 @@
                 showToast('✅ Terms accepted!', 'success');
                 navigateTo('home');
             });
-            setTimeout(() => initAds(), 100);
         } else if (activeView === "settings") {
             container.innerHTML = renderSettings();
             setTimeout(() => {
@@ -6031,10 +6013,10 @@
         console.log('✅ Google Play Billing initialized');
     }).catch(err => console.warn('Play Billing:', err));
 
-    console.log('🚀 Sage OS Directory v2.0 - Google Play Compliant');
-    console.log('📋 All Legal Pages: Privacy, Cookie, Terms');
+    console.log('🚀 Sage OS Directory v2.0 - Google Play Compliant (AdMob ready)');
+    console.log('📋 All Legal Pages: Privacy, Cookie, Terms with Data Deletion');
     console.log('📝 6 Blog Articles with Original Content');
-    console.log('📢 Google AdSense: Integrated');
+    console.log('📢 AdMob placeholders – integrate native SDK for production');
     console.log('🔒 GDPR Consent: Active with full controls');
     console.log('💳 Google Play Billing: Integrated');
     console.log('📱 M-Pesa: Disabled (Google Play compliant)');
@@ -6043,7 +6025,7 @@
     console.log('🔐 Demo Admin: admin@sageos.app');
     console.log('👨‍💻 Demo Developer: dev@sageos.app');
     console.log('🎨 Brand: Sage OS - Intelligence · Innovation · Inspiration');
-    console.log('✅ Google Play Store Ready!');
+    console.log('✅ Ready for Google Play resubmission after native AdMob integration.');
 </script>
 </body>
 </html>
