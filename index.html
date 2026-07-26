@@ -3079,6 +3079,7 @@
         "sacco-sable": "https://i.ibb.co/Psfr94nb/1782588375093.png",
         "cbo-three": "https://i.ibb.co/BH83mCK9/1782590354801.png",
         "gym-nine": "https://i.ibb.co/GD2WMcJ/1782594191864.png"
+        // No logos for the new apps; fallback will be used
     };
     const screenshotUrls = [
         "https://i.ibb.co/JPVGw2p/Screenshot-20260611-024707-Chrome.jpg",
@@ -3258,7 +3259,42 @@
                 "Progress monitoring", "Exercise library", "Goal setting", "Workout plans"
             ], description: "Gym Nine is your ultimate fitness companion.",
             externalUrl: "https://gym-nine-sepia.vercel.app/", tier: "FREE", trialActive: false, developer: "sage",
-            downloads: 6543 }
+            downloads: 6543 },
+        // ====== NEW APPS ADDED ======
+        { 
+            id: "music-player", 
+            name: "Music Player", 
+            slug: "music-player", 
+            shortDesc: "Stream and manage your music library",
+            category: "Entertainment", 
+            rating: 4.5, 
+            ratingCount: 120, 
+            version: "1.0.0", 
+            features: ["Music streaming", "Playlist creation", "Offline mode", "Equalizer"],
+            description: "A modern music player app to enjoy your favorite tracks anytime, anywhere.",
+            externalUrl: "https://music-player-mu-three.vercel.app", 
+            tier: "FREE", 
+            trialActive: false, 
+            developer: "sage",
+            downloads: 5000 
+        },
+        { 
+            id: "fedha-budget-planner", 
+            name: "Fedha Budget Planner", 
+            slug: "fedha-budget-planner", 
+            shortDesc: "Smart budgeting and expense tracking",
+            category: "Finance", 
+            rating: 4.7, 
+            ratingCount: 85, 
+            version: "1.0.0", 
+            features: ["Expense tracking", "Budget goals", "Reports", "Multi-currency"],
+            description: "Take control of your finances with Fedha's intuitive budget planner.",
+            externalUrl: "https://fedha-budget-planner-xfax.vercel.app", 
+            tier: "FREE", 
+            trialActive: false, 
+            developer: "sage",
+            downloads: 3200 
+        }
     ];
 
     appList.forEach((app, idx) => {
@@ -3376,7 +3412,9 @@
             "finance-eight": { primary: "#0D9488", secondary: "#14B8A6", letter: "F" },
             "sacco-sable": { primary: "#1E40AF", secondary: "#3B82F6", letter: "S" },
             "cbo-three": { primary: "#0D9488", secondary: "#0F766E", letter: "C" },
-            "gym-nine": { primary: "#DC2626", secondary: "#991B1B", letter: "G" }
+            "gym-nine": { primary: "#DC2626", secondary: "#991B1B", letter: "G" },
+            "music-player": { primary: "#8B5CF6", secondary: "#A855F7", letter: "M" },
+            "fedha-budget-planner": { primary: "#10B981", secondary: "#059669", letter: "F" }
         };
         const c = colorMap[appId] || { primary: "#0F172A", secondary: "#334155", letter: "A" };
         const svgString =
